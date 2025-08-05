@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfpv6fhikmmav"]
+
+[ext_resource type="Script" path="res://Scripts/UI/DialogInterface.gd" id="1_mog3c"]
+
+[node name="DialogInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -196.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_mog3c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -195.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NameLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = -43.0
+offset_right = 153.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 30
+text = "Slime:"
+
+[node name="Portrait" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 210.0
+grow_vertical = 2
+
+[node name="TextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1053.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+text = "Prova 1,2 ,3"

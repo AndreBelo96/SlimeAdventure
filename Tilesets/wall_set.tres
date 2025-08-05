@@ -1,0 +1,26 @@
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://bi8t1sts5s8k8"]
+
+[ext_resource type="PackedScene" uid="uid://wce46w1yuom5" path="res://Scenes/Walls/WallStart.tscn" id="1_rihn4"]
+[ext_resource type="PackedScene" uid="uid://dbjwcpp326a7a" path="res://Scenes/Walls/WallMid.tscn" id="2_3hwaq"]
+[ext_resource type="PackedScene" uid="uid://b1nyuv2v7hiwq" path="res://Scenes/Walls/WallEnd.tscn" id="3_87gdl"]
+[ext_resource type="PackedScene" uid="uid://ljibyu8fy8pr" path="res://Scenes/Walls/FlipWallStart.tscn" id="4_7aqy2"]
+[ext_resource type="PackedScene" uid="uid://81xkobubfxy6" path="res://Scenes/Walls/FlipWallMid.tscn" id="5_dxjkr"]
+[ext_resource type="PackedScene" uid="uid://db5iu7pltysij" path="res://Scenes/Walls/WallDoubleFront.tscn" id="6_gjpmx"]
+[ext_resource type="PackedScene" uid="uid://n7s6hbvwtn4l" path="res://Scenes/Walls/FlipWallEnd.tscn" id="6_hnyxg"]
+[ext_resource type="PackedScene" uid="uid://co1u2lu01mnqk" path="res://Scenes/Walls/WallPilastro.tscn" id="8_iaili"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ox2yp"]
+scenes/3/scene = ExtResource("1_rihn4")
+scenes/4/scene = ExtResource("2_3hwaq")
+scenes/5/scene = ExtResource("3_87gdl")
+scenes/6/scene = ExtResource("4_7aqy2")
+scenes/7/scene = ExtResource("5_dxjkr")
+scenes/8/scene = ExtResource("6_hnyxg")
+scenes/15/scene = ExtResource("6_gjpmx")
+scenes/17/scene = ExtResource("8_iaili")
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+sources/0 = SubResource("TileSetScenesCollectionSource_ox2yp")

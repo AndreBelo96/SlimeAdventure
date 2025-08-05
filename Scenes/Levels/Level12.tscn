@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=4 uid="uid://bbl1odosy4aiy"]
+
+[ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_6q0dq"]
+
+[node name="Level" instance=ExtResource("1_6q0dq")]
+
+[node name="LogicMapLayer" parent="." index="1"]
+tile_map_data = PackedByteArray("AAD+//z/AgAAAAAAAAD///z/AgAAAAAAAAAAAPz/AgAAAAAAAAAJAP7/AgAAAAAAAAACAP7/AgABAAAAAAD8//7/AgABAAAAAAD8//3/AgABAAAAAAA=")
+
+[node name="TileMapLayer" parent="." index="2"]
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAgD/////AQAAAAAAAgD8//7/AQAAAAAACAD9//7/AQAAAAAAAgD+//3/AQAAAAAAAgD///3/AQAAAAAAAgD+//7/AQAAAAAAAgD///7/AQAAAAAAAgAAAP7/AQAAAAAAAgD8//3/AQAAAAAACAD9//3/AQAAAAAAAgAAAP3/AQAAAAAAAgABAP3/AQAAAAAAAgABAP7/AQAAAAAAAgACAP7/AQAAAAAACQACAP3/AQAAAAAAAgD+//z/AQAAAAAACAD///z/AQAAAAAACAAAAPz/AQAAAAAACAADAP7/AQAAAAAAAgADAP3/AQAAAAAAAgAEAP7/AQAAAAAAAgAFAP7/AQAAAAAAAgAEAP3/AQAAAAAAAgAFAP3/AQAAAAAAAgAGAP3/AQAAAAAAAQAHAP7/AQAAAAAAAgAHAP3/AQAAAAAAAgAIAP7/AQAAAAAAAgAIAP3/AQAAAAAAAgAJAP3/AQAAAAAAAgAGAP7/AQAAAAAAAgAJAP7/AQAAAAAACQA=")
+
+[node name="DarkOverlay" parent="." index="4"]
+visible = false

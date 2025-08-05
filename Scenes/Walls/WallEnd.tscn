@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1nyuv2v7hiwq"]
+
+[ext_resource type="PackedScene" uid="uid://bkj24r4lsqxeb" path="res://Scenes/Walls/WallBase.tscn" id="1_gpero"]
+[ext_resource type="Script" path="res://Scripts/Walls/WallEnd.gd" id="2_32ptf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rmdv7"]
+load_path = "res://.godot/imported/set_wall.png-e5ae88b7364b8d4ce1ca3bc552ed7b47.ctex"
+
+[node name="Wall" instance=ExtResource("1_gpero")]
+script = ExtResource("2_32ptf")
+
+[node name="Tile" parent="." index="1"]
+texture = SubResource("CompressedTexture2D_rmdv7")
+region_enabled = true
+region_rect = Rect2(128, 81, 64, 81)

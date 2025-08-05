@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcyrvic42ifeu"]
+
+[ext_resource type="Script" path="res://Scripts/Tiles/TileBase.gd" id="1_c5erh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lwiv"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_c5erh")
+
+[node name="Center" type="Marker2D" parent="."]
+
+[node name="Tile" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, 3)
+
+[node name="AnimatedTile" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_1lwiv")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -12, 30, 0, 0, 11, -30, -1)

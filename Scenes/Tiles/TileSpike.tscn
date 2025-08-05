@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bohwi1rglg8c3"]
+
+[ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_3noqd"]
+[ext_resource type="Script" path="res://Scripts/Tiles/TileSpike.gd" id="2_wcs8j"]
+[ext_resource type="Texture2D" uid="uid://b8itw3rpynp07" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_bq5ug"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ingk0"]
+
+[node name="TileBase" instance=ExtResource("1_3noqd")]
+script = ExtResource("2_wcs8j")
+
+[node name="Tile" parent="." index="1"]
+texture = ExtResource("3_bq5ug")
+region_enabled = true
+region_rect = Rect2(768, 32, 64, 32)
+
+[node name="AnimatedTile" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ingk0")

@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhjjq05dhy3ks"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
+[ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_1kexw"]
+[ext_resource type="Texture2D" uid="uid://jj4f7fv4p1aw" path="res://Assets/Sprites/Player/Sunglasses.png" id="3_e4620"]
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ex1u7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.152941, 0.231373, 1)
+
+[node name="Vittoria" type="Label" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 78.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 60
+text = "Victory!!
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 82.0
+offset_bottom = 182.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+size_flags_stretch_ratio = 1.99
+theme_override_constants/separation = 450
+alignment = 1
+
+[node name="Actual" type="Label" parent="CanvasLayer/Title"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 50
+text = "Actual"
+
+[node name="Best" type="Label" parent="CanvasLayer/Title"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 50
+text = "Best"
+
+[node name="Actual" type="Label" parent="CanvasLayer"]
+offset_left = 209.0
+offset_top = 193.0
+offset_right = 275.0
+offset_bottom = 319.0
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 30
+text = "Steps:
+
+Time:"
+
+[node name="Best" type="Label" parent="CanvasLayer"]
+offset_left = 787.0
+offset_top = 194.0
+offset_right = 853.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 30
+text = "Steps:
+
+Time:"
+
+[node name="Record" type="Label" parent="CanvasLayer"]
+offset_left = 185.0
+offset_top = 410.0
+offset_right = 553.0
+offset_bottom = 501.0
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 70
+text = "New Record!!"
+
+[node name="Victory" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(906, 432)
+scale = Vector2(11.739, 10.6923)
+texture = ExtResource("3_e4620")
+
+[node name="Testo" type="Label" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -166.0
+offset_right = -1.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 30
+text = "Press any button to proceed..."
+horizontal_alignment = 1

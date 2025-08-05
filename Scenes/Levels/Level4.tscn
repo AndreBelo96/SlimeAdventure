@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=4 uid="uid://cyl4nnu75gpoj"]
+
+[ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_ggltg"]
+[ext_resource type="Script" path="res://Scripts/Levels/level4.gd" id="2_sgaj2"]
+
+[node name="Level" instance=ExtResource("1_ggltg")]
+script = ExtResource("2_sgaj2")
+
+[node name="TileMapLayer" parent="." index="1"]
+tile_map_data = PackedByteArray("AAD9/wAAAQAAAAAAAQD+/wAAAQAAAAAAAgD//wAAAQAAAAAAAgAAAAAAAQAAAAAAAgABAAAAAQAAAAAAAQD9////AQAAAAAAAgD9//7/AQAAAAAAAgD9//3/AQAAAAAAAQD+//3/AQAAAAAAAgD+//7/AQAAAAAAAgD+////AQAAAAAAAgD/////AQAAAAAAAgD///7/AQAAAAAAAgD///3/AQAAAAAAAgAAAP3/AQAAAAAAAQAAAP7/AQAAAAAAAgAAAP//AQAAAAAAAgABAP//AQAAAAAAAgABAP7/AQAAAAAAAgABAP3/AQAAAAAAAgACAP3/AQAAAAAAAgADAP3/AQAAAAAAAQACAP7/AQAAAAAAAgACAP//AQAAAAAAAgACAAAAAQAAAAAAAgA=")
+
+[node name="WallBackMapLayer" parent="YSort" index="0"]
+tile_map_data = PackedByteArray("AAD9/wEAAAAAAAAACQD+/wEAAAAAAAAACgD//wEAAAAAAAAACgAAAAEAAAAAAAAACgABAAEAAAAAAAAACgACAAEAAAAAAAAACwADAP//AAAAAAAADQADAAAAAAAAAAAADgADAP7/AAAAAAAAEAA=")
+
+[node name="WallMapLayer" parent="YSort" index="1"]
+tile_map_data = PackedByteArray("AAD9//z/AAAAAAAAAwD+//z/AAAAAAAABAD///z/AAAAAAAABAAAAPz/AAAAAAAABAABAPz/AAAAAAAABAACAPz/AAAAAAAABAADAPz/AAAAAAAABQD8//3/AAAAAAAABgD8//7/AAAAAAAABwD8////AAAAAAAABwD8/wAAAAAAAAAACAD///7/AAAAAAAAEQA=")
+
+[node name="OggettiInterattivi" parent="YSort" index="4"]
+y_sort_enabled = true
+
+[node name="TorchMapLayer" parent="YSort" index="5"]
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAQADAP3/AAAAAAAAAQD9//7/AAAAAAAAAgA=")

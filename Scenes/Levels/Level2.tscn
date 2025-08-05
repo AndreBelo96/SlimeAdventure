@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=4 uid="uid://dfiffid7tm682"]
+
+[ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_y2414"]
+[ext_resource type="Script" path="res://Scripts/Levels/level2.gd" id="2_pcnfu"]
+
+[node name="Level" instance=ExtResource("1_y2414")]
+script = ExtResource("2_pcnfu")
+
+[node name="TileMapFloor" parent="." index="1"]
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQACAAAAAQAAAAAAAQADAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP3/AQAAAAAAAQABAP3/AQAAAAAAAQABAP7/AQAAAAAAAQABAP//AQAAAAAAAQAAAP//AQAAAAAAAQAEAAAAAQAAAAAAAQAEAP//AQAAAAAAAQAEAP7/AQAAAAAAAQAEAP3/AQAAAAAAAQADAP3/AQAAAAAAAQACAP3/AQAAAAAAAQA=")

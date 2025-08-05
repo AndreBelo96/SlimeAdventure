@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://sj0kk6hfxx1b"]
+
+[ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_ncc36"]
+[ext_resource type="Script" path="res://Scripts/Tiles/TileSpikeStep.gd" id="2_kl1oj"]
+[ext_resource type="Texture2D" uid="uid://b8itw3rpynp07" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_kautj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwmf1"]
+atlas = ExtResource("3_kautj")
+region = Rect2(768, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhkv6"]
+atlas = ExtResource("3_kautj")
+region = Rect2(704, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uug7g"]
+atlas = ExtResource("3_kautj")
+region = Rect2(640, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmihl"]
+atlas = ExtResource("3_kautj")
+region = Rect2(576, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtx5w"]
+atlas = ExtResource("3_kautj")
+region = Rect2(512, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kk6n"]
+atlas = ExtResource("3_kautj")
+region = Rect2(512, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yksyj"]
+atlas = ExtResource("3_kautj")
+region = Rect2(576, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_himn6"]
+atlas = ExtResource("3_kautj")
+region = Rect2(640, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkuaq"]
+atlas = ExtResource("3_kautj")
+region = Rect2(704, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qxk5"]
+atlas = ExtResource("3_kautj")
+region = Rect2(768, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tybu5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwmf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhkv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uug7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmihl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtx5w")
+}],
+"loop": false,
+"name": &"DOWN",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kk6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yksyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_himn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkuaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qxk5")
+}],
+"loop": false,
+"name": &"UP",
+"speed": 30.0
+}]
+
+[node name="TileBase" instance=ExtResource("1_ncc36")]
+script = ExtResource("2_kl1oj")
+
+[node name="Tile" parent="." index="1"]
+texture = ExtResource("3_kautj")
+region_enabled = true
+region_rect = Rect2(512, 32, 64, 32)
+
+[node name="AnimatedTile" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_tybu5")
+animation = &"UP"

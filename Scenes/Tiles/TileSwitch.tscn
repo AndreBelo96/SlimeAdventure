@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://chb3jeju61dfw"]
+
+[ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_tp50i"]
+[ext_resource type="Script" path="res://Scripts/Tiles/TileSwitch.gd" id="2_465eo"]
+[ext_resource type="Texture2D" uid="uid://b8itw3rpynp07" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_b4gsc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g07d8"]
+atlas = ExtResource("3_b4gsc")
+region = Rect2(1024, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7yql"]
+atlas = ExtResource("3_b4gsc")
+region = Rect2(1088, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q5jy"]
+atlas = ExtResource("3_b4gsc")
+region = Rect2(1152, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl0o8"]
+atlas = ExtResource("3_b4gsc")
+region = Rect2(1216, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbrgv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g07d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7yql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q5jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl0o8")
+}],
+"loop": false,
+"name": &"PRESSED",
+"speed": 30.0
+}]
+
+[node name="Tile" instance=ExtResource("1_tp50i")]
+script = ExtResource("2_465eo")
+
+[node name="Tile" parent="." index="1"]
+texture = ExtResource("3_b4gsc")
+region_enabled = true
+region_rect = Rect2(1024, 32, 64, 32)
+
+[node name="AnimatedTile" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_cbrgv")
+animation = &"PRESSED"

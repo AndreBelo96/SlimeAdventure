@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6xtybjcl03w7"]
+
+[ext_resource type="PackedScene" uid="uid://e1xgk7yp8d0f" path="res://Scenes/Backgrounds/BackgroundBase.tscn" id="1_6r256"]
+[ext_resource type="Script" path="res://Scripts/Backgrounds/backgroundFirst.gd" id="2_g0owd"]
+
+[node name="Background" instance=ExtResource("1_6r256")]
+script = ExtResource("2_g0owd")
+
+[node name="ColorRect" parent="CanvasLayer" index="0"]
+color = Color(0.152941, 0.152941, 0.231373, 1)

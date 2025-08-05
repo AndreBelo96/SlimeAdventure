@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://xy61pbjpfef8"]
+
+[ext_resource type="PackedScene" uid="uid://3kbat82hiy2o" path="res://Scenes/Tiles/TileActivator.tscn" id="1_mltgd"]
+[ext_resource type="PackedScene" uid="uid://p2vhqquhlb37" path="res://Scenes/Tiles/TileNormal.tscn" id="2_p32pu"]
+[ext_resource type="PackedScene" uid="uid://bohwi1rglg8c3" path="res://Scenes/Tiles/TileSpike.tscn" id="3_r8eo1"]
+[ext_resource type="PackedScene" uid="uid://c3rol7efmjcb2" path="res://Scenes/Tiles/TileWall.tscn" id="4_bbn20"]
+[ext_resource type="PackedScene" uid="uid://hij3dxc2sy78" path="res://Scenes/Tiles/TileBorder.tscn" id="5_1ebv7"]
+[ext_resource type="PackedScene" uid="uid://dmikjdrjrisco" path="res://Scenes/Tiles/TileBorderFlip.tscn" id="6_38pvf"]
+[ext_resource type="PackedScene" uid="uid://sj0kk6hfxx1b" path="res://Scenes/Tiles/TileSpikeStep.tscn" id="7_xv534"]
+[ext_resource type="PackedScene" uid="uid://bsy3fwetdsap8" path="res://Scenes/Tiles/TileSpikeSwitch.tscn" id="8_rrq4q"]
+[ext_resource type="PackedScene" uid="uid://chb3jeju61dfw" path="res://Scenes/Tiles/TileSwitch.tscn" id="9_3bypr"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_a2sks"]
+scenes/1/scene = ExtResource("1_mltgd")
+scenes/2/scene = ExtResource("2_p32pu")
+scenes/3/scene = ExtResource("3_r8eo1")
+scenes/4/scene = ExtResource("4_bbn20")
+scenes/5/scene = ExtResource("5_1ebv7")
+scenes/6/scene = ExtResource("6_38pvf")
+scenes/7/scene = ExtResource("7_xv534")
+scenes/8/scene = ExtResource("8_rrq4q")
+scenes/9/scene = ExtResource("9_3bypr")
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+sources/1 = SubResource("TileSetScenesCollectionSource_a2sks")

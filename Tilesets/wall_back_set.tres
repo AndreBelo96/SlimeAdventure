@@ -1,0 +1,24 @@
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://mf4pq4pof2kv"]
+
+[ext_resource type="PackedScene" uid="uid://dbpjbbhbms0eh" path="res://Scenes/Walls/WallBackMid.tscn" id="1_bfwin"]
+[ext_resource type="PackedScene" uid="uid://dixmulhofsfhl" path="res://Scenes/Walls/WallBackEnd.tscn" id="2_lgk0t"]
+[ext_resource type="PackedScene" uid="uid://bhyegtrqcyxag" path="res://Scenes/Walls/FlipWallBackStart.tscn" id="3_jbke6"]
+[ext_resource type="PackedScene" uid="uid://b6q5iqbykxm63" path="res://Scenes/Walls/FlipWallBackMid.tscn" id="4_t24xg"]
+[ext_resource type="PackedScene" uid="uid://jatecflk4vw3" path="res://Scenes/Walls/FlipWallBackEnd.tscn" id="5_vuk5w"]
+[ext_resource type="PackedScene" uid="uid://d1fn5ix02k31q" path="res://Scenes/Walls/WallDoubleBack.tscn" id="7_rpb2o"]
+[ext_resource type="PackedScene" uid="uid://dmx7uhec4dsf4" path="res://Scenes/Walls/WallBackStart.tscn" id="15_uycmn"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ox2yp"]
+scenes/9/scene = ExtResource("15_uycmn")
+scenes/10/scene = ExtResource("1_bfwin")
+scenes/11/scene = ExtResource("2_lgk0t")
+scenes/12/scene = ExtResource("3_jbke6")
+scenes/13/scene = ExtResource("4_t24xg")
+scenes/14/scene = ExtResource("5_vuk5w")
+scenes/16/scene = ExtResource("7_rpb2o")
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+sources/0 = SubResource("TileSetScenesCollectionSource_ox2yp")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://db5iu7pltysij"]
+
+[ext_resource type="Script" path="res://Scripts/Walls/WallDoubleFront.gd" id="1_ck6bq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bj84q"]
+load_path = "res://.godot/imported/set_wall.png-e5ae88b7364b8d4ce1ca3bc552ed7b47.ctex"
+
+[node name="WallBase" type="Node2D"]
+script = ExtResource("1_ck6bq")
+
+[node name="Center" type="Marker2D" parent="."]
+
+[node name="Tile" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -29)
+texture = SubResource("CompressedTexture2D_bj84q")
+region_enabled = true
+region_rect = Rect2(192, 81, 64, 81)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-11, -28)
+scale = Vector2(0.976562, 1)
+polygon = PackedVector2Array(-21, -28, 11, -16, 11, 39, -21, 27)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-11, -28)
+scale = Vector2(0.976562, 1)
+polygon = PackedVector2Array(44.032, -28, 11, -16, 11, 39, 44.032, 27)

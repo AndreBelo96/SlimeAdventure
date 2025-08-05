@@ -17,6 +17,3 @@ tile_map_data = PackedByteArray("AAD///7/AAAAAAAAAwACAPv/AAAAAAAAAwAAAP7/AAAAAAA
 
 [node name="TorchMapLayer" parent="YSort" index="5"]
 tile_map_data = PackedByteArray("AAADAPz/AAAAAAAAAQAJAPz/AAAAAAAAAQABAP//AAAAAAAAAQA=")
-
-[node name="DarkOverlay" parent="." index="4"]
-visible = false

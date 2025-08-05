@@ -132,7 +132,6 @@ func assegna_chiavi_da_tilemap():
 			var tile_id = placeholder_map.get_cell_source_id(cell)
 			if tile_id < 0:
 				continue
-
 			var chiave = cell.get_custom_data("chiave")
 			print("Cella:", cell, "→ tile_id =", tile_id, "→ chiave =", chiave)
 

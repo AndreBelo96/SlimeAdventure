@@ -6,5 +6,5 @@
 [node name="Level" instance=ExtResource("1_0vq1g")]
 script = ExtResource("2_4xmhp")
 
-[node name="TileMapFloor" parent="." index="1"]
-tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQAAAP//AQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQA=")
+[node name="TileMapLayer" parent="." index="2"]
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQA=")

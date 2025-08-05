@@ -121,8 +121,8 @@ func tile_to_world(tile_pos: Vector2i) -> Vector2:
 	)
 
 func assegna_chiavi_da_tilemap():
-	var placeholder_map := $LogicMapLayer
-	var scene_layer     := $TileMapLayer
+	var placeholder_map: TileMapLayer = $LogicMapLayer
+	var scene_layer: TileMapLayer = $TileMapLayer
 	var area = placeholder_map.get_used_rect()
 
 	print("--- Inizio assegnazione chiavi ---")
@@ -130,11 +130,17 @@ func assegna_chiavi_da_tilemap():
 		for x in range(area.position.x, area.end.x):
 			var cell = Vector2i(x, y)
 			var tile_id = placeholder_map.get_cell_source_id(cell)
+			
 			if tile_id < 0:
 				continue
-			var chiave = cell.get_custom_data("chiave")
+				
+			var tile_data := placeholder_map.get_cell_tile_data(cell)
+			if tile_data == null:
+				continue
+				
+			var chiave = tile_data.get_custom_data("chiave")
 			print("Cella:", cell, "→ tile_id =", tile_id, "→ chiave =", chiave)
-
+			
 			for nodo in scene_layer.get_children():
 				# converto pixel → cella
 				var nodo_cell = scene_layer.local_to_map(nodo.position)

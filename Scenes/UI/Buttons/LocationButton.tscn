@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db5k6dimkigir"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Buttons/LocationButton.gd" id="1_sg713"]
+
+[node name="LocationButton" type="Button"]
+script = ExtResource("1_sg713")

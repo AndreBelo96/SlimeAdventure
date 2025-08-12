@@ -1,11 +1,17 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bjlusfts0e6u6"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bjlusfts0e6u6"]
 
 [ext_resource type="PackedScene" uid="uid://bwhgiflj7dpce" path="res://Scenes/Decorations/Interactive/Torches/WallTorch.tscn" id="1_lqth3"]
 [ext_resource type="PackedScene" uid="uid://bdkehbk8cpfag" path="res://Scenes/Decorations/Interactive/Torches/WallTorchFlipped.tscn" id="2_vof11"]
+[ext_resource type="PackedScene" uid="uid://c1bkrfypwqpci" path="res://Scenes/Decorations/Interactive/Torches/WallTorchBack.tscn" id="3_rhs2i"]
+[ext_resource type="PackedScene" uid="uid://d3q3ak8rnjrgi" path="res://Scenes/Decorations/Interactive/Torches/WallTorchBackFlipped.tscn" id="4_kyp1p"]
+[ext_resource type="PackedScene" uid="uid://d2k5qrvl24rpk" path="res://Scenes/Decorations/Interactive/Torches/TorchBlazier.tscn" id="5_68d87"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2kcle"]
 scenes/1/scene = ExtResource("1_lqth3")
 scenes/2/scene = ExtResource("2_vof11")
+scenes/3/scene = ExtResource("3_rhs2i")
+scenes/5/scene = ExtResource("4_kyp1p")
+scenes/6/scene = ExtResource("5_68d87")
 
 [resource]
 tile_shape = 1

@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 [autoload]
 
 GameManager="*res://Global/GameManager.gd"
+ThemeManager="*res://Global/ThemeManager.gd"
 
 [display]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drl8yshq658yv"
-path="res://.godot/imported/torch_set.png-fe8af642568f270592964fbb4022aa52.ctex"
+uid="uid://bt5b2ihqva3o7"
+path="res://.godot/imported/chain_wall.png-cf13fb5e1ded83e2ba66b34a033ca276.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Decorations/torch_set.png"
-dest_files=["res://.godot/imported/torch_set.png-fe8af642568f270592964fbb4022aa52.ctex"]
+source_file="res://Assets/Sprites/Decorations/chain_wall.png"
+dest_files=["res://.godot/imported/chain_wall.png-cf13fb5e1ded83e2ba66b34a033ca276.ctex"]
 
 [params]
 

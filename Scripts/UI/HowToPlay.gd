@@ -39,4 +39,5 @@ func _on_button_pressed() -> void:
 	var loader = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 	loader.scene_to_load = "res://Scenes/Levels/Level1.tscn"
 	loader.transition_text = "Tutorial"
+	loader.location_id = int(GameManager.get_location_for_level(1))
 	get_tree().root.add_child(loader)

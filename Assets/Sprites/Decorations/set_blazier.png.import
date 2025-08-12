@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drl8yshq658yv"
-path="res://.godot/imported/torch_set.png-fe8af642568f270592964fbb4022aa52.ctex"
+uid="uid://gddlaq570443"
+path="res://.godot/imported/set_blazier.png-91fd5f80318f863a17c77d9875e45e2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Decorations/torch_set.png"
-dest_files=["res://.godot/imported/torch_set.png-fe8af642568f270592964fbb4022aa52.ctex"]
+source_file="res://Assets/Sprites/Decorations/set_blazier.png"
+dest_files=["res://.godot/imported/set_blazier.png-91fd5f80318f863a17c77d9875e45e2c.ctex"]
 
 [params]
 

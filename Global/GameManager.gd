@@ -53,6 +53,8 @@ var save_data := {
 func _ready():
 	load_progress()
 
+# -- save data -- #
+
 func save_progress(level: int, steps: int, time: float):
 	# Aggiorna solo se è un miglioramento
 	var level_key = str(level)
@@ -104,12 +106,38 @@ func load_progress():
 	else:
 		print("Errore nel parsing JSON")
 
-func get_tileset_row_for_level() -> int:
-	var loc := get_location_for_level(current_level)
-	return location_to_tileset_row.get(loc, 0)
+# -- Locations -- #
+
+func get_all_locations() -> Array:
+	return Location.keys()
+
+func is_location_locked(location_name: String) -> bool:
+	var location_type = Location[location_name]
+	var first_level := _get_first_level_of_location(location_type)
+	return first_level > max_level_reach
+
+func _get_first_level_of_location(location_type) -> int:
+	var min_level = null
+	for level in level_locations.keys():
+		if level_locations[level] == location_type:
+			if min_level == null or level < min_level:
+				min_level = level
+	return min_level
 
 func get_location_for_level(level: int) -> Location:
 	return level_locations.get(level, Location.TUTORIAL)
+
+func get_location_type(location_name: String) -> Location:
+	if Location.has(location_name):
+		return Location[location_name]
+	else:
+		return Location.TUTORIAL
+
+# -- Levels -- #
+
+func get_tileset_row_for_level() -> int:
+	var loc := get_location_for_level(current_level)
+	return location_to_tileset_row.get(loc, 0)
 
 func get_level_range_for_location(loc: Location) -> Array[int]:
 	var result: Array[int] = []
@@ -133,10 +161,13 @@ func next_level():
 	current_steps = 0
 	current_time = 0.0
 	
-	if is_location_changing(current_level-1):
+	var previous_level = current_level-1
+	
+	if is_location_changing(previous_level):
 		var loader = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 		loader.scene_to_load = scene_path
 		loader.transition_text = Location.keys()[get_location_for_level(current_level)]
+		loader.location_id = int(get_location_for_level(current_level))
 		get_tree().root.add_child(loader)
 	else:
 		get_tree().change_scene_to_file(scene_path)

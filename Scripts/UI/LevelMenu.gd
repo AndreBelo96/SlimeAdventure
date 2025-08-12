@@ -77,6 +77,7 @@ func _on_level_button_pressed(path: String):
 		var loader = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 		loader.scene_to_load = path
 		loader.transition_text = GameManager.Location.keys()[GameManager.get_location_for_level(level_num)]
+		loader.location_id = int(GameManager.get_location_for_level(level_num))
 		get_tree().root.add_child(loader)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

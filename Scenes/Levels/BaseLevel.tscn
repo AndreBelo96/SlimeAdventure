@@ -68,6 +68,9 @@ texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
 
 [node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
+tile_map_layer_path = NodePath("../../TileMapLayer")
+wall_map_layer_path = NodePath("../WallMapLayer")
+wall_back_map_layer_path = NodePath("../WallBackMapLayer")
 
 [node name="OggettiDecorativi" type="Node2D" parent="YSort"]
 y_sort_enabled = true

@@ -28,9 +28,9 @@ func _ready():
 		dark_overlay.visible = false
 	
 	pause_menu.hide()
-	player.player_died.connect(_on_player_died)
-	player.player_won.connect(_on_player_won)
-	player.steps_changed.connect(_on_steps_changed)
+	player.connect("player_won", Callable(self, "_on_player_won"))
+	player.connect("steps_changed", Callable(self, "_on_steps_changed"))
+	player.connect("player_died", Callable(self, "_on_player_died"))
 	
 	await get_tree().process_frame
 	
@@ -68,8 +68,8 @@ func clear_children(node: Node):
 	for child in node.get_children():
 		child.queue_free()
 
-func _on_player_died():
-	print("MORTE!")
+func _on_player_died(death_type: int):
+	print("MORTE! Tipo:", death_type)
 	await get_tree().create_timer(1.5).timeout
 	show_defeat_screen()
 

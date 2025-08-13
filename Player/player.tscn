@@ -1,6 +1,6 @@
 [gd_scene load_steps=41 format=3 uid="uid://co1o3jnm2k22u"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_63ylr"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_63ylr"]
 [ext_resource type="Texture2D" uid="uid://bt0auom2br7y0" path="res://Assets/Sprites/Player/SlimeSet.png" id="2_sw1bk"]
 [ext_resource type="Texture2D" uid="uid://ckh6r4mjnbr2c" path="res://Assets/Sprites/UI/LightMask.png" id="3_ghh27"]
 
@@ -277,6 +277,7 @@ animations = [{
 [node name="Player" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_63ylr")
+point_light_path = NodePath("PointLight2D")
 
 [node name="Center" type="Marker2D" parent="."]
 position = Vector2(0, 1)
@@ -289,7 +290,9 @@ polygon = PackedVector2Array(-7, 0, -3, 5, 3, 5, 7, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_h402l")
-animation = &"Idle"
+animation = &"Move"
+frame = 16
+frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 texture_filter = 1

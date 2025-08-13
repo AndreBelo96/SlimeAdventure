@@ -1,6 +1,16 @@
 # Scripts/GameManager.gd
 extends Node
 
+## Level Variables
+const DeathType = preload("res://Scripts/Player/DeathType.gd").DeathType
+const NORMAL_TILE_POSITION := 7
+const SPIKE_STEP_TILE_POSITION := 8
+const SPIKE_TILE_POSITION := 12
+const WALL_TILE_POSITION := 13
+const BORDER_TILE_POSITION := 14
+const FLIP_BORDER_TILE_POSITION := 15
+const SWITCH_TILE_POSITION := 16
+
 enum Location { TUTORIAL, DUNGEON, FOREST }
 ## Current variables
 var current_level: int = 1
@@ -11,14 +21,7 @@ var max_level_reach: int = 1
 var total_time: float = 0.0
 var total_steps: int = 0
 var isRecord: bool = false
-## Level Variables
-const NORMAL_TILE_POSITION := 7
-const SPIKE_STEP_TILE_POSITION := 8
-const SPIKE_TILE_POSITION := 12
-const WALL_TILE_POSITION := 13
-const BORDER_TILE_POSITION := 14
-const FLIP_BORDER_TILE_POSITION := 15
-const SWITCH_TILE_POSITION := 16
+
 var location_selected = Location.TUTORIAL
 var level_locations := {
 	1: Location.TUTORIAL,
@@ -41,6 +44,13 @@ var location_to_tileset_row := {
 	Location.TUTORIAL: 0,
 	Location.DUNGEON: 1,
 	Location.FOREST: 2
+}
+
+var death_counts := {
+	DeathType.SPIKES: 0,
+	DeathType.VOID: 0,
+	DeathType.ENEMY: 0,
+	DeathType.TIMEOUT: 0
 }
 
 ## Save Variables
@@ -135,6 +145,15 @@ func get_location_type(location_name: String) -> Location:
 
 # -- Levels -- #
 
+func register_death(death_type: int):
+	if death_type in death_counts:
+		death_counts[death_type] += 1
+	else:
+		death_counts[death_type] = 1
+
+func get_death_count(death_type: int) -> int:
+	return death_counts.get(death_type, 0)
+
 func get_tileset_row_for_level() -> int:
 	var loc := get_location_for_level(current_level)
 	return location_to_tileset_row.get(loc, 0)
@@ -151,6 +170,9 @@ func is_location_changing(next: int) -> bool:
 	var current_loc = get_location_for_level(current_level)
 	var next_loc = get_location_for_level(next)
 	return current_loc != next_loc
+
+func is_dark_level() -> bool:
+	return current_level in [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 func next_level():
 	current_level += 1

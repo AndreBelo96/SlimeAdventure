@@ -46,7 +46,8 @@ func on_player_enter():
 	else:
 		animation_player.play("Deactivate")
 		print("Tile disattivato!")
-	# Emetti il segnale ogni volta che cambia stato
+	
+	emit_signal("tile_triggered", self, "activate", {"is_active": is_active})
 	emit_signal("tile_state_changed")
 
 func is_activated() -> bool:

@@ -4,6 +4,8 @@ class_name TileBase
 
 @onready var sprite := $Tile
 
+signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
+
 var is_active := false
 const TILESET := preload("res://Assets/Sprites/Tiles/Tileset.png")
 var atlas_texture := AtlasTexture.new()
@@ -11,10 +13,10 @@ var atlas_texture := AtlasTexture.new()
 func _ready():
 	sprite.region_enabled = false
 	atlas_texture.atlas = TILESET
+	debug_log("Tile pronta: " + str(self.name))
 
 func on_player_enter():
-	# Comportamento base: non fa nulla
-	pass
+	emit_signal("tile_triggered", self, "none", {})
 
 func can_enter() -> bool:
 	return true

@@ -97,7 +97,7 @@ func spanw_ogg_decorativo(tipo: OggettiDecorativi, tile_pos: Vector2i, offset :=
 	match tipo:
 		OggettiDecorativi.PORTA_CELLA:
 			var porta_scene = preload("res://Scenes/Decorations/PortaCella.tscn").instantiate()
-			porta_scene.position = tile_to_world(tile_pos) + offset
+			porta_scene.position = (tile_to_world(tile_pos) + offset).floor()
 			$YSort/OggettiDecorativi.add_child(porta_scene)
 		_:
 			var sprite = Sprite2D.new()
@@ -106,7 +106,7 @@ func spanw_ogg_decorativo(tipo: OggettiDecorativi, tile_pos: Vector2i, offset :=
 			atlas.atlas = texture_atlas
 			atlas.region = OGGETTI_REGIONI[tipo]
 			sprite.texture = atlas
-			var world_pos = tile_to_world(tile_pos) + offset
+			var world_pos = (tile_to_world(tile_pos) + offset).floor()
 			sprite.position = world_pos
 			sprite.y_sort_enabled = true
 			$YSort/OggettiDecorativi.add_child(sprite)

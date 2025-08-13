@@ -36,7 +36,8 @@ load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.
 script = ExtResource("1_t0igq")
 
 [node name="BackgroundRoot" type="Node2D" parent="."]
-z_index = -100
+z_index = -10
+z_as_relative = false
 
 [node name="LogicMapLayer" type="TileMapLayer" parent="."]
 z_index = -15

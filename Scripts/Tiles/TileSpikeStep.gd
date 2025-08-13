@@ -32,4 +32,4 @@ func _lower_spikes():
 func on_player_enter():
 	if (isUp):
 		debug_log("Slime colpito dalle punte!")
-		get_parent().get_parent().player._handle_death()
+		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.DeathType.SPIKES})

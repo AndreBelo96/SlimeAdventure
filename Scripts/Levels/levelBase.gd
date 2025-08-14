@@ -2,11 +2,11 @@ extends Node2D
 
 @onready var hud = $CanvasHUD/HUD
 @onready var player = $YSort/Player
-@onready var background_root =$BackgroundRoot
 @onready var pause_menu = $CanvasHUD/Pause
 @onready var tile_label = $CanvasHUD/HUD/Base/Control/TileToActive
 @onready var dialog_interface = $CanvasHUD/DialogInterface
 @onready var dark_overlay = $DarkOverlay
+@onready var background_manager: BackgroundManager = $BackgroundManager as BackgroundManager
 
 enum OggettiDecorativi {
 	PORTA_CELLA,
@@ -26,6 +26,8 @@ func _ready():
 	pause_menu.visible = false
 	if not GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level):
 		dark_overlay.visible = false
+		
+	setup_background()
 	
 	pause_menu.hide()
 	player.connect("player_won", Callable(self, "_on_player_won"))
@@ -56,10 +58,18 @@ func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
 
-func set_background(scene_path: String):
-	clear_children(background_root)
-	var bg_scene = load(scene_path).instantiate()
-	background_root.add_child(bg_scene)
+func setup_background():
+	var generator_instance: IBackgroundGenerator = null
+	
+	match GameManager.get_location_for_level(GameManager.current_level):
+		GameManager.Location.TUTORIAL:
+			generator_instance = PanelBackgroundGenerator.new()
+		GameManager.Location.DUNGEON:
+			generator_instance = SkullBackgroundGenerator.new()
+		_:
+			generator_instance = PanelBackgroundGenerator.new()
+			
+	background_manager.initialize(generator_instance)
 
 func set_current_level_number(current_level: int):
 	GameManager.current_level = current_level

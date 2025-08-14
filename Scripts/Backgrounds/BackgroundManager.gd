@@ -1,5 +1,6 @@
 # Scripts/Backgrounds/BackgroundManager.gd
 extends Node2D
+class_name BackgroundManager
 
 @export var move_speed := Vector2(40, 40)
 @export var panel_size := Vector2(50, 50)
@@ -18,14 +19,20 @@ var panels_data := []
 var scroll_offset := Vector2.ZERO
 var elapsed_time := 0.0
 
-func _ready() -> void:
-	if not panel_generator:
+func initialize(generator: IBackgroundGenerator):
+	if not generator:
 		push_error("Nessun generatore di pannelli assegnato")
 		return
+	panel_generator = generator
+	$CanvasLayer/DarkOverlay.color = GameManager.get_dark_overlay_for_level()
+	$CanvasLayer/BgColor.color = panel_generator.get_bg_color()
+	set_vignette_overlay()
+	_create_panels()
+
+func _ready() -> void:
 	screen_size = DisplayServer.window_get_size()
 	spacing_x = screen_size.x / panel_count
 	spacing_y = screen_size.y / row_count
-	_create_panels()
 
 func _process(delta: float) -> void:
 	elapsed_time += delta
@@ -80,3 +87,12 @@ func _update_panels(delta: float) -> void:
 			node.position = Vector2(x, y)
 
 		panel_generator.update_panel(node, row, col, elapsed_time, delta)
+
+func set_vignette_overlay(): 
+	var vignette = $CanvasLayer/VignetteRect
+	vignette.texture = preload("res://Assets/Sprites/UI/vignette.png") 
+	vignette.modulate = Color(1, 1, 1, 0.5) 
+	vignette.anchor_right = 1.0 
+	vignette.anchor_bottom = 1.0 
+	vignette.size_flags_horizontal = Control.SIZE_FILL 
+	vignette.size_flags_vertical = Control.SIZE_FILL

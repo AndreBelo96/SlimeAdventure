@@ -22,6 +22,8 @@ var total_time: float = 0.0
 var total_steps: int = 0
 var isRecord: bool = false
 
+var dark_overlay_service := DarkOverlayService.new()
+
 var location_selected = Location.TUTORIAL
 var level_locations := {
 	1: Location.TUTORIAL,
@@ -193,6 +195,9 @@ func next_level():
 		get_tree().root.add_child(loader)
 	else:
 		get_tree().change_scene_to_file(scene_path)
+
+func get_dark_overlay_for_level() -> Color:
+	return dark_overlay_service.get_for_level(current_level)
 
 func restart_level():
 	get_tree().change_scene_to_file("res://Scenes/Levels/Level%d.tscn" % current_level)

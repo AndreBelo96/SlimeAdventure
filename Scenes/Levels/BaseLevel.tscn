@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=16 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/levelBase.gd" id="1_t0igq"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
 [ext_resource type="TileSet" uid="uid://xy61pbjpfef8" path="res://Tilesets/tile_set.tres" id="2_ljv4m"]
 [ext_resource type="PackedScene" uid="uid://co1o3jnm2k22u" path="res://Player/player.tscn" id="2_xyu3k"]
+[ext_resource type="PackedScene" uid="uid://e1xgk7yp8d0f" path="res://Scenes/Backgrounds/BackgroundManager.tscn" id="3_lq64p"]
 [ext_resource type="Texture2D" uid="uid://bpnvvnewy6act" path="res://Assets/Sprites/Tiles/logic_set.png" id="3_orymm"]
 [ext_resource type="TileSet" uid="uid://bi8t1sts5s8k8" path="res://Tilesets/wall_set.tres" id="4_3jiy3"]
 [ext_resource type="TileSet" uid="uid://mf4pq4pof2kv" path="res://Tilesets/wall_back_set.tres" id="4_aapch"]
@@ -41,9 +42,7 @@ script = ExtResource("2_1s4qq")
 player = NodePath("../YSort/Player")
 tile_layer = NodePath("../TileMapLayer")
 
-[node name="BackgroundRoot" type="Node2D" parent="."]
-z_index = -10
-z_as_relative = false
+[node name="BackgroundManager" parent="." instance=ExtResource("3_lq64p")]
 
 [node name="LogicMapLayer" type="TileMapLayer" parent="."]
 z_index = -15

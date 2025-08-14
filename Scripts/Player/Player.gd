@@ -53,7 +53,6 @@ func _unhandled_input(event):
 	if not input_enabled:
 		return
 
-	# Evita che partano due movimenti in contemporanea
 	if movement_handler.is_moving:
 		return
 
@@ -62,7 +61,6 @@ func _unhandled_input(event):
 		movement_handler.move_to(
 			movement_handler.grid_position + direction
 		)
-
 
 func on_movement_finished():
 	steps += 1

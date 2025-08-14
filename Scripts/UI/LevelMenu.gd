@@ -3,11 +3,10 @@ extends Control
 
 @onready var level_container: GridContainer = $CanvasLayer/RightPanel/CenterContainer/LevelButtonContainer
 
-var LevelLoader = preload("res://Scripts/Levels/LevelLoader.gd")
-var LevelButtonFactory = preload("res://Scripts/Levels/LevelButtonFactory.gd")
+var loader = preload("res://Scripts/Levels/LevelLoader.gd")
+var factory = preload("res://Scripts/Levels/LevelButtonFactory.gd")
 
-var loader: LevelLoader
-var factory: LevelButtonFactory
+
 
 func _ready():
 	loader = LevelLoader.new()

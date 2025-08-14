@@ -1,6 +1,6 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
-@onready var animation = $AnimatedTile #Sarà da modificare come in tile activator
+@onready var animation = $AnimatedTile
 
 var isUp = false
 var step_counter = 0

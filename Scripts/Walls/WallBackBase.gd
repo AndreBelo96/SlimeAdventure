@@ -15,7 +15,7 @@ func _ready():
 func can_enter() -> bool:
 	return false
 
-func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_height := 81):
+func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 66, tile_height := 83):
 	atlas_texture.region = Rect2(
 		Vector2(tile_x * tile_width, tile_y * tile_height),
 		Vector2(tile_width, tile_height)

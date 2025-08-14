@@ -22,9 +22,9 @@ func _create_location_button(location_name: String) -> Button:
 	
 	var location_type = GameManager.get_location_type(location_name)
 	var locked = GameManager.is_location_locked(location_name)
-	var theme = ThemeManager.get_theme_for_location_type(location_type)
+	var themeBtn = ThemeManager.get_theme_for_location_type(location_type)
 	
-	btn.setup(location_name, locked, theme)
+	btn.setup(location_name, locked, themeBtn)
 	btn.pressed.connect(_on_location_selected.bind(location_name))
 	return btn
 

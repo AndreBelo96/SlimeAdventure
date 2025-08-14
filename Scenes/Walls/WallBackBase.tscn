@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5knphj4oe44y"]
 
 [ext_resource type="Script" path="res://Scripts/Walls/WallBackBase.gd" id="1_agjkh"]
-[ext_resource type="Texture2D" uid="uid://dyi4i1ck7c2kh" path="res://Assets/Sprites/Walls/set_wall.png" id="2_pqi7k"]
+[ext_resource type="Texture2D" uid="uid://cvydwpf4ckuvv" path="res://Assets/Sprites/Walls/set_wall.png" id="2_pqi7k"]
 
 [node name="Wall" type="Node2D"]
 script = ExtResource("1_agjkh")

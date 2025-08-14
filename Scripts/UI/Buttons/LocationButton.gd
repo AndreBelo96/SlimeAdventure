@@ -2,12 +2,12 @@ extends Button
 
 const BUTTON_SIZE := Vector2(210, 70)
 
-func setup(location_name: String, locked: bool, theme: Theme) -> void:
+func setup(location_name: String, locked: bool, themeBtn: Theme) -> void:
 	text = location_name
 	disabled = locked
 	
-	if theme != null:
-		self.theme = theme
+	if themeBtn != null:
+		self.theme = themeBtn
 	else:
 		add_theme_color_override("font_color", Color.WHITE)
 

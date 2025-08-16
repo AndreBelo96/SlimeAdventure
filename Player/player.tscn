@@ -303,3 +303,5 @@ rotation_smoothing_enabled = true
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("3_ghh27")
 texture_scale = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

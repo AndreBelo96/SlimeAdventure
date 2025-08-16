@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=17 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/levelBase.gd" id="1_t0igq"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="5_662ev"]
 [ext_resource type="TileSet" uid="uid://bjlusfts0e6u6" path="res://Tilesets/torch_set.tres" id="5_idd1r"]
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
+[ext_resource type="TileSet" uid="uid://bfdegxpjgd1n3" path="res://Tilesets/stair_set.tres" id="8_p3cyg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")
@@ -72,6 +73,12 @@ y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
+
+[node name="StairMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+tile_set = ExtResource("8_p3cyg")
 
 [node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
 tile_map_layer_path = NodePath("../../TileMapLayer")

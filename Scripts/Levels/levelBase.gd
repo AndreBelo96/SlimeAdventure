@@ -78,8 +78,7 @@ func clear_children(node: Node):
 	for child in node.get_children():
 		child.queue_free()
 
-func _on_player_died(death_type: int):
-	print("MORTE! Tipo:", death_type)
+func _on_player_died():
 	await get_tree().create_timer(1.5).timeout
 	show_defeat_screen()
 

@@ -33,19 +33,12 @@ func _ready():
 	assert(wall_back_map_layer, "wall_back_map_layer non assegnato nel Player")
 	assert(point_light, "point_light non assegnato nel Player")
 
-	# Setup componenti
 	movement_handler.setup(self, tile_map_layer, wall_map_layer, wall_back_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer)
-	animation_handler.setup($AnimatedSprite2D)
+	animation_handler.setup($AnimatedSprite2D, $AudioStreamPlayer2D)
 	light_handler.setup(point_light)
-
-	# Attiva luce solo se il livello è buio
 	light_handler.set_enabled(GameManager.is_dark_level())
-
-	# Snap iniziale
-	movement_handler.snap_to_tile_center(
-		movement_handler.get_coords_from_global_position(global_position)
-	)
+	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position(global_position))
 	await get_tree().process_frame
 	interaction_handler.check_tile()
 
@@ -73,6 +66,7 @@ func on_player_won():
 
 func on_player_died(death_type: int):
 	input_enabled = false
+	print("MORTE! Tipo:", death_type)
 	animation_handler.play_death(death_type)
 	GameManager.register_death(death_type)
-	emit_signal("player_died", death_type)
+	emit_signal("player_died")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvdf7kgwe6x8c"
-path="res://.godot/imported/chain_wall.png-eb604920a3c19154120d3cf1e3edd225.ctex"
+uid="uid://c85606vtkeb5m"
+path="res://.godot/imported/Stairs.png-8ea7da48c8be44c2b13eea349b60615f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Audio/chain_wall.png"
-dest_files=["res://.godot/imported/chain_wall.png-eb604920a3c19154120d3cf1e3edd225.ctex"]
+source_file="res://Assets/Sprites/Decorations/Stairs/Stairs.png"
+dest_files=["res://.godot/imported/Stairs.png-8ea7da48c8be44c2b13eea349b60615f.ctex"]
 
 [params]
 

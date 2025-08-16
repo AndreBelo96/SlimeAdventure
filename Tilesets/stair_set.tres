@@ -1,0 +1,21 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bfdegxpjgd1n3"]
+
+[ext_resource type="Texture2D" uid="uid://c85606vtkeb5m" path="res://Assets/Sprites/Decorations/Stairs/Stairs.png" id="1_j0jk0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6eb6p"]
+texture = ExtResource("1_j0jk0")
+texture_region_size = Vector2i(66, 66)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 13)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 13)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 13)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 13)
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+sources/2 = SubResource("TileSetAtlasSource_6eb6p")

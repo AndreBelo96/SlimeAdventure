@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2cybdqsih4gr"
-path="res://.godot/imported/chain_animation.png-b3e8f5948f58f16784ca7642e991d73a.ctex"
+path="res://.godot/imported/chain_animation.png-741d98f234f928f28dc16a3ac0715ad5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Decorations/chain_animation.png"
-dest_files=["res://.godot/imported/chain_animation.png-b3e8f5948f58f16784ca7642e991d73a.ctex"]
+source_file="res://Assets/Sprites/Decorations/Chains/chain_animation.png"
+dest_files=["res://.godot/imported/chain_animation.png-741d98f234f928f28dc16a3ac0715ad5.ctex"]
 
 [params]
 

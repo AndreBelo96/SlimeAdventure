@@ -35,7 +35,7 @@ func _ready():
 
 	movement_handler.setup(self, tile_map_layer, wall_map_layer, wall_back_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer)
-	animation_handler.setup($AnimatedSprite2D, $AudioStreamPlayer2D)
+	animation_handler.setup($AnimatedSprite2D)
 	light_handler.setup(point_light)
 	light_handler.set_enabled(GameManager.is_dark_level())
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position(global_position))

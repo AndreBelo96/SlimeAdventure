@@ -1,4 +1,5 @@
 extends Control
+class_name DialogueInterface
 
 @onready var text_label = $Panel/TextLabel
 @onready var name_label = $Panel/NameLabel

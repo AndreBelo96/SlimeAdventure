@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.3", "Mobile")
 
 GameManager="*res://Global/GameManager.gd"
 ThemeManager="*res://Global/ThemeManager.gd"
+SoundManager="*res://Global/SoundManager.gd"
+SaveManager="*res://Global/SaveManager.gd"
 
 [display]
 

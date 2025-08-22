@@ -12,15 +12,16 @@ const FLIP_BORDER_TILE_POSITION := 15
 const SWITCH_TILE_POSITION := 16
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
-## Current variables
+## Variabili correnti
 var current_level: int = 1
 var current_time: float = 0.0
 var current_steps: int = 0
-## Total Variables
+var isRecord: bool = false
+## Totali caricati da SaveManager
 var max_level_reach: int = 1
 var total_time: float = 0.0
 var total_steps: int = 0
-var isRecord: bool = false
+var total_deaths: Dictionary = {}
 
 var dark_overlay_service := DarkOverlayService.new()
 
@@ -55,68 +56,60 @@ var death_counts := {
 	DeathType.TIMEOUT: 0
 }
 
-## Save Variables
-const SAVE_PATH := "user://save_data.save"
-var save_data := {
-	"levels": {},
-	"max_level_reach": 1
+var last_attempt := {
+	"level": 1,
+	"steps": 0,
+	"time": 0.0,
+	"deaths": {
+		DeathType.SPIKES: 0,
+		DeathType.VOID: 0,
+		DeathType.ENEMY: 0,
+		DeathType.TIMEOUT: 0
+	},
+	"victory": false,
+	"is_record": false
 }
 
 func _ready():
-	load_progress()
+	var loaded = SaveManager.load_progress()
+	max_level_reach = SaveManager.get_max_level_reach()
+	var totals = SaveManager.get_totals()
+	total_steps = totals.steps
+	total_time = totals.time
+	total_deaths = totals.deaths
 
-# -- save data -- #
-
-func save_progress(level: int, steps: int, time: float):
-	# Aggiorna solo se è un miglioramento
-	var level_key = str(level)
-
-	if not save_data["levels"].has(level_key):
-		save_data["levels"][level_key] = {"steps": steps, "time": time}
-		isRecord = true
+# --- Gestione Morti ---
+func register_death(death_type: int):
+	if death_type in death_counts:
+		death_counts[death_type] += 1
 	else:
-		var old_data = save_data["levels"][level_key]
-		
-		if steps < old_data["steps"] || time < old_data["time"]:
-			isRecord = true
-		
-		save_data["levels"][level_key]["steps"] = min(old_data["steps"], steps)
-		save_data["levels"][level_key]["time"] = min(old_data["time"], time)
-	
-	save_data["max_level_reach"] = max(save_data["max_level_reach"], level+1)
-	
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	file.store_string(JSON.stringify(save_data, "\t"))
-	file.close()
+		death_counts[death_type] = 1
 
-	print("Salvataggio aggiornato per livello", level)
+# --- Fine livello ---
+func end_level(victory: bool):
+	# Salva statistiche del livello
+	last_attempt["level"] = current_level
+	last_attempt["steps"] = current_steps
+	last_attempt["time"] = current_time
+	last_attempt["deaths"] = death_counts.duplicate(true)
+	last_attempt["victory"] = victory
+	
+	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory)
+	last_attempt["is_record"] = isRecord
 
-func load_progress():
-	if not FileAccess.file_exists(SAVE_PATH):
-		print("Nessun file di salvataggio trovato")
-		return
-	
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
-	var content := file.get_as_text()
-	file.close()
-	
-	var result: Variant = JSON.parse_string(content)
-	if result is Dictionary:
-		# Carica l'intera struttura nel save_data
-		save_data = result
-		# Se vogliamo usare direttamente valori comodi per compatibilità
-		if save_data.has("max_level_reach"):
-			max_level_reach = save_data["max_level_reach"]
-		# Esempio: calcolo dei totali ricavandoli dai dati salvati per livello
-		if save_data.has("levels"):
-			total_steps = 0
-			total_time = 0.0
-			for level_data in save_data["levels"].values():
-				total_steps += int(level_data.get("steps", 0))
-				total_time += float(level_data.get("time", 0.0))
-		print("Salvataggio caricato con successo")
-	else:
-		print("Errore nel parsing JSON")
+	# reset conteggio morti per prossimo livello
+	death_counts = {
+		DeathType.SPIKES: 0,
+		DeathType.VOID: 0,
+		DeathType.ENEMY: 0,
+		DeathType.TIMEOUT: 0
+	}
+
+	if victory:
+		current_level += 1
+
+	current_steps = 0
+	current_time = 0.0
 
 # -- Locations -- #
 
@@ -147,12 +140,6 @@ func get_location_type(location_name: String) -> Location:
 
 # -- Levels -- #
 
-func register_death(death_type: int):
-	if death_type in death_counts:
-		death_counts[death_type] += 1
-	else:
-		death_counts[death_type] = 1
-
 func get_death_count(death_type: int) -> int:
 	return death_counts.get(death_type, 0)
 
@@ -177,7 +164,6 @@ func is_dark_level() -> bool:
 	return current_level in [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 func next_level():
-	current_level += 1
 	var scene_path = "res://Scenes/Levels/Level%d.tscn" % current_level
 	
 	if current_level > max_level_reach:

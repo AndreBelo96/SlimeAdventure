@@ -1,35 +1,24 @@
 extends Node2D
 
-@onready var hud = $CanvasHUD/HUD
 @onready var player = $YSort/Player
-@onready var pause_menu = $CanvasHUD/Pause
-@onready var tile_label = $CanvasHUD/HUD/Base/Control/TileToActive
-@onready var dialog_interface = $CanvasHUD/DialogInterface
+@onready var hud_manager: LevelHUDManager = $CanvasHUD/HUD
+@onready var pause_menu: Control = $CanvasHUD/Pause
+@onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var dark_overlay = $DarkOverlay
-@onready var background_manager: BackgroundManager = $BackgroundManager as BackgroundManager
-
-enum OggettiDecorativi {
-	PORTA_CELLA,
-	GABBIA
-}
-
-const OGGETTI_REGIONI = {
-	OggettiDecorativi.PORTA_CELLA: Rect2i(0, 0, 32, 72),
-	OggettiDecorativi.GABBIA: Rect2i(64, 0, 64, 64)
-}
+@onready var tile_label = $CanvasHUD/HUD/Base/Control/TileToActive
+@onready var background_manager: BackgroundManager = $BackgroundManager
 
 var steps := 0
 var level_time := 0.0
-var texture_atlas = preload("res://Assets/Sprites/Decorations/set_decorazioni.png")
 
 func _ready():
 	pause_menu.visible = false
-	if not GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level):
-		dark_overlay.visible = false
-		
+	pause_menu.hide()
+	
+	dark_overlay.visible = GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level)
+	
 	setup_background()
 	
-	pause_menu.hide()
 	player.connect("player_won", Callable(self, "_on_player_won"))
 	player.connect("steps_changed", Callable(self, "_on_steps_changed"))
 	player.connect("player_died", Callable(self, "_on_player_died"))
@@ -47,78 +36,84 @@ func _ready():
 
 func _process(delta):
 	level_time += delta
-	hud.get_node("TimeLabel").text = "Tempo: " + str(int(level_time)) + "s"
+	hud_manager.update_time(level_time)
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel"):  # ESC
+	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		toggle_pause()
+
+func setup_background(): 
+	var generator_instance: IBackgroundGenerator = null 
+	match GameManager.get_location_for_level(GameManager.current_level): 
+		GameManager.Location.TUTORIAL: 
+			generator_instance = PanelBackgroundGenerator.new() 
+		GameManager.Location.DUNGEON: 
+			generator_instance = SkullBackgroundGenerator.new() 
+		_: 
+			generator_instance = PanelBackgroundGenerator.new()
+	
+	background_manager.initialize(generator_instance)
 
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
 
-func setup_background():
-	var generator_instance: IBackgroundGenerator = null
-	
-	match GameManager.get_location_for_level(GameManager.current_level):
-		GameManager.Location.TUTORIAL:
-			generator_instance = PanelBackgroundGenerator.new()
-		GameManager.Location.DUNGEON:
-			generator_instance = SkullBackgroundGenerator.new()
-		_:
-			generator_instance = PanelBackgroundGenerator.new()
-			
-	background_manager.initialize(generator_instance)
-
-func set_current_level_number(current_level: int):
-	GameManager.current_level = current_level
-
-func clear_children(node: Node):
-	for child in node.get_children():
-		child.queue_free()
-
 func _on_player_died():
+	print("morte!")
 	await get_tree().create_timer(1.5).timeout
+	GameManager.current_steps = steps
+	GameManager.current_time = level_time
+	GameManager.end_level(false)
 	show_defeat_screen()
 
 func _on_player_won():
 	print("VITTORIA!")
-	
-	# Salva tempo e passi nel GameManager
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
-	
 	GameManager.total_steps += steps
 	GameManager.total_time += level_time
-	
-	GameManager.save_progress(GameManager.current_level, steps, level_time)
+	GameManager.end_level(true)
 	
 	await get_tree().create_timer(1).timeout
 	show_victory_screen()
 
 func _on_steps_changed(new_count: int) -> void:
-	hud.get_node("Base").get_node("StepsLabel").text = "Passi: %d" % new_count
 	steps = new_count
+	hud_manager.update_steps(steps)
 
-func spanw_ogg_decorativo(tipo: OggettiDecorativi, tile_pos: Vector2i, offset := Vector2.ZERO):
-	
-	match tipo:
-		OggettiDecorativi.PORTA_CELLA:
-			var porta_scene = preload("res://Scenes/Decorations/PortaCella.tscn").instantiate()
-			porta_scene.position = (tile_to_world(tile_pos) + offset).floor()
-			$YSort/OggettiDecorativi.add_child(porta_scene)
-		_:
-			var sprite = Sprite2D.new()
-			sprite.centered = true
-			var atlas = AtlasTexture.new()
-			atlas.atlas = texture_atlas
-			atlas.region = OGGETTI_REGIONI[tipo]
-			sprite.texture = atlas
-			var world_pos = (tile_to_world(tile_pos) + offset).floor()
-			sprite.position = world_pos
-			sprite.y_sort_enabled = true
-			$YSort/OggettiDecorativi.add_child(sprite)
+func show_defeat_screen():
+	get_tree().change_scene_to_file("res://Scenes/UI/Defeat.tscn")
+
+func show_victory_screen():
+	get_tree().change_scene_to_file("res://Scenes/UI/Victory.tscn")
+
+# -- UTILS -- #
+func set_current_level_number(current_level: int):
+	GameManager.current_level = current_level
+
+
+#func spanw_ogg_decorativo(tipo: OggettiDecorativi, tile_pos: Vector2i, offset := Vector2.ZERO):
+	#
+	#match tipo:
+		#OggettiDecorativi.PORTA_CELLA:
+			#var porta_scene = preload("res://Scenes/Decorations/PortaCella.tscn").instantiate()
+			#porta_scene.position = (tile_to_world(tile_pos) + offset).floor()
+			#$YSort/OggettiDecorativi.add_child(porta_scene)
+		#_:
+			#var sprite = Sprite2D.new()
+			#sprite.centered = true
+			#var atlas = AtlasTexture.new()
+			#atlas.atlas = texture_atlas
+			#atlas.region = OGGETTI_REGIONI[tipo]
+			#sprite.texture = atlas
+			#var world_pos = (tile_to_world(tile_pos) + offset).floor()
+			#sprite.position = world_pos
+			#sprite.y_sort_enabled = true
+			#$YSort/OggettiDecorativi.add_child(sprite)
+
+
+# 		tile da rivedere
 
 func tile_to_world(tile_pos: Vector2i) -> Vector2:
 	var tile_width := 64.0
@@ -173,12 +168,6 @@ func _on_interruttore_premuto(chiave: String):
 	for spina in $TileMapLayer.get_children():
 		if spina.is_in_group("spine") and spina.chiave == chiave:
 			spina.disattiva()
-
-func show_defeat_screen():
-	get_tree().change_scene_to_file("res://Scenes/UI/Defeat.tscn")
-
-func show_victory_screen():
-	get_tree().change_scene_to_file("res://Scenes/UI/Victory.tscn")
 
 func update_tile_label():
 	var total = 0

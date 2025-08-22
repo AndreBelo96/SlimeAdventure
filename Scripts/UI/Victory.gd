@@ -5,34 +5,42 @@ extends Control
 func _ready() -> void:
 	var sprite = $CanvasLayer/Victory
 	
-	var liv = str(GameManager.current_level)
+	# Dati dell’ultima run, salvati in GameManager.end_level()
+	var last = GameManager.last_attempt
+	var completed_level: int = int(last["level"])
+	var run_steps: int = int(last["steps"])
+	var run_time: float = float(last["time"])
+	var is_record: bool = bool(last.get("is_record", false))
+
+	# Mostra i risultati della run appena conclusa
+	$CanvasLayer/Actual.text = "Steps: %d\nTime: %.2f" % [run_steps, run_time]
+	
 	var best_steps := "-"
 	var best_time := "-"
 	
-	if GameManager.save_data["levels"].has(liv):
-		var data = GameManager.save_data["levels"][liv]
-		best_steps = str(data.get("steps", "-"))
-		best_time = str(data.get("time", "-")).substr(0, 4)
+	var level_data := SaveManager.get_level_data(completed_level)
+	if level_data.size() > 0:
+		best_steps = str(level_data.get("steps", "-"))
+		best_time = "%.2f" % float(level_data.get("time", 0.0))
 	else:
-		best_steps = str(GameManager.current_steps)
-		best_time = str(GameManager.current_time).substr(0, 4)
+		# prima volta: non c'erano dati, mostra i valori della run
+		best_steps = str(run_steps)
+		best_time = "%.2f" % run_time
+
+	$CanvasLayer/Best.text = "Steps: %s\nTime: %s" % [best_steps, best_time]
 	
-	$CanvasLayer/Actual.text = "Steps: " + str(GameManager.current_steps) + "\nTime: " + str(GameManager.current_time).substr(0, 4)
-	$CanvasLayer/Best.text = "Steps: " + best_steps + "\nTime: " + best_time
-	
-	# Se non è un record, usa la texture atlas
-	if not GameManager.isRecord:
+	if is_record:
+		$CanvasLayer/Record.text = "New record!!"
+		sprite.texture = preload("res://Assets/Sprites/Player/Sunglasses.png")
+	else:
+		$CanvasLayer/Record.text = "Nice!!"
 		var atlas := AtlasTexture.new()
 		atlas.atlas = preload("res://Assets/Sprites/Player/SlimeSet.png")
 		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))
 		sprite.texture = atlas
-		$CanvasLayer/Record.text = "Nice!!"
-	else:
-		print("RECORD")
-		$CanvasLayer/Record.text = "New record!!"
-		sprite.texture = preload("res://Assets/Sprites/Player/Sunglasses.png")
-		GameManager.isRecord = false
-	
+
+	# (facoltativo) azzera il flag globale se lo usi altrove
+	GameManager.isRecord = false
 
 
 func _input(event):

@@ -1,6 +1,5 @@
 extends Control
 
-
 @export var scene_to_load: String
 @export var transition_text: String = "Caricamento..."
 @export var location_id: int = 0

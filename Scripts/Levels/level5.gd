@@ -1,4 +1,4 @@
-extends "res://Scripts/Levels/levelBase.gd"
+extends "res://Scripts/Levels/LevelManager.gd"
 
 var slime_face = preload("res://Assets/Sprites/Player/Sunglasses.png")
 

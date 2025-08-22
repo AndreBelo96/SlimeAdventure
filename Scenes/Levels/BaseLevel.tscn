@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=18 format=3 uid="uid://epn6jxi3iejh"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/levelBase.gd" id="1_t0igq"]
+[ext_resource type="Script" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
 [ext_resource type="TileSet" uid="uid://xy61pbjpfef8" path="res://Tilesets/tile_set.tres" id="2_ljv4m"]
 [ext_resource type="PackedScene" uid="uid://co1o3jnm2k22u" path="res://Player/player.tscn" id="2_xyu3k"]
@@ -13,6 +13,7 @@
 [ext_resource type="TileSet" uid="uid://bjlusfts0e6u6" path="res://Tilesets/torch_set.tres" id="5_idd1r"]
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
 [ext_resource type="TileSet" uid="uid://bfdegxpjgd1n3" path="res://Tilesets/stair_set.tres" id="8_p3cyg"]
+[ext_resource type="Script" path="res://Scripts/Levels/LevelHUDManager.gd" id="11_vokoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")
@@ -36,7 +37,7 @@ sources/2 = SubResource("TileSetAtlasSource_ahpxb")
 load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_t0igq")
+script = ExtResource("1_l5mnm")
 
 [node name="LevelLogic" type="Node" parent="." node_paths=PackedStringArray("player", "tile_layer")]
 script = ExtResource("2_1s4qq")
@@ -106,6 +107,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("11_vokoc")
 
 [node name="TimeLabel" type="Label" parent="CanvasHUD/HUD"]
 layout_mode = 1

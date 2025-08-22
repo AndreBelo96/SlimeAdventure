@@ -1,4 +1,4 @@
-extends "res://Scripts/Levels/levelBase.gd"
+extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()

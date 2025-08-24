@@ -8,4 +8,4 @@ script = ExtResource("2_60vuf")
 
 [node name="Tile" parent="." index="1"]
 region_enabled = true
-region_rect = Rect2(128, 81, 64, 81)
+region_rect = Rect2(132, 83, 66, 83)

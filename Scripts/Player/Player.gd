@@ -7,6 +7,7 @@ signal player_won
 signal steps_changed(new_count: int)
 
 @export var tile_map_layer_path: NodePath
+@export var pickup_map_layer_path: NodePath
 @export var wall_map_layer_path: NodePath
 @export var wall_back_map_layer_path: NodePath
 @export var point_light_path: NodePath
@@ -16,6 +17,7 @@ var steps: int = 0
 var input_enabled := true
 
 @onready var tile_map_layer: Node = get_node(tile_map_layer_path)
+@onready var pickup_map_layer: Node = get_node(pickup_map_layer_path)
 @onready var wall_map_layer: Node = get_node(wall_map_layer_path)
 @onready var wall_back_map_layer: Node = get_node(wall_back_map_layer_path)
 @onready var point_light: PointLight2D = get_node(point_light_path)
@@ -29,18 +31,27 @@ var input_enabled := true
 func _ready():
 	# Verifica che i nodi siano assegnati
 	assert(tile_map_layer, "tile_map_layer non assegnato nel Player")
+	assert(pickup_map_layer, "pickup_map_layer non assegnato nel Player")
 	assert(wall_map_layer, "wall_map_layer non assegnato nel Player")
 	assert(wall_back_map_layer, "wall_back_map_layer non assegnato nel Player")
 	assert(point_light, "point_light non assegnato nel Player")
 
 	movement_handler.setup(self, tile_map_layer, wall_map_layer, wall_back_map_layer, move_duration)
-	interaction_handler.setup(self, tile_map_layer)
+	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
 	animation_handler.setup($AnimatedSprite2D)
 	light_handler.setup(point_light)
-	light_handler.set_enabled(GameManager.is_dark_level())
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position(global_position))
 	await get_tree().process_frame
 	interaction_handler.check_tile()
+	interaction_handler.check_pickup()
+
+func set_lights(isLight):
+	light_handler.set_enabled(isLight)
+
+func set_lights_for_duration(duration: float):
+	set_lights(true)
+	await get_tree().create_timer(duration).timeout
+	set_lights(false)
 
 func _unhandled_input(event):
 	if not input_enabled:
@@ -59,6 +70,7 @@ func on_movement_finished():
 	steps += 1
 	emit_signal("steps_changed", steps)
 	interaction_handler.check_tile()
+	interaction_handler.check_pickup()
 
 func on_player_won():
 	input_enabled = false

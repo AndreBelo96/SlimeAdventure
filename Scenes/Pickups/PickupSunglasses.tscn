@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8kjm8t82fj0y"]
+
+[ext_resource type="PackedScene" uid="uid://ba2esyl04ctby" path="res://Scenes/Pickups/Pickup.tscn" id="1_54ya5"]
+[ext_resource type="Script" path="res://Scripts/Pickups/PickupSunglasses.gd" id="2_6t0b8"]
+
+[node name="Pickup" instance=ExtResource("1_54ya5")]
+script = ExtResource("2_6t0b8")
+
+[node name="Sprite" parent="." index="0"]
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)

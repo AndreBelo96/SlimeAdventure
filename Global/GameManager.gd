@@ -85,6 +85,12 @@ func register_death(death_type: int):
 	else:
 		death_counts[death_type] = 1
 
+func change_scene_to_victory():
+	get_tree().change_scene_to_file("res://Scenes/UI/Victory.tscn")
+
+func change_scene_to_defeat():
+	get_tree().change_scene_to_file("res://Scenes/UI/Defeat.tscn")
+
 # --- Fine livello ---
 func end_level(victory: bool):
 	# Salva statistiche del livello

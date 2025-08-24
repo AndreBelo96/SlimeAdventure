@@ -1,6 +1,6 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
-signal interruttore_premuto(chiave: String)
+#signal interruttore_premuto(chiave: String)
 
 var chiave := "A"
 var attivato := false
@@ -16,5 +16,5 @@ func on_player_enter():
 		attivato = true
 		$AnimatedTile.play("PRESSED")
 		debug_log("Interruttore premuto: " + chiave)
-		#emit_signal("tile_triggered", self, "switch", {}) #TODO usa questo non interruttore premuto
-		emit_signal("interruttore_premuto", chiave)
+		emit_signal("tile_triggered", self, "switch", {"chiave": chiave})
+		#emit_signal("interruttore_premuto", chiave)

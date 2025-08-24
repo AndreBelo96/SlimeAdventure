@@ -16,7 +16,7 @@ texture_repeat = 1
 position = Vector2(0, -29)
 texture = SubResource("CompressedTexture2D_bj84q")
 region_enabled = true
-region_rect = Rect2(512, 81, 64, 81)
+region_rect = Rect2(528, 83, 66, 83)
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -301,5 +301,5 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 texture = ExtResource("3_ghh27")
-texture_scale = 0.5

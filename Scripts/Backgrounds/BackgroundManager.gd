@@ -1,4 +1,4 @@
-# Scripts/Backgrounds/BackgroundManager.gd
+# -- BackgroundManager.gd -- #
 extends Node2D
 class_name BackgroundManager
 

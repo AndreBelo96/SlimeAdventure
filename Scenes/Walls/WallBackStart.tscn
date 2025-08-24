@@ -8,3 +8,4 @@ script = ExtResource("2_geei6")
 
 [node name="Tile" parent="." index="1"]
 region_enabled = true
+region_rect = Rect2(264, 83, 66, 83)

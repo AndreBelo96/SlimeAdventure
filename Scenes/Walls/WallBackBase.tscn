@@ -9,6 +9,7 @@ script = ExtResource("1_agjkh")
 [node name="Center" type="Marker2D" parent="."]
 
 [node name="Tile" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, -29)

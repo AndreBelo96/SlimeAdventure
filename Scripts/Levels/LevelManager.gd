@@ -1,3 +1,4 @@
+# -- LevelManager.gd -- #
 extends Node2D
 
 @onready var player = $YSort/Player
@@ -25,14 +26,14 @@ func _ready():
 	
 	await get_tree().process_frame
 	
-	# Connessione dei segnali delle tile attivabili
-	for child in $TileMapLayer.get_children():
-		if child.has_method("is_activated"):
-			if child.has_signal("tile_state_changed"):
-				child.connect("tile_state_changed", Callable(self, "update_tile_label"))
-	call_deferred("update_tile_label")
-	call_deferred("assegna_chiavi_da_tilemap")
-	call_deferred("connect_interruttori")
+	var tile_manager := LevelTileManager.new()
+	tile_manager.tile_layer = $TileMapLayer
+	tile_manager.logic_map = $LogicMapLayer
+	add_child(tile_manager)
+	tile_manager.all_tiles_activated.connect(_on_all_tiles_activated)
+	tile_manager.tile_progress_changed.connect(hud_manager.update_tile_label)
+	
+	tile_manager.initialize()
 
 func _process(delta):
 	level_time += delta
@@ -59,13 +60,16 @@ func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
 
+func _on_all_tiles_activated():
+	print("Tutte le tile attivate → Apro la porta!")
+
 func _on_player_died():
 	print("morte!")
 	await get_tree().create_timer(1.5).timeout
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
 	GameManager.end_level(false)
-	show_defeat_screen()
+	GameManager.change_scene_to_defeat()
 
 func _on_player_won():
 	print("VITTORIA!")
@@ -76,17 +80,11 @@ func _on_player_won():
 	GameManager.end_level(true)
 	
 	await get_tree().create_timer(1).timeout
-	show_victory_screen()
+	GameManager.change_scene_to_victory()
 
 func _on_steps_changed(new_count: int) -> void:
 	steps = new_count
 	hud_manager.update_steps(steps)
-
-func show_defeat_screen():
-	get_tree().change_scene_to_file("res://Scenes/UI/Defeat.tscn")
-
-func show_victory_screen():
-	get_tree().change_scene_to_file("res://Scenes/UI/Victory.tscn")
 
 # -- UTILS -- #
 func set_current_level_number(current_level: int):
@@ -111,70 +109,3 @@ func set_current_level_number(current_level: int):
 			#sprite.position = world_pos
 			#sprite.y_sort_enabled = true
 			#$YSort/OggettiDecorativi.add_child(sprite)
-
-
-# 		tile da rivedere
-
-func tile_to_world(tile_pos: Vector2i) -> Vector2:
-	var tile_width := 64.0
-	var tile_height := 24.0
-	
-	return Vector2(
-		int((tile_pos.x - tile_pos.y) * (tile_width / 2)),
-		int((tile_pos.x + tile_pos.y) * (tile_height / 2))
-	)
-
-func assegna_chiavi_da_tilemap():
-	var placeholder_map: TileMapLayer = $LogicMapLayer
-	var scene_layer: TileMapLayer = $TileMapLayer
-	var area = placeholder_map.get_used_rect()
-
-	print("--- Inizio assegnazione chiavi ---")
-	for y in range(area.position.y, area.end.y):
-		for x in range(area.position.x, area.end.x):
-			var cell = Vector2i(x, y)
-			var tile_id = placeholder_map.get_cell_source_id(cell)
-			
-			if tile_id < 0:
-				continue
-				
-			var tile_data := placeholder_map.get_cell_tile_data(cell)
-			if tile_data == null:
-				continue
-				
-			var chiave = tile_data.get_custom_data("chiave")
-			print("Cella:", cell, "→ tile_id =", tile_id, "→ chiave =", chiave)
-			
-			for nodo in scene_layer.get_children():
-				# converto pixel → cella
-				var nodo_cell = scene_layer.local_to_map(nodo.position)
-				print(" ├ Nodo:", nodo.name, "@ pixel", nodo.position, 
-				"→ cella", nodo_cell,
-				"in_group(interruttori):", nodo.is_in_group("interruttori"),
-				"in_group(spine):", nodo.is_in_group("spine"))
-
-				if nodo_cell == cell and (nodo.is_in_group("interruttori") or nodo.is_in_group("spine")):
-					print(" └>> Match! assegno chiave", chiave, "a", nodo.name)
-					nodo.chiave = chiave
-
-	print("--- Fine assegnazione chiavi ---")
-
-func connect_interruttori():
-	for child in $TileMapLayer.get_children():
-		if child.is_in_group("interruttori"):
-			child.interruttore_premuto.connect(_on_interruttore_premuto)
-
-func _on_interruttore_premuto(chiave: String):
-	for spina in $TileMapLayer.get_children():
-		if spina.is_in_group("spine") and spina.chiave == chiave:
-			spina.disattiva()
-
-func update_tile_label():
-	var total = 0
-	var activated = 0
-	for child in $TileMapLayer.get_children():
-		if child.has_method("is_activated"):
-			total += 1
-			if child.is_activated():
-				activated += 1
-	tile_label.text = "%d / %d" % [activated, total]

@@ -1,3 +1,4 @@
+# -- LevelHUDManager.gd -- #
 extends Control
 
 class_name LevelHUDManager

@@ -1,3 +1,4 @@
+# -- DialogInterface.gd -- #
 extends Control
 class_name DialogueInterface
 

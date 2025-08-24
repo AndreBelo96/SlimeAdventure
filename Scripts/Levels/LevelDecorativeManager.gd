@@ -1,3 +1,4 @@
+# -- LevelDecorativeManager.gd -- #
 extends Node2D
 
 var texture_atlas = preload("res://Assets/Sprites/Decorations/set_decorazioni.png")

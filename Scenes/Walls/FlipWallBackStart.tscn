@@ -8,3 +8,4 @@ script = ExtResource("2_8ipvq")
 
 [node name="Tile" parent="." index="1"]
 region_enabled = true
+region_rect = Rect2(265, 83, 66, 83)

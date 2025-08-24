@@ -16,4 +16,4 @@ func disattiva():
 func on_player_enter():
 	if attivo:
 		debug_log("Spina disattivabile attiva → Slime colpito!")
-		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.DeathType.SPIKES})
+		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.DeathType.SPIKES, "chiave": chiave})

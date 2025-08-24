@@ -1,6 +1,6 @@
+# -- LevelLogic.gd -- #
 extends Node
 
-# Riferimenti a player e player_interaction
 @export var player: Node2D
 @export var tile_layer: Node2D
 
@@ -22,10 +22,18 @@ func _on_tile_triggered(tile: TileBase, action: String, data: Dictionary) -> voi
 			tile.is_active = data.get("is_active", true)
 			print("[PlayerInteraction] Tile attivata:", tile.name, "stato:", tile.is_active)
 			check_victory()
+		"switch":
+			var chiave = data.get("chiave", "")
+			_unlock_spikes(chiave)
 		_:
 			pass
 
-func check_victory():
+func _unlock_spikes(chiave: String):
+	for child in tile_layer.get_children():
+		if child.is_in_group("spine") and child.chiave == chiave:
+			child.disattiva()
+
+func check_victory(): # TODO questo sarà da cambaire -> la vittoria sarà quando raggiungo l'uscita
 	for child in tile_layer.get_children():
 		if child.has_method("is_activated") and not child.is_activated():
 			return

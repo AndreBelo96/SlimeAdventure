@@ -47,3 +47,15 @@ func update_progress():
 	emit_signal("tile_progress_changed", activated, total)
 	if activated == total and total > 0:
 		emit_signal("all_tiles_activated")
+
+func get_exit_position() -> Vector2:
+	var area = logic_map.get_used_rect()
+	for y in range(area.position.y, area.end.y):
+		for x in range(area.position.x, area.end.x):
+			var cell = Vector2i(x, y)
+			var tile_data = logic_map.get_cell_tile_data(cell)
+			if tile_data == null:
+				continue
+			if tile_data.get_custom_data("chiave") == "EXIT":
+				return cell
+	return Vector2.ZERO

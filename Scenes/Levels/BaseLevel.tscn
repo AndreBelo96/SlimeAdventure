@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://xy61pbjpfef8" path="res://Tilesets/tile_set.tres" id="2_ljv4m"]
 [ext_resource type="PackedScene" uid="uid://co1o3jnm2k22u" path="res://Player/player.tscn" id="2_xyu3k"]
 [ext_resource type="PackedScene" uid="uid://e1xgk7yp8d0f" path="res://Scenes/Backgrounds/BackgroundManager.tscn" id="3_lq64p"]
-[ext_resource type="Texture2D" uid="uid://bpnvvnewy6act" path="res://Assets/Sprites/Tiles/logic_set.png" id="3_orymm"]
+[ext_resource type="Texture2D" uid="uid://2u58orbnfe0e" path="res://Assets/Sprites/Tiles/logic_set.png" id="3_orymm"]
 [ext_resource type="TileSet" uid="uid://bi8t1sts5s8k8" path="res://Tilesets/wall_set.tres" id="4_3jiy3"]
 [ext_resource type="TileSet" uid="uid://mf4pq4pof2kv" path="res://Tilesets/wall_back_set.tres" id="4_aapch"]
 [ext_resource type="PackedScene" uid="uid://bfj77cmvhy0xn" path="res://Scenes/UI/Pause.tscn" id="4_k28r4"]
@@ -25,6 +25,30 @@ texture_region_size = Vector2i(64, 32)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, -3)
 1:0/0/custom_data_0 = "B"
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -3)
+2:0/0/custom_data_0 = "C"
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -3)
+3:0/0/custom_data_0 = "D"
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, -3)
+4:0/0/custom_data_0 = "E"
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, -3)
+5:0/0/custom_data_0 = "F"
+6:0/0 = 0
+6:0/0/texture_origin = Vector2i(0, -3)
+6:0/0/custom_data_0 = "G"
+7:0/0 = 0
+7:0/0/texture_origin = Vector2i(0, -3)
+7:0/0/custom_data_0 = "H"
+8:0/0 = 0
+8:0/0/texture_origin = Vector2i(0, -3)
+8:0/0/custom_data_0 = "I"
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, -3)
+9:0/0/custom_data_0 = "EXIT"
 
 [sub_resource type="TileSet" id="TileSet_w0n8b"]
 tile_shape = 1

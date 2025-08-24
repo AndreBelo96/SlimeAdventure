@@ -9,8 +9,11 @@ extends Node2D
 @onready var tile_label = $CanvasHUD/HUD/Base/Control/TileToActive
 @onready var background_manager: BackgroundManager = $BackgroundManager
 
+signal signal_victory
+
 var steps := 0
 var level_time := 0.0
+var exit_position: Vector2 = Vector2.ZERO
 
 func _ready():
 	pause_menu.visible = false
@@ -34,6 +37,7 @@ func _ready():
 	tile_manager.tile_progress_changed.connect(hud_manager.update_tile_label)
 	
 	tile_manager.initialize()
+	exit_position = tile_manager.get_exit_position()
 
 func _process(delta):
 	level_time += delta
@@ -85,6 +89,7 @@ func _on_player_won():
 func _on_steps_changed(new_count: int) -> void:
 	steps = new_count
 	hud_manager.update_steps(steps)
+	emit_signal("signal_victory")
 
 # -- UTILS -- #
 func set_current_level_number(current_level: int):

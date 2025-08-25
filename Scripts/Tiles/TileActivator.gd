@@ -2,12 +2,15 @@ extends "res://Scripts/Tiles/TileBase.gd"
 
 signal tile_state_changed
 
+var locked := false
+
 @onready var center_marker: Marker2D = $Center
 @onready var animation_player: AnimatedSprite2D = $AnimatedTile
 @onready var particles := $GlowParticles
 
 func _ready():
 	super._ready()
+	add_to_group("activatables")
 	set_region_from_coords(0, GameManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
 	var animation_row = GameManager.get_tileset_row_for_level()
@@ -39,6 +42,10 @@ func _create_animations(row: int):
 	return frames
 
 func on_player_enter():
+	
+	if locked:
+		return
+	
 	is_active = !is_active
 	if is_active:
 		animation_player.play("Activate")

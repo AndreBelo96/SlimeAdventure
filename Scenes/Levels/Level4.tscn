@@ -21,8 +21,8 @@ tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAgA=")
 [node name="WallMapLayer" parent="YSort" index="2"]
 tile_map_data = PackedByteArray("AAD9//z/AAAAAAAAAwD+//z/AAAAAAAABAD///z/AAAAAAAABAAAAPz/AAAAAAAABAABAPz/AAAAAAAABAACAPz/AAAAAAAABAD8//3/AAAAAAAABgD8//7/AAAAAAAABwD8////AAAAAAAABwD8/wAAAAAAAAAACAD///7/AAAAAAAAEQAEAPz/AAAAAAAABQADAPz/AAAAAAAABAA=")
 
-[node name="OggettiInterattivi" parent="YSort" index="6"]
-y_sort_enabled = true
+[node name="DoorsMapLayer" parent="YSort" index="3"]
+tile_map_data = PackedByteArray("AAAEAP3/AAAAAAAACAA=")
 
-[node name="TorchMapLayer" parent="YSort" index="7"]
+[node name="TorchMapLayer" parent="YSort" index="6"]
 tile_map_data = PackedByteArray("AAD/////AAAAAAAAAQADAP3/AAAAAAAAAQD9//7/AAAAAAAAAgA=")

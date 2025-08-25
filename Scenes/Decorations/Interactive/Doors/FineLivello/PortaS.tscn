@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl1qnr5gef6ch"]
+
+[ext_resource type="Script" path="res://Scripts/Decorations/Interactive/Doors/PortaS.gd" id="1_detor"]
+[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="2_sed2o"]
+
+[node name="PortaS" instance=ExtResource("2_sed2o")]
+script = ExtResource("1_detor")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(12, -24)
+animation = &"Closed_S"

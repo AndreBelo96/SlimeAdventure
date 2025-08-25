@@ -18,5 +18,8 @@ tile_map_data = PackedByteArray("AAD//wQAAAAAAAAACQAAAAQAAAAAAAAACgABAAQAAAAAAAA
 [node name="WallMapLayer" parent="YSort" index="2"]
 tile_map_data = PackedByteArray("AAABAP//AAAAAAAABAD/////AAAAAAAAAwAAAP//AAAAAAAABAACAP//AAAAAAAABAADAP//AAAAAAAABAAEAP7/AAAAAAAABgD+/wIAAAAAAAAABwD+/wMAAAAAAAAACAAEAP//AAAAAAAADwD+/wEAAAAAAAAABgA=")
 
-[node name="TorchMapLayer" parent="YSort" index="7"]
+[node name="DoorsMapLayer" parent="YSort" index="3"]
+tile_map_data = PackedByteArray("AAAFAP7/AAAAAAAACQA=")
+
+[node name="TorchMapLayer" parent="YSort" index="6"]
 tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAgD//wMAAAAAAAAAAgD//wAAAAAAAAAAAQABAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAFAP//AAAAAAAAAgA=")

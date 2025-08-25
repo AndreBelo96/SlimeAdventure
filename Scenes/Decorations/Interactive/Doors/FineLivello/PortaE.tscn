@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://0x63sxigcn8w"]
+
+[ext_resource type="Script" path="res://Scripts/Decorations/Interactive/Doors/PortaE.gd" id="1_bosl7"]
+[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="2_u1ww0"]
+
+[node name="PortaE" instance=ExtResource("2_u1ww0")]
+script = ExtResource("1_bosl7")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(-13, -24)
+animation = &"Closed_E"

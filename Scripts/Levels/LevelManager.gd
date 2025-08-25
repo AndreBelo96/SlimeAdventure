@@ -65,7 +65,16 @@ func toggle_pause():
 	pause_menu.visible = get_tree().paused
 
 func _on_all_tiles_activated():
-	print("Tutte le tile attivate → Apro la porta!")
+	print("Tutte le tile attivate → Apro tutte le porte!")
+	
+	var porte = get_tree().get_nodes_in_group("porte")
+	for porta in porte:
+		if porta.has_method("open"):
+			porta.open()
+	
+	for tile in get_tree().get_nodes_in_group("activatables"):
+		tile.locked = true
+	
 
 func _on_player_died():
 	print("morte!")
@@ -94,23 +103,3 @@ func _on_steps_changed(new_count: int) -> void:
 # -- UTILS -- #
 func set_current_level_number(current_level: int):
 	GameManager.current_level = current_level
-
-
-#func spanw_ogg_decorativo(tipo: OggettiDecorativi, tile_pos: Vector2i, offset := Vector2.ZERO):
-	#
-	#match tipo:
-		#OggettiDecorativi.PORTA_CELLA:
-			#var porta_scene = preload("res://Scenes/Decorations/PortaCella.tscn").instantiate()
-			#porta_scene.position = (tile_to_world(tile_pos) + offset).floor()
-			#$YSort/OggettiDecorativi.add_child(porta_scene)
-		#_:
-			#var sprite = Sprite2D.new()
-			#sprite.centered = true
-			#var atlas = AtlasTexture.new()
-			#atlas.atlas = texture_atlas
-			#atlas.region = OGGETTI_REGIONI[tipo]
-			#sprite.texture = atlas
-			#var world_pos = (tile_to_world(tile_pos) + offset).floor()
-			#sprite.position = world_pos
-			#sprite.y_sort_enabled = true
-			#$YSort/OggettiDecorativi.add_child(sprite)

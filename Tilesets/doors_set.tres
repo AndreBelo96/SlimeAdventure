@@ -1,0 +1,18 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dwiuj3egvhemc"]
+
+[ext_resource type="PackedScene" uid="uid://0x63sxigcn8w" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaE.tscn" id="1_0iiht"]
+[ext_resource type="PackedScene" uid="uid://ckr2xduwmue4o" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaN.tscn" id="2_qmgbn"]
+[ext_resource type="PackedScene" uid="uid://dl1qnr5gef6ch" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaS.tscn" id="3_g73nd"]
+[ext_resource type="PackedScene" uid="uid://cbai1egjg2n1s" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaW.tscn" id="4_5rbfy"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2kcle"]
+scenes/8/scene = ExtResource("1_0iiht")
+scenes/9/scene = ExtResource("2_qmgbn")
+scenes/10/scene = ExtResource("3_g73nd")
+scenes/11/scene = ExtResource("4_5rbfy")
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+sources/0 = SubResource("TileSetScenesCollectionSource_2kcle")

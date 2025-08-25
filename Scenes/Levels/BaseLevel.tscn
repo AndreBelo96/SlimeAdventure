@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=20 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
 [ext_resource type="TileSet" uid="uid://bfdegxpjgd1n3" path="res://Tilesets/stair_set.tres" id="8_p3cyg"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelHUDManager.gd" id="11_vokoc"]
+[ext_resource type="TileSet" uid="uid://dwiuj3egvhemc" path="res://Tilesets/doors_set.tres" id="12_iw06x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")
@@ -104,6 +105,10 @@ texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
 
+[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+tile_set = ExtResource("12_iw06x")
+
 [node name="StairMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
 texture_filter = 1
@@ -115,11 +120,7 @@ tile_map_layer_path = NodePath("../../TileMapLayer")
 pickup_map_layer_path = NodePath("../PickupMapLayer")
 wall_map_layer_path = NodePath("../WallMapLayer")
 wall_back_map_layer_path = NodePath("../WallBackMapLayer")
-
-[node name="OggettiDecorativi" type="Node2D" parent="YSort"]
-y_sort_enabled = true
-
-[node name="OggettiInterattivi" type="Node2D" parent="YSort"]
+doors_map_layer_path = NodePath("../DoorsMapLayer")
 
 [node name="TorchMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true

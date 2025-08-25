@@ -10,6 +10,7 @@ signal steps_changed(new_count: int)
 @export var pickup_map_layer_path: NodePath
 @export var wall_map_layer_path: NodePath
 @export var wall_back_map_layer_path: NodePath
+@export var doors_map_layer_path: NodePath
 @export var point_light_path: NodePath
 @export var move_duration := 0.4
 
@@ -20,6 +21,7 @@ var input_enabled := true
 @onready var pickup_map_layer: Node = get_node(pickup_map_layer_path)
 @onready var wall_map_layer: Node = get_node(wall_map_layer_path)
 @onready var wall_back_map_layer: Node = get_node(wall_back_map_layer_path)
+@onready var doors_map_layer: Node = get_node(doors_map_layer_path)
 @onready var point_light: PointLight2D = get_node(point_light_path)
 
 @onready var input_handler = PlayerInput.new()
@@ -34,9 +36,10 @@ func _ready():
 	assert(pickup_map_layer, "pickup_map_layer non assegnato nel Player")
 	assert(wall_map_layer, "wall_map_layer non assegnato nel Player")
 	assert(wall_back_map_layer, "wall_back_map_layer non assegnato nel Player")
+	assert(doors_map_layer, "doors_map_layer non assegnato nel Player")
 	assert(point_light, "point_light non assegnato nel Player")
 
-	movement_handler.setup(self, tile_map_layer, wall_map_layer, wall_back_map_layer, move_duration)
+	movement_handler.setup(self, tile_map_layer, wall_map_layer, wall_back_map_layer, doors_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
 	animation_handler.setup($AnimatedSprite2D)
 	light_handler.setup(point_light)

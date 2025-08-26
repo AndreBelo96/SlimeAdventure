@@ -59,3 +59,11 @@ func get_exit_position() -> Vector2:
 			if tile_data.get_custom_data("chiave") == "EXIT":
 				return cell
 	return Vector2.ZERO
+
+func activate_exit_particles(exit_cell: Vector2i):
+	for nodo in tile_layer.get_children():
+		if tile_layer.local_to_map(nodo.position) == exit_cell:
+			if nodo.has_node("GlowParticles"):
+				var particles = nodo.get_node("GlowParticles") as GPUParticles2D
+				particles.emitting = true
+			return

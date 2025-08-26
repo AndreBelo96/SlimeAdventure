@@ -13,6 +13,7 @@ signal signal_victory
 
 var steps := 0
 var level_time := 0.0
+var tile_manager
 var exit_position: Vector2 = Vector2.ZERO
 
 func _ready():
@@ -29,7 +30,7 @@ func _ready():
 	
 	await get_tree().process_frame
 	
-	var tile_manager := LevelTileManager.new()
+	tile_manager = LevelTileManager.new()
 	tile_manager.tile_layer = $TileMapLayer
 	tile_manager.logic_map = $LogicMapLayer
 	add_child(tile_manager)
@@ -75,6 +76,10 @@ func _on_all_tiles_activated():
 	for tile in get_tree().get_nodes_in_group("activatables"):
 		tile.locked = true
 	
+	if exit_position == Vector2.ZERO:
+		player.on_player_won()
+	else:
+		tile_manager.activate_exit_particles(exit_position)
 
 func _on_player_died():
 	print("morte!")

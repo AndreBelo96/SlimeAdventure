@@ -39,18 +39,14 @@ func _unlock_spikes(chiave: String):
 			child.disattiva()
 
 func check_victory():
-	for child in tile_layer.get_children():
-		if child.has_method("is_activated") and not child.is_activated():
-			return
-	
 	var level_manager = get_parent()
 	if player is not Node2D or not level_manager or level_manager.exit_position == Vector2.ZERO:
 		return
-		
+	
 	var player_tile = get_coords_from_global_position(player.position)
 	var exit_tile = Vector2i(level_manager.exit_position)
 	
-	if  player_tile == exit_tile:
+	if player_tile == exit_tile:
 		player.on_player_won()
 
 func get_coords_from_global_position(global_pos: Vector2) -> Vector2i:

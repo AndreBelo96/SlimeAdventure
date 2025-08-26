@@ -354,7 +354,7 @@ offset_bottom = 238.0
 grow_horizontal = 2
 theme = ExtResource("1_nv7gp")
 theme_override_font_sizes/font_size = 40
-text = "Entrando in..."
+text = "Enter in..."
 horizontal_alignment = 1
 
 [node name="Titolo" type="Label" parent="CanvasLayer"]
@@ -368,7 +368,7 @@ offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_nv7gp")
-text = "Tutorial
+text = "
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -383,7 +383,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_nv7gp")
 theme_override_font_sizes/font_size = 40
-text = "Caricamento..."
+text = "Loading..."
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]

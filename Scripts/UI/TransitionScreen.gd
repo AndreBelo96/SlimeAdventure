@@ -1,17 +1,18 @@
 extends Control
 
 @export var scene_to_load: String
-@export var transition_text: String = "Caricamento..."
+@export var transition_text: String = "Loading..."
 @export var location_id: int = 0
 
 @onready var animation_player = $CanvasLayer/AnimationPlayer
 @onready var animated_sprite =$CanvasLayer/AnimatedSprite2D
 @onready var sprite =$CanvasLayer/Sprite
 
-var inputs_disabled: bool = true
 
 func _ready():
-	inputs_disabled = true
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
+	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	$CanvasLayer/Titolo.text = transition_text
 
@@ -40,12 +41,14 @@ func _ready():
 	animation_player.play("FadeOut")
 	await animation_player.animation_finished
 
-	var packed_scene = load(scene_to_load)
-	inputs_disabled = false
+	get_tree().paused = false
+	var packed_scene := load(scene_to_load)
 	get_tree().change_scene_to_packed(packed_scene)
-	
+
 	queue_free()
 
+func _input(event: InputEvent) -> void:
+	get_viewport().set_input_as_handled()
+
 func _unhandled_input(event: InputEvent) -> void:
-	if inputs_disabled:
-		pass
+	get_viewport().set_input_as_handled()

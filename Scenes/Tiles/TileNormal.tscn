@@ -24,7 +24,9 @@ texture = ExtResource("3_4sxk7")
 region_enabled = true
 region_rect = Rect2(448, 32, 64, 32)
 
-[node name="GlowParticles" type="GPUParticles2D" parent="." index="4"]
+[node name="GlowParticles" type="GPUParticles2D" parent="." index="3"]
+z_index = 10
+z_as_relative = false
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_fpcbv")

@@ -19,10 +19,15 @@ func load_level_buttons():
 		child.queue_free()
 
 	var levels_info = loader.get_level_data_for_location(GameManager.location_selected)
+	var levels_range = GameManager.get_level_range_for_location(GameManager.location_selected)
 
 	for info in levels_info:
+		var relative_index = levels_range.find(loader.extract_level_number(info.path)) + 1
+		var location_id = int(GameManager.location_selected)
+		var display_number = "%d.%d" % [location_id, relative_index]
+		
 		var btn = factory.create_level_button(
-			str(info.number),
+			display_number,
 			info.disabled,
 			info.theme
 		)

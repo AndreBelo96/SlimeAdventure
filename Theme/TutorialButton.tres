@@ -1,12 +1,10 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://bekimpr1d4j4a"]
 
 [ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_jrrk7"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hnxeg"]
-load_path = "res://.godot/imported/button_set.png-9a365a034381287448fec1d3dc07b66f.ctex"
+[ext_resource type="Texture2D" uid="uid://7g3obbc0a1cf" path="res://Assets/Sprites/Buttons/button_set.png" id="2_umw23"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vgg2q"]
-texture = SubResource("CompressedTexture2D_hnxeg")
+texture = ExtResource("2_umw23")
 region_rect = Rect2(249, 13, 62, 24)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flrmq"]

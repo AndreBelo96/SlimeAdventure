@@ -7,8 +7,8 @@ func create_level_button(label: String, is_disabled: bool, theme: Theme) -> Butt
 	button.disabled = is_disabled
 	button.focus_mode = Control.FOCUS_NONE
 	button.theme = theme
-	button.set_size(Vector2(100, 60))
-	button.set_custom_minimum_size(Vector2(100, 60))
+	button.set_size(Vector2(150, 60))
+	button.set_custom_minimum_size(Vector2(150, 60))
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	return button

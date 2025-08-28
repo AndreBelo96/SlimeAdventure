@@ -56,6 +56,7 @@ func bounce_off(blocked_position: Vector2i):
 
 	# Primo salto verso il muro
 	await tween_jump(start_pos, mid_pos, jump_height, move_duration * 0.4)
+	SoundManager.play_sfx("res://Assets/Audio/Bounce.wav")
 	# Rimbalzo indietro
 	await tween_jump(mid_pos, start_pos, jump_height * 0.75, move_duration * 0.3)
 

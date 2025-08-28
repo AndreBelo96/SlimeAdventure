@@ -1,14 +1,18 @@
 extends "res://Scripts/Levels/LevelManager.gd"
 
-var slime_face = preload("res://Assets/Sprites/Player/Sunglasses.png")
-
 func _ready():
 	super._ready()
 	set_current_level_number(5)
 	await get_tree().create_timer(0.2).timeout
 	
 	var intro_dialogue = [
-		{"name": "Slime", "text": "Qualcosa non va, cosa sono queste trappole?", "portrait": slime_face}
+		{
+			"name": "Slime", 
+			"text": "Cosa aveva detto nonno sulle trappole? Qualcosa sul non toccarle mi pare...", 
+			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
+			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
+		}
 	]
 
 	dialog_interface.show_dialogue(intro_dialogue)

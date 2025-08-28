@@ -21,6 +21,7 @@ ThemeManager="*res://Global/ThemeManager.gd"
 SoundManager="*res://Global/SoundManager.gd"
 SaveManager="*res://Global/SaveManager.gd"
 PortraitManager="*res://Global/PortraitManager.gd"
+VoiceManager="*res://Global/VoiceManager.gd"
 
 [display]
 

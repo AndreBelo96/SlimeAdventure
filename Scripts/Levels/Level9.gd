@@ -1,12 +1,16 @@
 extends "res://Scripts/Levels/LevelManager.gd"
 
-var slime_face = preload("res://Assets/Sprites/Player/Sunglasses.png")
-
 func _ready():
 	super._ready()
 	set_current_level_number(9)
 	var intro_dialogue = [
-		{"name": "Slime", "text": "Cosa è questo buio?", "portrait": slime_face}
+		{
+			"name": "Slime", 
+			"text": "Chissà se nonno si riferiva a questo quando parlava delle torce e la muffa...", 
+			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
+			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
+		}
 	]
 
 	dialog_interface.show_dialogue(intro_dialogue)

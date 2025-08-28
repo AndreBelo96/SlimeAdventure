@@ -37,8 +37,17 @@ func _show_line():
 func _type_text(text: String):
 	is_typing = true
 	text_label.text = ""
+	var line = current_dialogue[current_index]
+	
+	var voice = line.get("voice", null)
+	var voice_speed = line.get("voice_speed", VoiceManager.get_speed(line.get("name", "")))
+	
 	for i in text.length():
 		text_label.text += text[i]
+		
+		if voice and i % voice_speed == 0 and text[i] != " ":
+			SoundManager.play_sfx(voice)
+		
 		await get_tree().create_timer(0.03).timeout
 	is_typing = false
 

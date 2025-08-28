@@ -7,5 +7,6 @@ func _ready():
 
 func on_player_enter(player: Node) -> void:
 	print("Pickup raccolto: ", ItemType.keys()[ITEM_TYPE])
+	SoundManager.play_sfx("res://Assets/Audio/Pickup.wav")
 	player.set_lights_for_duration(7.0)
 	queue_free()

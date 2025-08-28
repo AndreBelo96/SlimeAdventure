@@ -71,7 +71,7 @@ var last_attempt := {
 }
 
 func _ready():
-	var loaded = SaveManager.load_progress()
+	var _loaded = SaveManager.load_progress()
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
 	total_steps = totals.steps

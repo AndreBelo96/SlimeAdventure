@@ -24,7 +24,7 @@ func play_death(death_type: int):
 			anim_sprite.play("Death")
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
 		DeathType.VOID:
-			anim_sprite.play("Death")
+			#anim_sprite.play("Death")
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
 		DeathType.ENEMY:
 			anim_sprite.play("Death")

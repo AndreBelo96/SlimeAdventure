@@ -18,5 +18,5 @@ func _process(delta):
 	elapsed += delta
 	position.y = start_y + sin(elapsed * float_speed) * float_amount
 
-func on_player_enter(player: Node) -> void:
+func on_player_enter(_player: Node) -> void:
 	pass

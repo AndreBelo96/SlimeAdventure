@@ -3,6 +3,7 @@ extends Resource
 
 var player
 var tile_map_layer
+var npc_map_layer
 var wall_map_layer
 var wall_back_map_layer
 var doors_map_layer
@@ -11,14 +12,15 @@ var move_duration
 var grid_position := Vector2i.ZERO
 var is_moving := false
 
-func setup(player_ref, tile_layer, wall_layer, wall_back_layer, doors_layer, duration):
+func setup(player_ref, tile_layer, wall_layer, wall_back_layer, doors_layer, npc_layer, duration):
 	player = player_ref
 	tile_map_layer = tile_layer
 	wall_map_layer = wall_layer
 	wall_back_map_layer = wall_back_layer
 	doors_map_layer = doors_layer
+	npc_map_layer = npc_layer
 	move_duration = duration
-	grid_position = get_coords_from_global_position(player.global_position)
+	grid_position = get_coords_from_global_position_in_layer(player.global_position, tile_map_layer)
 
 func move_to(new_grid_position: Vector2i):
 	if is_moving:
@@ -79,40 +81,32 @@ func get_tile_center_position(coords: Vector2i) -> Vector2:
 	for child in tile_map_layer.get_children():
 		if child.has_node("Center"):
 			var center = child.get_node("Center")
-			if get_coords_from_global_position(center.global_position) == coords:
+			if get_coords_from_global_position_in_layer(center.global_position, tile_map_layer) == coords:
 				return center.global_position
 	return tile_map_layer.to_global(tile_map_layer.map_to_local(coords))
 
-func get_coords_from_global_position(global_pos: Vector2) -> Vector2i:
-	return tile_map_layer.local_to_map(tile_map_layer.to_local(global_pos))
-
-func get_coords_from_global_position_for_walls(global_pos: Vector2) -> Vector2i:
-	return wall_map_layer.local_to_map(wall_map_layer.to_local(global_pos))
-
-func get_coords_from_global_position_for_walls_back(global_pos: Vector2) -> Vector2i:
-	return wall_back_map_layer.local_to_map(wall_back_map_layer.to_local(global_pos))
-
-func get_coords_from_global_position_for_doors(global_pos: Vector2) -> Vector2i:
-	return doors_map_layer.local_to_map(doors_map_layer.to_local(global_pos))
+func get_coords_from_global_position_in_layer(global_pos: Vector2, layer: TileMapLayer) -> Vector2i:
+	return layer.local_to_map(layer.to_local(global_pos))
 
 func can_move_to(coords: Vector2i) -> bool:
 	for child in tile_map_layer.get_children():
 		if child.has_node("Center"):
 			var center = child.get_node("Center")
-			if get_coords_from_global_position(center.global_position) == coords:
+			if get_coords_from_global_position_in_layer(center.global_position, tile_map_layer) == coords:
 				return child.has_method("can_enter") and child.can_enter()
 	return true
 
 func is_wall_at(coords: Vector2i) -> bool:
 	for child in wall_map_layer.get_children():
-		if child.has_node("Center") and get_coords_from_global_position_for_walls(child.get_node("Center").global_position) == coords:
+		if child.has_node("Center") and get_coords_from_global_position_in_layer(child.get_node("Center").global_position, wall_map_layer) == coords:
 			return true
 	for child in wall_back_map_layer.get_children():
-		if child.has_node("Center") and get_coords_from_global_position_for_walls_back(child.get_node("Center").global_position) == coords:
+		if child.has_node("Center") and get_coords_from_global_position_in_layer(child.get_node("Center").global_position, wall_back_map_layer) == coords:
 			return true
 	for child in doors_map_layer.get_children():
-		var door_coords = get_coords_from_global_position_for_doors(child.get_node("Center").global_position)
-		print("DEBUG: porta a ", door_coords, " contro ", coords, " open=", child.is_open)
-		if door_coords == coords and !child.is_open:
+		if get_coords_from_global_position_in_layer(child.get_node("Center").global_position, doors_map_layer) == coords and !child.is_open:
+			return true
+	for child in npc_map_layer.get_children():
+		if get_coords_from_global_position_in_layer(child.get_node("Center").global_position, npc_map_layer) == coords:
 			return true
 	return false

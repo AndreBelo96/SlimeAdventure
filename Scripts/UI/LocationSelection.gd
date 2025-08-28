@@ -34,4 +34,5 @@ func _on_location_selected(location_name: String) -> void:
 	get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
 
 func _on_button_pressed() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

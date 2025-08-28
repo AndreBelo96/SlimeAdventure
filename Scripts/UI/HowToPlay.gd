@@ -35,6 +35,7 @@ func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 
 
 func _on_button_pressed() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	var loader = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 	loader.scene_to_load = "res://Scenes/Levels/Level1.tscn"

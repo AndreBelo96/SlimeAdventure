@@ -15,7 +15,7 @@ func create_panel(panel_size: Vector2) -> Node:
 	skull_sprite.centered = true
 	return skull_sprite
 
-func update_panel(node: Node, row: int, col: int, elapsed_time: float, delta: float) -> void:
-	if node is Node2D:
-		var scale_value = 3 + 2 * (sin(elapsed_time * 4.0) * 0.5 + 0.9)
-		node.scale = Vector2.ONE * scale_value
+func update_panel(_node: Node, _row: int, _col: int, _elapsed_time: float, _delta: float) -> void:
+	if _node is Node2D:
+		var scale_value = 3 + 2 * (sin(_elapsed_time * 4.0) * 0.5 + 0.9)
+		_node.scale = Vector2.ONE * scale_value

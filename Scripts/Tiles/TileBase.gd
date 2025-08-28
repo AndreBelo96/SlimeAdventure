@@ -30,5 +30,5 @@ func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_hei
 func debug_log(msg: String):
 	print("[TileBase] ", msg)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	pass # Replace with function body.

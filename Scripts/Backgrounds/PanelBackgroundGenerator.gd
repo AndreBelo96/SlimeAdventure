@@ -13,7 +13,7 @@ func create_panel(panel_size: Vector2) -> Node:
 	panel.add_theme_stylebox_override("panel", stylebox)
 	return panel
 
-func update_panel(node: Node, row: int, col: int, elapsed_time: float, delta: float) -> void:
-	if node is Control:
-		var scale_value = 0.3 + 0.8 * (sin(elapsed_time * 2.0) * 0.5 + 0.5)
-		node.scale = Vector2.ONE * scale_value
+func update_panel(_node: Node, _row: int, _col: int, _elapsed_time: float, _delta: float) -> void:
+	if _node is Control:
+		var scale_value = 0.3 + 0.8 * (sin(_elapsed_time * 2.0) * 0.5 + 0.5)
+		_node.scale = Vector2.ONE * scale_value

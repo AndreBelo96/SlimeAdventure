@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy3p1262vrlln"]
+
+[ext_resource type="Texture2D" uid="uid://ce48sjs0p4wxy" path="res://Assets/Sprites/UI/DialogueImages.png" id="1_nig5d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oraxt"]
+atlas = ExtResource("1_nig5d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_veu0t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oraxt")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="NonnoSlime" type="Node2D"]
+
+[node name="Center" type="Marker2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_veu0t")

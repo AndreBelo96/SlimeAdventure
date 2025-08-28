@@ -3,10 +3,8 @@ extends Control
 
 @onready var level_container: GridContainer = $CanvasLayer/RightPanel/CenterContainer/LevelButtonContainer
 
-var loader = preload("res://Scripts/Levels/LevelLoader.gd")
-var factory = preload("res://Scripts/Levels/LevelButtonFactory.gd")
-
-
+var loader = preload("res://Scripts/UI/LevelLoader.gd")
+var factory = preload("res://Scripts/UI/LevelButtonFactory.gd")
 
 func _ready():
 	loader = LevelLoader.new()
@@ -63,4 +61,5 @@ func is_level_disabled(label: String) -> bool:
 	return level_number > GameManager.max_level_reach
 
 func _on_button_pressed() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")

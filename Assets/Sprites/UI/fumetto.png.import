@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxl3unea0u3oj"
-path="res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
+uid="uid://dwe62dfjc6hw5"
+path="res://.godot/imported/fumetto.png-248c0913876b1612b4525481c0fb2fa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tiles/Tileset.png"
-dest_files=["res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"]
+source_file="res://Assets/Sprites/UI/fumetto.png"
+dest_files=["res://.godot/imported/fumetto.png-248c0913876b1612b4525481c0fb2fa8.ctex"]
 
 [params]
 

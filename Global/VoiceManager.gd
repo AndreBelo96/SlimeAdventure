@@ -10,5 +10,5 @@ const SPEEDS = {
 	DEFAULT: 3,
 }
 
-static func get_speed(character: String) -> int:
+func get_speed(character: String) -> int:
 	return SPEEDS.get(character, SPEEDS[DEFAULT])

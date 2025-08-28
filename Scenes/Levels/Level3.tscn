@@ -6,5 +6,11 @@
 [node name="Level" instance=ExtResource("1_0vq1g")]
 script = ExtResource("2_4xmhp")
 
+[node name="LogicMapLayer" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAAAAgAJAAAAAAA=")
+
 [node name="TileMapLayer" parent="." index="3"]
-tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQABAP//AQAAAAAAAgA=")
+
+[node name="NPCMapLayer" parent="YSort" index="5"]
+tile_map_data = PackedByteArray("AAABAP//AQAAAAAAAQA=")

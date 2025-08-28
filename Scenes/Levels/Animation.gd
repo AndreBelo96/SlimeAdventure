@@ -1,16 +1,11 @@
-extends Control
+extends Node2D
 
+@onready var animation: AnimatedSprite2D = $ExampleAnimation
+@onready var sprite: Sprite2D = $Arrow
 
-@onready var animation: AnimatedSprite2D = $CanvasLayer/HBoxContainer/ExampleAnimation
-@onready var sprite: Sprite2D = $CanvasLayer/HBoxContainer/Arrow
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	animation.sprite_frames.set_animation_loop("UP", false)
 	animation.sprite_frames.set_animation_loop("DOWN", false)
-	print("GameManager valid:", is_instance_valid(GameManager))
-	print("GameManager type:", typeof(GameManager))
-	# Avvia la sequenza in loop
 	play_sequence()
 
 func play_sequence() -> void:
@@ -24,7 +19,6 @@ func play_sequence() -> void:
 		sprite.region_rect = Rect2(32, 0, 16, 16)
 		await play_animation("DOWN", true, false)
 
-
 func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 	animation.flip_h = flip_h
 	animation.flip_v = flip_v
@@ -32,8 +26,3 @@ func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 	
 	await animation.animation_finished
 	await get_tree().create_timer(1.0).timeout
-
-
-func _on_button_pressed() -> void:
-	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
-	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

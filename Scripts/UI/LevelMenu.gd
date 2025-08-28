@@ -39,13 +39,6 @@ func _on_level_button_pressed(path: String):
 	var is_first_level_of_location = level_num == GameManager.get_level_range_for_location(GameManager.location_selected)[0]
 
 	if is_first_level_of_location:
-		var location_key: String = str(GameManager.location_selected + 1)
-		var how_to_play_path = "res://Scenes/UI/HowToPlay%s.tscn" % location_key
-
-		if ResourceLoader.exists(how_to_play_path):
-			get_tree().change_scene_to_file(how_to_play_path)
-			return
-		
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		var loader_scene = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 		loader_scene.scene_to_load = path

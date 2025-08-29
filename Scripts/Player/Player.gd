@@ -49,7 +49,6 @@ func _ready():
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position_in_layer(global_position, tile_map_layer))
 	await get_tree().process_frame
 	interaction_handler.check_tile()
-	interaction_handler.check_pickup()
 
 func set_lights(isLight):
 	light_handler.set_enabled(isLight)

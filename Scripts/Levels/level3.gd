@@ -11,7 +11,16 @@ func _ready():
 			"portrait": PortraitManager.get_portrait("Nonno"),
 			"voice": "res://Assets/Audio/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
+		},
+		{
+			"name": "Nonno Slime", 
+			"text": "E ricorda, alcuni livelli per terminarli dovrai arrivare alla casella di uscita!", 
+			"portrait": PortraitManager.get_portrait("Nonno"),
+			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		}
 	]
 	
+	await get_tree().process_frame
+	await get_tree().process_frame
 	dialog_interface.show_dialogue(intro_dialogue)

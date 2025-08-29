@@ -15,6 +15,7 @@ var steps := 0
 var level_time := 0.0
 var tile_manager
 var exit_position: Vector2 = Vector2.ZERO
+var all_tiles_active := false
 
 func _ready():
 	pause_menu.visible = false
@@ -67,6 +68,8 @@ func toggle_pause():
 
 func _on_all_tiles_activated():
 	print("Tutte le tile attivate → Apro tutte le porte!")
+	
+	all_tiles_active = true
 	
 	var porte = get_tree().get_nodes_in_group("porte")
 	for porta in porte:

@@ -32,6 +32,8 @@ var input_enabled := true
 @onready var animation_handler = PlayerAnimation.new()
 @onready var light_handler = PlayerLight.new()
 
+var can_move := true
+
 func _ready():
 	# Verifica che i nodi siano assegnati
 	assert(tile_map_layer, "tile_map_layer non assegnato nel Player")
@@ -59,7 +61,7 @@ func set_lights_for_duration(duration: float):
 	set_lights(false)
 
 func _unhandled_input(event):
-	if not input_enabled:
+	if not input_enabled or not can_move:
 		return
 
 	if movement_handler.is_moving:

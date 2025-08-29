@@ -12,6 +12,5 @@ func _ready():
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		}
 	]
-	await get_tree().process_frame
-	await get_tree().process_frame
+	
 	dialog_interface.show_dialogue(intro_dialogue)

@@ -84,6 +84,5 @@ func _ready():
 		},
 		
 	]
-	await get_tree().process_frame
-	await get_tree().process_frame
+
 	dialog_interface.show_dialogue(intro_dialogue)

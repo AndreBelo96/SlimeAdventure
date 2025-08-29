@@ -5,6 +5,8 @@ class_name DialogueInterface
 @onready var text_label = $Panel/TextLabel
 @onready var name_label = $Panel/NameLabel
 @onready var portrait = $Panel/Portrait
+@export var player: Node2D
+@export var level_manager: Node2D
 
 var current_dialogue = []
 var current_index = 0
@@ -12,11 +14,16 @@ var is_typing = false
 var key_pressed = false
 
 func show_dialogue(dialogue: Array):
+	if player:
+		player.can_move = false
+	
+	if level_manager:
+		level_manager.time_running = false
+	
 	for line in dialogue:
 		if typeof(line) != TYPE_DICTIONARY or not line.has("text"):
 			push_error("Dialogue line is invalid: " + str(line))
 			return
-	get_tree().paused = true
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	current_dialogue = dialogue
 	current_index = 0
@@ -26,7 +33,12 @@ func show_dialogue(dialogue: Array):
 func _show_line():
 	if current_index >= current_dialogue.size():
 		visible = false
-		get_tree().paused = false
+		
+		if player:
+			player.can_move = true
+		
+		if level_manager:
+			level_manager.time_running = true
 		return
 
 	var line = current_dialogue[current_index]
@@ -54,8 +66,9 @@ func _type_text(text: String):
 func _unhandled_input(event):
 	if not visible:
 		return
-
-	# Considera solo tasti o click rilasciati
+	
+	#TODO pensare ad un modo epr velocizzare o skippare il testo
+	
 	if (event is InputEventKey or event is InputEventMouseButton) and not event.pressed:
 		if is_typing:
 			return

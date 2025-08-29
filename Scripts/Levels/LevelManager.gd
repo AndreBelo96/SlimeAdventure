@@ -16,6 +16,7 @@ var level_time := 0.0
 var tile_manager
 var exit_position: Vector2 = Vector2.ZERO
 var all_tiles_active := false
+var time_running := true
 
 func _ready():
 	pause_menu.visible = false
@@ -42,8 +43,9 @@ func _ready():
 	exit_position = tile_manager.get_exit_position()
 
 func _process(delta):
-	level_time += delta
-	hud_manager.update_time(level_time)
+	if time_running:
+		level_time += delta
+		hud_manager.update_time(level_time)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):

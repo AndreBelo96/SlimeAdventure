@@ -9,14 +9,14 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": "Alcune volte per completare il livello sarai costretto a spegnere alcune tile per terminarlo!", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		{
 			"name": "Nonno Slime", 
 			"text": "E ricorda, alcuni livelli per terminarli dovrai arrivare alla casella di uscita!", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		}
 	]

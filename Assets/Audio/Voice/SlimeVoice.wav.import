@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c63q8m6370lb4"
-path="res://.godot/imported/SlimeVoice.wav-47ecd4eba934962c3165d6172d46f7d3.sample"
+path="res://.godot/imported/SlimeVoice.wav-a30ca00bbe6951545ad3105cb4d17a91.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/SlimeVoice.wav"
-dest_files=["res://.godot/imported/SlimeVoice.wav-47ecd4eba934962c3165d6172d46f7d3.sample"]
+source_file="res://Assets/Audio/Voice/SlimeVoice.wav"
+dest_files=["res://.godot/imported/SlimeVoice.wav-a30ca00bbe6951545ad3105cb4d17a91.sample"]
 
 [params]
 

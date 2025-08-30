@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jle6etg17io7"
+path="res://.godot/imported/Fire (2).wav-8d2f7fa05dee56f00df0db84f4fb043d.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Fire/Fire (2).wav"
+dest_files=["res://.godot/imported/Fire (2).wav-8d2f7fa05dee56f00df0db84f4fb043d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

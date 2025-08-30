@@ -8,7 +8,7 @@ func _ready():
 			"name": "Slime", 
 			"text": "Chissà se nonno si riferiva a questo quando parlava delle torce e la muffa...", 
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		}
 	]

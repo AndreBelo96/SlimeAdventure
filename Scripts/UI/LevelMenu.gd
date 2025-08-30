@@ -29,15 +29,17 @@ func load_level_buttons():
 			info.disabled,
 			info.theme
 		)
-		btn.pressed.connect(_on_level_button_pressed.bind(info.path))
+		btn.pressed.connect(_on_level_button_pressed.bind(info.path, info.sound))
 		level_container.add_child(btn)
 
-func _on_level_button_pressed(path: String):
+func _on_level_button_pressed(path: String, sound: String):
 	var level_num = loader.extract_level_number(path)
 	GameManager.current_level = level_num
 
 	var is_first_level_of_location = level_num == GameManager.get_level_range_for_location(GameManager.location_selected)[0]
-
+	
+	SoundManager.play_sfx(sound);
+	
 	if is_first_level_of_location:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		var loader_scene = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()

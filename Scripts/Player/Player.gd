@@ -103,4 +103,4 @@ func handle_void_death():
 	tween.parallel().tween_property(self, "scale", Vector2(0.3, 0.3), 1.5)
 	tween.parallel().tween_property(self, "modulate:a", 0.0, 1.5)
 	
-	SoundManager.play_sfx("res://Assets/Audio/Fall.wav")
+	SoundManager.play_sfx("res://Assets/Audio/FallLow.wav")

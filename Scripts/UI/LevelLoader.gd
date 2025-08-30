@@ -5,6 +5,10 @@ const THEME_TUTORIAL := preload("res://Theme/TutorialButton.tres")
 const THEME_DUNGEON := preload("res://Theme/DungeonButton.tres")
 const THEME_DEFAULT := preload("res://Theme/DefaultButton.tres")
 
+const SOUND_TUTORIAL := "res://Assets/Audio/TutorialBtnClick.wav"
+const SOUND_DUNGEON := "res://Assets/Audio/TutorialBtnClick.wav" #TODO da fare
+const SOUND_DEFAULT := "res://Assets/Audio/DefaultBtnClick.wav"
+
 func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 	var levels_info: Array[Dictionary] = []
 	var files = get_levels_for_location(loc)
@@ -14,9 +18,19 @@ func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 			"number": num,
 			"path": "res://Scenes/Levels/" + file,
 			"disabled": num > GameManager.max_level_reach,
-			"theme": get_theme_for_location(loc)
+			"theme": get_theme_for_location(loc),
+			"sound": get_sound_for_location(loc)
 		})
 	return levels_info
+
+func get_sound_for_location(loc: int) -> String:
+	match loc:
+		GameManager.Location.TUTORIAL:
+			return SOUND_TUTORIAL
+		GameManager.Location.DUNGEON:
+			return SOUND_DUNGEON
+		_:
+			return SOUND_DEFAULT
 
 func get_theme_for_location(loc: int) -> Theme:
 	match loc:

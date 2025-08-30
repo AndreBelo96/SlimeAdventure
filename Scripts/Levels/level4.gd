@@ -11,15 +11,15 @@ func _ready():
 			"name": "Slime", 
 			"text": "Ehm… Nonno? Che cos’è quella cosa strana lì per terra? Ha due occhi finti… con il vetro davanti!",
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
 		{
 			"name": "Nonno Slime", 
-			"text": "Oh, quelli, nipotino, sono… come li chiamano… “occhiali da sole”. Li usano gli avventurieri per sembrare più… fighi... o forse per proteggersi dalla luce, non ricordo bene", 
+			"text": "Oh, quelli, nipotino, sono… come li chiamano… “occhiali da sole”. Li usano gli avventurieri per sembrare più… fighi... o forse per proteggersi dalla luce, non ricordo bene.", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -27,7 +27,7 @@ func _ready():
 			"name": "Slime", 
 			"text": "Avventurieri? Quelli che entrano qui a urlare “Per il tesoro!” e poi noi li sciogliamo un po’?", 
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -35,7 +35,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": "Esattamente! Sono strani esseri, sempre in cerca di gloria, ricchezze e… beh, cadaveri come questo. Ma non ti preoccupare: noi Slime siamo più saggi. Noi restiamo a casa.", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -44,7 +44,7 @@ func _ready():
 			"text": "Nonno, e se questi occhiali avessero visto cose incredibili? Montagne altissime! Cieli sconfinati! Luoghi pieni di luce! 
 			\nCosa c’è fuori da queste segrete?", 
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -52,7 +52,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": "Ehm… fuori? Beh… ci sono altre stanze… e… forse scale? Io… io non sono mai uscito, a dire il vero.", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -61,7 +61,7 @@ func _ready():
 			"text": "Allora devo farlo io! Se questi occhiali hanno visto il mondo… io voglio vederlo con i miei occhi di slime! 
 			\nNon resterò per sempre qui sotto. Voglio saltare là fuori e scoprire cosa c’è oltre queste segrete!", 
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -70,7 +70,7 @@ func _ready():
 			"text": "Hai lo stesso fuoco che avevo io da giovane blob… Vai, piccolo mio. Segui ciò che brilla nei tuoi occhi… 
 			\nMa stai attento: là fuori non ci saranno solo torce e muffa.", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -79,7 +79,7 @@ func _ready():
 			"text": "Allora meglio iniziare subito! 
 			\nGrazie, Nonno. La mia avventura comincia… ora!", 
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		

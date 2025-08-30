@@ -9,7 +9,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": "Usa le frecce direzionali per muoverti. Cerca di attivare tutte le tile per avanzare!!", 
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		}
 	]

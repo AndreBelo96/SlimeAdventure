@@ -23,14 +23,16 @@ func _create_location_button(location_name: String) -> Button:
 	var location_type = GameManager.get_location_type(location_name)
 	var locked = GameManager.is_location_locked(location_name)
 	var themeBtn = ThemeManager.get_theme_for_location_type(location_type)
+	var soundBtn = ThemeManager.get_sound_for_location_type(location_type)
 	
 	btn.setup(location_name, locked, themeBtn)
-	btn.pressed.connect(_on_location_selected.bind(location_name))
+	btn.pressed.connect(_on_location_selected.bind(location_name, soundBtn))
 	return btn
 
 # --- EVENTS --- #
-func _on_location_selected(location_name: String) -> void:
+func _on_location_selected(location_name: String, sound: String) -> void:
 	GameManager.location_selected = GameManager.Location[location_name]
+	SoundManager.play_sfx(sound)
 	get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
 
 func _on_button_pressed() -> void:

@@ -4,9 +4,10 @@ extends Control
 @export var transition_text: String = "Loading..."
 @export var location_id: int = 0
 
+@export var dungeon_frames: SpriteFrames
+@export var forest_frames: SpriteFrames
+
 @onready var animation_player = $CanvasLayer/AnimationPlayer
-@onready var animated_sprite =$CanvasLayer/AnimatedSprite2D
-@onready var sprite =$CanvasLayer/Sprite
 
 
 func _ready():
@@ -18,26 +19,21 @@ func _ready():
 
 	match location_id:
 		GameManager.Location.TUTORIAL:
-			animated_sprite.visible = false
-			sprite.visible = false
+			pass
 		GameManager.Location.DUNGEON:
-			animated_sprite.visible = true
-			var second_sprite: AnimatedSprite2D = animated_sprite.duplicate()
-			second_sprite.position = Vector2(350, 300)
-			second_sprite.scale = Vector2(0.8, 0.8)
-			second_sprite.animation = animated_sprite.animation
-			second_sprite.play()
-			$CanvasLayer.add_child(second_sprite)
-			sprite.visible = false
+			var chain_manager = DungeonManager.new()
+			chain_manager.chain_frames = dungeon_frames
+			$CanvasLayer.add_child(chain_manager)
+			chain_manager.spawn_chains($CanvasLayer)
+			chain_manager.spawn_sprites($CanvasLayer)
 		GameManager.Location.FOREST:
-			animated_sprite.visible = false
-			sprite.visible = false
-
+			pass
+	
 	animation_player.play("FadeIn")
 	await animation_player.animation_finished
 	
 	await get_tree().create_timer(2).timeout
-
+	
 	animation_player.play("FadeOut")
 	await animation_player.animation_finished
 

@@ -12,8 +12,13 @@ var current_dialogue = []
 var current_index = 0
 var is_typing = false
 var key_pressed = false
+var skip_typing = false
 
 func show_dialogue(dialogue: Array):
+	
+	if get_tree().paused:
+		return
+	
 	if player:
 		player.can_move = false
 	
@@ -24,7 +29,8 @@ func show_dialogue(dialogue: Array):
 		if typeof(line) != TYPE_DICTIONARY or not line.has("text"):
 			push_error("Dialogue line is invalid: " + str(line))
 			return
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	process_mode = Node.PROCESS_MODE_INHERIT
 	current_dialogue = dialogue
 	current_index = 0
 	visible = true
@@ -48,6 +54,7 @@ func _show_line():
 
 func _type_text(text: String):
 	is_typing = true
+	skip_typing = false
 	text_label.text = ""
 	var line = current_dialogue[current_index]
 	
@@ -55,30 +62,28 @@ func _type_text(text: String):
 	var voice_speed = line.get("voice_speed", VoiceManager.get_speed(line.get("name", "")))
 	
 	for i in text.length():
+		if skip_typing: 
+			text_label.text = text
+			break
+		
 		text_label.text += text[i]
 		
 		if voice and i % voice_speed == 0 and text[i] != " ":
 			SoundManager.play_sfx(voice)
 		
-		await get_tree().create_timer(0.03).timeout
+		await get_tree().create_timer(0.03, false).timeout
 	is_typing = false
 
 func _unhandled_input(event):
 	if not visible:
 		return
-	
-	#TODO pensare ad un modo epr velocizzare o skippare il testo
-	
+		
 	if (event is InputEventKey or event is InputEventMouseButton) and not event.pressed:
-		if is_typing:
-			return
 		advance_dialogue()
-
 
 func advance_dialogue():
 	if is_typing:
-		text_label.text = current_dialogue[current_index]["text"]
-		is_typing = false
+		skip_typing = true
 	else:
 		current_index += 1
 		_show_line()

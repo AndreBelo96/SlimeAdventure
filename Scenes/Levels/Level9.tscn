@@ -27,5 +27,5 @@ tile_map_data = PackedByteArray("AAARAAAAAAAAAAAACAA=")
 [node name="StairMapLayer" parent="YSort" index="4"]
 tile_map_data = PackedByteArray("AAASAAAAAgAAAAAAAAA=")
 
-[node name="TorchMapLayer" parent="YSort" index="6"]
+[node name="TorchMapLayer" parent="YSort" index="7"]
 tile_map_data = PackedByteArray("AAADAPz/AAAAAAAAAQAJAPz/AAAAAAAAAQABAP//AAAAAAAAAQA=")

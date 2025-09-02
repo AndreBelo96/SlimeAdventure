@@ -86,9 +86,11 @@ func register_death(death_type: int):
 		death_counts[death_type] = 1
 
 func change_scene_to_victory():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://Scenes/UI/Victory.tscn")
 
 func change_scene_to_defeat():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://Scenes/UI/Defeat.tscn")
 
 # --- Fine livello ---

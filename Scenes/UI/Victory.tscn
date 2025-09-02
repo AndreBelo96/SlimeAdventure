@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhjjq05dhy3ks"]
+[gd_scene load_steps=5 format=3 uid="uid://dhjjq05dhy3ks"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_1kexw"]
 [ext_resource type="Texture2D" uid="uid://jj4f7fv4p1aw" path="res://Assets/Sprites/Player/Sunglasses.png" id="3_e4620"]
+[ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="4_0fdxb"]
 
 [node name="Victory" type="Control"]
 layout_mode = 3
@@ -83,30 +84,42 @@ Time:"
 
 [node name="Record" type="Label" parent="CanvasLayer"]
 offset_left = 185.0
-offset_top = 410.0
+offset_top = 366.0
 offset_right = 553.0
-offset_bottom = 501.0
+offset_bottom = 457.0
 theme_override_fonts/font = ExtResource("2_1kexw")
 theme_override_font_sizes/font_size = 70
 text = "New Record!!"
 
 [node name="Victory" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(906, 432)
+position = Vector2(876, 404)
 scale = Vector2(11.739, 10.6923)
 texture = ExtResource("3_e4620")
 
-[node name="Testo" type="Label" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -166.0
-offset_right = -1.0
-offset_bottom = -126.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 30
-text = "Press any button to proceed..."
-horizontal_alignment = 1
+[node name="BackMainMenu" type="Button" parent="CanvasLayer"]
+offset_left = 900.0
+offset_top = 550.0
+offset_right = 1200.0
+offset_bottom = 632.0
+theme = ExtResource("4_0fdxb")
+text = "Back To Main Menu"
+
+[node name="BackLevelSelection" type="Button" parent="CanvasLayer"]
+offset_left = 490.0
+offset_top = 550.0
+offset_right = 790.0
+offset_bottom = 632.0
+theme = ExtResource("4_0fdxb")
+text = "Back To Level Select"
+
+[node name="Next" type="Button" parent="CanvasLayer"]
+offset_left = 80.0
+offset_top = 550.0
+offset_right = 380.0
+offset_bottom = 632.0
+theme = ExtResource("4_0fdxb")
+text = "Next level"
+
+[connection signal="pressed" from="CanvasLayer/BackMainMenu" to="." method="_on_back_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackLevelSelection" to="." method="_on_back_level_selection_pressed"]
+[connection signal="pressed" from="CanvasLayer/Next" to="." method="_on_restart_pressed"]

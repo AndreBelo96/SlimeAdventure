@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_dex63"]
 [ext_resource type="Script" path="res://Scripts/Tiles/TileFlipBorder.gd" id="2_hixil"]
-[ext_resource type="Texture2D" uid="uid://b8itw3rpynp07" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_2lshj"]
+[ext_resource type="Texture2D" uid="uid://dxl3unea0u3oj" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_2lshj"]
 
 [node name="Tile" instance=ExtResource("1_dex63")]
 script = ExtResource("2_hixil")
@@ -17,6 +17,3 @@ region_rect = Rect2(960, 32, 64, 32)
 
 [node name="AnimatedTile" parent="." index="2"]
 animation = &"UP"
-
-[node name="CollisionPolygon2D" parent="Area2D" index="0"]
-polygon = PackedVector2Array(22, -3, 30, 0, 0, 11, -8, 8)

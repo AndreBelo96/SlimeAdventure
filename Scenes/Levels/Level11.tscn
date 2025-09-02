@@ -21,5 +21,5 @@ tile_map_data = PackedByteArray("AAD8//T/AAAAAAAAAwD9//T/AAAAAAAABAACAPT/AAAAAAA
 [node name="DoorsMapLayer" parent="YSort" index="3"]
 tile_map_data = PackedByteArray("AAAAAPH/AAAAAAAACQA=")
 
-[node name="TorchMapLayer" parent="YSort" index="6"]
+[node name="TorchMapLayer" parent="YSort" index="7"]
 tile_map_data = PackedByteArray("AAD8//v/AAAAAAAAAgD8//j/AAAAAAAAAgD8//X/AAAAAAAAAgD+//X/AAAAAAAAAQACAPX/AAAAAAAAAQD///L/AAAAAAAAAgAEAPj/AAAAAAAAAwAEAPX/AAAAAAAAAwAEAPv/AAAAAAAAAwABAPL/AAAAAAAAAwAAAP//AAAAAAAAAwD+////AAAAAAAAAgABAP3/AAAAAAAABQD9//3/AAAAAAAABQA=")

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_oxoqu"]
 [ext_resource type="Script" path="res://Scripts/Tiles/TileSpikeSwitch.gd" id="2_eqr8q"]
-[ext_resource type="Texture2D" uid="uid://b8itw3rpynp07" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8bfao"]
+[ext_resource type="Texture2D" uid="uid://dxl3unea0u3oj" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8bfao"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcykk"]
 load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"

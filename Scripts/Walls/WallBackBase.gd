@@ -7,6 +7,7 @@ const TILESET := preload("res://Assets/Sprites/Walls/set_wall.png")
 var atlas_texture := AtlasTexture.new()
 
 func _ready():
+	#print(get_path(), " -> Y:", global_position.y)
 	sprite.region_enabled = false
 	atlas_texture.atlas = TILESET
 	sprite.modulate.a = 0.4

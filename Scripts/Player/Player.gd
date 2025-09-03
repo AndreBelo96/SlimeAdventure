@@ -69,11 +69,10 @@ func _unhandled_input(event):
 
 	var direction = input_handler.get_direction(event)
 	if direction != Vector2i.ZERO:
-		movement_handler.move_to(
-			movement_handler.grid_position + direction
-		)
+		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
+	print(get_path(), " -> Y:", global_position.y)
 	steps += 1
 	emit_signal("steps_changed", steps)
 	interaction_handler.check_tile()

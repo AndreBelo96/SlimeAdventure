@@ -3,7 +3,7 @@ extends Node2D
 @onready var light = $PointLight2D
 
 func _ready():
-	#print(name, " → Posizione: ", global_position, " | Y ordinamento: ", global_position.y)
+	print(get_path(), " -> Y:", global_position.y)
 	flicker()
 
 func flicker():

@@ -75,10 +75,12 @@ tile_layer = NodePath("../TileMapLayer")
 
 [node name="LogicMapLayer" type="TileMapLayer" parent="."]
 z_index = -15
-y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = SubResource("TileSet_w0n8b")
+
+[node name="MovementLogicMapLayer" type="TileMapLayer" parent="."]
+z_index = -15
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
@@ -89,6 +91,10 @@ tile_set = ExtResource("2_ljv4m")
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+tile_set = ExtResource("12_iw06x")
 
 [node name="WallBackMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
@@ -105,10 +111,6 @@ y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
-
-[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
-y_sort_enabled = true
-tile_set = ExtResource("12_iw06x")
 
 [node name="StairMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true

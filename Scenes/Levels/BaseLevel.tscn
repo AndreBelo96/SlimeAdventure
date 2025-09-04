@@ -1,15 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=23 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
 [ext_resource type="TileSet" uid="uid://xy61pbjpfef8" path="res://Tilesets/tile_set.tres" id="2_ljv4m"]
 [ext_resource type="PackedScene" uid="uid://co1o3jnm2k22u" path="res://Player/player.tscn" id="2_xyu3k"]
 [ext_resource type="PackedScene" uid="uid://e1xgk7yp8d0f" path="res://Scenes/Backgrounds/BackgroundManager.tscn" id="3_lq64p"]
-[ext_resource type="Texture2D" uid="uid://2u58orbnfe0e" path="res://Assets/Sprites/Tiles/logic_set.png" id="3_orymm"]
+[ext_resource type="Texture2D" uid="uid://2u58orbnfe0e" path="res://Assets/Sprites/Tiles/Logic/logic_set.png" id="3_orymm"]
 [ext_resource type="TileSet" uid="uid://bi8t1sts5s8k8" path="res://Tilesets/wall_set.tres" id="4_3jiy3"]
-[ext_resource type="TileSet" uid="uid://mf4pq4pof2kv" path="res://Tilesets/wall_back_set.tres" id="4_aapch"]
 [ext_resource type="PackedScene" uid="uid://bfj77cmvhy0xn" path="res://Scenes/UI/Pause.tscn" id="4_k28r4"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="5_662ev"]
+[ext_resource type="Texture2D" uid="uid://8muq26gnwoie" path="res://Assets/Sprites/Tiles/Logic/MovementLogicTIleMap.png" id="5_ds48i"]
 [ext_resource type="TileSet" uid="uid://bjlusfts0e6u6" path="res://Tilesets/torch_set.tres" id="5_idd1r"]
 [ext_resource type="TileSet" uid="uid://dvw5f0e610k6" path="res://Tilesets/pickup_set.tres" id="7_6r6ib"]
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
@@ -60,6 +60,52 @@ custom_data_layer_0/name = "chiave"
 custom_data_layer_0/type = 4
 sources/2 = SubResource("TileSetAtlasSource_ahpxb")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0kmu"]
+texture = ExtResource("5_ds48i")
+margins = Vector2i(1, 1)
+separation = Vector2i(2, 2)
+texture_region_size = Vector2i(64, 25)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 4
+3:0/0 = 0
+3:0/0/custom_data_0 = 2
+3:1/0 = 0
+3:1/0/custom_data_0 = 5
+3:2/0 = 0
+3:2/0/custom_data_0 = 14
+3:3/0 = 0
+3:3/0/custom_data_0 = 8
+2:3/0 = 0
+2:3/0/custom_data_0 = 6
+2:2/0 = 0
+2:2/0/custom_data_0 = 7
+2:1/0 = 0
+2:1/0/custom_data_0 = 9
+1:1/0 = 0
+1:1/0/custom_data_0 = 3
+1:2/0 = 0
+1:2/0/custom_data_0 = 13
+1:3/0 = 0
+1:3/0/custom_data_0 = 10
+0:3/0 = 0
+0:3/0/custom_data_0 = 11
+0:2/0 = 0
+0:2/0/custom_data_0 = 12
+0:1/0 = 0
+0:1/0/custom_data_0 = 15
+
+[sub_resource type="TileSet" id="TileSet_duywq"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 24)
+custom_data_layer_0/name = "MovementMask"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_i0kmu")
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_auecd"]
 load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
 
@@ -81,6 +127,7 @@ tile_set = SubResource("TileSet_w0n8b")
 
 [node name="MovementLogicMapLayer" type="TileMapLayer" parent="."]
 z_index = -15
+tile_set = SubResource("TileSet_duywq")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
@@ -92,25 +139,19 @@ tile_set = ExtResource("2_ljv4m")
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
-y_sort_enabled = true
-tile_set = ExtResource("12_iw06x")
-
-[node name="WallBackMapLayer" type="TileMapLayer" parent="YSort"]
-y_sort_enabled = true
-texture_filter = 1
-texture_repeat = 1
-tile_set = ExtResource("4_aapch")
-
-[node name="PickupMapLayer" type="TileMapLayer" parent="YSort"]
-y_sort_enabled = true
-tile_set = ExtResource("7_6r6ib")
-
 [node name="WallMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
+
+[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+tile_set = ExtResource("12_iw06x")
+
+[node name="PickupMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+tile_set = ExtResource("7_6r6ib")
 
 [node name="StairMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
@@ -125,8 +166,7 @@ tile_set = ExtResource("11_3rmix")
 [node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
 tile_map_layer_path = NodePath("../../TileMapLayer")
 pickup_map_layer_path = NodePath("../PickupMapLayer")
-wall_map_layer_path = NodePath("../WallMapLayer")
-wall_back_map_layer_path = NodePath("../WallBackMapLayer")
+movement_logic_map_layer_path = NodePath("../../MovementLogicMapLayer")
 doors_map_layer_path = NodePath("../DoorsMapLayer")
 npc_map_layer_path = NodePath("../NPCMapLayer")
 

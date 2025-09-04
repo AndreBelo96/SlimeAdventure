@@ -9,7 +9,10 @@ script = ExtResource("2_4xmhp")
 [node name="LogicMapLayer" parent="." index="2"]
 tile_map_data = PackedByteArray("AAACAAAAAgAJAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="3"]
+[node name="MovementLogicMapLayer" parent="." index="3"]
+tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAA=")
+
+[node name="TileMapLayer" parent="." index="4"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQABAP//AQAAAAAAAgACAAAAAQAAAAAAAgA=")
 
 [node name="NPCMapLayer" parent="YSort" index="5"]

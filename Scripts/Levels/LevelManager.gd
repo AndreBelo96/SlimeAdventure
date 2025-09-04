@@ -19,6 +19,7 @@ var all_tiles_active := false
 var time_running := true
 
 func _ready():
+	$MovementLogicMapLayer.visible = false
 	pause_menu.visible = false
 	pause_menu.hide()
 	

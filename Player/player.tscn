@@ -294,12 +294,6 @@ animation = &"Move"
 frame = 16
 frame_progress = 1.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-texture_filter = 1
-zoom = Vector2(4, 4)
-position_smoothing_speed = 1.0
-rotation_smoothing_speed = 1.0
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
 texture = ExtResource("3_ghh27")

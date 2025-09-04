@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=25 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -13,10 +13,12 @@
 [ext_resource type="TileSet" uid="uid://bjlusfts0e6u6" path="res://Tilesets/torch_set.tres" id="5_idd1r"]
 [ext_resource type="TileSet" uid="uid://dvw5f0e610k6" path="res://Tilesets/pickup_set.tres" id="7_6r6ib"]
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
+[ext_resource type="TileSet" uid="uid://bamqvivf771yo" path="res://Tilesets/decorations_set.tres" id="8_cp7g0"]
 [ext_resource type="TileSet" uid="uid://bfdegxpjgd1n3" path="res://Tilesets/stair_set.tres" id="8_p3cyg"]
 [ext_resource type="TileSet" uid="uid://cmuwmspta6dkl" path="res://Tilesets/npc_set.tres" id="11_3rmix"]
 [ext_resource type="Script" path="res://Scripts/Levels/LevelHUDManager.gd" id="11_vokoc"]
 [ext_resource type="TileSet" uid="uid://dwiuj3egvhemc" path="res://Tilesets/doors_set.tres" id="12_iw06x"]
+[ext_resource type="Script" path="res://Scripts/Levels/Camera.gd" id="18_wwx3o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")
@@ -155,6 +157,7 @@ tile_set = ExtResource("4_3jiy3")
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
+tile_set = ExtResource("8_cp7g0")
 
 [node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
@@ -273,3 +276,7 @@ player = NodePath("../../YSort/Player")
 level_manager = NodePath("../..")
 
 [node name="Pause" parent="CanvasHUD" instance=ExtResource("4_k28r4")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+script = ExtResource("18_wwx3o")

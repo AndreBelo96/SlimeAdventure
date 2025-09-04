@@ -39,7 +39,7 @@ func _get_tile_under_player() -> TileBase:
 func _get_pickup_under_player() -> PickupBase:
 	var player_pos = player.global_position
 	for child in pickup_layer.get_children():
-		if child is PickupBase:
+		if child is PickupBase and child.is_active:
 			var tile_pos = child.global_position
 			if is_point_on_iso_tile(tile_pos, player_pos):
 				print("[DEBUG] Player sopra pickup:", child.name)

@@ -30,6 +30,8 @@ var input_enabled := true
 @onready var animation_handler = PlayerAnimation.new()
 @onready var light_handler = PlayerLight.new()
 
+@onready var light_timer = $LightTimer
+
 var can_move := true
 
 func _ready():
@@ -48,13 +50,18 @@ func _ready():
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position_in_layer(global_position, tile_map_layer))
 	await get_tree().process_frame
 	interaction_handler.check_tile()
+	
+	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
+	
 
 func set_lights(isLight):
 	light_handler.set_enabled(isLight)
 
-func set_lights_for_duration(duration: float):
+func set_lights_for_duration(duration: float) -> void:
 	set_lights(true)
-	await get_tree().create_timer(duration).timeout
+	light_timer.start(duration)
+
+func _on_light_timer_timeout() -> void:
 	set_lights(false)
 
 func _unhandled_input(event):

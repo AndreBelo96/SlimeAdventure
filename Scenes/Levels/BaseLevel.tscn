@@ -151,6 +151,11 @@ texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
 
+[node name="DecorationMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+
 [node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
 tile_set = ExtResource("12_iw06x")

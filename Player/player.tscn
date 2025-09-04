@@ -297,8 +297,8 @@ frame_progress = 1.0
 [node name="Camera2D" type="Camera2D" parent="."]
 texture_filter = 1
 zoom = Vector2(4, 4)
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
+position_smoothing_speed = 1.0
+rotation_smoothing_speed = 1.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false

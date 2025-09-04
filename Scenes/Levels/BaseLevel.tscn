@@ -139,6 +139,12 @@ tile_set = ExtResource("2_ljv4m")
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="BackWallMapLayer" type="TileMapLayer" parent="YSort"]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+tile_set = ExtResource("4_3jiy3")
+
 [node name="WallMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
 texture_filter = 1

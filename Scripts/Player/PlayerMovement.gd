@@ -67,8 +67,9 @@ func tween_jump(start_pos: Vector2, end_pos: Vector2, jump_height: float, durati
 		func(progress):
 			var pos = start_pos.lerp(end_pos, progress)
 			var vertical_offset = jump_height * 4 * progress * (1 - progress)
-			player.global_position = (pos + Vector2(0, vertical_offset)).round(),0.0, 1.0, duration ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			player.global_position = pos + Vector2(0, vertical_offset), 0.0, 1.0, duration ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween.finished
+	
 
 func snap_to_tile_center(coords: Vector2i):
 	player.global_position = get_tile_center_position(coords)

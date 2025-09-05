@@ -1,6 +1,6 @@
 extends Node2D
 
-const DeathType = preload("res://Scripts/Player/DeathType.gd").DeathType
+const DEATH = DeathType.Type
 
 signal player_died(death_type: int)
 signal player_won
@@ -17,12 +17,12 @@ signal steps_changed(new_count: int)
 var steps: int = 0
 var input_enabled := true
 
-@onready var tile_map_layer: Node = get_node(tile_map_layer_path)
-@onready var pickup_map_layer: Node = get_node(pickup_map_layer_path)
-@onready var movement_logic_map_layer: Node = get_node(movement_logic_map_layer_path)
-@onready var doors_map_layer: Node = get_node(doors_map_layer_path)
-@onready var npc_map_layer: Node = get_node(npc_map_layer_path)
-@onready var point_light: PointLight2D = get_node(point_light_path)
+@onready var tile_map_layer
+@onready var pickup_map_layer
+@onready var movement_logic_map_layer
+@onready var doors_map_layer
+@onready var npc_map_layer
+@onready var point_light
 
 @onready var input_handler = PlayerInput.new()
 @onready var movement_handler = PlayerMovement.new()
@@ -35,13 +35,12 @@ var input_enabled := true
 var can_move := true
 
 func _ready():
-	# Verifica che i nodi siano assegnati
-	assert(tile_map_layer, "tile_map_layer non assegnato nel Player")
-	assert(pickup_map_layer, "pickup_map_layer non assegnato nel Player")
-	assert(movement_logic_map_layer, "wall_map_layer non assegnato nel Player")
-	assert(doors_map_layer, "doors_map_layer non assegnato nel Player")
-	assert(npc_map_layer, "npc_map_layer non assegnato nel Player")
-	assert(point_light, "point_light non assegnato nel Player")
+	tile_map_layer = get_required_node(tile_map_layer_path, "tile_map_layer")
+	pickup_map_layer = get_required_node(pickup_map_layer_path, "pickup_map_layer")
+	movement_logic_map_layer = get_required_node(movement_logic_map_layer_path, "movement_logic_map_layer")
+	doors_map_layer = get_required_node(doors_map_layer_path, "doors_map_layer")
+	npc_map_layer = get_required_node(npc_map_layer_path, "npc_map_layer")
+	point_light = get_required_node(point_light_path, "point_light") as PointLight2D
 
 	movement_handler.setup(self, tile_map_layer, movement_logic_map_layer, doors_map_layer, npc_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
@@ -52,31 +51,27 @@ func _ready():
 	interaction_handler.check_tile()
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
-	
 
-func set_lights(isLight):
-	light_handler.set_enabled(isLight)
+func _set_lights_state(enabled: bool) -> void:
+	light_handler.set_enabled(enabled)
 
-func set_lights_for_duration(duration: float) -> void:
-	set_lights(true)
-	light_timer.start(duration)
+func turn_on_lights(duration: float = 0.0) -> void:
+	_set_lights_state(true)
+	if duration > 0.0:
+		light_timer.start(duration)
 
 func _on_light_timer_timeout() -> void:
-	set_lights(false)
+	_set_lights_state(false)
 
 func _unhandled_input(event):
-	if not input_enabled or not can_move:
+	if should_ignore_input():
 		return
-
-	if movement_handler.is_moving:
-		return
-
+	
 	var direction = input_handler.get_direction(event)
 	if direction != Vector2i.ZERO:
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
-	print(get_path(), " -> Y:", global_position.y)
 	steps += 1
 	emit_signal("steps_changed", steps)
 	interaction_handler.check_tile()
@@ -90,15 +85,14 @@ func on_player_died(death_type: int):
 	input_enabled = false
 	print("MORTE! Tipo:", death_type)
 	
-	if death_type == DeathType.VOID:
-		handle_void_death()
+	if death_type == DEATH.VOID:
+		_play_void_death()
 	else:
 		animation_handler.play_death(death_type)
-	
 	GameManager.register_death(death_type)
 	emit_signal("player_died")
 
-func handle_void_death():
+func _play_void_death():
 	z_index = -100
 
 	var tween = create_tween()
@@ -108,3 +102,11 @@ func handle_void_death():
 	
 	SoundManager.play_sfx("res://Assets/Audio/Fall.wav")
 	#sound.volume_db = linear_to_db(0.5)
+
+func should_ignore_input() -> bool:
+	return not input_enabled or not can_move or movement_handler.is_moving
+
+func get_required_node(path: NodePath, description: String) -> Node:
+	var node = get_node_or_null(path)
+	assert(node, "%s non assegnato nel Player" % description)
+	return node

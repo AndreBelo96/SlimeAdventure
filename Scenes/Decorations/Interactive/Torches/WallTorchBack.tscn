@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://c1bkrfypwqpci"]
 
 [ext_resource type="PackedScene" uid="uid://cdlw61vwbucp" path="res://Scenes/Decorations/Interactive/Torches/TorchBase.tscn" id="1_1bokg"]
-[ext_resource type="Script" path="res://Scripts/Decorations/Interactive/BackWallTorch.gd" id="2_y5hgq"]
+[ext_resource type="Script" path="res://Scripts/Decorations/Interactive/Torch/BackWallTorch.gd" id="2_y5hgq"]
 [ext_resource type="Texture2D" uid="uid://drl8yshq658yv" path="res://Assets/Sprites/Decorations/torch_set.png" id="3_p3co1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vqrm"]

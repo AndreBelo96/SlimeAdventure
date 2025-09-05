@@ -1,14 +1,15 @@
 class_name PlayerInput
 extends Resource
 
+var directions := {
+	"move_up": Vector2i(0, -1),
+	"move_right": Vector2i(1, 0),
+	"move_down": Vector2i(0, 1),
+	"move_left": Vector2i(-1, 0)
+}
+
 func get_direction(event) -> Vector2i:
-	var direction := Vector2i.ZERO
-	if event.is_action_pressed("move_up"):
-		direction = Vector2i(0, -1)
-	elif event.is_action_pressed("move_right"):
-		direction = Vector2i(1, 0)
-	elif event.is_action_pressed("move_down"):
-		direction = Vector2i(0, 1)
-	elif event.is_action_pressed("move_left"):
-		direction = Vector2i(-1, 0)
-	return direction
+	for action in directions.keys():
+		if event.is_action_pressed(action):
+			return directions[action]
+	return Vector2i.ZERO

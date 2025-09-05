@@ -1,19 +1,17 @@
 class_name PlayerLight
 extends Resource
 
-var light_node: PointLight2D
+var light: PointLight2D
 
-func setup(light: PointLight2D):
-	light_node = light
+func setup(new_light: PointLight2D) -> void:
+	light = new_light
 
-func enable():
-	if light_node:
-		light_node.visible = true
+func set_enabled(enabled: bool) -> void:
+	if light:
+		light.visible = enabled
 
-func disable():
-	if light_node:
-		light_node.visible = false
+func enable() -> void:
+	set_enabled(true)
 
-func set_enabled(is_enabled: bool):
-	if light_node:
-		light_node.visible = is_enabled
+func disable() -> void:
+	set_enabled(false)

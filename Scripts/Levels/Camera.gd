@@ -1,7 +1,8 @@
 extends Camera2D
 
+func get_player_position_rounded() -> Vector2:
+	var player = $"../YSort/Player"
+	return Vector2(round(player.global_position.x), round(player.global_position.y))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var target_pos = $"../YSort/Player".global_position
-	global_position = Vector2(round(target_pos.x), round(target_pos.y))
+	global_position = get_player_position_rounded()

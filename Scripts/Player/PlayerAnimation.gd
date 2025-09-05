@@ -1,7 +1,7 @@
 class_name PlayerAnimation
 extends Resource
 
-const DeathType = preload("res://Scripts/Player/DeathType.gd").DeathType
+const DEATH = DeathType.Type
 
 var anim_sprite
 
@@ -13,22 +13,26 @@ func play_idle():
 
 func play_move():
 	anim_sprite.play("Move")
-	SoundManager.play_sfx("res://Assets/Audio/Jump.wav")
+	_play_sfx("res://Assets/Audio/Jump.wav")
 
 func play_death(death_type: int):
 	if not anim_sprite:
 		return
 	
 	match death_type:
-		DeathType.SPIKES:
+		DEATH.SPIKES:
 			anim_sprite.play("Death")
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
-		DeathType.VOID:
-			#anim_sprite.play("Death")
+		DEATH.VOID:
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
-		DeathType.ENEMY:
+		DEATH.ENEMY:
 			anim_sprite.play("Death")
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
-		DeathType.TIMEOUT:
+		DEATH.TIMEOUT:
 			anim_sprite.play("Death")
 			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
+
+
+# --- PRIVATI ---
+func _play_sfx(path: String) -> void:
+	SoundManager.play_sfx(path)

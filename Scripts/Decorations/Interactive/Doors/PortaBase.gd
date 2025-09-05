@@ -1,10 +1,10 @@
 extends Node2D
+class_name PortaBase
 
 var direction: String = "N"
 var is_open: bool = false
 
 func _ready():
-	print(get_path(), " -> Y:", global_position.y)
 	add_to_group("porte")
 	update_visual()
 

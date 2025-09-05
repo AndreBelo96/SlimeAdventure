@@ -2,7 +2,8 @@
 extends Resource
 class_name PlayerInteraction
 
-const DeathType = preload("res://Scripts/Player/DeathType.gd").DeathType
+const DEATH = DeathType.Type
+const TILE_HALF_SIZE = 16
 
 var player: Node2D
 var tile_layer: Node2D
@@ -19,7 +20,7 @@ func check_tile():
 		tile.on_player_enter()
 	else:
 		print("[DEBUG] Player fuori mappa!")
-		player.on_player_died(DeathType.VOID)
+		player.on_player_died(DEATH.VOID)
 
 func check_pickup():
 	var pickup  = _get_pickup_under_player()
@@ -48,4 +49,4 @@ func _get_pickup_under_player() -> PickupBase:
 
 func is_point_on_iso_tile(tile_pos: Vector2, point: Vector2) -> bool:
 	var local = point - tile_pos
-	return abs(local.x / 2) + abs(local.y) <= 16
+	return abs(local.x / 2) + abs(local.y) <= TILE_HALF_SIZE

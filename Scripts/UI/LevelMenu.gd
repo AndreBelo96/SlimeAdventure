@@ -3,8 +3,8 @@ extends Control
 
 @onready var level_container: GridContainer = $CanvasLayer/RightPanel/CenterContainer/LevelButtonContainer
 
-var loader = preload("res://Scripts/UI/LevelLoader.gd")
-var factory = preload("res://Scripts/UI/LevelButtonFactory.gd")
+var loader = preload("res://Scripts/UI/Buttons/LevelLoader.gd")
+var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
 
 func _ready():
 	loader = LevelLoader.new()

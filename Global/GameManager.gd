@@ -2,7 +2,7 @@
 extends Node
 
 ## Level Variables
-const DeathType = preload("res://Scripts/Player/DeathType.gd").DeathType
+const Death = DeathType.Type
 const NORMAL_TILE_POSITION := 7
 const SPIKE_STEP_TILE_POSITION := 8
 const SPIKE_TILE_POSITION := 12
@@ -50,10 +50,10 @@ var location_to_tileset_row := {
 }
 
 var death_counts := {
-	DeathType.SPIKES: 0,
-	DeathType.VOID: 0,
-	DeathType.ENEMY: 0,
-	DeathType.TIMEOUT: 0
+	Death.SPIKES: 0,
+	Death.VOID: 0,
+	Death.ENEMY: 0,
+	Death.TIMEOUT: 0
 }
 
 var last_attempt := {
@@ -61,10 +61,10 @@ var last_attempt := {
 	"steps": 0,
 	"time": 0.0,
 	"deaths": {
-		DeathType.SPIKES: 0,
-		DeathType.VOID: 0,
-		DeathType.ENEMY: 0,
-		DeathType.TIMEOUT: 0
+		Death.SPIKES: 0,
+		Death.VOID: 0,
+		Death.ENEMY: 0,
+		Death.TIMEOUT: 0
 	},
 	"victory": false,
 	"is_record": false
@@ -107,10 +107,10 @@ func end_level(victory: bool):
 
 	# reset conteggio morti per prossimo livello
 	death_counts = {
-		DeathType.SPIKES: 0,
-		DeathType.VOID: 0,
-		DeathType.ENEMY: 0,
-		DeathType.TIMEOUT: 0
+		Death.SPIKES: 0,
+		Death.VOID: 0,
+		Death.ENEMY: 0,
+		Death.TIMEOUT: 0
 	}
 
 	if victory:

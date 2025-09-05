@@ -1,12 +1,9 @@
 # PickupSunglasses.gd
 extends PickupBase
 
-func _ready():
-	ITEM_TYPE = ItemType.SUNGLASSES
-	super._ready()
+func on_ready_custom() -> void:
+	item_type = ItemType.SUNGLASSES
 
-func on_player_enter(_player: Node) -> void:
-	print("Pickup raccolto: ", ItemType.keys()[ITEM_TYPE])
-	SoundManager.play_sfx("res://Assets/Audio/Pickup.wav")
-	#player.add_light()
+func on_player_enter_custom(_player: Node) -> void:
+	# Esegui eventuale effetto specifico
 	queue_free()

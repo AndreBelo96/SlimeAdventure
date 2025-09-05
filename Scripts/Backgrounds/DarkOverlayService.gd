@@ -2,10 +2,12 @@
 extends Resource
 class_name DarkOverlayService
 
-var dark_overlay_by_level := {
-	1: Color(1, 1, 1, 1),
-	2: Color(1, 1, 1, 1),
-	3: Color(1, 1, 1, 1),
+
+# Mappa dei livelli -> colore overlay
+const DARK_OVERLAY_BY_LEVEL := {
+	1: Color.WHITE,
+	2: Color.WHITE,
+	3: Color.WHITE,
 	4: Color(0.3, 0.3, 0.3, 1),
 	5: Color(0.3, 0.3, 0.3, 1),
 	6: Color(0.3, 0.3, 0.3, 1),
@@ -15,8 +17,10 @@ var dark_overlay_by_level := {
 	10: Color(0.8, 0.8, 0.8, 1),
 	11: Color(0.8, 0.8, 0.8, 1),
 	12: Color(0.8, 0.8, 0.8, 1),
-	13: Color(1, 1, 1, 1),
+	13: Color.WHITE,
 }
 
+const DEFAULT_COLOR: Color = Color.WHITE
+
 func get_for_level(level: int) -> Color:
-	return dark_overlay_by_level.get(level)
+	return DARK_OVERLAY_BY_LEVEL.get(level, DEFAULT_COLOR)

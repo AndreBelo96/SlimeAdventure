@@ -7,4 +7,4 @@ func _ready():
 
 func on_player_enter():
 	debug_log("Slime colpito dalle punte!")
-	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.DeathType.SPIKES})
+	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES})

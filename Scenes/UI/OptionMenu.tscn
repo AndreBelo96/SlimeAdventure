@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://8ie6gpqhyi75"]
+
+[ext_resource type="Script" uid="uid://gluvfuv1csco" path="res://Scripts/UI/OptionMenu.gd" id="1_5nvs0"]
+[ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="1_nx5qc"]
+
+[node name="OptionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5nvs0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.152941, 0.231373, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color(1, 0.843137, 0, 1)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.49
+theme_override_fonts/font = ExtResource("1_nx5qc")
+theme_override_font_sizes/font_size = 50
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeMusica" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/VolumeMusica"]
+layout_mode = 2
+text = "Volume Musica"
+
+[node name="music_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/VolumeMusica"]
+layout_mode = 2
+
+[node name="VolumeEffetti" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/VolumeEffetti"]
+layout_mode = 2
+text = "Volume Effetti"
+
+[node name="sfx_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/VolumeEffetti"]
+layout_mode = 2
+
+[node name="Difficolta" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Difficolta"]
+layout_mode = 2
+text = "Difficoltà"
+
+[node name="difficult_option" type="OptionButton" parent="CanvasLayer/VBoxContainer/Difficolta"]
+layout_mode = 2
+
+[node name="Schermo intero" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Schermo intero"]
+layout_mode = 2
+text = "Schermo Intero
+"
+
+[node name="fullscreen_check" type="CheckBox" parent="CanvasLayer/VBoxContainer/Schermo intero"]
+layout_mode = 2
+
+[node name="Lingua" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Lingua"]
+layout_mode = 2
+text = "Lingua"
+
+[node name="language_option" type="OptionButton" parent="CanvasLayer/VBoxContainer/Lingua"]
+layout_mode = 2
+
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/VolumeMusica/music_slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/VolumeEffetti/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/Difficolta/difficult_option" to="." method="_on_difficult_option_item_selected"]
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/Schermo intero/fullscreen_check" to="." method="_on_fullscreen_check_toggled"]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/Lingua/language_option" to="." method="_on_language_option_item_selected"]

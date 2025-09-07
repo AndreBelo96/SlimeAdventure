@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dl1qnr5gef6ch"]
 
-[ext_resource type="Script" path="res://Scripts/Decorations/Interactive/Doors/PortaS.gd" id="1_detor"]
+[ext_resource type="Script" uid="uid://chaxyram463hj" path="res://Scripts/Decorations/Interactive/Doors/PortaS.gd" id="1_detor"]
 [ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="2_sed2o"]
 
 [node name="PortaS" instance=ExtResource("2_sed2o")]

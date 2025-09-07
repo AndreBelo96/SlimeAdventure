@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmikjdrjrisco"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_dex63"]
-[ext_resource type="Script" path="res://Scripts/Tiles/TileFlipBorder.gd" id="2_hixil"]
+[ext_resource type="Script" uid="uid://boambs2hlfbk4" path="res://Scripts/Tiles/TileFlipBorder.gd" id="2_hixil"]
 [ext_resource type="Texture2D" uid="uid://dxl3unea0u3oj" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_2lshj"]
 
 [node name="Tile" instance=ExtResource("1_dex63")]

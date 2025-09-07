@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://epn6jxi3iejh"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
-[ext_resource type="Script" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
+[ext_resource type="Script" uid="uid://b0ephypyc3vya" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
+[ext_resource type="Script" uid="uid://cs20dsk7jtn58" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
 [ext_resource type="TileSet" uid="uid://xy61pbjpfef8" path="res://Tilesets/tile_set.tres" id="2_ljv4m"]
 [ext_resource type="PackedScene" uid="uid://co1o3jnm2k22u" path="res://Player/player.tscn" id="2_xyu3k"]
 [ext_resource type="PackedScene" uid="uid://e1xgk7yp8d0f" path="res://Scenes/Backgrounds/BackgroundManager.tscn" id="3_lq64p"]
@@ -16,9 +16,9 @@
 [ext_resource type="TileSet" uid="uid://bamqvivf771yo" path="res://Tilesets/decorations_set.tres" id="8_cp7g0"]
 [ext_resource type="TileSet" uid="uid://bfdegxpjgd1n3" path="res://Tilesets/stair_set.tres" id="8_p3cyg"]
 [ext_resource type="TileSet" uid="uid://cmuwmspta6dkl" path="res://Tilesets/npc_set.tres" id="11_3rmix"]
-[ext_resource type="Script" path="res://Scripts/Levels/LevelHUDManager.gd" id="11_vokoc"]
+[ext_resource type="Script" uid="uid://1dne7xk7mqos" path="res://Scripts/Levels/LevelHUDManager.gd" id="11_vokoc"]
 [ext_resource type="TileSet" uid="uid://dwiuj3egvhemc" path="res://Tilesets/doors_set.tres" id="12_iw06x"]
-[ext_resource type="Script" path="res://Scripts/Levels/Camera.gd" id="18_wwx3o"]
+[ext_resource type="Script" uid="uid://4lfgwtv2807" path="res://Scripts/Levels/Camera.gd" id="18_wwx3o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")

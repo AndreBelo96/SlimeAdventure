@@ -15,6 +15,4 @@ func on_player_enter():
 	if not attivato:
 		attivato = true
 		$AnimatedTile.play("PRESSED")
-		debug_log("Interruttore premuto: " + chiave)
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave})
-		#emit_signal("interruttore_premuto", chiave)

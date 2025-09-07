@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhjjq05dhy3ks"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
+[ext_resource type="Script" uid="uid://bfjuw531ros1i" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_1kexw"]
 [ext_resource type="Texture2D" uid="uid://jj4f7fv4p1aw" path="res://Assets/Sprites/Player/Sunglasses.png" id="3_e4620"]
 [ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="4_0fdxb"]

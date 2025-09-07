@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://b73ex6fke0j8i"]
 
-[ext_resource type="Script" path="res://Scripts/UI/TransitionScreen/TransitionScreen.gd" id="1_3t0pe"]
+[ext_resource type="Script" uid="uid://di2ngvximr3x1" path="res://Scripts/UI/TransitionScreen/TransitionScreen.gd" id="1_3t0pe"]
 [ext_resource type="Theme" uid="uid://p0s2ogqb3vcf" path="res://Theme/TransitionTitle.tres" id="1_nv7gp"]
 [ext_resource type="Texture2D" uid="uid://c2cybdqsih4gr" path="res://Assets/Sprites/Decorations/Chains/chain_animation.png" id="3_8mtux"]
 
@@ -321,9 +321,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lh2se"]
 _data = {
-"FadeIn": SubResource("Animation_8typh"),
-"FadeOut": SubResource("Animation_aqdep"),
-"RESET": SubResource("Animation_lald8")
+&"FadeIn": SubResource("Animation_8typh"),
+&"FadeOut": SubResource("Animation_aqdep"),
+&"RESET": SubResource("Animation_lald8")
 }
 
 [node name="TransitionScreen" type="Control"]

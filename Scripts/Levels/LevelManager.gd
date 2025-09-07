@@ -19,6 +19,7 @@ var all_tiles_active := false
 var time_running := true
 
 func _ready():
+	Logger.info("Inizio livello %d" % GameManager.current_level)
 	$MovementLogicMapLayer.visible = false
 	pause_menu.visible = false
 	pause_menu.hide()
@@ -70,7 +71,7 @@ func toggle_pause():
 	pause_menu.visible = get_tree().paused
 
 func _on_all_tiles_activated():
-	print("Tutte le tile attivate → Apro tutte le porte!")
+	Logger.info("Tutte le tile attivate → Apertura porte!")
 	
 	all_tiles_active = true
 	
@@ -88,7 +89,6 @@ func _on_all_tiles_activated():
 		tile_manager.activate_exit_particles(exit_position)
 
 func _on_player_died():
-	print("morte!")
 	await get_tree().create_timer(1.5).timeout
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
@@ -96,13 +96,12 @@ func _on_player_died():
 	GameManager.change_scene_to_defeat()
 
 func _on_player_won():
-	print("VITTORIA!")
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
 	GameManager.total_steps += steps
 	GameManager.total_time += level_time
+	Logger.info("Completato livello %d in %d secondi con %d passi" % [GameManager.current_level, level_time, steps])
 	GameManager.end_level(true)
-	
 	await get_tree().create_timer(1).timeout
 	GameManager.change_scene_to_victory()
 

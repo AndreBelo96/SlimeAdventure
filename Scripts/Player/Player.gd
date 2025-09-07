@@ -83,7 +83,6 @@ func on_player_won():
 
 func on_player_died(death_type: int):
 	input_enabled = false
-	print("MORTE! Tipo:", death_type)
 	
 	if death_type == DEATH.VOID:
 		_play_void_death()
@@ -101,7 +100,6 @@ func _play_void_death():
 	tween.parallel().tween_property(self, "modulate:a", 0.0, 1.5)
 	
 	SoundManager.play_sfx("res://Assets/Audio/Fall.wav")
-	#sound.volume_db = linear_to_db(0.5)
 
 func should_ignore_input() -> bool:
 	return not input_enabled or not can_move or movement_handler.is_moving

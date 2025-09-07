@@ -20,22 +20,24 @@ func _connect_player_signal():
 		level_manager.connect("signal_victory", Callable(self, "check_victory"))
 
 func _on_tile_triggered(tile: TileBase, action: String, data: Dictionary) -> void:
-	print("[PlayerInteraction] Segnale ricevuto da", tile.name, "azione:", action, "dati:", data)
 	match action:
 		"death":
+			Logger.warn("Morte: tipo=%s tile=%s pos=%s" % [str(data.get("death_type", 0)), tile.name, str(tile.global_position)])
 			player.on_player_died(data.get("death_type", 0))
 		"activate":
 			tile.is_active = data.get("is_active", true)
-			print("[PlayerInteraction] Tile attivata:", tile.name, "stato:", tile.is_active)
+			Logger.info("Tile attivata: %s stato=%s pos=%s" % [tile.name, str(tile.is_active), str(tile.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
+			Logger.info("Switch tile=%s chiave=%s" % [tile.name, chiave])
 			_unlock_spikes(chiave)
 		_:
-			pass
+			Logger.info("Tile %s azione=%s dati=%s" % [tile.name, action, str(data)])
 
 func _unlock_spikes(chiave: String):
 	for child in tile_layer.get_children():
 		if child.is_in_group("spine") and child.chiave == chiave:
+			Logger.info("Spine sbloccate con chiave=%s" % chiave)
 			child.disattiva()
 
 func check_victory():

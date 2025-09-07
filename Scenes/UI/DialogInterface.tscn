@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfpv6fhikmmav"]
 
-[ext_resource type="Script" path="res://Scripts/UI/DialogInterface.gd" id="1_mog3c"]
+[ext_resource type="Script" uid="uid://cdekipkcivo67" path="res://Scripts/UI/DialogInterface.gd" id="1_mog3c"]
 
 [node name="DialogInterface" type="Control"]
 layout_mode = 3

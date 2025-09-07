@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7rgr1o061kb7"]
 
-[ext_resource type="Script" path="res://Scripts/UI/LevelMenu.gd" id="1_so21l"]
+[ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/LevelMenu.gd" id="1_so21l"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_lf38f"]
 [ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="3_v8elj"]
 

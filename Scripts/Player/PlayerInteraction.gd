@@ -19,7 +19,7 @@ func check_tile():
 	if tile and tile.has_method("on_player_enter"):
 		tile.on_player_enter()
 	else:
-		print("[DEBUG] Player fuori mappa!")
+		Logger.warn("Morte: tipo=VOID tile= no tile pos= " + str(player.global_position))
 		player.on_player_died(DEATH.VOID)
 
 func check_pickup():
@@ -33,7 +33,6 @@ func _get_tile_under_player() -> TileBase:
 		if child is TileBase:
 			var tile_pos = child.global_position
 			if is_point_on_iso_tile(tile_pos, player_pos):
-				print("[DEBUG] Player sopra tile:", child.name)
 				return child
 	return null
 
@@ -43,7 +42,7 @@ func _get_pickup_under_player() -> PickupBase:
 		if child is PickupBase and child.is_active:
 			var tile_pos = child.global_position
 			if is_point_on_iso_tile(tile_pos, player_pos):
-				print("[DEBUG] Player sopra pickup:", child.name)
+				Logger.info("Pickup -> Player sopra= " + str(child.name))
 				return child
 	return null
 

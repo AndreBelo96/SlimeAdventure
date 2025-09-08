@@ -72,6 +72,9 @@ var last_attempt := {
 
 func _ready():
 	var _loaded = SaveManager.load_progress()
+	SettingsManager.load_settings()
+	SoundManager.apply_from_settings(SettingsManager)
+	DisplayManager.apply_display_settings(SettingsManager)
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
 	total_steps = totals.steps

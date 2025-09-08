@@ -5,13 +5,13 @@ const AUDIO_SETTINGS_PATH := "user://audio_settings.save"
 
 var music_volume: float = 1.0
 var sfx_volume: float = 1.0
+var master_volume: float = 1.0
+var environment_volume: float = 1.0
 
 var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
 
 func _ready():
-	load_settings()
-
 	music_player = AudioStreamPlayer.new()
 	music_player.bus = "Music"
 	add_child(music_player)
@@ -22,7 +22,6 @@ func _ready():
 		add_child(p)
 		sfx_players.append(p)
 
-	apply_volumes()
 
 func play_music(path: String, loop := true):
 	var stream = load(path)
@@ -54,39 +53,24 @@ func play_sfx(path: String):
 	sfx_players[0].stream = stream
 	sfx_players[0].play()
 
+func set_master_volume(value: float):
+	master_volume = clamp(value, 0.0, 1.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(master_volume))
+
 func set_music_volume(value: float):
 	music_volume = clamp(value, 0.0, 1.0)
-	apply_volumes()
-	save_settings()
+	AudioServer.set_bus_volume_db( AudioServer.get_bus_index("Music"), linear_to_db(music_volume) )
 
 func set_sfx_volume(value: float):
 	sfx_volume = clamp(value, 0.0, 1.0)
-	apply_volumes()
-	save_settings()
-
-func apply_volumes():
-	AudioServer.set_bus_volume_db( AudioServer.get_bus_index("Music"), linear_to_db(music_volume) )
 	AudioServer.set_bus_volume_db( AudioServer.get_bus_index("SFX"), linear_to_db(sfx_volume) )
 
-func save_settings():
-	var file = FileAccess.open(AUDIO_SETTINGS_PATH, FileAccess.WRITE)
-	if file:
-		var data = {
-			"music_volume": music_volume,
-			"sfx_volume": sfx_volume
-		}
-		file.store_string(JSON.stringify(data))
-		file.close()
+func set_environment_volume(value: float):
+	environment_volume = clamp(value, 0.0, 1.0)
+	AudioServer.set_bus_volume_db( AudioServer.get_bus_index("Environment"), linear_to_db(environment_volume) )
 
-func load_settings():
-	if not FileAccess.file_exists(AUDIO_SETTINGS_PATH):
-		return
-	
-	var file = FileAccess.open(AUDIO_SETTINGS_PATH, FileAccess.READ)
-	var content = file.get_as_text()
-	file.close()
-	
-	var result = JSON.parse_string(content)
-	if result is Dictionary:
-		music_volume = float(result.get("music_volume", 1.0))
-		sfx_volume = float(result.get("sfx_volume", 1.0))
+func apply_from_settings(settings: Node):
+	set_master_volume(settings.master_volume / 100.0)
+	set_music_volume(settings.music_volume / 100.0)
+	set_sfx_volume(settings.sfx_volume / 100.0)
+	set_environment_volume(settings.environment_volume / 100.0)

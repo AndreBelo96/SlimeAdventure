@@ -1,43 +1,109 @@
 extends Control
 
-@onready var music_slider = $CanvasLayer/VBoxContainer/VolumeMusica/music_slider
-@onready var sfx_slider = $CanvasLayer/VBoxContainer/VolumeEffetti/sfx_slider
-@onready var difficult_option = $CanvasLayer/VBoxContainer/Difficolta/difficult_option
-@onready var fullscreen_check = $"CanvasLayer/VBoxContainer/Schermo intero/fullscreen_check"
-@onready var language_option = $CanvasLayer/VBoxContainer/Lingua/language_option
+var panels: Array[PanelContainer] = []
+
+#Buttons
+@onready var gameplay_btn: Button = %GameplayBtn
+@onready var graphics_btn: Button = %GraphicsBtn
+@onready var audio_btn: Button = %AudioBtn
+@onready var controls_btn: Button = %ControlsBtn
+
+@onready var master_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider
+@onready var music_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider
+@onready var sound_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
+@onready var environment_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/EnvironmentSlider
+@onready var difficult_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
+@onready var fullscreen_check = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/FullScreenCheck
+@onready var resolution_option: OptionButton = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option
+@onready var langauge_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
+
 
 func _ready():
-	# Carica le impostazioni salvate (se presenti)
-	music_slider.value = ProjectSettings.get_setting("audio/music_volume", 50)
-	sfx_slider.value = ProjectSettings.get_setting("audio/sfx_volume", 50)
-	fullscreen_check.button_pressed = ProjectSettings.get_setting("display/window/size/fullscreen", false)
-
+	
+	 # --- Popola OptionMenu ---
 	difficult_option.add_item("Facile")
 	difficult_option.add_item("Medio")
 	difficult_option.add_item("Difficile")
+	difficult_option.select(SettingsManager.difficulty)
+	
+	langauge_option.add_item("Ingelse")
+	langauge_option.add_item("Italiano")
+	langauge_option.select(SettingsManager.language)
 
-	language_option.add_item("Ingelse")
-	language_option.add_item("Italiano")
+	resolution_option.add_item("1920x1080")
+	resolution_option.add_item("1280x720")
+	resolution_option.add_item("400x240")
+	resolution_option.add_item("320x180")
+	resolution_option.select(SettingsManager.resolution)
+	
+	fullscreen_check.button_pressed = SettingsManager.fullscreen
+	
+	master_slider.value = SettingsManager.master_volume
+	music_slider.value = SettingsManager.music_volume
+	sound_slider.value = SettingsManager.sfx_volume
+	environment_slider.value = SettingsManager.environment_volume
+	
+	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
+	setup_panel_btn()
+	show_panel(panels[0])
+	gameplay_btn.grab_focus()
 
-func _on_music_slider_value_changed(value):
+func setup_panel_btn() -> void:
+	gameplay_btn.pressed.connect(show_panel.bind(panels[0]))
+	graphics_btn.pressed.connect(show_panel.bind(panels[1]))
+	audio_btn.pressed.connect(show_panel.bind(panels[2]))
+	controls_btn.pressed.connect(show_panel.bind(panels[3]))
+
+func show_panel(panel_to_show: PanelContainer) -> void:
+	for panel in panels:
+		panel.hide()
+	
+	panel_to_show.show()
+
+
+# --- Connect methods --- #
+
+# -- Gameplay -- #
+func _on_difficulty_option_item_selected(index: int) -> void:
+	SettingsManager.difficulty = index
+	SettingsManager.save_settings()
+
+func _on_langauge_option_item_selected(index: int) -> void:
+	SettingsManager.language = index
+	SettingsManager.save_settings()
+
+# -- Graphics -- #
+func _on_full_screen_check_toggled(toggled_on: bool) -> void:
+	SettingsManager.fullscreen = toggled_on
+	DisplayManager.apply_fullscreen(toggled_on)
+	SettingsManager.save_settings()
+
+func _on_resolution_option_item_selected(index: int) -> void:
+	SettingsManager.resolution = index
+	DisplayManager.apply_resolution(index)
+	SettingsManager.save_settings()
+
+# -- Sound -- #
+func _on_master_slider_value_changed(value: float) -> void:
+	SettingsManager.master_volume = value
+	SoundManager.set_master_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_music_slider_value_changed(value: float) -> void:
 	SettingsManager.music_volume = value
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value / 100.0))
+	SoundManager.set_music_volume(value / 100.0)
 	SettingsManager.save_settings()
 
-func _on_sfx_slider_value_changed(value):
+func _on_sound_slider_value_changed(value: float) -> void:
 	SettingsManager.sfx_volume = value
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(value / 100.0))
+	SoundManager.set_sfx_volume(value / 100.0)
 	SettingsManager.save_settings()
 
-func _on_difficult_option_item_selected(index: int) -> void:
-	pass # Replace with function body.
+func _on_environment_slider_value_changed(value: float) -> void:
+	SettingsManager.environment_volume = value
+	SoundManager.set_environment_volume(value / 100.0)
 	SettingsManager.save_settings()
 
-func _on_fullscreen_check_toggled(pressed):
-	SettingsManager.fullscreen = pressed
-	ProjectSettings.set_setting("display/window/size/fullscreen", pressed)
-	SettingsManager.save_settings()
-
-func _on_language_option_item_selected(index: int) -> void:
-	pass # Replace with function body.
-	SettingsManager.save_settings()
+func _on_back_pressed() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

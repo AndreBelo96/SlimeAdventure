@@ -24,16 +24,17 @@ PortraitManager="*res://Global/PortraitManager.gd"
 VoiceManager="*res://Global/VoiceManager.gd"
 Logger="*res://Global/Logger.gd"
 SettingsManager="*res://Global/SettingsManager.gd"
+DisplayManager="*res://Global/DisplayManager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_width"
 
 [editor]
 

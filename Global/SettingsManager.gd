@@ -36,3 +36,11 @@ func save_settings():
 	config.set_value("gameplay", "language", language)
 	config.save("user://settings.cfg")
 	
+func get_locale_from_index(index: int) -> String:
+	match index:
+		0:
+			return "it"
+		1:
+			return "en"
+		_:
+			return "en"

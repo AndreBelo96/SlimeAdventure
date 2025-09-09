@@ -19,15 +19,21 @@ var panels: Array[PanelContainer] = []
 
 
 func _ready():
-	
-	 # --- Popola OptionMenu ---
-	difficult_option.add_item("Facile")
-	difficult_option.add_item("Medio")
-	difficult_option.add_item("Difficile")
+	populate_option_menu()
+	setup_language()
+	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
+	setup_panel_btn()
+	show_panel(panels[0])
+	gameplay_btn.grab_focus()
+
+func populate_option_menu() -> void:
+	difficult_option.add_item(tr("DIFFICULT_1"))
+	difficult_option.add_item(tr("DIFFICULT_2"))
+	difficult_option.add_item(tr("DIFFICULT_3"))
 	difficult_option.select(SettingsManager.difficulty)
 	
-	langauge_option.add_item("Ingelse")
-	langauge_option.add_item("Italiano")
+	langauge_option.add_item(tr("LANGUAGE_1"))
+	langauge_option.add_item("LANGUAGE_2")
 	langauge_option.select(SettingsManager.language)
 
 	resolution_option.add_item("1920x1080")
@@ -42,11 +48,28 @@ func _ready():
 	music_slider.value = SettingsManager.music_volume
 	sound_slider.value = SettingsManager.sfx_volume
 	environment_slider.value = SettingsManager.environment_volume
+
+func setup_language() -> void:
 	
-	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
-	setup_panel_btn()
-	show_panel(panels[0])
-	gameplay_btn.grab_focus()
+	%GameplayBtn.text = tr("GAMEPLAY_BTN")
+	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/Label.text = tr("DIFFICULT_LABEL")
+	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("LANGUAGE_LABEL")
+	
+	%GraphicsBtn.text = tr("GRAPHICS_BTN")
+	fullscreen_check.text = tr("FULLSCREEN_CHK")
+	$MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("RESOLUTION_LABEL")
+	
+	%AudioBtn.text = tr("AUDIO_BTN")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/Label.text = tr("VOLUME_1")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/Label.text = tr("VOLUME_2")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/Label.text = tr("VOLUME_3")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/Label.text = tr("VOLUME_4")
+	
+	%ControlsBtn.text = tr("CONTROLS_BTN")
+	
+	$MarginContainer/HBoxContainer/VBoxContainer/Back.text = tr("BACK_BTN")
+	
+	pass
 
 func setup_panel_btn() -> void:
 	gameplay_btn.pressed.connect(show_panel.bind(panels[0]))
@@ -70,6 +93,9 @@ func _on_difficulty_option_item_selected(index: int) -> void:
 
 func _on_langauge_option_item_selected(index: int) -> void:
 	SettingsManager.language = index
+	var lang = SettingsManager.get_locale_from_index(index)
+	TranslationServer.set_locale(lang)
+	setup_language()
 	SettingsManager.save_settings()
 
 # -- Graphics -- #

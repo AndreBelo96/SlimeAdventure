@@ -72,6 +72,10 @@ move_right={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/translation_file.en.translation", "res://Localization/translation_file.it.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

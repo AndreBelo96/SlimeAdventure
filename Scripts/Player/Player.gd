@@ -52,16 +52,13 @@ func _ready():
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
 
-func _set_lights_state(enabled: bool) -> void:
-	light_handler.set_enabled(enabled)
-
 func turn_on_lights(duration: float = 0.0) -> void:
-	_set_lights_state(true)
+	light_handler.enable(0.5)
 	if duration > 0.0:
 		light_timer.start(duration)
 
 func _on_light_timer_timeout() -> void:
-	_set_lights_state(false)
+	light_handler.disable(1.0)
 
 func _unhandled_input(event):
 	if should_ignore_input():

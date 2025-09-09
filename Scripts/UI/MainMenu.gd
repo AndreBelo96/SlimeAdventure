@@ -1,5 +1,10 @@
 extends Node2D
 
+func _ready():
+	$CanvasLayer/Menu/StartButton.text = tr("START_BTN")
+	$CanvasLayer/Menu/HowToPlay.text = tr("HOW_TO_PLAY_BTN")
+	$CanvasLayer/Menu/OptionButton.text = tr("OPTIONS_BTN")
+	$CanvasLayer/Menu/ExitButton.text = tr("EXIT_BTN")
 
 func _on_start_button_pressed() -> void:
 	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")

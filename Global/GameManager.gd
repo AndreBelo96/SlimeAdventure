@@ -71,10 +71,14 @@ var last_attempt := {
 }
 
 func _ready():
+	# Load info
 	var _loaded = SaveManager.load_progress()
 	SettingsManager.load_settings()
 	SoundManager.apply_from_settings(SettingsManager)
 	DisplayManager.apply_display_settings(SettingsManager)
+	TranslationServer.set_locale(SettingsManager.get_locale_from_index(SettingsManager.language))
+	
+	#Setup var
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
 	total_steps = totals.steps

@@ -1,0 +1,25 @@
+keys,it,en
+MAIN_MENU,,
+START_BTN,Inizia,Start
+HOW_TO_PLAY_BTN,Come giocare,How to play
+OPTIONS_BTN,Opzioni,Options
+EXIT_BTN,Esci,Exit
+OPTION_MENU,,
+GAMEPLAY_BTN,Gameplay,Gameplay
+DIFFICULT_LABEL,Difficoltà,Difficulty
+DIFFICULT_1,Facile,Easy
+DIFFICULT_2,Medio,Medium
+DIFFICULT_3,Difficile,Hard
+LANGUAGE_LABEL,Lingua,Language
+LANGUAGE_1,Italiano,Italian
+LANGUAGE_2,Inglese,English
+GRAPHICS_BTN,Grafica,Graphics
+FULLSCREEN_CHK,Schermo intero,Fullscreen
+RESOLUTION_LABEL,Risoluzione,Resolution
+AUDIO_BTN,Audio,Audio
+VOLUME_1,Volume Master,Master Volume
+VOLUME_2,Volume Musica,Music Volume
+VOLUME_3,Volume Suoni,Sound Volume
+VOLUME_4,Volume Ambiente,Environment Volume
+CONTROLS_BTN,Controlli,Controls
+BACK_BTN,Indietro,Back

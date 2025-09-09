@@ -1,8 +1,9 @@
 # SlimeAdventure
+
 Game develop in Godot
 
-Struttura:
-
+Struttura della repo:
+```
 res://
 ├── Scenes/
 │   ├── Main.tscn                  # Entry point del gioco
@@ -45,7 +46,7 @@ res://
 └── Global/
 	└── Autoload/
 		└── Globals.gd             # Singleton opzionale per stats, retry, ecc.
-		
+```		
 Struttura livelli Dungeons:
 	
 	🗺️ Schema Livelli con Tematiche e Progressione

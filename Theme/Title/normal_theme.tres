@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bxoj84vtba5hi"]
+
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_wim42"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wim42"]
+
+[resource]
+default_font = ExtResource("1_wim42")
+default_font_size = 25
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 3
+Label/constants/shadow_offset_y = 3
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("1_wim42")
+Label/styles/normal = SubResource("StyleBoxEmpty_wim42")

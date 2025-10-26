@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7rgr1o061kb7"]
+[gd_scene load_steps=6 format=3 uid="uid://b7rgr1o061kb7"]
 
 [ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/LevelMenu.gd" id="1_so21l"]
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_d7vnq"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_lf38f"]
-[ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="3_v8elj"]
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_kwl2h"]
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="5_kwl2h"]
 
 [node name="LevelMenu" type="Control"]
 layout_mode = 3
@@ -13,93 +15,126 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_so21l")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.152941, 0.152941, 0.231373, 1)
+color = Color(0.133333, 0.109804, 0.262745, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="RightPanel" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.15
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="SelectLevel" type="Label" parent="CanvasLayer/RightPanel"]
-modulate = Color(1, 0.843137, 0, 1)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 136.0
-grow_horizontal = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("2_lf38f")
-theme_override_font_sizes/font_size = 70
-text = "Level Selection"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Location" type="Label" parent="CanvasLayer/RightPanel"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -550.0
-offset_bottom = -467.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_lf38f")
-theme_override_font_sizes/font_size = 50
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/RightPanel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = -132.0
-offset_right = -50.0
-offset_bottom = 196.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LevelButtonContainer" type="GridContainer" parent="CanvasLayer/RightPanel/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
+theme_override_constants/separation = 25
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer"]
+modulate = Color(0.937255, 0.690196, 0.345098, 1)
+layout_mode = 2
+theme = ExtResource("2_d7vnq")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "Level Selection"
+
+[node name="CenterContainer4" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Location" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer4"]
+layout_mode = 2
+theme = ExtResource("2_d7vnq")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelButtonContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 30
 columns = 5
 
-[node name="Button" type="Button" parent="CanvasLayer/RightPanel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -62.0
-offset_top = -126.0
-offset_right = 62.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-theme = ExtResource("3_v8elj")
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Back"
+[node name="CenterContainer3" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
-[connection signal="pressed" from="CanvasLayer/RightPanel/Button" to="." method="_on_button_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_font_sizes/font_size = 20
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_lf38f")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+
+[node name="Back" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Back"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_kwl2h")
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_font_sizes/font_size = 20
+text = " <"
+horizontal_alignment = 1

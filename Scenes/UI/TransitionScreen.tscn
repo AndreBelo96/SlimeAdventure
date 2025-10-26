@@ -347,10 +347,12 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 172.0
-offset_bottom = 238.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.0
+offset_right = 126.0
+offset_bottom = 83.0
 grow_horizontal = 2
 theme = ExtResource("1_nv7gp")
 theme_override_font_sizes/font_size = 60
@@ -363,13 +365,11 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -163.0
-offset_bottom = 113.0
+offset_top = -102.5
+offset_bottom = 102.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_nv7gp")
-text = "
-"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -378,7 +378,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -203.0
+offset_top = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_nv7gp")
@@ -388,5 +388,5 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {
-"": SubResource("AnimationLibrary_lh2se")
+&"": SubResource("AnimationLibrary_lh2se")
 }

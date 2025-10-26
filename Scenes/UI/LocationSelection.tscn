@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdsfhh0xy6ddk"]
+[gd_scene load_steps=7 format=3 uid="uid://bdsfhh0xy6ddk"]
 
-[ext_resource type="Script" uid="uid://cgu8qthonp7ck" path="res://Scripts/UI/LocationSelection.gd" id="1_fu6wn"]
+[ext_resource type="Script" uid="uid://3yac8sfevp5j" path="res://Scripts/UI/LocationSelection.gd" id="1_fu6wn"]
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_hlq0a"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_ogx0x"]
-[ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="3_3kdee"]
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="2_ud2kn"]
+[ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="3_3o0af"]
+[ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="4_y1ydm"]
 
 [node name="LocationSelection" type="Control"]
 layout_mode = 3
@@ -13,78 +16,184 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fu6wn")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.152941, 0.152941, 0.231373, 1)
+color = Color(0.133333, 0.109804, 0.262745, 1)
 
-[node name="Menu" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="Titolo" type="Label" parent="CanvasLayer/Menu"]
-modulate = Color(1, 0.843137, 0, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -119.5
-offset_top = 30.0
-offset_right = 119.5
-offset_bottom = 60.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_ogx0x")
-theme_override_font_sizes/font_size = 70
-text = "Location Selection"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Menu"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = -120.0
-offset_right = -50.0
-offset_bottom = 160.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LocationContainer" type="GridContainer" parent="CanvasLayer/Menu/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 60
+theme_override_constants/separation = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+modulate = Color(0.937255, 0.690196, 0.345098, 1)
+layout_mode = 2
+theme = ExtResource("2_hlq0a")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "Location Selection"
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LocationContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
 columns = 3
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -62.0
-offset_top = -126.0
-offset_right = 62.0
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-theme = ExtResource("3_3kdee")
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Back"
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_3o0af")
+text = "Tutorial"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
+
+[node name="Dungeon" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_y1ydm")
+text = "Dungeon"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
+
+[node name="Forest" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_3o0af")
+text = "Forest"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 20
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_ogx0x")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_ud2kn")
+theme_override_font_sizes/font_size = 20
+text = " <"
+horizontal_alignment = 1

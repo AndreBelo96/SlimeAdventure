@@ -5,7 +5,7 @@ var music_volume: float = 50
 var sfx_volume: float = 50
 var environment_volume: float = 50
 
-var fullscreen: bool = false
+var fullscreen: int = 0
 var resolution: int = 0
 
 var difficulty: int = 0
@@ -19,7 +19,7 @@ func load_settings():
 		music_volume = config.get_value("audio", "music_volume", 50)
 		sfx_volume = config.get_value("audio", "sfx_volume", 50)
 		environment_volume = config.get_value("audio", "environment_volume", 50)
-		fullscreen = config.get_value("video", "fullscreen", false)
+		fullscreen = config.get_value("video", "fullscreen", 0)
 		resolution = config.get_value("video", "resolution", 0)
 		difficulty = config.get_value("gameplay", "difficulty", 0)
 		language = config.get_value("gameplay", "language", 0)

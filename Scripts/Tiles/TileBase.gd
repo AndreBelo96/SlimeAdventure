@@ -20,8 +20,13 @@ func on_player_enter():
 func can_enter() -> bool:
 	return true
 
-func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_height := 32):
+func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_height := 48):
+	var offset = 1;
+	
+	var block_w = tile_width + 2 * offset
+	var block_h = tile_height + 2 * offset
+	
 	atlas_texture.region = Rect2(
-		Vector2(tile_x * tile_width, tile_y * tile_height),
+		Vector2(tile_x * block_w + offset, tile_y * block_h + offset),
 		Vector2(tile_width, tile_height)
 	)

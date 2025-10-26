@@ -1,121 +1,378 @@
-[gd_scene load_steps=4 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene load_steps=13 format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
+[ext_resource type="Shader" uid="uid://dgk8voxxoch2l" path="res://Shader/title_shader.gdshader" id="2_744d7"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_b5bqd"]
-[ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="3_tatqy"]
+[ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_jex3y"]
+[ext_resource type="Texture2D" uid="uid://cja8bx7dsi76j" path="res://Assets/Sprites/IntroSlime.png" id="2_kl3t2"]
+[ext_resource type="Shader" uid="uid://cgef5yg2cypqb" path="res://Shader/fade_border.gdshader" id="2_ynupv"]
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
+[ext_resource type="Texture2D" uid="uid://cprycl3pfs3hf" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
+[ext_resource type="Shader" uid="uid://bo5v8kgyx6j5n" path="res://Shader/blink_shader.gdshader" id="8_ynupv"]
 
-[node name="Menu" type="Node2D"]
-script = ExtResource("1_wrbul")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynupv"]
+shader = ExtResource("2_ynupv")
+shader_parameter/margin_x = 0.3
+shader_parameter/margin_y = 0.25
+shader_parameter/intensity_x = 10.0
+shader_parameter/intensity_y = 10.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl3t2"]
+shader = ExtResource("2_744d7")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/speed = 1.0
+shader_parameter/width = 0.2
+shader_parameter/intensity = 1.5
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.152758, 0.152782, 0.232614, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvisc"]
+shader = ExtResource("8_ynupv")
+shader_parameter/flash_duration = 1.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[node name="Menu" type="Control" parent="CanvasLayer"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_wrbul")
 
-[node name="Titolo" type="Label" parent="CanvasLayer/Menu"]
-modulate = Color(1, 0.843137, 0, 1)
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -119.5
-offset_top = 30.0
-offset_right = 119.5
-offset_bottom = 60.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_b5bqd")
-theme_override_font_sizes/font_size = 70
-text = "Slime Adventure"
+grow_vertical = 2
+color = Color(0.133333, 0.109804, 0.262745, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ynupv")
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 655.0
+offset_bottom = 375.0
+texture = ExtResource("2_kl3t2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
+material = SubResource("ShaderMaterial_kl3t2")
+layout_mode = 2
+texture = ExtResource("2_jex3y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = ">"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="CanvasLayer/Menu"]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Start" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -160.5
-offset_right = 90.0
-offset_bottom = -100.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-theme = ExtResource("3_tatqy")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = "Start"
+horizontal_alignment = 1
 
-[node name="HowToPlay" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Profile" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -80.5
-offset_right = 90.0
-offset_bottom = -20.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-theme = ExtResource("3_tatqy")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = "Profile"
+horizontal_alignment = 1
 
-[node name="OptionButton" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Scoreboard" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -0.5
-offset_right = 90.0
-offset_bottom = 59.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-theme = ExtResource("3_tatqy")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = "Scoreboard"
+horizontal_alignment = 1
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Option" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = 79.5
-offset_right = 90.0
-offset_bottom = 139.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-theme = ExtResource("3_tatqy")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = "Option"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/Menu/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/HowToPlay" to="." method="_on_how_to_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/OptionButton" to="." method="_on_option_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Exit" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer2"]
+material = SubResource("ShaderMaterial_dvisc")
+layout_mode = 2
+texture = ExtResource("5_k8um8")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 10
+text = "Version 0.1 Alpha"
+horizontal_alignment = 1

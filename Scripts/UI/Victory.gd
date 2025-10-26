@@ -1,9 +1,8 @@
 extends Control
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var sprite = $CanvasLayer/Victory
+	var sprite = $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Victory
 	
 	# Dati dell’ultima run, salvati in GameManager.end_level()
 	var last = GameManager.last_attempt
@@ -13,7 +12,7 @@ func _ready() -> void:
 	var is_record: bool = bool(last.get("is_record", false))
 
 	# Mostra i risultati della run appena conclusa
-	$CanvasLayer/Actual.text = "Steps: %d\nTime: %.2f" % [run_steps, run_time]
+	$ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer/Actual2.text = "Steps: %d\nTime: %.2f" % [run_steps, run_time]
 	
 	var best_steps := "-"
 	var best_time := "-"
@@ -27,13 +26,13 @@ func _ready() -> void:
 		best_steps = str(run_steps)
 		best_time = "%.2f" % run_time
 
-	$CanvasLayer/Best.text = "Steps: %s\nTime: %s" % [best_steps, best_time]
+	$ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer2/Best2.text = "Steps: %s\nTime: %s" % [best_steps, best_time]
 	
 	if is_record:
-		$CanvasLayer/Record.text = "New record!!"
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Record.text = "New record!!"
 		sprite.texture = preload("res://Assets/Sprites/Player/Sunglasses.png")
 	else:
-		$CanvasLayer/Record.text = "Nice!!"
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Record.text = "Nice!!"
 		var atlas := AtlasTexture.new()
 		atlas.atlas = preload("res://Assets/Sprites/Player/SlimeSet.png")
 		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))

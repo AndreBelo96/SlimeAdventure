@@ -13,12 +13,12 @@ var panels: Array[PanelContainer] = []
 @onready var sound_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
 @onready var environment_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/EnvironmentSlider
 @onready var difficult_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
-@onready var fullscreen_check = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/FullScreenCheck
+@onready var fullscreen_option = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option
 @onready var resolution_option: OptionButton = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option
 @onready var langauge_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
 
 
-func _ready():
+func _ready():	
 	populate_option_menu()
 	setup_language()
 	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
@@ -36,13 +36,15 @@ func populate_option_menu() -> void:
 	langauge_option.add_item("LANGUAGE_2")
 	langauge_option.select(SettingsManager.language)
 
+	resolution_option.add_item("2560x1440")
 	resolution_option.add_item("1920x1080")
 	resolution_option.add_item("1280x720")
-	resolution_option.add_item("400x240")
-	resolution_option.add_item("320x180")
+	resolution_option.add_item("640x360")
 	resolution_option.select(SettingsManager.resolution)
 	
-	fullscreen_check.button_pressed = SettingsManager.fullscreen
+	fullscreen_option.add_item(tr("FULLSCREEN_CHK"))
+	fullscreen_option.add_item("Schermo Intero Senza Bordi")
+	fullscreen_option.add_item("Finestra")
 	
 	master_slider.value = SettingsManager.master_volume
 	music_slider.value = SettingsManager.music_volume
@@ -56,7 +58,7 @@ func setup_language() -> void:
 	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("LANGUAGE_LABEL")
 	
 	%GraphicsBtn.text = tr("GRAPHICS_BTN")
-	fullscreen_check.text = tr("FULLSCREEN_CHK")
+	$MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Label.text = tr("FULLSCREEN_CHK")
 	$MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("RESOLUTION_LABEL")
 	
 	%AudioBtn.text = tr("AUDIO_BTN")
@@ -99,9 +101,9 @@ func _on_langauge_option_item_selected(index: int) -> void:
 	SettingsManager.save_settings()
 
 # -- Graphics -- #
-func _on_full_screen_check_toggled(toggled_on: bool) -> void:
-	SettingsManager.fullscreen = toggled_on
-	DisplayManager.apply_fullscreen(toggled_on)
+func _on_fullscreen_option_item_selected(index: int) -> void:
+	SettingsManager.fullscreen = index
+	DisplayManager.apply_fullscreen(index)
 	SettingsManager.save_settings()
 
 func _on_resolution_option_item_selected(index: int) -> void:

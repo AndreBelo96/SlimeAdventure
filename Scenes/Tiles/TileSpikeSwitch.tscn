@@ -1,52 +1,89 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsy3fwetdsap8"]
+[gd_scene load_steps=15 format=3 uid="uid://bsy3fwetdsap8"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_oxoqu"]
 [ext_resource type="Script" uid="uid://wstnwcivml1d" path="res://Scripts/Tiles/TileSpikeSwitch.gd" id="2_eqr8q"]
-[ext_resource type="Texture2D" uid="uid://dxl3unea0u3oj" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8bfao"]
+[ext_resource type="Texture2D" uid="uid://dxy5dnho37yls" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8bfao"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcykk"]
-load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_ideo7"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(792, 50, 66, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0yof3"]
-atlas = SubResource("CompressedTexture2D_lcykk")
-region = Rect2(768, 32, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhqym"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(726, 50, 66, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xyfrs"]
-atlas = SubResource("CompressedTexture2D_lcykk")
-region = Rect2(704, 32, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qber0"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(660, 50, 66, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gk8ta"]
-atlas = SubResource("CompressedTexture2D_lcykk")
-region = Rect2(640, 32, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhguu"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(594, 50, 66, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2vrio"]
-atlas = SubResource("CompressedTexture2D_lcykk")
-region = Rect2(576, 32, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_22rs6"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(528, 50, 66, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cg0g"]
-atlas = SubResource("CompressedTexture2D_lcykk")
-region = Rect2(512, 32, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gcta"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(528, 50, 66, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faoed"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(594, 50, 66, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ienfd"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(660, 50, 66, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hju6"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(726, 50, 66, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7l7d"]
+atlas = ExtResource("3_8bfao")
+region = Rect2(792, 50, 66, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pf1ww"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0yof3")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ideo7")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xyfrs")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_vhqym")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gk8ta")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_qber0")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2vrio")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_dhguu")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2cg0g")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_22rs6")
 }],
 "loop": false,
 "name": &"OFF",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5gcta")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_faoed")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ienfd")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0hju6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_c7l7d")
+}],
+"loop": false,
+"name": &"ON",
 "speed": 30.0
 }]
 
@@ -54,9 +91,8 @@ animations = [{
 script = ExtResource("2_eqr8q")
 
 [node name="Tile" parent="." index="1"]
-texture = ExtResource("3_8bfao")
 region_enabled = true
-region_rect = Rect2(768, 32, 64, 32)
+region_rect = Rect2(793, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_pf1ww")

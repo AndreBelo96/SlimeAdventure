@@ -1,0 +1,47 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bekimpr1d4j4a"]
+
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_xvlvq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ocm36"]
+load_path = "res://.godot/imported/button_set.png-9a365a034381287448fec1d3dc07b66f.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvlvq"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+texture = SubResource("CompressedTexture2D_ocm36")
+expand_margin_top = 3.0
+region_rect = Rect2(9, 6, 62, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q47c0"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+texture = SubResource("CompressedTexture2D_ocm36")
+expand_margin_top = 3.0
+region_rect = Rect2(9, 6, 62, 32)
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0.147672, 0.147672, 0.147672, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_xvlvq")
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxTexture_xvlvq")
+Button/styles/normal = SubResource("StyleBoxTexture_q47c0")

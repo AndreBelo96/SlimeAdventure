@@ -80,6 +80,7 @@ layout_mode = 2
 
 [node name="GameplayPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 0.211765, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -137,7 +138,6 @@ theme_override_font_sizes/font_size = 30
 
 [node name="GraphicsPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 modulate = Color(0.772549, 0.286275, 0.160784, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -164,12 +164,15 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="FullScreenCheck" type="CheckBox" parent="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
 theme_override_font_sizes/font_size = 30
-text = "Schermo Intero"
+text = "Fullscreen"
+
+[node name="Fullscreen_option" type="OptionButton" parent="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 4
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -292,7 +295,7 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption" to="." method="_on_difficulty_option_item_selected"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption" to="." method="_on_langauge_option_item_selected"]
-[connection signal="toggled" from="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/FullScreenCheck" to="." method="_on_full_screen_check_toggled"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option" to="." method="_on_fullscreen_option_item_selected"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option" to="." method="_on_resolution_option_item_selected"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]

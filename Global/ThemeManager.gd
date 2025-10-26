@@ -2,8 +2,8 @@
 extends Node
 
 const BUTTON_THEMES := {
-	GameManager.Location.TUTORIAL: preload("res://Theme/TutorialButton.tres"),
-	GameManager.Location.DUNGEON: preload("res://Theme/DungeonButton.tres")
+	GameManager.Location.TUTORIAL: preload("res://Theme/Button/TutorialButton.tres"),
+	GameManager.Location.DUNGEON: preload("res://Theme/Button/DungeonButton.tres")
 }
 
 const BUTTON_SOUNDS := {

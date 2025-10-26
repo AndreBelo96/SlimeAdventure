@@ -7,9 +7,9 @@ const NORMAL_TILE_POSITION := 7
 const SPIKE_STEP_TILE_POSITION := 8
 const SPIKE_TILE_POSITION := 12
 const WALL_TILE_POSITION := 13
-const BORDER_TILE_POSITION := 14
-const FLIP_BORDER_TILE_POSITION := 15
-const SWITCH_TILE_POSITION := 16
+#const BORDER_TILE_POSITION := 14
+#const FLIP_BORDER_TILE_POSITION := 15
+const SWITCH_TILE_POSITION := 19
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
 ## Variabili correnti
@@ -75,7 +75,7 @@ func _ready():
 	var _loaded = SaveManager.load_progress()
 	SettingsManager.load_settings()
 	SoundManager.apply_from_settings(SettingsManager)
-	DisplayManager.apply_display_settings(SettingsManager)
+	#DisplayManager.apply_display_settings(SettingsManager)
 	TranslationServer.set_locale(SettingsManager.get_locale_from_index(SettingsManager.language))
 	
 	#Setup var

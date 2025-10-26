@@ -26,17 +26,17 @@ func _create_animations(row: int):
 	for col in range(0, 7):
 		var tex = AtlasTexture.new()
 		tex.atlas = TILESET
-		tex.region = Rect2(Vector2(col * 64, row * 32), Vector2(64, 32))
+		tex.region = Rect2(Vector2((col * 66) + 1, (row * 50) + 1), Vector2(64, 48))
 		frames.add_frame("Activate", tex)
 
 	# Deactivate animation (frames da colonna 7 a 0)
 	frames.add_animation("Deactivate")
 	frames.set_animation_speed("Deactivate", 30)
 	frames.set_animation_loop("Deactivate", false)
-	for x in range(6, -1, -1):
+	for col in range(6, -1, -1):
 		var tex = AtlasTexture.new()
 		tex.atlas = TILESET
-		tex.region = Rect2(Vector2(x * 64, row * 32), Vector2(64, 32))
+		tex.region = Rect2(Vector2((col * 66) + 1, (row * 50) + 1), Vector2(64, 48))
 		frames.add_frame("Deactivate", tex)
 
 	return frames

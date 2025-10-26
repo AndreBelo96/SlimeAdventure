@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcyrvic42ifeu"]
+[gd_scene load_steps=4 format=3 uid="uid://bcyrvic42ifeu"]
 
 [ext_resource type="Script" uid="uid://b5u5f6um65tvu" path="res://Scripts/Tiles/TileBase.gd" id="1_c5erh"]
+[ext_resource type="Texture2D" uid="uid://dxy5dnho37yls" path="res://Assets/Sprites/Tiles/Tileset.png" id="2_e7jm1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1lwiv"]
 animations = [{
@@ -18,10 +19,11 @@ script = ExtResource("1_c5erh")
 [node name="Tile" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(0, 3)
+position = Vector2(0, 12)
+texture = ExtResource("2_e7jm1")
 
 [node name="AnimatedTile" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(0, 3)
+position = Vector2(0, 12)
 sprite_frames = SubResource("SpriteFrames_1lwiv")

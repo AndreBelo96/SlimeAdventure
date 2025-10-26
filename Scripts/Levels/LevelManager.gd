@@ -6,7 +6,7 @@ extends Node2D
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var dark_overlay = $DarkOverlay
-@onready var tile_label = $CanvasHUD/HUD/Base/Control/TileToActive
+@onready var tile_label = $CanvasHUD/HUD/TileToActive
 @onready var background_manager: BackgroundManager = $BackgroundManager
 
 signal signal_victory

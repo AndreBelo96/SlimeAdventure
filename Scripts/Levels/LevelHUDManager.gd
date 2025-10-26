@@ -1,11 +1,11 @@
 # -- LevelHUDManager.gd -- #
-extends Control
+extends MarginContainer
 
 class_name LevelHUDManager
 
-@onready var steps_label = $Base/StepsLabel
+@onready var steps_label = $StepsLabel
 @onready var time_label = $TimeLabel
-@onready var tile_label = $Base/Control/TileToActive
+@onready var tile_label = $TileToActive
 
 func update_steps(count: int):
 	steps_label.text = "Passi: %d" % count

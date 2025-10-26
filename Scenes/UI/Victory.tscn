@@ -1,125 +1,134 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhjjq05dhy3ks"]
+[gd_scene load_steps=7 format=3 uid="uid://dhjjq05dhy3ks"]
 
 [ext_resource type="Script" uid="uid://bfjuw531ros1i" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
 [ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_1kexw"]
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_owefo"]
 [ext_resource type="Texture2D" uid="uid://jj4f7fv4p1aw" path="res://Assets/Sprites/Player/Sunglasses.png" id="3_e4620"]
 [ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="4_0fdxb"]
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="4_1fos3"]
 
 [node name="Victory" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_ex1u7")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.152941, 0.152941, 0.231373, 1)
+script = ExtResource("1_ex1u7")
 
-[node name="Vittoria" type="Label" parent="CanvasLayer"]
-anchors_preset = 10
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 78.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+grow_vertical = 2
+color = Color(0.133333, 0.109804, 0.262745, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer"]
+modulate = Color(0.937255, 0.690196, 0.345098, 1)
+layout_mode = 2
+theme = ExtResource("2_owefo")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 60
-text = "Victory!!
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+text = "Victory!!"
 
-[node name="Title" type="HBoxContainer" parent="CanvasLayer"]
+[node name="Points" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 82.0
-offset_bottom = 182.0
-grow_horizontal = 2
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.99
 theme_override_constants/separation = 450
 alignment = 1
 
-[node name="Actual" type="Label" parent="CanvasLayer/Title"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/Points"]
+layout_mode = 2
+
+[node name="Actual" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 text = "Actual"
 
-[node name="Best" type="Label" parent="CanvasLayer/Title"]
+[node name="Actual2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 20
+text = "Steps:
+
+Time:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/Points"]
+layout_mode = 2
+
+[node name="Best" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1kexw")
+theme_override_font_sizes/font_size = 30
 text = "Best"
 
-[node name="Actual" type="Label" parent="CanvasLayer"]
-offset_left = 209.0
-offset_top = 193.0
-offset_right = 275.0
-offset_bottom = 319.0
+[node name="Best2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer2"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
 text = "Steps:
 
 Time:"
 
-[node name="Best" type="Label" parent="CanvasLayer"]
-offset_left = 787.0
-offset_top = 194.0
-offset_right = 853.0
-offset_bottom = 320.0
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 30
-text = "Steps:
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
-Time:"
-
-[node name="Record" type="Label" parent="CanvasLayer"]
-offset_left = 185.0
-offset_top = 366.0
-offset_right = 553.0
-offset_bottom = 457.0
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 70
+[node name="Record" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_1fos3")
 text = "New Record!!"
 
-[node name="Victory" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(876, 404)
-scale = Vector2(11.739, 10.6923)
+[node name="Victory" type="Sprite2D" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(428.5, 21)
+scale = Vector2(4, 4)
 texture = ExtResource("3_e4620")
 
-[node name="BackMainMenu" type="Button" parent="CanvasLayer"]
-offset_left = 900.0
-offset_top = 550.0
-offset_right = 1200.0
-offset_bottom = 632.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackMainMenu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 theme = ExtResource("4_0fdxb")
+theme_override_font_sizes/font_size = 20
 text = "Back To Main Menu"
 
-[node name="BackLevelSelection" type="Button" parent="CanvasLayer"]
-offset_left = 490.0
-offset_top = 550.0
-offset_right = 790.0
-offset_bottom = 632.0
+[node name="BackLevelSelection" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 theme = ExtResource("4_0fdxb")
+theme_override_font_sizes/font_size = 20
 text = "Back To Level Select"
 
-[node name="Next" type="Button" parent="CanvasLayer"]
-offset_left = 80.0
-offset_top = 550.0
-offset_right = 380.0
-offset_bottom = 632.0
+[node name="Next" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 theme = ExtResource("4_0fdxb")
-text = "Next level"
+theme_override_font_sizes/font_size = 20
+text = "Next Level"
 
-[connection signal="pressed" from="CanvasLayer/BackMainMenu" to="." method="_on_back_main_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/BackLevelSelection" to="." method="_on_back_level_selection_pressed"]
-[connection signal="pressed" from="CanvasLayer/Next" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/BackMainMenu" to="." method="_on_back_main_menu_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/BackLevelSelection" to="." method="_on_back_level_selection_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/Next" to="." method="_on_restart_pressed"]

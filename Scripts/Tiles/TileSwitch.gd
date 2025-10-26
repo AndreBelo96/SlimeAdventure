@@ -1,7 +1,5 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
-#signal interruttore_premuto(chiave: String)
-
 var chiave := "A"
 var attivato := false
 

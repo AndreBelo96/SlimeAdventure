@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Slime Adventure"
 run/main_scene="res://Scenes/UI/MainMenu.tscn"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 
 [autoload]
 
@@ -22,7 +22,7 @@ SoundManager="*res://Global/SoundManager.gd"
 SaveManager="*res://Global/SaveManager.gd"
 PortraitManager="*res://Global/PortraitManager.gd"
 VoiceManager="*res://Global/VoiceManager.gd"
-Logger="*res://Global/Logger.gd"
+GameLogger="*res://Global/GameLogger.gd"
 SettingsManager="*res://Global/SettingsManager.gd"
 DisplayManager="*res://Global/DisplayManager.gd"
 

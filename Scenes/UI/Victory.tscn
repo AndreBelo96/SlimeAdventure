@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhjjq05dhy3ks"]
+[gd_scene load_steps=6 format=3 uid="uid://dhjjq05dhy3ks"]
 
 [ext_resource type="Script" uid="uid://bfjuw531ros1i" path="res://Scripts/UI/Victory.gd" id="1_ex1u7"]
-[ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_1kexw"]
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_owefo"]
 [ext_resource type="Texture2D" uid="uid://jj4f7fv4p1aw" path="res://Assets/Sprites/Player/Sunglasses.png" id="3_e4620"]
-[ext_resource type="Theme" uid="uid://bne2hom5bb0sj" path="res://Theme/DefaultButton.tres" id="4_0fdxb"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="4_1fos3"]
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="5_1fos3"]
 
 [node name="Victory" type="Control"]
 layout_mode = 3
@@ -39,6 +38,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -52,83 +52,218 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 text = "Victory!!"
 
-[node name="Points" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 100)
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-size_flags_stretch_ratio = 1.99
-theme_override_constants/separation = 450
+theme_override_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/Points"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Actual" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer"]
+[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="BackMainMenu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+flat = true
+
+[node name="BackMainMenu" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 20
+text = "Back To Main Menù"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="BackLevelSelection" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_mode = 0
+flat = true
+
+[node name="BackLevelSelection" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 20
+text = "Back To Level Select"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Next" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+flat = true
+
+[node name="Next" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 20
+text = "Next Level"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_1fos3")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="Points" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Actual" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Actual" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
+layout_mode = 2
+theme = ExtResource("4_1fos3")
 text = "Actual"
 
-[node name="Actual2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer"]
+[node name="ActualSteps" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 20
-text = "Steps:
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 18
+text = "Steps:"
 
-Time:"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/Points"]
+[node name="ActualTime" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
 layout_mode = 2
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 18
+text = "Time:"
 
-[node name="Best" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer2"]
+[node name="Best" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 30
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Best" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
+layout_mode = 2
+theme = ExtResource("4_1fos3")
 text = "Best"
 
-[node name="Best2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/Points/VBoxContainer2"]
+[node name="BestSteps" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1kexw")
-theme_override_font_sizes/font_size = 20
-text = "Steps:
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 18
+text = "Steps:"
 
-Time:"
+[node name="BestTime" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
+layout_mode = 2
+theme = ExtResource("4_1fos3")
+theme_override_font_sizes/font_size = 18
+text = "Time:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+alignment = 1
 
 [node name="Record" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4_1fos3")
 text = "New Record!!"
 
-[node name="Victory" type="Sprite2D" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
-position = Vector2(428.5, 21)
+[node name="Control" type="Control" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Victory" type="Sprite2D" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Control"]
 scale = Vector2(4, 4)
 texture = ExtResource("3_e4620")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="BackMainMenu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("4_0fdxb")
-theme_override_font_sizes/font_size = 20
-text = "Back To Main Menu"
-
-[node name="BackLevelSelection" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("4_0fdxb")
-theme_override_font_sizes/font_size = 20
-text = "Back To Level Select"
-
-[node name="Next" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("4_0fdxb")
-theme_override_font_sizes/font_size = 20
-text = "Next Level"
-
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/BackMainMenu" to="." method="_on_back_main_menu_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/BackLevelSelection" to="." method="_on_back_level_selection_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/Next" to="." method="_on_restart_pressed"]

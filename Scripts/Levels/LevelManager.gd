@@ -69,6 +69,9 @@ func setup_background():
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
+	
+	if pause_menu.visible:
+		pause_menu._on_pause_visible()
 
 func _on_all_tiles_activated():
 	Logger.info("Tutte le tile attivate → Apertura porte!")

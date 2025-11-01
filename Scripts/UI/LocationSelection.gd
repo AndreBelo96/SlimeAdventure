@@ -48,6 +48,8 @@ func setup_selectors():
 	for group in selectors:
 		for sel in group:
 			base_positions[sel] = sel.position
+	
+	print("BASE POSITION LOCATION SELECTION: ", base_positions)
 
 func setup_mouse():
 	buttons = [

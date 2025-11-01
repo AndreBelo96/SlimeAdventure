@@ -51,7 +51,6 @@ func load_level_buttons():
 		buttons.append(button)
 		selectors.append([selector_label])
 		base_positions[selector_label] = selector_label.position
-		button.pressed.connect(_on_level_button_pressed.bind(info.path, info.sound))
 
 	var back_button = $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
 	var back_selector = [$ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
@@ -59,9 +58,10 @@ func load_level_buttons():
 	buttons.append(back_button)
 	selectors.append(back_selector)
 	
+	await get_tree().process_frame
 	for sel in back_selector:
 		base_positions[sel] = sel.position
-
+	
 	if buttons.size() > 0:
 		set_current_selection(0)
 	
@@ -116,7 +116,7 @@ func _start_tween(group):
 
 func _unhandled_input(_delta):
 	var max_index = buttons.size() - 1  # include anche il back button
-	
+		
 	if Input.is_action_just_pressed("move_right") and current_selection < max_index:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		current_selection += 1
@@ -127,14 +127,15 @@ func _unhandled_input(_delta):
 		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("move_down") and current_selection < max_index:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-		current_selection = max_index
+		current_selection = current_selection + 5 if current_selection + 5 <= max_index else max_index
 		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-		current_selection = 0
+		current_selection = current_selection - 5 if current_selection - 5 >= 0 else 0
 		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("ui_accept"):
 		handle_selection(current_selection)
+
 
 # ------ MANAGE MOUSE ------ #
 func setup_mouse():
@@ -156,12 +157,13 @@ func is_level_disabled() -> bool:
 	return current_selection > GameManager.max_level_reach #Must trasform current_selection in actual number level
 
 func handle_selection(_current_selection):
-	if(is_level_disabled()):
-		return
 	
 	if _current_selection == buttons.size() - 1:
 		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+		return
+	
+	if(is_level_disabled()):
 		return
 	
 	# Altrimenti selezione livello
@@ -186,11 +188,11 @@ func _on_level_button_pressed(path: String, sound: String):
 		get_tree().root.add_child(loader_scene)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		get_tree().change_scene_to_file(path) #TODO Se rpemo col mouse non va
+		get_tree().change_scene_to_file(path)
 
-func print_tree_paths(node: Node, prefix: String = ""):
-	for child in node.get_children():
-		var path = prefix + "/" + child.name
-		var type = child.get_class()
-		print(path, " (", type, ")")
-		print_tree_paths(child, path)
+#func print_tree_paths(node: Node, prefix: String = ""):
+	#for child in node.get_children():
+		#var path = prefix + "/" + child.name
+		#var type = child.get_class()
+		#print(path, " (", type, ")")
+		#print_tree_paths(child, path)

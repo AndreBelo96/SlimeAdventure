@@ -1,6 +1,5 @@
 extends BaseMenu
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	setup_results()
@@ -72,13 +71,12 @@ func handle_navigation(_event):
 	if Input.is_action_just_pressed("move_down") and current_selection < 2:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		current_selection += 1
-		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		current_selection -= 1
-		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed("ui_accept"):
-		handle_selection(current_selection)
+	
+	set_current_selection(current_selection)
+
 
 func handle_selection(_index):
 	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")

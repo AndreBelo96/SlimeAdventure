@@ -103,12 +103,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Title" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer"]
-modulate = Color(0.937255, 0.690196, 0.345098, 1)
 layout_mode = 2
 theme = ExtResource("2_64brn")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
 text = "Defeat!!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]

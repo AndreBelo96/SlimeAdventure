@@ -1,13 +1,10 @@
 # Script LevelMenu
-extends Control
+extends BaseMenu
 
 @onready var level_container: GridContainer = $ColorRect/MarginContainer/VBoxContainer/CenterContainer2/LevelButtonContainer
 @onready var location: Label = $ColorRect/MarginContainer/VBoxContainer/CenterContainer4/Location
 
-var current_selection = 0
-var selectors := []
-var buttons := []
-var base_positions = {}
+const ROW_SIZE := 5
 
 var loader = preload("res://Scripts/UI/Buttons/LevelLoader.gd")
 var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
@@ -15,7 +12,6 @@ var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
 func _ready():
 	loader = LevelLoader.new()
 	factory = LevelButtonFactory.new()
-	#setup_languages()
 	
 	location.text = GameManager.Location.keys()[GameManager.location_selected]
 	load_level_buttons()
@@ -67,98 +63,29 @@ func load_level_buttons():
 	
 	setup_mouse()
 
-func set_current_selection(_current_selection):
-	if selectors.is_empty():
-		return
-	
-	current_selection = clamp(_current_selection, 0, selectors.size() - 1)
-	
-	for i in range(buttons.size()):
-		var btn = buttons[i]
-		btn.add_theme_color_override("font_color", Color.WHITE if i == current_selection else Color.BLACK)
-	
-	for group in selectors:
-		if group == null:
-			continue
-		for sel in group:
-			if sel == null:
-				continue
-			sel.text = ""
-	
-	var group = selectors[_current_selection]
-	group[0].text = ">"
-	if group.size() > 1:
-		group[1].text = "<"
-	
-	await get_tree().process_frame
-	_start_tween(group)
+func is_level_disabled() -> bool:
+	return current_selection > GameManager.max_level_reach
 
-func _start_tween(group):
-	# Se è un singolo selector → verticale
-	var vertical = group.size() == 1
-	
-	for sel in group:
-		if sel.has_meta("tween"):
-			sel.get_meta("tween").kill()
-		
-		var base = base_positions[sel]
-		var offset
-		
-		if vertical:
-			offset = Vector2(0, -5)
-		else:
-			offset = Vector2(-5, 0) if sel == group[0] else Vector2(5, 0)
-		
-		var tween = create_tween().set_loops()
-		tween.tween_property(sel, "position", base + offset, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(sel, "position", base, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		sel.set_meta("tween", tween)
-
-func _unhandled_input(_delta):
+func handle_navigation(_event):
 	var max_index = buttons.size() - 1  # include anche il back button
 		
 	if Input.is_action_just_pressed("move_right") and current_selection < max_index:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		current_selection += 1
-		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("move_left") and current_selection > 0:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		current_selection -= 1
-		set_current_selection(current_selection)
 	elif Input.is_action_just_pressed("move_down") and current_selection < max_index:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-		current_selection = current_selection + 5 if current_selection + 5 <= max_index else max_index
-		set_current_selection(current_selection)
+		current_selection = current_selection + ROW_SIZE if current_selection + ROW_SIZE <= max_index else max_index
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-		current_selection = current_selection - 5 if current_selection - 5 >= 0 else 0
-		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed("ui_accept"):
-		handle_selection(current_selection)
-
-
-# ------ MANAGE MOUSE ------ #
-func setup_mouse():
-	for i in range(buttons.size()):
-		var btn = buttons[i]
-		btn.connect("mouse_entered", Callable(self, "_on_label_mouse_entered").bind(i))
-		btn.connect("pressed", Callable(self, "_on_button_pressed").bind(i))
-
-func _on_button_pressed(index):
-	handle_selection(index)
-
-func _on_label_mouse_entered(index):
-	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-	current_selection = index
+		current_selection = current_selection - ROW_SIZE if current_selection - ROW_SIZE >= 0 else 0
+	
 	set_current_selection(current_selection)
 
-
-func is_level_disabled() -> bool:
-	return current_selection > GameManager.max_level_reach #Must trasform current_selection in actual number level
-
-func handle_selection(_current_selection):
-	
-	if _current_selection == buttons.size() - 1:
+func handle_selection(_index):
+	if _index == buttons.size() - 1:
 		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
 		return
@@ -166,9 +93,7 @@ func handle_selection(_current_selection):
 	if(is_level_disabled()):
 		return
 	
-	# Altrimenti selezione livello
-	var button = buttons[_current_selection]
-	var info = loader.get_level_data_for_location(GameManager.location_selected)[_current_selection] ## Ma va?
+	var info = loader.get_level_data_for_location(GameManager.location_selected)[_index]
 	_on_level_button_pressed(info.path, info.sound)
 
 func _on_level_button_pressed(path: String, sound: String):
@@ -189,10 +114,3 @@ func _on_level_button_pressed(path: String, sound: String):
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		get_tree().change_scene_to_file(path)
-
-#func print_tree_paths(node: Node, prefix: String = ""):
-	#for child in node.get_children():
-		#var path = prefix + "/" + child.name
-		#var type = child.get_class()
-		#print(path, " (", type, ")")
-		#print_tree_paths(child, path)

@@ -7,7 +7,7 @@ extends Control
 @export var dungeon_frames: SpriteFrames
 @export var forest_frames: SpriteFrames
 
-@onready var animation_player = $CanvasLayer/AnimationPlayer
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 	get_tree().paused = true
 	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	$CanvasLayer/Titolo.text = transition_text
+	$MarginContainer/VBoxContainer/Titolo.text = transition_text
 
 	match location_id:
 		GameManager.Location.TUTORIAL:
@@ -23,9 +23,9 @@ func _ready():
 		GameManager.Location.DUNGEON:
 			var chain_manager = DungeonManager.new()
 			chain_manager.chain_frames = dungeon_frames
-			$CanvasLayer.add_child(chain_manager)
-			chain_manager.spawn_chains($CanvasLayer)
-			chain_manager.spawn_sprites($CanvasLayer)
+			$MarginContainer.add_child(chain_manager)
+			chain_manager.spawn_chains($MarginContainer)
+			chain_manager.spawn_sprites($MarginContainer)
 		GameManager.Location.FOREST:
 			pass
 	

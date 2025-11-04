@@ -4,9 +4,9 @@ class_name BackgroundManager
 
 # --- Configurazioni ---
 @export var move_speed := Vector2(40, 40)
-@export var panel_size := Vector2(50, 50)
-@export var panel_count := 5
-@export var row_count := 5
+@export var panel_size := Vector2(40, 40)
+@export var panel_count := 4
+@export var row_count := 3
 @export var panel_generator: IBackgroundGenerator
 
 # --- Riferimenti scene ---
@@ -27,7 +27,7 @@ var elapsed_time := 0.0
 # Lifecycle
 # -------------------------------
 func _ready() -> void:
-	screen_size = DisplayServer.window_get_size()
+	screen_size = get_viewport().get_visible_rect().size
 	spacing_x = screen_size.x / panel_count
 	spacing_y = screen_size.y / row_count
 
@@ -88,13 +88,13 @@ func _update_panels(delta: float) -> void:
 func _update_panel_position(data: Dictionary) -> void:
 	var row = data["row"]
 	var col = data["col"]
-
-	var x = col * spacing_x + scroll_offset.x
-	var y = row * spacing_y + scroll_offset.y
-
+	
 	col = _wrap_coordinate(col, spacing_x, scroll_offset.x, screen_size.x, panel_count)
 	row = _wrap_coordinate(row, spacing_y, scroll_offset.y, screen_size.y, row_count)
-
+	
+	var x = col * spacing_x + scroll_offset.x
+	var y = row * spacing_y + scroll_offset.y
+	
 	if data["base_row"] % 2 == 1:
 		x += spacing_x / 2
 

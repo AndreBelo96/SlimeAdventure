@@ -28,9 +28,9 @@ func setup_languages():
 # -- Manage Muose -- #
 func setup_mouse():
 	buttons = [
-		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu,
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart,
 		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection,
-		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu,
 	]
 	
 	for i in range(buttons.size()):
@@ -50,9 +50,9 @@ func _on_button_pressed(index):
 func setup_selectors():
 	
 	selectors = [
-		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorR],
-		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorR],
 		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorR],
+		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorR],
+		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorR],
 	]
 	await get_tree().process_frame
 	
@@ -106,9 +106,9 @@ func _start_tween(group):
 func handle_selection(_current_selection):
 	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 	if (_current_selection == 0):
-		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		GameManager.restart_level()
 	elif (_current_selection == 1):
 		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
 	elif (_current_selection == 2):
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		GameManager.restart_level()
+		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

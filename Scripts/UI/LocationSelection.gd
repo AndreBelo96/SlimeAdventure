@@ -51,6 +51,7 @@ func setup_selectors():
 	
 	print("BASE POSITION LOCATION SELECTION: ", base_positions)
 
+# -- Mouse -> da fare a parte
 func setup_mouse():
 	buttons = [
 		$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Tutorial,
@@ -114,17 +115,26 @@ func _start_tween(group):
 		sel.set_meta("tween", tween)
 
 func handle_selection(_current_selection):
-	if (_current_selection == 0):
-		GameManager.location_selected = GameManager.Location.values()[_current_selection]
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
-		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
-	elif (_current_selection == 1):
-		GameManager.location_selected = GameManager.Location.values()[_current_selection]
-		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
-		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
-	elif (_current_selection == 2):
-		GameManager.location_selected = GameManager.Location.values()[_current_selection]
-		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
-	elif (_current_selection == 3):
+	
+	if (_current_selection == 3):
 		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+		return
+	
+	var location_name = GameManager.Location.keys()[_current_selection]
+	
+	if GameManager.is_location_locked(location_name):
+		#SoundManager.play_sfx("res://Assets/Audio/LockedBtn.wav") # TODO un suono diverso e setup tasto bloccato, disegni sopra lucchetto?
+		print("Location bloccata:", location_name)
+		return
+	
+	# Se è sbloccata, procedi
+	GameManager.location_selected = GameManager.Location.values()[_current_selection]
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	
+	if (_current_selection == 0):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
+	elif (_current_selection == 1):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
+	elif (_current_selection == 2):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")

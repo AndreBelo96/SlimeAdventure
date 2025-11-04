@@ -9,9 +9,9 @@ const REGION_RECT: Rect2 = Rect2(Vector2(36, 0), Vector2(18, 18))
 const BASE_TILE_SIZE: Vector2 = Vector2(18, 18)
 
 # Animazione
-const ANIMATION_SPEED: float = 4.0
+const ANIMATION_SPEED: float = 3.0
 const SCALE_MIN: float = 3.0
-const SCALE_RANGE: float = 2.0
+const SCALE_RANGE: float = 1.5
 const WAVE_OFFSET: float = 0.9
 
 # -------------------------------

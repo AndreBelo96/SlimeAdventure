@@ -96,4 +96,4 @@ region_rect = Rect2(529, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_tybu5")
-animation = &"DOWN"
+animation = &"UP"

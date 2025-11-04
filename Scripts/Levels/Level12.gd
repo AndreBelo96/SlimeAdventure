@@ -2,5 +2,5 @@ extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
-	set_current_level_number(11)
+	set_current_level_number(12)
 	victory_mode = VictoryMode.TILES

@@ -11,11 +11,20 @@ extends Node2D
 
 signal signal_victory
 
+enum VictoryMode {
+	TILES,
+	BOSS,
+	CUSTOM
+}
+
+var victory_mode: VictoryMode = VictoryMode.TILES
+
 var steps := 0
 var level_time := 0.0
 var tile_manager
 var exit_position: Vector2 = Vector2.ZERO
 var all_tiles_active := false
+var boss_defeated := false
 var time_running := true
 
 func _ready():
@@ -86,10 +95,35 @@ func _on_all_tiles_activated():
 	for tile in get_tree().get_nodes_in_group("activatables"):
 		tile.locked = true
 	
-	if exit_position == Vector2.ZERO:
-		player.on_player_won()
-	else:
-		tile_manager.activate_exit_particles(exit_position)
+	check_victory_condition()
+
+# ================================================================
+# ========= Funzione di controllo condizione di vittoria =========
+# ================================================================
+func check_victory_condition():
+	match victory_mode:
+		VictoryMode.TILES:
+			GameLogger.info("Vittoria classica → apertura uscita!")
+			if all_tiles_active:
+				if exit_position == Vector2.ZERO:
+					player.on_player_won()
+				else:
+					tile_manager.activate_exit_particles(exit_position)
+		
+		VictoryMode.BOSS:
+			if boss_defeated:
+				GameLogger.info("Boss sconfitto → apertura uscita!")
+				if exit_position == Vector2.ZERO:
+					player.on_player_won()
+				else:
+					tile_manager.activate_exit_particles(exit_position)
+		
+		VictoryMode.CUSTOM:
+			GameLogger.info("Controllo personalizzato da sottoclasse")
+
+func on_boss_defeated():
+	boss_defeated = true
+	check_victory_condition()
 
 func _on_player_died():
 	await get_tree().create_timer(1.5).timeout

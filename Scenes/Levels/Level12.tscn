@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=4 uid="uid://bbl1odosy4aiy"]
+[gd_scene load_steps=3 format=4 uid="uid://bbl1odosy4aiy"]
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_6q0dq"]
+[ext_resource type="Script" uid="uid://cur4qj6wnuxjl" path="res://Scripts/Levels/Level12.gd" id="2_ue8b6"]
 
 [node name="Level" instance=ExtResource("1_6q0dq")]
+script = ExtResource("2_ue8b6")
 
 [node name="LogicMapLayer" parent="." index="2"]
 tile_map_data = PackedByteArray("AAANAP7/AgAAAAAAAAD8//7/AgAAAAAAAAD8//3/AgAAAAAAAAD+//z/AgABAAAAAAD///z/AgABAAAAAAAAAPz/AgABAAAAAADx////AgABAAAAAAD///b/AgAJAAAAAAA=")

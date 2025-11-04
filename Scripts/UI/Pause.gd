@@ -55,12 +55,14 @@ func handle_selection(_index):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_pause_visible():
+	if !visible:
+		return
+	
 	await get_tree().process_frame
 	await get_tree().process_frame
-
+	
 	for group in selectors:
 		for sel in group:
 			base_positions[sel] = sel.position
-			print("BASE POS:", sel, base_positions[sel])
-
+	
 	set_current_selection(0)

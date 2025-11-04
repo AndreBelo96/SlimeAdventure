@@ -15,5 +15,5 @@ tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA
 [node name="TileMapLayer" parent="." index="4"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQABAP//AQAAAAAAAgACAAAAAQAAAAAAAgA=")
 
-[node name="NPCMapLayer" parent="YSort" index="5"]
+[node name="NPCMapLayer" parent="YSort" index="6"]
 tile_map_data = PackedByteArray("AAABAP//AQAAAAAAAQA=")

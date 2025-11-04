@@ -337,7 +337,7 @@ tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAA
 [node name="TileMapLayer" parent="." index="4"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQACAP7/AQAAAAAAAQACAP//AQAAAAAAAQACAAAAAQAAAAAAAQACAAEAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQAAAAAAAQAAAAAAAgA=")
 
-[node name="NPCMapLayer" parent="YSort" index="5"]
+[node name="NPCMapLayer" parent="YSort" index="6"]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAQA=")
 
 [node name="Animation" type="Node2D" parent="." index="7"]

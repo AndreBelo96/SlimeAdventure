@@ -3,6 +3,8 @@ extends "res://Scripts/Levels/LevelManager.gd"
 func _ready():
 	super._ready()
 	set_current_level_number(5)
+	victory_mode = VictoryMode.TILES
+	
 	await get_tree().create_timer(0.2).timeout
 	
 	var intro_dialogue = [

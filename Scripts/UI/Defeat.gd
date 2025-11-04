@@ -32,7 +32,6 @@ func handle_navigation(_event):
 	
 	set_current_selection(current_selection)
 
-
 func handle_selection(_index):
 	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 	if (_index == 0):

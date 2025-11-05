@@ -2,6 +2,7 @@ extends "res://Scripts/Tiles/TileBase.gd"
 
 var chiave := "A"
 var attivato := false
+var azione := "disattiva"
 
 func _ready():
 	super._ready()
@@ -13,4 +14,4 @@ func on_player_enter():
 	if not attivato:
 		attivato = true
 		$AnimatedTile.play("PRESSED")
-		emit_signal("tile_triggered", self, "switch", {"chiave": chiave})
+		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})

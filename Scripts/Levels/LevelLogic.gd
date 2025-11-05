@@ -29,16 +29,22 @@ func _on_tile_triggered(tile: TileBase, action: String, data: Dictionary) -> voi
 			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [tile.name, str(tile.is_active), str(tile.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
-			GameLogger.info("Switch tile=%s chiave=%s" % [tile.name, chiave])
-			_unlock_spikes(chiave)
+			var azione = data.get("azione", "disattiva")
+			GameLogger.info("Switch tile=%s chiave=%s azione=%s" % [tile.name, chiave, azione])
+			_handle_switch(chiave, azione)
 		_:
 			GameLogger.info("Tile %s azione=%s dati=%s" % [tile.name, action, str(data)])
 
-func _unlock_spikes(chiave: String):
+func _handle_switch(chiave: String, azione: String):
 	for child in tile_layer.get_children():
 		if child.is_in_group("spine") and child.chiave == chiave:
-			GameLogger.info("Spine sbloccate con chiave=%s" % chiave)
-			child.disattiva()
+			match azione:
+				"attiva":
+					child.attiva()
+					GameLogger.info("Spine attivate chiave = %s" % chiave)
+				"disattiva":
+					child.disattiva()
+					GameLogger.info("Spine disattivate chiave = %s" % chiave)
 
 func check_victory():
 	var level_manager = get_parent()

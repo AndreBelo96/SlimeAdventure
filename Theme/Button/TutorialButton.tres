@@ -3,7 +3,6 @@
 [ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_xvlvq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ocm36"]
-load_path = "res://.godot/imported/button_set.png-9a365a034381287448fec1d3dc07b66f.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvlvq"]
 content_margin_left = 10.0

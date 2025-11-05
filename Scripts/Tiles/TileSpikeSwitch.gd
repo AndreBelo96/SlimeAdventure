@@ -13,6 +13,10 @@ func disattiva():
 	attivo = false
 	$AnimatedTile.play("OFF")
 
+func attiva():
+	attivo = true
+	$AnimatedTile.play("ON")
+
 func on_player_enter():
 	if attivo:
 		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES, "chiave": chiave})

@@ -29,12 +29,18 @@ func assign_keys():
 			var tile_data = logic_map.get_cell_tile_data(cell)
 			if tile_data == null:
 				continue
+			
 			var chiave = tile_data.get_custom_data("chiave")
+			var azione = tile_data.get_custom_data("azione")
 			
 			for nodo in tile_layer.get_children():
 				if tile_layer.local_to_map(nodo.position) == cell:
 					if nodo.is_in_group("spine") or nodo.is_in_group("interruttori"):
 						nodo.chiave = chiave
+						nodo.azione = azione
+						
+						if nodo.has_method("set_initial_state"):
+							nodo.set_initial_state()
 
 func update_progress():
 	var total := 0

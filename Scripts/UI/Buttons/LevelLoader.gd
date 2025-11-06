@@ -1,7 +1,7 @@
 class_name LevelLoader
 extends Object
 
-const THEME_TUTORIAL := preload("res://Theme/Button/DungeonButton.tres")
+const THEME_TUTORIAL := preload("res://Theme/Button/TutorialButton.tres")
 const THEME_DUNGEON := preload("res://Theme/Button/DungeonButton.tres")
 const THEME_DEFAULT := preload("res://Theme/DefaultButton.tres")
 

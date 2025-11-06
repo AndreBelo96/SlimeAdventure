@@ -1,14 +1,13 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://bekimpr1d4j4a"]
 
-[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_xvlvq"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ocm36"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_4t21b"]
+[ext_resource type="Texture2D" uid="uid://d13buv6ufq7y7" path="res://Assets/Sprites/Buttons/button_set.png" id="2_dtrx1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvlvq"]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 15.0
-texture = SubResource("CompressedTexture2D_ocm36")
+texture = ExtResource("2_dtrx1")
 expand_margin_top = 3.0
 region_rect = Rect2(9, 6, 62, 32)
 
@@ -16,7 +15,7 @@ region_rect = Rect2(9, 6, 62, 32)
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 15.0
-texture = SubResource("CompressedTexture2D_ocm36")
+texture = ExtResource("2_dtrx1")
 expand_margin_top = 3.0
 region_rect = Rect2(9, 6, 62, 32)
 
@@ -39,8 +38,9 @@ Button/constants/h_separation = 0
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("1_xvlvq")
+Button/fonts/font = ExtResource("1_4t21b")
 Button/styles/disabled = null
 Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxTexture_xvlvq")
 Button/styles/normal = SubResource("StyleBoxTexture_q47c0")
+Label/fonts/font = ExtResource("1_4t21b")

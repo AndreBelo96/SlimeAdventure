@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://qfo2dhin8psy"]
+
+[ext_resource type="Script" uid="uid://b74hmnfqtmkqu" path="res://Scripts/Enemy/Boss/BaseBoss.gd" id="1_qh0r3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_evbvj"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"BREATH",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}]
+
+[node name="BaseBoss" type="Node2D"]
+script = ExtResource("1_qh0r3")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_evbvj")
+animation = &"BREATH"

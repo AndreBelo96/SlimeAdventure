@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://dki0tv4cy7hx5"]
 
-[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_1euxi"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_1euxi"]
 
 [resource]
 default_font = ExtResource("1_1euxi")

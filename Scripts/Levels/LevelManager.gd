@@ -26,6 +26,7 @@ var exit_position: Vector2 = Vector2.ZERO
 var all_tiles_active := false
 var boss_defeated := false
 var time_running := true
+var is_boss_level := false
 
 func _ready():
 	GameLogger.info("Inizio livello %d" % GameManager.current_level)
@@ -36,6 +37,7 @@ func _ready():
 	dark_overlay.visible = GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level)
 	
 	setup_background()
+	setup_hud()
 	
 	player.connect("player_won", Callable(self, "_on_player_won"))
 	player.connect("steps_changed", Callable(self, "_on_steps_changed"))
@@ -74,6 +76,13 @@ func setup_background():
 			generator_instance = PanelBackgroundGenerator.new()
 	
 	background_manager.initialize(generator_instance)
+
+func setup_hud():
+	hud_manager.setup_base_level()
+	
+	if is_boss_level:
+		hud_manager.setup_boss_level()
+
 
 func toggle_pause():
 	get_tree().paused = not get_tree().paused

@@ -1,6 +1,7 @@
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
+	is_boss_level = true
 	super._ready()
 	set_current_level_number(13)
 	victory_mode = VictoryMode.BOSS

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://dysj5yr4onuf8"]
+
+[ext_resource type="Script" uid="uid://1dne7xk7mqos" path="res://Scripts/UI/LevelHUDManager.gd" id="1_6d7lo"]
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_ks3ap"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6d7lo"]
+load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6d7lo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="TimeLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("1_ks3ap")
+text = "Tempo : 0"
+horizontal_alignment = 2
+
+[node name="StepsLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("1_ks3ap")
+text = "Passi: 0"
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+max_value = 3.0
+step = 1.0
+value = 3.0
+rounded = true
+show_percentage = false
+
+[node name="TileToActive" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("1_ks3ap")
+text = "12/16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(413.25, 316.125)
+scale = Vector2(0.851566, 1.11979)
+texture = SubResource("CompressedTexture2D_6d7lo")
+region_enabled = true
+region_rect = Rect2(397, 1, 64, 48)

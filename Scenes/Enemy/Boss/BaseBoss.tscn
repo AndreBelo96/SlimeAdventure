@@ -18,7 +18,7 @@ animations = [{
 [node name="BaseBoss" type="Node2D"]
 script = ExtResource("1_qh0r3")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="."]
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_evbvj")

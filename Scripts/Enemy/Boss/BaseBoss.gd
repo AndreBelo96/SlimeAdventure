@@ -3,12 +3,17 @@ class_name EnemyBase
 extends Node2D
 
 var vita: int
-var posizione_tile: Vector2i  # coordinata griglia
-@onready var tilemap = get_node("/root/Game/TileMap")
+var posizione_tile: Vector2i
 
-func move_to(_target_tile: Vector2i):
-	# Calcolo il percorso dal tile corrente a target_tile (es. usando A*), poi mi sposto di un passo.
-	# La conversione da tile a posizione reale si fa con tilemap.map_to_world().
+@export var tilemap: TileMapLayer
+@onready var animation : AnimatedSprite2D = $Animation
+
+func snap_to_tile_center(coords: Vector2i):
+	var tile_local = tilemap.map_to_local(coords)
+	var tile_global = tilemap.to_global(tile_local)
+	global_position = tile_global - ($Center.position)
+
+func breath():
 	pass
 
 func take_damage(dmg: int):

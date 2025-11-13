@@ -7,6 +7,8 @@ var _breath_timer := 0.0
 var _waiting_time := 0.0
 var _is_breathing := false
 
+@onready var level_logic = $LevelLogic
+
 func _ready():
 	vita = 3
 	posizione_tile = Vector2i(-1, -8)
@@ -25,19 +27,19 @@ func _on_turn():
 	if is_adjacent_to_slime():
 		carica_attacco()
 	else:
-		muovi_verso_slime()
+		pass
+		#move_to()
 
 func is_adjacent_to_slime() -> bool:
-	return true
+	return false
 	#return slime.posizione_tile.distance_to(posizione_tile) == 1
 
-func muovi_verso_slime():
-	pass
-	#var target = calculate_next_tile_towards(slime.posizione_tile)
-	#move_to(target)
+func move_to(tile: Vector2i):
+	posizione_tile = tile
+	snap_to_tile_center(tile)
 
-#func calculate_next_tile_towards(slime_tile: Vector2i) -> Vector2i:
-	pass
+	if level_logic:
+		level_logic.apply_tile_effect_to_enemy(self, tile)
 
 func carica_attacco():
 	pass

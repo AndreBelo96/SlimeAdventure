@@ -8,6 +8,15 @@ func _ready():
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
 
+func apply_tile_effect_to_enemy(enemy: EnemyBase, tile: Vector2i):
+	var tile_data = tile_layer.get_cell_tile_data(tile)
+	if tile_data == null:
+		return
+	var effect = tile_data.get_custom_data("effect")
+	match effect:
+		"spike":
+			enemy.receive_hit("tile_spike")
+
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
 		if child is TileBase:

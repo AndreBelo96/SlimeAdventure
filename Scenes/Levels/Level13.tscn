@@ -20,5 +20,5 @@ tile_map_data = PackedByteArray("AAD6//3/AAACAAEAAgD6//z/AAABAAEAAgD6//v/AAABAAE
 tile_map_data = PackedByteArray("AAD9//n/AAAAAAAABgABAPn/AAAAAAAABgA=")
 
 [node name="DungeonBoss" parent="." index="9" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
-position = Vector2(257, -122)
+position = Vector2(255, -120)
 tilemap = NodePath("../TileMapLayer")

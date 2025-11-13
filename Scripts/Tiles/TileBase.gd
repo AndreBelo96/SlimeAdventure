@@ -17,6 +17,9 @@ func _ready():
 func on_player_enter():
 	emit_signal("tile_triggered", self, "none", {})
 
+func on_enemy_enter(enemy: EnemyBase):
+	pass
+
 func can_enter() -> bool:
 	return true
 

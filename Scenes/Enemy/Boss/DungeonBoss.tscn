@@ -104,8 +104,8 @@ animations = [{
 [node name="DungeonBoss" instance=ExtResource("1_nqbnp")]
 script = ExtResource("2_5gm8k")
 
-[node name="Marker2D" parent="." index="0"]
-position = Vector2(-1, 27)
+[node name="Center" parent="." index="0"]
+position = Vector2(0, 26)
 
 [node name="Animation" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_4kcxs")

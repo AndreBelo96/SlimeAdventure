@@ -102,11 +102,7 @@ func _animate_move_to(tile: Vector2i) -> void:
 	_is_moving = false
 
 func attack():
-	print("DAMAGE TO SLIME")
-	emit_signal("tile_triggered", self, "death", {
-		"death_type": GameManager.Death.ENEMY
-	})
-	pass
+	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
 
 ##################
 ## -- Breath -- ##

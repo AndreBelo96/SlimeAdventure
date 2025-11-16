@@ -5,6 +5,7 @@ var attivo := true
 var azione := "disattiva"
 
 func _ready():
+	print("TileSpikes ready:", name, "script:", get_script())
 	super._ready()
 	add_to_group("spine")
 	set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
@@ -35,3 +36,7 @@ func attiva():
 func on_player_enter():
 	if attivo:
 		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES, "chiave": chiave})
+
+func on_enemy_enter(_enemy: EnemyBase):
+	if attivo:
+		_enemy.receive_hit("damage")

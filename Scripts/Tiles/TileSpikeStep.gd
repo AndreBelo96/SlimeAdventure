@@ -32,3 +32,7 @@ func _lower_spikes():
 func on_player_enter():
 	if (isUp):
 		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES})
+
+func on_enemy_enter(_enemy: EnemyBase):
+	if (isUp):
+		_enemy.receive_hit("damage")

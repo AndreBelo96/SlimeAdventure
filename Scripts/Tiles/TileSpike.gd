@@ -7,3 +7,6 @@ func _ready():
 
 func on_player_enter():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES})
+
+func on_enemy_enter(_enemy: EnemyBase):
+	_enemy.receive_hit("damage")

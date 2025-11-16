@@ -35,6 +35,7 @@ var input_enabled := true
 var can_move := true
 
 func _ready():
+	add_to_group("player")
 	tile_map_layer = get_required_node(tile_map_layer_path, "tile_map_layer")
 	pickup_map_layer = get_required_node(pickup_map_layer_path, "pickup_map_layer")
 	movement_logic_map_layer = get_required_node(movement_logic_map_layer_path, "movement_logic_map_layer")

@@ -7,15 +7,22 @@ extends Node
 func _ready():
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
+	add_to_group("level_logic")
 
-func apply_tile_effect_to_enemy(enemy: EnemyBase, tile: Vector2i):
-	var tile_data = tile_layer.get_cell_tile_data(tile)
-	if tile_data == null:
-		return
-	var effect = tile_data.get_custom_data("effect")
-	match effect:
-		"spike":
-			enemy.receive_hit("tile_spike")
+# ------ Enemy ------ #
+func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
+	var tile = get_tile_under_enemy(pos)
+	if tile and tile.has_method("on_enemy_enter"):
+		tile.on_enemy_enter(enemy)
+
+func get_tile_under_enemy(pos: Vector2i) -> TileBase:
+	var target_world_pos = tile_layer.to_global(tile_layer.map_to_local(pos))
+	for child in tile_layer.get_children():
+		if child is TileBase:
+			if child.global_position.distance_to(target_world_pos) < 1.0:
+				return child
+	
+	return null
 
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
@@ -28,21 +35,21 @@ func _connect_player_signal():
 	if level_manager:
 		level_manager.connect("signal_victory", Callable(self, "check_victory"))
 
-func _on_tile_triggered(tile: TileBase, action: String, data: Dictionary) -> void:
+func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 	match action:
 		"death":
-			GameLogger.warn("Morte: tipo=%s tile=%s pos=%s" % [str(data.get("death_type", 0)), tile.name, str(tile.global_position)])
+			GameLogger.warn("Morte: tipo=%s sender=%s pos=%s" % [str(data.get("death_type", 0)), sender.name, str(sender.global_position)])
 			player.on_player_died(data.get("death_type", 0))
 		"activate":
-			tile.is_active = data.get("is_active", true)
-			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [tile.name, str(tile.is_active), str(tile.global_position)])
+			sender.is_active = data.get("is_active", true)
+			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [sender.name, str(sender.is_active), str(sender.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
 			var azione = data.get("azione", "disattiva")
-			GameLogger.info("Switch tile=%s chiave=%s azione=%s" % [tile.name, chiave, azione])
+			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
 			_handle_switch(chiave, azione)
 		_:
-			GameLogger.info("Tile %s azione=%s dati=%s" % [tile.name, action, str(data)])
+			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
 
 func _handle_switch(chiave: String, azione: String):
 	for child in tile_layer.get_children():

@@ -3,6 +3,7 @@ extends Node2D
 class_name TileBase
 
 @onready var sprite := $Tile
+var tile_pos: Vector2i = Vector2i.ZERO
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
@@ -17,7 +18,7 @@ func _ready():
 func on_player_enter():
 	emit_signal("tile_triggered", self, "none", {})
 
-func on_enemy_enter(enemy: EnemyBase):
+func on_enemy_enter(_enemy: EnemyBase):
 	pass
 
 func can_enter() -> bool:

@@ -6,7 +6,6 @@ extends Node2D
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var dark_overlay = $DarkOverlay
-@onready var tile_label = $CanvasHUD/HUD/TileToActive
 @onready var background_manager: BackgroundManager = $BackgroundManager
 
 signal signal_victory
@@ -31,6 +30,7 @@ var is_boss_level := false
 func _ready():
 	GameLogger.info("Inizio livello %d" % GameManager.current_level)
 	$MovementLogicMapLayer.visible = false
+	$MovementLogicMapLayer.add_to_group("movement_logic")
 	pause_menu.visible = false
 	pause_menu.hide()
 	
@@ -81,7 +81,9 @@ func setup_hud():
 	hud_manager.setup_base_level()
 	
 	if is_boss_level:
-		hud_manager.setup_boss_level()
+		var boss = get_tree().get_first_node_in_group("boss")
+		var boss_hp = boss.vita if boss else 3
+		hud_manager.setup_boss_level(boss_hp)
 
 
 func toggle_pause():

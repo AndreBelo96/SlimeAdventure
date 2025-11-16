@@ -8,6 +8,9 @@ class_name LevelHUDManager
 @onready var tile_label = $MarginContainer/TileToActive
 @onready var boss_life_bar = $MarginContainer/ProgressBar
 
+func _ready():
+	add_to_group("hud")
+
 func update_steps(count: int):
 	steps_label.text = "Passi: %d" % count
 
@@ -20,10 +23,12 @@ func update_tile_label(activated: int, total: int):
 func update_progress_bar(dmg: int):
 	boss_life_bar.value -= dmg
 
-func setup_boss_level():
+func setup_boss_level(boss_max_hp: int):
 	tile_label.visible = false
 	$MarginContainer/Sprite2D.visible = false
 	boss_life_bar.visible = true
+	boss_life_bar.max_value = boss_max_hp
+	boss_life_bar.value = boss_max_hp
 
 func setup_base_level():
 	tile_label.visible = true

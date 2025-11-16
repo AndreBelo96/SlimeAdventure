@@ -70,6 +70,13 @@ var last_attempt := {
 	"is_record": false
 }
 
+const DIRECTION_BITS = {
+	Vector2i(1, 0): 1,
+	Vector2i(-1, 0): 2,
+	Vector2i(0, 1): 4,
+	Vector2i(0, -1): 8
+}
+
 func _ready():
 	# Load info
 	var _loaded = SaveManager.load_progress()

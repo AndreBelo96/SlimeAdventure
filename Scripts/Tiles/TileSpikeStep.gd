@@ -24,10 +24,12 @@ func _on_player_step(step_count: int):
 func _raise_spikes():
 	isUp = true
 	animation.play("UP")
+	peso = 5
 
 func _lower_spikes():
 	isUp = false
 	animation.play("DOWN")
+	peso = 1
 
 func on_player_enter():
 	if (isUp):

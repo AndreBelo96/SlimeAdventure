@@ -3,6 +3,7 @@ extends Node
 
 @export var player: Node2D
 @export var tile_layer: Node2D
+@export var boss: EnemyBase
 
 func _ready():
 	call_deferred("_connect_all_tiles")
@@ -24,11 +25,21 @@ func get_tile_under_enemy(pos: Vector2i) -> TileBase:
 	
 	return null
 
+func _on_tile_state_changed(tile: TileBase, new_state: String):
+	var tile_pos = tile_layer.local_to_map(tile.position)
+	
+	if boss.posizione_tile == tile_pos:
+		tile.on_enemy_enter(boss)
+
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
 		if child is TileBase:
 			if not child.is_connected("tile_triggered", Callable(self, "_on_tile_triggered")):
 				child.connect("tile_triggered", Callable(self, "_on_tile_triggered"))
+			
+			# Se non è già connesso il cambio di stato
+			if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
+				child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
 
 func _connect_player_signal():
 	var level_manager = get_parent()

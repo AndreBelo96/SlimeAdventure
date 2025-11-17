@@ -28,10 +28,14 @@ func set_initial_frame(anim_name: String):
 func disattiva():
 	attivo = false
 	$AnimatedTile.play("OFF")
+	peso = 1
+	emit_signal("state_changed", self, "OFF")
 
 func attiva():
 	attivo = true
 	$AnimatedTile.play("ON")
+	peso = 5
+	emit_signal("state_changed", self, "ON")
 
 func on_player_enter():
 	if attivo:

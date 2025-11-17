@@ -4,8 +4,10 @@ class_name TileBase
 
 @onready var sprite := $Tile
 var tile_pos: Vector2i = Vector2i.ZERO
+var peso: int = 1
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
+signal state_changed(tile: TileBase, new_state: String)
 
 var is_active := false
 const TILESET := preload("res://Assets/Sprites/Tiles/Tileset.png")

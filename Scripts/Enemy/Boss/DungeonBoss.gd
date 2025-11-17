@@ -13,7 +13,8 @@ const STEPS_TO_TRIGGER = 2
 
 
 @onready var slime := get_tree().get_first_node_in_group("player")
-@onready var movement_map := get_tree().get_first_node_in_group("movement_logic")
+@onready var movement_map :=  $"../MovementLogicMapLayer"
+@onready var visual_map = $"../TileMapLayer"
 var pathfinder: Pathfinder
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
@@ -37,13 +38,11 @@ func _ensure_pathfinder() -> bool:
 	if pathfinder != null:
 		return true
 
-	if movement_map == null:
-		movement_map = get_tree().get_first_node_in_group("movement_logic")
-
-	if movement_map == null:
+	if movement_map == null or visual_map == null:
+		push_error("Boss: movement_map or visual_map is not set!")
 		return false
 
-	pathfinder = Pathfinder.new(movement_map, GameManager.DIRECTION_BITS)
+	pathfinder = Pathfinder.new(movement_map, visual_map, GameManager.DIRECTION_BITS)
 	return true
 
 func _on_slime_step(step_count: int):
@@ -51,6 +50,10 @@ func _on_slime_step(step_count: int):
 	
 	if step_counter == 0:
 		do_turn()
+
+func _apply_tile_effect_here():
+	if level_logic:
+		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
 
 func do_turn():
 	if _is_moving:
@@ -63,7 +66,10 @@ func do_turn():
 		attack()
 	else:
 		var next_tile = find_next_tile()
-		await move_to(next_tile)
+		if next_tile != posizione_tile:
+			await move_to(next_tile)
+	
+	_apply_tile_effect_here()
 
 func find_next_tile() -> Vector2i:
 	return pathfinder.get_next_step(posizione_tile, slime.movement_handler.grid_position)
@@ -79,12 +85,8 @@ func is_adjacent_to_slime() -> bool:
 
 func move_to(next_tile: Vector2i):
 	await _animate_move_to(next_tile)
-
 	posizione_tile = next_tile
 	snap_to_tile_center(next_tile)
-
-	if level_logic:
-		level_logic.apply_tile_effect_to_enemy(self, next_tile)
 
 func _animate_move_to(tile: Vector2i) -> void:
 	_is_moving = true

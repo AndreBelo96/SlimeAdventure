@@ -11,10 +11,12 @@ const DIRS := [
 ]
 
 var movement_map: TileMapLayer
+var visual_map: TileMapLayer
 var DIRECTION_BITS: Dictionary
 
-func _init(_movement_map: TileMapLayer, _direction_bits: Dictionary):
+func _init(_movement_map: TileMapLayer, _visual_map: TileMapLayer, _direction_bits: Dictionary):
 	movement_map = _movement_map
+	visual_map = _visual_map
 	DIRECTION_BITS = _direction_bits
 
 # --------------------------------------------------
@@ -44,7 +46,7 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 
 	while open.size() > 0:
 		var current: Vector2i = get_lowest_f(open)
-		var current_data = open[current]  # Salviamo i dati prima della rimozione
+		var current_data = open[current]
 
 		if current == goal:
 			return reconstruct_path(came_from, current)
@@ -55,16 +57,14 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 		for dir in DIRS:
 			var neighbor = current + dir
 
-			# Già esplorato
 			if closed.has(neighbor):
 				continue
 
-			# Non posso muovermi in quella direzione
 			if not can_move(current, neighbor):
 				continue
 
-			# Usa current_data invece di open[current] dopo la cancellazione
-			var tentative_g = current_data["g"] + 1
+			var tile_cost = get_tile_cost(neighbor)
+			var tentative_g = current_data["g"] + tile_cost
 
 			if not open.has(neighbor) or tentative_g < open[neighbor]["g"]:
 				came_from[neighbor] = current
@@ -103,6 +103,31 @@ func can_move(from: Vector2i, to: Vector2i) -> bool:
 # --------------------------------------------------
 # Funzioni di supporto per A*
 # --------------------------------------------------
+func get_tile_cost(pos: Vector2i) -> int:
+	if visual_map == null:
+		return 999
+	
+	var tile_instance = get_tile_instance_at(pos)
+	
+	if tile_instance == null:
+		return 999
+	
+	if "peso" in tile_instance:
+		return tile_instance.peso
+	else:
+		return 1
+
+func get_tile_instance_at(pos: Vector2i) -> TileBase:
+	if visual_map == null:
+		return null
+
+	var world_pos = visual_map.map_to_local(pos) + visual_map.global_position
+	for child in visual_map.get_children():
+		if child is TileBase:
+			if child.global_position.distance_to(world_pos) < 1.0:
+				return child
+	return null
+
 func heuristic(a: Vector2i, b: Vector2i) -> int:
 	return abs(a.x - b.x) + abs(a.y - b.y)
 

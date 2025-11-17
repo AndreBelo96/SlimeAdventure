@@ -29,7 +29,6 @@ func disattiva():
 	attivo = false
 	$AnimatedTile.play("OFF")
 	peso = 1
-	emit_signal("state_changed", self, "OFF")
 
 func attiva():
 	attivo = true

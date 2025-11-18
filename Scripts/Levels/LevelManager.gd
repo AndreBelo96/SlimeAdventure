@@ -5,10 +5,9 @@ extends Node2D
 @onready var hud_manager: LevelHUDManager = $CanvasHUD/HUD
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
+@onready var level_logic: Node = $LevelLogic
 @onready var dark_overlay = $DarkOverlay
 @onready var background_manager: BackgroundManager = $BackgroundManager
-
-signal signal_victory
 
 enum VictoryMode {
 	TILES,
@@ -85,7 +84,6 @@ func setup_hud():
 		var boss_hp = boss.vita if boss else 3
 		hud_manager.setup_boss_level(boss_hp)
 
-
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
@@ -108,33 +106,11 @@ func _on_all_tiles_activated():
 	
 	check_victory_condition()
 
-# ================================================================
-# ========= Funzione di controllo condizione di vittoria =========
-# ================================================================
-func check_victory_condition():
-	match victory_mode:
-		VictoryMode.TILES:
-			GameLogger.info("Vittoria classica → apertura uscita!")
-			if all_tiles_active:
-				if exit_position == Vector2.ZERO:
-					player.on_player_won()
-				else:
-					tile_manager.activate_exit_particles(exit_position)
-		
-		VictoryMode.BOSS:
-			if boss_defeated:
-				GameLogger.info("Boss sconfitto → apertura uscita!")
-				if exit_position == Vector2.ZERO:
-					player.on_player_won()
-				else:
-					tile_manager.activate_exit_particles(exit_position)
-		
-		VictoryMode.CUSTOM:
-			GameLogger.info("Controllo personalizzato da sottoclasse")
-
-func on_boss_defeated():
-	boss_defeated = true
-	check_victory_condition()
+func _on_steps_changed(new_count: int) -> void:
+	steps = new_count
+	hud_manager.update_steps(steps)
+	level_logic.on_player_step(steps)
+	check_victory()
 
 func _on_player_died():
 	await get_tree().create_timer(1.5).timeout
@@ -142,6 +118,52 @@ func _on_player_died():
 	GameManager.current_time = level_time
 	GameManager.end_level(false)
 	GameManager.change_scene_to_defeat()
+
+# ================================================================
+# ========= Funzione di controllo condizione di vittoria =========
+# ================================================================
+func on_boss_defeated():
+	boss_defeated = true
+	check_victory_condition()
+
+func check_victory_condition():
+	match victory_mode:
+		VictoryMode.TILES:
+			if all_tiles_active:
+				_open_exit()
+		
+		VictoryMode.BOSS:
+			if boss_defeated:
+				_open_exit()
+		
+		VictoryMode.CUSTOM:
+			GameLogger.info("Controllo personalizzato da sottoclasse")
+
+func _open_exit():
+	GameLogger.info("Uscita sbloccata!")
+	
+	if exit_position == Vector2.ZERO:
+		# Livelli senza uscita fisica
+		player.on_player_won()
+		return
+	
+	tile_manager.activate_exit_particles(exit_position)
+
+func check_victory():
+	if exit_position == Vector2.ZERO:
+		return
+	
+	if not all_tiles_active and victory_mode == VictoryMode.TILES:
+		return
+	
+	if not boss_defeated and victory_mode == VictoryMode.BOSS:
+		return
+	
+	var player_tile = tile_manager.get_coords_from_global_position(player.position)
+	var exit_tile = Vector2i(exit_position)
+	
+	if player_tile == exit_tile:
+		player.on_player_won()
 
 func _on_player_won():
 	GameManager.current_steps = steps
@@ -152,11 +174,6 @@ func _on_player_won():
 	GameManager.end_level(true)
 	await get_tree().create_timer(1).timeout
 	GameManager.change_scene_to_victory()
-
-func _on_steps_changed(new_count: int) -> void:
-	steps = new_count
-	hud_manager.update_steps(steps)
-	emit_signal("signal_victory")
 
 # -- UTILS -- #
 func set_current_level_number(current_level: int):

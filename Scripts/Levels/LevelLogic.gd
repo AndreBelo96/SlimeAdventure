@@ -5,6 +5,8 @@ extends Node
 @export var tile_layer: Node2D
 @export var boss: EnemyBase
 
+signal global_step(step_count: int)
+
 func _ready():
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
@@ -41,11 +43,6 @@ func _connect_all_tiles() -> void:
 			if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
 				child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
 
-func _connect_player_signal():
-	var level_manager = get_parent()
-	if level_manager:
-		level_manager.connect("signal_victory", Callable(self, "check_victory"))
-
 func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 	match action:
 		"death":
@@ -73,17 +70,5 @@ func _handle_switch(chiave: String, azione: String):
 					child.disattiva()
 					GameLogger.info("Spine disattivate chiave = %s" % chiave)
 
-func check_victory():
-	var level_manager = get_parent()
-	
-	if player is not Node2D or not level_manager or level_manager.exit_position == Vector2.ZERO:
-		return
-	
-	var player_tile = get_coords_from_global_position(player.position)
-	var exit_tile = Vector2i(level_manager.exit_position)
-	
-	if player_tile == exit_tile and level_manager.all_tiles_active:
-		player.on_player_won()
-
-func get_coords_from_global_position(global_pos: Vector2) -> Vector2i:
-	return tile_layer.local_to_map(tile_layer.to_local(global_pos))
+func on_player_step(step_count: int):
+	emit_signal("global_step", step_count)

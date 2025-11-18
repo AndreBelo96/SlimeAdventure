@@ -66,6 +66,9 @@ func get_exit_position() -> Vector2:
 				return cell
 	return Vector2.ZERO
 
+func get_coords_from_global_position(global_pos: Vector2) -> Vector2i:
+	return tile_layer.local_to_map(tile_layer.to_local(global_pos))
+
 func activate_exit_particles(exit_cell: Vector2i):
 	for nodo in tile_layer.get_children():
 		if tile_layer.local_to_map(nodo.position) == exit_cell:

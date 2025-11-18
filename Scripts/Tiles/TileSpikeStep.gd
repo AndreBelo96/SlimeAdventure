@@ -10,15 +10,15 @@ func _ready():
 	super._ready()
 	set_region_from_coords(GameManager.SPIKE_STEP_TILE_POSITION, GameManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
-	# Connetti al segnale steps_changed del player
-	var player = get_parent().get_parent().get_node("YSort").get_node("Player")
-	player.steps_changed.connect(_on_player_step)
+	# Connetti questa tile al segnale globale dei passi
+	var level_logic = get_tree().get_first_node_in_group("level_logic")
+	if level_logic:
+		level_logic.global_step.connect(_on_global_step)
 
-func _on_player_step(step_count: int):
-	step_counter = step_count % STEPS_TO_TRIGGER
-	if step_counter == 0:
+func _on_global_step(step_count: int):
+	if step_count % STEPS_TO_TRIGGER == 0:
 		_raise_spikes()
-	elif step_counter == 1 && isUp:
+	elif isUp:
 		_lower_spikes()
 
 func _raise_spikes():

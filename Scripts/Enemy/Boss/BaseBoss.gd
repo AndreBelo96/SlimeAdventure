@@ -10,7 +10,7 @@ var posizione_tile: Vector2i
 @onready var level_logic = get_tree().get_first_node_in_group("level_logic")
 
 func _ready():
-	add_to_group("boss")
+	add_to_group("enemy")
 	if level_logic:
 		if not is_connected("tile_triggered", Callable(level_logic, "_on_tile_triggered")):
 			connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
@@ -19,6 +19,12 @@ func _ready():
 func snap_to_tile_center(coords: Vector2i):
 	var tile_pos = tilemap.map_to_local(coords)
 	global_position = tile_pos - $Center.position
+
+func should_move(_step_count: int) -> bool:
+	return true
+
+func take_turn():
+	pass
 
 func breath():
 	pass

@@ -25,8 +25,6 @@ func _ready():
 	posizione_tile = Vector2i(-1, -8)
 	snap_to_tile_center(posizione_tile)
 	_reset_breath_timer()
-	
-	slime.steps_changed.connect(_on_slime_step)
 
 func _process(delta: float) -> void:
 	_breath_timer += delta
@@ -45,21 +43,18 @@ func _ensure_pathfinder() -> bool:
 	pathfinder = Pathfinder.new(movement_map, visual_map, GameManager.DIRECTION_BITS)
 	return true
 
-func _on_slime_step(step_count: int):
-	step_counter = step_count % STEPS_TO_TRIGGER
-	
-	if step_counter == 0:
-		do_turn()
+func should_move(_step_count: int) -> bool:
+	return _step_count % STEPS_TO_TRIGGER == 0
 
 func _apply_tile_effect_here():
 	if level_logic:
 		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
 
-func do_turn():
-	if _is_moving:
-		return
+func take_turn():
+	_pathfind_and_move()
 
-	if not _ensure_pathfinder():
+func _pathfind_and_move():
+	if _is_moving:
 		return
 
 	if is_adjacent_to_slime():
@@ -72,6 +67,9 @@ func do_turn():
 	_apply_tile_effect_here()
 
 func find_next_tile() -> Vector2i:
+	if not _ensure_pathfinder():
+		return Vector2i.ZERO
+	
 	return pathfinder.get_next_step(posizione_tile, slime.movement_handler.grid_position)
 
 func is_adjacent_to_slime() -> bool:

@@ -72,3 +72,6 @@ func _handle_switch(chiave: String, azione: String):
 
 func on_player_step(step_count: int):
 	emit_signal("global_step", step_count)
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy.should_move(step_count):
+			enemy.take_turn()

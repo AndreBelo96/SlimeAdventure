@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://d2k5qrvl24rpk"]
 
 [ext_resource type="PackedScene" uid="uid://cdlw61vwbucp" path="res://Scenes/Decorations/Interactive/Torches/TorchBase.tscn" id="1_m0a6g"]
-[ext_resource type="Texture2D" uid="uid://gddlaq570443" path="res://Assets/Sprites/Decorations/set_blazier.png" id="2_e8s5a"]
+[ext_resource type="Texture2D" uid="uid://skqg5qrk2vh4" path="res://Assets/Sprites/Decorations/set_blazier.png" id="2_e8s5a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ymag"]
 atlas = ExtResource("2_e8s5a")

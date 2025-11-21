@@ -26,6 +26,9 @@ func should_move(_step_count: int) -> bool:
 func take_turn():
 	pass
 
+func on_step(_step_count: int):
+	pass
+
 func breath():
 	pass
 

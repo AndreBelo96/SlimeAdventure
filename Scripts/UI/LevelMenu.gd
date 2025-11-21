@@ -96,7 +96,7 @@ func handle_selection(_index):
 	var info = loader.get_level_data_for_location(GameManager.location_selected)[_index]
 	_on_level_button_pressed(info.path, info.sound)
 
-func _on_level_button_pressed(path: String, sound: String):
+func _on_level_button_pressed(path: String, _sound: String):
 	var level_num = loader.extract_level_number(path)
 	GameManager.current_level = level_num
 

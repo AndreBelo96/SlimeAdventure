@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dad4wb7dn63x6" path="res://Scripts/UI/Defeat.gd" id="1_ev520"]
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_64brn"]
-[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_64brn"]
-[ext_resource type="Texture2D" uid="uid://bt0auom2br7y0" path="res://Assets/Sprites/Player/SlimeSet.png" id="3_temoj"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_64brn"]
+[ext_resource type="Texture2D" uid="uid://c38wf3qncasg5" path="res://Assets/Sprites/Player/SlimeSet.png" id="3_temoj"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="4_ca67j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w4hrg"]

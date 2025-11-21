@@ -70,7 +70,6 @@ func _unhandled_input(event):
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
-	print("Posizione globale player: ", global_position)
 	steps += 1
 	emit_signal("steps_changed", steps)
 	interaction_handler.check_tile()

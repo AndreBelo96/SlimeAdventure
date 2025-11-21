@@ -15,3 +15,9 @@ func on_player_enter():
 		attivato = true
 		$AnimatedTile.play("PRESSED")
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
+
+func reset_switch():
+	if attivato:
+		attivato = false
+		$AnimatedTile.play("UNPRESSED")
+		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": "disattiva"}) #TODO da capire

@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://b0cp5c2mgydcd"]
 
 [ext_resource type="Script" uid="uid://b4q1yh6hp0330" path="res://Scripts/Decorations/Interactive/Doors/PortaBase.gd" id="1_503en"]
-[ext_resource type="Texture2D" uid="uid://c2yaouh3300um" path="res://Assets/Sprites/Decorations/set_decorazioni.png" id="2_8agp5"]
+[ext_resource type="Texture2D" uid="uid://dypev18jrkm3l" path="res://Assets/Sprites/Decorations/set_decorazioni.png" id="2_8agp5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r3gd"]
 atlas = ExtResource("2_8agp5")

@@ -5,6 +5,9 @@ extends Node
 @export var tile_layer: Node2D
 @export var boss: EnemyBase
 
+var boss_hit_by_switch := false
+var switch_waiting_reset := false
+
 signal global_step(step_count: int)
 
 func _ready():
@@ -27,11 +30,17 @@ func get_tile_under_enemy(pos: Vector2i) -> TileBase:
 	
 	return null
 
-func _on_tile_state_changed(tile: TileBase, new_state: String):
+func _on_tile_state_changed(tile: TileBase, _new_state: String):
 	var tile_pos = tile_layer.local_to_map(tile.position)
 	
-	if boss.posizione_tile == tile_pos:
-		tile.on_enemy_enter(boss)
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy._is_moving:
+			continue
+		
+		if enemy.posizione_tile == tile_pos:
+			print("DANNO SUBITO")
+			tile.on_enemy_enter(enemy)
+			boss_hit_by_switch = true
 
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
@@ -53,13 +62,21 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [sender.name, str(sender.is_active), str(sender.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
-			var azione = data.get("azione", "disattiva")
+			var azione = data.get("azione", "")
+			print("Tile trigger: ", azione)
 			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
 			_handle_switch(chiave, azione)
 		_:
 			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
 
 func _handle_switch(chiave: String, azione: String):
+	
+	print("Gestione dell'azione: ", azione)
+	
+	if azione == "attiva":
+		boss_hit_by_switch = false
+		switch_waiting_reset = true
+	
 	for child in tile_layer.get_children():
 		if child.is_in_group("spine") and child.chiave == chiave:
 			match azione:
@@ -72,6 +89,22 @@ func _handle_switch(chiave: String, azione: String):
 
 func on_player_step(step_count: int):
 	emit_signal("global_step", step_count)
+	
+	print("Passo del player")
+	
+	# --- RESET POST SWITCH ---
+	if switch_waiting_reset:
+		if not boss_hit_by_switch:
+			_reset_switch_and_spikes()
+		switch_waiting_reset = false
+		boss_hit_by_switch = false
+	
+	# --- Movimento nemici ---
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		if enemy.should_move(step_count):
 			enemy.take_turn()
+
+func _reset_switch_and_spikes():
+	for tile in tile_layer.get_children():
+		if tile.is_in_group("interruttori"):
+			tile.reset_switch()

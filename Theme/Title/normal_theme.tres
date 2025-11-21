@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://bxoj84vtba5hi"]
 
-[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_wim42"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_wim42"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wim42"]
 

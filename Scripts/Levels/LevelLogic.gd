@@ -7,6 +7,7 @@ extends Node
 
 var boss_hit_by_switch := false
 var switch_waiting_reset := false
+var tiles_to_reset := []
 
 signal global_step(step_count: int)
 
@@ -37,8 +38,9 @@ func _on_tile_state_changed(tile: TileBase, _new_state: String):
 		if enemy._is_moving:
 			continue
 		
+		tiles_to_reset.append(tile)
+		
 		if enemy.posizione_tile == tile_pos:
-			print("DANNO SUBITO")
 			tile.on_enemy_enter(enemy)
 			boss_hit_by_switch = true
 

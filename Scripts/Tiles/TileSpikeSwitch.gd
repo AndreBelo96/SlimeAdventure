@@ -43,3 +43,4 @@ func on_player_enter():
 func on_enemy_enter(_enemy: EnemyBase):
 	if attivo:
 		_enemy.receive_hit("damage")
+		emit_signal("tile_triggered", self, "enemy_hit", {"enemy": _enemy})

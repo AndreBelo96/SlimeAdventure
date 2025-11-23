@@ -7,7 +7,7 @@ extends Node
 
 var boss_hit_by_switch := false
 var switch_waiting_reset := false
-var tiles_to_reset := []
+var last_switch_pressed = null
 
 signal global_step(step_count: int)
 
@@ -38,11 +38,8 @@ func _on_tile_state_changed(tile: TileBase, _new_state: String):
 		if enemy._is_moving:
 			continue
 		
-		tiles_to_reset.append(tile)
-		
 		if enemy.posizione_tile == tile_pos:
 			tile.on_enemy_enter(enemy)
-			boss_hit_by_switch = true
 
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
@@ -65,9 +62,14 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 		"switch":
 			var chiave = data.get("chiave", "")
 			var azione = data.get("azione", "")
-			print("Tile trigger: ", azione)
+			
+			if azione == "attiva":
+				last_switch_pressed = sender
+			
 			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
 			_handle_switch(chiave, azione)
+		"enemy_hit":
+			boss_hit_by_switch = true
 		_:
 			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
 
@@ -107,6 +109,7 @@ func on_player_step(step_count: int):
 			enemy.take_turn()
 
 func _reset_switch_and_spikes():
-	for tile in tile_layer.get_children():
-		if tile.is_in_group("interruttori"):
-			tile.reset_switch()
+	if last_switch_pressed and last_switch_pressed.is_in_group("interruttori"):
+		last_switch_pressed.reset_switch()
+
+	last_switch_pressed = null

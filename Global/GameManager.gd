@@ -71,10 +71,10 @@ var last_attempt := {
 }
 
 const DIRECTION_BITS = {
-	Vector2i(1, 0): 1,
-	Vector2i(-1, 0): 2,
+	Vector2i(0, -1): 1,
+	Vector2i(1, 0): 2,
 	Vector2i(0, 1): 4,
-	Vector2i(0, -1): 8
+	Vector2i(-1, 0): 8,
 }
 
 func _ready():

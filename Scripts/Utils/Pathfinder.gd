@@ -72,7 +72,8 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 					"g": tentative_g,
 					"f": tentative_g + heuristic(neighbor, goal)
 				}
-
+	
+	print("A*: nessun percorso da ", start, " a ", goal)
 	return []  # Nessun percorso trovato
 
 
@@ -96,6 +97,7 @@ func can_move(from: Vector2i, to: Vector2i) -> bool:
 	var dir := to - from
 	var bit = DIRECTION_BITS.get(dir, 0)
 
+	print("CHECK MOVIMENTO: ", from, " → ", to, " dir=", dir, " bit=", bit, " mask=", mask)
 	# Se il bit è presente → quella direzione è BLOCCATA
 	return (mask & bit) == 0
 

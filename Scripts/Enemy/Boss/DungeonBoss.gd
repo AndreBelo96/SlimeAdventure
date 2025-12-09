@@ -58,6 +58,9 @@ func _pathfind_and_move():
 		return
 
 	if is_adjacent_to_slime():
+		animation.play("ATTACK")
+		await animation.animation_finished
+		animation.play("IDLE")
 		attack()
 	else:
 		var next_tile = find_next_tile()

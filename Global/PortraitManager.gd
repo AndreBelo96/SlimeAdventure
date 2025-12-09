@@ -7,6 +7,7 @@ const PORTRAITS = {
 	"Nonno": Rect2(Vector2(0,0), Vector2(32,32)),
 	"Slime_Sunglasses": Rect2(Vector2(32,0), Vector2(32,32)),
 	"Slime": Rect2(Vector2(64,0), Vector2(32,32)),
+	"Ludovico": Rect2(Vector2(96,0), Vector2(32,32))
 }
 
 func get_portrait(portrait_name: String) -> Texture2D:

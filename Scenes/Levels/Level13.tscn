@@ -8,7 +8,7 @@
 script = ExtResource("2_4x05o")
 
 [node name="LevelLogic" parent="." index="0" node_paths=PackedStringArray("boss")]
-boss = NodePath("../DungeonBoss")
+boss = NodePath("../YSort/DungeonBoss")
 
 [node name="LogicMapLayer" parent="." index="2"]
 tile_map_data = PackedByteArray("AAABAPv/AgAFAAAAAAD+//v/AgAFAAAAAAD9//b/AgAEAAAAAAADAP3/AgAFAAAAAAADAPj/AgAEAAAAAAABAPb/AgAEAAAAAAACAPr/AgAEAAAAAAABAPf/AgAEAAAAAAD7//j/AgAGAAAAAAD8//j/AgAGAAAAAAD7//r/AgAGAAAAAAA=")
@@ -23,8 +23,8 @@ tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAgD/////AQAAAAAAAgD///7/AQAAAAA
 tile_map_data = PackedByteArray("AAD6//3/AAACAAEAAgD6//z/AAABAAEAAgD6//v/AAABAAEAAgD6//r/AAABAAEAAgD6//n/AAABAAEAAgD6//j/AAABAAEAAgD6//f/AAABAAEAAgD6//b/AAABAAEAAgD6//X/AAABAAEAAgD+//H/AAAAAAEAAgD9//P/AAABAAEAAgD+////AAABAAEAAgD+/wAAAAACAAEAAgD9//L/AAAFAAEAAAD+//L/AAADAAEAAAD9//T/AAADAAEAAAD7//T/AAABAAEAAAD8//T/AAABAAEAAAD6//T/AAAFAAEAAAD9//j/AAAEAAEAAAABAPj/AAAEAAEAAAAAAPL/AAABAAEAAAABAPT/AAABAAEAAAACAPT/AAABAAEAAAADAPT/AAACAAEAAAD+//7/AAABAAEAAgA=")
 
 [node name="TorchMapLayer" parent="YSort" index="8"]
-tile_map_data = PackedByteArray("AAD9//n/AAAAAAAABgABAPn/AAAAAAAABgA=")
+tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgA=")
 
-[node name="DungeonBoss" parent="." index="9" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
+[node name="DungeonBoss" parent="YSort" index="9" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
 position = Vector2(255, -120)
-tilemap = NodePath("../TileMapLayer")
+tilemap = NodePath("../../TileMapLayer")

@@ -5,8 +5,9 @@ var chain_frames: SpriteFrames
 const chain_sfx: String = "res://Assets/Audio/Catene/ChainTransition.wav"
 
 var chains_data = [
-	{"position": Vector2(500, 360), "scale": Vector2(3.5, 3.5)},
-	#{"position": Vector2(400, 300), "scale": Vector2(2, 2)},
+	{"position": Vector2(200, 200), "scale": Vector2(2, 2)},
+	{"position": Vector2(300, 200), "scale": Vector2(1, 1)},
+	{"position": Vector2(400, 100), "scale": Vector2(1.5, 1.5)}
 ]
 
 var sprites_data = [

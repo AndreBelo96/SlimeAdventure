@@ -13,8 +13,8 @@ const STEPS_TO_TRIGGER = 2
 
 
 @onready var slime := get_tree().get_first_node_in_group("player")
-@onready var movement_map :=  $"../MovementLogicMapLayer"
-@onready var visual_map = $"../TileMapLayer"
+@onready var movement_map :=  $"../../MovementLogicMapLayer"
+@onready var visual_map = $"../../TileMapLayer"
 var pathfinder: Pathfinder
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)

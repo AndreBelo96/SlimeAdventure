@@ -2,11 +2,13 @@ extends Node
 
 const SLIME = "Slime"
 const NONNO = "Nonno Slime"
+const LUDOVICO = "Ludovico"
 const DEFAULT = "Default"
 
 const SPEEDS = {
 	SLIME: 2,
 	NONNO: 6,
+	LUDOVICO: 4,
 	DEFAULT: 3,
 }
 

@@ -42,8 +42,10 @@ func receive_hit(event_type: String, data := {}):
 			pass
 
 func take_damage(dmg: int):
+	damage_animation()
+	
 	vita -= dmg
-
+	
 	# Aggiorna la barra HUD
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
@@ -52,6 +54,9 @@ func take_damage(dmg: int):
 	print("Boss colpito! Vita attuale:", vita)
 	if vita <= 0:
 		die()
+
+func damage_animation():
+	pass
 
 func die():
 	print("Il boss è morto!")

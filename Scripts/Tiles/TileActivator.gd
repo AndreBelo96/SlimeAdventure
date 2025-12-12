@@ -64,7 +64,7 @@ func _on_animated_tile_animation_finished() -> void:
 	var current_anim = animation_player.animation
 
 	if current_anim == "Activate":
-		# Glow blu
+		# Glow white
 		animation_player.modulate = Color(2, 2, 2)
 		particles.emitting = true;
 		await get_tree().create_timer(0.2).timeout

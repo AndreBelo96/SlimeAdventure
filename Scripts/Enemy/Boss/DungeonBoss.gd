@@ -46,9 +46,7 @@ func _ensure_pathfinder() -> bool:
 func should_move(_step_count: int) -> bool:
 	return _step_count % STEPS_TO_TRIGGER == 0
 
-func _apply_tile_effect_here():
-	if level_logic:
-		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
+### ------- Turn ------- ###
 
 func take_turn():
 	_pathfind_and_move()
@@ -68,6 +66,8 @@ func _pathfind_and_move():
 			await move_to(next_tile)
 	
 	_apply_tile_effect_here()
+
+### ------- Move ------- ###
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -104,12 +104,34 @@ func _animate_move_to(tile: Vector2i) -> void:
 	animation.play("IDLE")
 	_is_moving = false
 
+### ------- Take Dmg ------- ###
+
+func damage_animation():
+	animation.modulate = Color(2, 2, 2)
+	await get_tree().create_timer(0.2).timeout
+	animation.modulate = Color(1, 1, 1)
+	
+	var tween := create_tween()
+	tween.tween_property(self, "position:y", position.y - 20, 0.15)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(self, "position:y", position.y, 0.2)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_IN)
+	
+	pass
+
+func _apply_tile_effect_here():
+	if level_logic:
+		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
+
+### ------- Attack ------- ###
+
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
 
-##################
-## -- Breath -- ##
-##################
+### ------- Breath ------- ###
 
 func breath():
 	_is_breathing = true

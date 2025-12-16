@@ -5,6 +5,7 @@ const DEATH = DeathType.Type
 signal player_died(death_type: int)
 signal player_won
 signal steps_changed(new_count: int)
+signal move_finished
 
 @export var tile_map_layer_path: NodePath
 @export var pickup_map_layer_path: NodePath
@@ -16,6 +17,7 @@ signal steps_changed(new_count: int)
 
 var steps: int = 0
 var input_enabled := true
+var is_cutscene := false 
 
 @onready var tile_map_layer
 @onready var pickup_map_layer
@@ -70,10 +72,24 @@ func _unhandled_input(event):
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
-	steps += 1
-	emit_signal("steps_changed", steps)
+	
+	if not is_cutscene:
+		steps += 1
+		emit_signal("steps_changed", steps)
+	
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
+	
+	can_move = true
+	emit_signal("move_finished")
+
+func enter_cutscene() -> void:
+	is_cutscene = true
+	lock_input()
+
+func exit_cutscene() -> void:
+	is_cutscene = false
+	unlock_input()
 
 func on_player_won():
 	input_enabled = false
@@ -106,3 +122,18 @@ func get_required_node(path: NodePath, description: String) -> Node:
 	var node = get_node_or_null(path)
 	assert(node, "%s non assegnato nel Player" % description)
 	return node
+
+func lock_input() -> void:
+	input_enabled = false
+	can_move = false
+
+func unlock_input() -> void:
+	input_enabled = true
+	can_move = true
+
+func force_move(dir: Vector2i) -> void:
+	if movement_handler.is_moving:
+		return
+	
+	can_move = false
+	movement_handler.move_to(movement_handler.grid_position + dir)

@@ -13,6 +13,7 @@ config_version=5
 config/name="Slime Adventure"
 run/main_scene="res://Scenes/UI/MainMenu.tscn"
 config/features=PackedStringArray("4.5", "Mobile")
+run/max_fps=60
 
 [autoload]
 
@@ -25,6 +26,10 @@ VoiceManager="*res://Global/VoiceManager.gd"
 GameLogger="*res://Global/GameLogger.gd"
 SettingsManager="*res://Global/SettingsManager.gd"
 DisplayManager="*res://Global/DisplayManager.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

@@ -26,6 +26,7 @@ var boss_defeated := false
 var time_running := true
 var is_boss_level := false
 
+
 func _ready():
 	GameLogger.info("Inizio livello %d" % GameManager.current_level)
 	$MovementLogicMapLayer.visible = false

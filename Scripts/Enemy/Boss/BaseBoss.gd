@@ -3,6 +3,7 @@ class_name EnemyBase
 extends Node2D
 
 var vita: int
+var active := false
 var posizione_tile: Vector2i
 
 @export var tilemap: TileMapLayer
@@ -10,6 +11,9 @@ var posizione_tile: Vector2i
 @onready var level_logic = get_tree().get_first_node_in_group("level_logic")
 
 func _ready():
+	active = false
+	set_process(false)
+	set_physics_process(false)
 	add_to_group("enemy")
 	if level_logic:
 		if not is_connected("tile_triggered", Callable(level_logic, "_on_tile_triggered")):
@@ -60,9 +64,15 @@ func damage_animation():
 
 func die():
 	print("Il boss è morto!")
+	print("Da mettere animazione morte prima del queue free")
 	queue_free()
 
 	# Notifica al level manager
 	var level_manager = get_tree().get_first_node_in_group("level_manager")
 	if level_manager:
 		level_manager.on_boss_defeated()
+
+func activate():
+	active = true
+	set_process(true)
+	set_physics_process(true)

@@ -2,9 +2,12 @@
 extends Control
 class_name DialogueInterface
 
+signal dialogue_finished
+
 @onready var text_label = $Panel/TextLabel
 @onready var name_label = $Panel/NameLabel
 @onready var portrait = $Panel/Portrait
+
 @export var player: Node2D
 @export var level_manager: Node2D
 
@@ -15,7 +18,6 @@ var key_pressed = false
 var skip_typing = false
 
 func show_dialogue(dialogue: Array):
-	
 	if get_tree().paused:
 		return
 	
@@ -45,6 +47,8 @@ func _show_line():
 		
 		if level_manager:
 			level_manager.time_running = true
+			
+		emit_signal("dialogue_finished")
 		return
 
 	var line = current_dialogue[current_index]

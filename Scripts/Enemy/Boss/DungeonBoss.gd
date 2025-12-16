@@ -6,11 +6,11 @@ var max_breath_time := 3.0
 var _breath_timer := 0.0
 var _waiting_time := 0.0
 var _is_breathing := false
+var _is_attacking := false
 var _is_moving = false
 
 var step_counter = 0
 const STEPS_TO_TRIGGER = 2
-
 
 @onready var slime := get_tree().get_first_node_in_group("player")
 @onready var movement_map :=  $"../../MovementLogicMapLayer"
@@ -28,7 +28,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	_breath_timer += delta
-	if _breath_timer >= _waiting_time:
+	if _breath_timer >= _waiting_time and !_is_attacking:
 		breath()
 
 func _ensure_pathfinder() -> bool:
@@ -56,9 +56,9 @@ func _pathfind_and_move():
 		return
 
 	if is_adjacent_to_slime():
+		_is_attacking = true
 		animation.play("ATTACK")
 		await animation.animation_finished
-		animation.play("IDLE")
 		attack()
 	else:
 		var next_tile = find_next_tile()
@@ -130,6 +130,7 @@ func _apply_tile_effect_here():
 
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
+	_is_attacking = false
 
 ### ------- Breath ------- ###
 

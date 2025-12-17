@@ -2,7 +2,7 @@
 extends Node2D
 class_name PickupBase
 
-enum ItemType { NONE, SUNGLASSES, LANTERN, MACE }
+enum ItemType { NONE, SUNGLASSES, LANTERN, PICKAXE }
 var item_type: ItemType = ItemType.NONE
 
 const float_amount := 1.0

@@ -35,6 +35,7 @@ var is_cutscene := false
 @onready var light_timer = $LightTimer
 
 var can_move := true
+var powerup_pickaxe := false
 
 func _ready():
 	add_to_group("player")

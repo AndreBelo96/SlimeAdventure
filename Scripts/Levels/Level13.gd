@@ -56,7 +56,7 @@ func play_boss_intro() -> void:
 			"name": "Ludovico", 
 			"text": "Mo te sfondo er culo!!", 
 			"portrait": PortraitManager.get_portrait("Ludovico"),
-			"voice": "res://Assets/Audio/Voice/Ludovico.wav",
+			"voice": "res://Assets/Audio/Voice/LudovicoVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.LUDOVICO)
 		},
 		{
@@ -84,5 +84,6 @@ func force_player_steps(steps: int, dir: Vector2) -> void:
 		player.force_move(dir)
 		await player.move_finished
 
+# NON viene chiamato -> qua dentro -> boss, termian livello -> aggiungi drop del pickup -> disattiva spine -> aggiungi uscita, una volta che lo chiama
 func _on_boss_died():
 	on_boss_defeated()

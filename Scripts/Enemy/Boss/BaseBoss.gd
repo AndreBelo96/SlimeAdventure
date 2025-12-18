@@ -10,6 +10,8 @@ var posizione_tile: Vector2i
 @onready var animation : AnimatedSprite2D = $Animation
 @onready var level_logic = get_tree().get_first_node_in_group("level_logic")
 
+signal defeated
+
 func _ready():
 	active = false
 	set_process(false)
@@ -65,12 +67,9 @@ func damage_animation():
 func die():
 	print("Il boss è morto!")
 	print("Da mettere animazione morte prima del queue free")
-	queue_free()
 
-	# Notifica al level manager
-	var level_manager = get_tree().get_first_node_in_group("level_manager")
-	if level_manager:
-		level_manager.on_boss_defeated()
+	emit_signal("defeated")
+	queue_free()
 
 func activate():
 	active = true

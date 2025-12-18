@@ -81,9 +81,11 @@ func setup_hud():
 	hud_manager.setup_base_level()
 	
 	if is_boss_level:
-		var boss = get_tree().get_first_node_in_group("boss")
-		var boss_hp = boss.vita if boss else 3
-		hud_manager.setup_boss_level(boss_hp)
+		var boss = get_tree().get_first_node_in_group("enemy")
+		if boss:
+			boss.defeated.connect(on_boss_defeated)
+			var boss_hp = boss.vita if boss else 3
+			hud_manager.setup_boss_level(boss_hp)
 
 func toggle_pause():
 	get_tree().paused = not get_tree().paused

@@ -28,7 +28,6 @@ func get_tile_under_enemy(pos: Vector2i) -> TileBase:
 		if child is TileBase:
 			if child.global_position.distance_to(target_world_pos) < 1.0:
 				return child
-	
 	return null
 
 func _on_tile_state_changed(tile: TileBase, _new_state: String):
@@ -113,3 +112,8 @@ func _reset_switch_and_spikes():
 		last_switch_pressed.reset_switch()
 
 	last_switch_pressed = null
+
+func disable_all_spikes():
+	for child in tile_layer.get_children():
+		if child.is_in_group("spine"):
+			child.disattiva()

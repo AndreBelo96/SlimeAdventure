@@ -97,7 +97,6 @@ func can_move(from: Vector2i, to: Vector2i) -> bool:
 	var dir := to - from
 	var bit = DIRECTION_BITS.get(dir, 0)
 
-	print("CHECK MOVIMENTO: ", from, " → ", to, " dir=", dir, " bit=", bit, " mask=", mask)
 	# Se il bit è presente → quella direzione è BLOCCATA
 	return (mask & bit) == 0
 

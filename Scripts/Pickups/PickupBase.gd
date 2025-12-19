@@ -2,6 +2,8 @@
 extends Node2D
 class_name PickupBase
 
+@onready var center: Marker2D = $Center
+
 enum ItemType { NONE, SUNGLASSES, LANTERN, PICKAXE }
 var item_type: ItemType = ItemType.NONE
 
@@ -11,14 +13,15 @@ const float_speed := 2.0
 var start_y: float = 0.0
 var elapsed: float = 0.0
 var is_active: bool = true
+var posizione_tile: Vector2i
 
 func _ready():
-	start_y = position.y
+	add_to_group("pickups")
 	on_ready_custom()
 
 func _process(delta):
 	elapsed += delta
-	position.y = start_y + sin(elapsed * float_speed) * float_amount
+	global_position.y = start_y + sin(elapsed * float_speed) * float_amount
 
 func on_ready_custom() -> void:
 	pass
@@ -38,3 +41,8 @@ func hide_temporarily(duration: float = 5.0) -> void:
 	set_active(false)
 	await get_tree().create_timer(duration).timeout
 	set_active(true)
+
+func snap_to_tile_center(tile_pos):
+	global_position = tile_pos - center.position
+	posizione_tile = tile_pos
+	start_y = global_position.y

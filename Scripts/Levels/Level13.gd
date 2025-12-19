@@ -1,5 +1,7 @@
 extends "res://Scripts/Levels/LevelManager.gd"
 
+@export var pickaxe_pickup_scene: PackedScene
+
 func _ready():
 	is_boss_level = true
 	super._ready()
@@ -79,11 +81,34 @@ func switch_all_torches(state: bool) -> void:
 	for torch in get_tree().get_nodes_in_group("torches"):
 		torch.set_state(state)
 
-func force_player_steps(steps: int, dir: Vector2) -> void:
-	for i in range(steps):
+func force_player_steps(steps_to_do: int, dir: Vector2) -> void:
+	for i in range(steps_to_do):
 		player.force_move(dir)
 		await player.move_finished
 
-# NON viene chiamato -> qua dentro -> boss, termian livello -> aggiungi drop del pickup -> disattiva spine -> aggiungi uscita, una volta che lo chiama
 func _on_boss_died():
 	on_boss_defeated()
+
+# ---- Boss defeated ---- #
+func _on_boss_defeated_custom():
+	disable_all_spikes()
+	drop_pickaxe_pickup()
+	
+func disable_all_spikes():
+	if level_logic.has_method("disable_all_spikes"):
+		level_logic.disable_all_spikes()
+
+func drop_pickaxe_pickup():
+	if not pickaxe_pickup_scene:
+		return
+	
+	var bosses := get_tree().get_nodes_in_group("enemy")
+	if bosses.is_empty():
+		return
+	
+	var boss: Node2D = bosses[0]
+	
+	var pickup := pickaxe_pickup_scene.instantiate() as PickupBase
+	pickup_layer.add_child(pickup)
+	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile))
+	pickup.is_active = true

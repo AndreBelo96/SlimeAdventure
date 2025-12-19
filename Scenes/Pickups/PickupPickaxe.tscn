@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwej3r6jf671d"]
 
 [ext_resource type="PackedScene" uid="uid://ba2esyl04ctby" path="res://Scenes/Pickups/Pickup.tscn" id="1_i848m"]
-[ext_resource type="Script" uid="uid://bi8pfe17wuqp4" path="res://Scripts/Pickups/PickupMace.gd" id="2_lr2xi"]
+[ext_resource type="Script" uid="uid://bi8pfe17wuqp4" path="res://Scripts/Pickups/PickupPickaxe.gd" id="2_lr2xi"]
 
 [node name="Pickup" instance=ExtResource("1_i848m")]
 script = ExtResource("2_lr2xi")

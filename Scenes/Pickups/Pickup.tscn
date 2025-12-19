@@ -7,5 +7,7 @@
 script = ExtResource("1_p52if")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
 texture = ExtResource("2_0nu3w")
+
+[node name="Center" type="Marker2D" parent="."]
+position = Vector2(0, 10)

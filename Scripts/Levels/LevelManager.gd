@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var player = $YSort/Player
 @onready var hud_manager: LevelHUDManager = $CanvasHUD/HUD
+@onready var pickup_layer: Node2D = $YSort/PickupMapLayer
+@onready var tilemap_layer: Node2D = $TileMapLayer
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var level_logic: Node = $LevelLogic
@@ -54,6 +56,14 @@ func _ready():
 	
 	tile_manager.initialize()
 	exit_position = tile_manager.get_exit_position()
+	
+	var pickups = get_tree().get_nodes_in_group("pickups")
+
+	for pickup in pickups:
+		var tile_coords = tile_manager.get_coords_from_global_position(pickup.global_position)
+		var tile_pos = pickup_layer.map_to_local(tile_coords)
+		pickup.snap_to_tile_center(tile_pos)
+	
 
 func _process(delta):
 	if time_running:
@@ -127,7 +137,13 @@ func _on_player_died():
 # ================================================================
 func on_boss_defeated():
 	boss_defeated = true
+	
+	_on_boss_defeated_custom()
+	
 	check_victory_condition()
+
+func _on_boss_defeated_custom():
+	pass
 
 func check_victory_condition():
 	match victory_mode:
@@ -145,8 +161,8 @@ func check_victory_condition():
 func _open_exit():
 	GameLogger.info("Uscita sbloccata!")
 	
+	# Livelli senza uscita fisica
 	if exit_position == Vector2.ZERO:
-		# Livelli senza uscita fisica
 		player.on_player_won()
 		return
 	

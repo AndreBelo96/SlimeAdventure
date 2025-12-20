@@ -49,6 +49,8 @@ func should_move(_step_count: int) -> bool:
 ### ------- Turn ------- ###
 
 func take_turn():
+	if _is_attacking or _is_moving:
+		return
 	_pathfind_and_move()
 
 func _pathfind_and_move():
@@ -56,6 +58,7 @@ func _pathfind_and_move():
 		return
 
 	if is_adjacent_to_slime():
+		slime.lock_input()
 		_is_attacking = true
 		animation.play("ATTACK")
 		await animation.animation_finished

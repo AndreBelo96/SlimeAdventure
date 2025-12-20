@@ -25,6 +25,10 @@ var total_deaths: Dictionary = {}
 
 var dark_overlay_service := DarkOverlayService.new()
 
+# ----- Powerup variables ----- #
+var has_pickaxe = false
+
+
 var location_selected = Location.TUTORIAL
 var level_locations := {
 	1: Location.TUTORIAL,
@@ -88,6 +92,7 @@ func _ready():
 	#Setup var
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
+	has_pickaxe = SaveManager.has_pickaxe()
 	total_steps = totals.steps
 	total_time = totals.time
 	total_deaths = totals.deaths
@@ -116,7 +121,7 @@ func end_level(victory: bool):
 	last_attempt["deaths"] = death_counts.duplicate(true)
 	last_attempt["victory"] = victory
 	
-	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory)
+	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory, has_pickaxe)
 	last_attempt["is_record"] = isRecord
 
 	# reset conteggio morti per prossimo livello

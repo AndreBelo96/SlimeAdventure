@@ -21,7 +21,7 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
 func _ready():
 	super._ready()
-	vita = 3
+	vita = 1
 	posizione_tile = Vector2i(-1, -8)
 	snap_to_tile_center(posizione_tile)
 	_reset_breath_timer()

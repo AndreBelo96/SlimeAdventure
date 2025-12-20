@@ -6,4 +6,5 @@ func _ready():
 	sprite.texture = atlas_texture
 
 func can_enter() -> bool:
-	return false
+	#TODO animazione rottura se ho il piccone -> più queue free (quando farò the Big Reefactor sulle tile) - rimane un TODO intanto
+	return GameManager.has_pickaxe

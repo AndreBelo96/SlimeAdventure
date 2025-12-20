@@ -9,7 +9,7 @@ func _ready():
 	victory_mode = VictoryMode.BOSS
 	
 	await get_tree().process_frame
-	await play_boss_intro()
+	#await play_boss_intro()
 
 
 func play_boss_intro() -> void:

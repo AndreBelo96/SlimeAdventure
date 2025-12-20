@@ -4,6 +4,9 @@ const SAVE_PATH := "user://save_data.save"
 
 ## Struttura dati persistente
 var save_data := {
+	"player": {                  # dati giocatore
+		"has_pickaxe": false
+	},
 	"levels": {},                # dati per livello
 	"max_level_reach": 1,        # livello massimo sbloccato
 	"total_steps": 0,            # passi totali
@@ -37,11 +40,12 @@ func save_progress(level: int, steps: int, time: float) -> bool:
 	_write_file()
 	return is_record
 
-func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool) -> bool:
+func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, has_pickaxe: bool) -> bool:
 	var is_record := false
 	
 	if victory:
 		is_record = save_progress(level, steps, time)
+		save_data["player"]["has_pickaxe"] = has_pickaxe
 
 	save_data["total_steps"] += steps
 	save_data["total_time"] += time
@@ -66,6 +70,10 @@ func load_progress() -> Dictionary:
 	var result: Variant = JSON.parse_string(content)
 	if result is Dictionary:
 		save_data = result
+	
+	if not save_data.has("player"):
+		save_data["player"] = {"has_pickaxe": false}
+	
 	return save_data
 
 func reset_save():
@@ -91,6 +99,9 @@ func get_totals() -> Dictionary:
 		"time": save_data.get("total_time", 0.0),
 		"deaths": save_data.get("death_counts", {})
 	}
+
+func has_pickaxe() -> bool:
+	return save_data.get("player", {}).get("has_pickaxe", false)
 
 ## --- Private --- ##
 func _write_file():

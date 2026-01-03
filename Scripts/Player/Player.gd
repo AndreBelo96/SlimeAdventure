@@ -18,6 +18,7 @@ signal move_finished
 var steps: int = 0
 var input_enabled := true
 var is_cutscene := false 
+var grid_position: Vector2i
 
 @onready var tile_map_layer
 @onready var pickup_map_layer
@@ -54,6 +55,8 @@ func _ready():
 	interaction_handler.check_tile()
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
+	
+	grid_position = movement_handler.grid_position
 
 func turn_on_lights(duration: float = 0.0) -> void:
 	light_handler.enable(0.5)
@@ -77,6 +80,7 @@ func on_movement_finished():
 		steps += 1
 		emit_signal("steps_changed", steps)
 	
+	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
 	

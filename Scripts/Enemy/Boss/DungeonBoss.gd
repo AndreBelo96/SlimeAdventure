@@ -5,9 +5,6 @@ var min_breath_time := 1.0
 var max_breath_time := 3.0
 var _breath_timer := 0.0
 var _waiting_time := 0.0
-var _is_breathing := false
-var _is_attacking := false
-var _is_moving = false
 
 var step_counter = 0
 const STEPS_TO_TRIGGER = 2
@@ -21,15 +18,49 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
 func _ready():
 	super._ready()
-	vita = 1
+	vita = 3
 	posizione_tile = Vector2i(-1, -8)
 	snap_to_tile_center(posizione_tile)
 	_reset_breath_timer()
 
 func _process(delta: float) -> void:
-	_breath_timer += delta
-	if _breath_timer >= _waiting_time and !_is_attacking:
-		breath()
+	match state:
+		BossState.IDLE:
+			_update_idle(delta)
+		BossState.MOVING:
+			if not action_in_progress:
+				_start_move()
+		BossState.ATTACKING:
+			if not action_in_progress:
+				_start_attack()
+		BossState.DEAD:
+			pass
+
+
+### ------- Turn ------- ###
+
+func take_turn():
+	if is_adjacent_to_slime():
+		state = BossState.ATTACKING
+		#_start_attack()
+	else:
+		state = BossState.MOVING
+		#_start_move()
+
+### ------- Move ------- ###
+
+func _start_move():
+	action_in_progress = true
+	
+	var next_tile = find_next_tile()
+	if next_tile != posizione_tile:
+		await move_to(next_tile)
+
+	_apply_tile_effect_here()
+	
+	action_in_progress = false
+	idle_entered = false
+	state = BossState.IDLE
 
 func _ensure_pathfinder() -> bool:
 	
@@ -45,32 +76,6 @@ func _ensure_pathfinder() -> bool:
 
 func should_move(_step_count: int) -> bool:
 	return _step_count % STEPS_TO_TRIGGER == 0
-
-### ------- Turn ------- ###
-
-func take_turn():
-	if _is_attacking or _is_moving:
-		return
-	_pathfind_and_move()
-
-func _pathfind_and_move():
-	if _is_moving:
-		return
-
-	if is_adjacent_to_slime():
-		slime.lock_input()
-		_is_attacking = true
-		animation.play("ATTACK")
-		await animation.animation_finished
-		attack()
-	else:
-		var next_tile = find_next_tile()
-		if next_tile != posizione_tile:
-			await move_to(next_tile)
-	
-	_apply_tile_effect_here()
-
-### ------- Move ------- ###
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -88,24 +93,17 @@ func is_adjacent_to_slime() -> bool:
 	return dx <= 1 and dy <= 1 and not (dx == 0 and dy == 0)
 
 func move_to(next_tile: Vector2i):
+	animation.play("WALK")
 	await _animate_move_to(next_tile)
 	posizione_tile = next_tile
 	snap_to_tile_center(next_tile)
 
 func _animate_move_to(tile: Vector2i) -> void:
-	_is_moving = true
-
-	#animation.play("MOVE")
 	var target_pos = tilemap.map_to_local(tile) - $Center.position
-
-	# movimento smooth (0.2s)
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", target_pos, 0.2)
-
 	await tween.finished
 
-	animation.play("IDLE")
-	_is_moving = false
 
 ### ------- Take Dmg ------- ###
 
@@ -131,21 +129,40 @@ func _apply_tile_effect_here():
 
 ### ------- Attack ------- ###
 
+func _start_attack():
+	action_in_progress = true
+	
+	slime.lock_input()
+	animation.play("ATTACK")
+	await animation.animation_finished
+	attack()
+	
+	action_in_progress = false
+	idle_entered = false
+	state = BossState.IDLE
+
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
-	_is_attacking = false
 
 ### ------- Breath ------- ###
 
-func breath():
-	_is_breathing = true
+func _update_idle(delta):
+	if not idle_entered:
+		animation.play("IDLE")
+		idle_entered = true
 	
-	animation.play("BREATH")
-	await animation.animation_finished
-	
-	_is_breathing = false
-	animation.play("IDLE")
+	_breath_timer += delta
+	if _breath_timer >= _waiting_time:
+		_start_breath()
+		idle_entered = false
 
+func _start_breath():
+	if animation.is_playing():
+		return
+	animation.play("BREATH")
+	_reset_breath_timer()
+
+func breath():
 	_reset_breath_timer()
 
 func _reset_breath_timer():

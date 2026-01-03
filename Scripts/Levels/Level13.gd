@@ -9,7 +9,7 @@ func _ready():
 	victory_mode = VictoryMode.BOSS
 	
 	await get_tree().process_frame
-	#await play_boss_intro()
+	await play_boss_intro()
 
 
 func play_boss_intro() -> void:
@@ -110,5 +110,5 @@ func drop_pickaxe_pickup():
 	
 	var pickup := pickaxe_pickup_scene.instantiate() as PickupBase
 	pickup_layer.add_child(pickup)
-	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile))
+	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile), boss.posizione_tile)
 	pickup.is_active = true

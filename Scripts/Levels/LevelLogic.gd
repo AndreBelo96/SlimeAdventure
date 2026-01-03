@@ -34,8 +34,6 @@ func _on_tile_state_changed(tile: TileBase, _new_state: String):
 	var tile_pos = tile_layer.local_to_map(tile.position)
 	
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		if enemy._is_moving:
-			continue
 		
 		if enemy.posizione_tile == tile_pos:
 			tile.on_enemy_enter(enemy)

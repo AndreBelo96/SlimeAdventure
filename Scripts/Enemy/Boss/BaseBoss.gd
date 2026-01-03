@@ -2,6 +2,17 @@
 class_name EnemyBase
 extends Node2D
 
+enum BossState {
+	IDLE,
+	MOVING,
+	ATTACKING,
+	DEAD
+}
+
+var state: BossState = BossState.IDLE
+var action_in_progress := false
+var idle_entered := false
+
 var vita: int
 var active := false
 var posizione_tile: Vector2i
@@ -13,10 +24,11 @@ var posizione_tile: Vector2i
 signal defeated
 
 func _ready():
+	add_to_group("enemy")
 	active = false
 	set_process(false)
+	
 	set_physics_process(false)
-	add_to_group("enemy")
 	if level_logic:
 		if not is_connected("tile_triggered", Callable(level_logic, "_on_tile_triggered")):
 			connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
@@ -48,6 +60,9 @@ func receive_hit(event_type: String, data := {}):
 			pass
 
 func take_damage(dmg: int):
+	if state == BossState.DEAD:
+		return
+	
 	damage_animation()
 	
 	vita -= dmg
@@ -57,7 +72,6 @@ func take_damage(dmg: int):
 	if hud:
 		hud.update_progress_bar(dmg)
 	
-	print("Boss colpito! Vita attuale:", vita)
 	if vita <= 0:
 		die()
 
@@ -65,11 +79,13 @@ func damage_animation():
 	pass
 
 func die():
-	print("Il boss è morto!")
-	print("Da mettere animazione morte prima del queue free")
+	if state == BossState.DEAD:
+		return
 
+	state = BossState.DEAD
+	animation.play("DEATH")
 	emit_signal("defeated")
-	queue_free()
+
 
 func activate():
 	active = true

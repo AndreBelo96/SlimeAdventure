@@ -62,7 +62,7 @@ func _ready():
 	for pickup in pickups:
 		var tile_coords = tile_manager.get_coords_from_global_position(pickup.global_position)
 		var tile_pos = pickup_layer.map_to_local(tile_coords)
-		pickup.snap_to_tile_center(tile_pos)
+		pickup.snap_to_tile_center(tile_pos, tile_coords)
 	
 
 func _process(delta):
@@ -137,9 +137,7 @@ func _on_player_died():
 # ================================================================
 func on_boss_defeated():
 	boss_defeated = true
-	
 	_on_boss_defeated_custom()
-	
 	check_victory_condition()
 
 func _on_boss_defeated_custom():

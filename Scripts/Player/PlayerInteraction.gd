@@ -37,14 +37,16 @@ func _get_tile_under_player() -> TileBase:
 	return null
 
 func _get_pickup_under_player() -> PickupBase:
-	var player_pos = player.global_position
 	for child in pickup_layer.get_children():
 		if child is PickupBase and child.is_active:
-			var tile_pos = child.global_position
-			if is_point_on_iso_tile(tile_pos, player_pos):
+			var tile_coord = child.posizione_tile
+			if have_same_coord(player.grid_position , tile_coord):
 				GameLogger.info("Pickup -> Player sopra= " + str(child.name))
 				return child
 	return null
+
+func have_same_coord(player_tile_coord: Vector2, pickup_tile_coord: Vector2):
+	return player_tile_coord == pickup_tile_coord
 
 func is_point_on_iso_tile(tile_pos: Vector2, point: Vector2) -> bool:
 	var local = point - tile_pos

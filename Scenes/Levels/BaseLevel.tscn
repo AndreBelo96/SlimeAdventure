@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=24 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" uid="uid://b0ephypyc3vya" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" uid="uid://cs20dsk7jtn58" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bfj77cmvhy0xn" path="res://Scenes/UI/Pause.tscn" id="4_k28r4"]
 [ext_resource type="Texture2D" uid="uid://bgyocxbkb3jxf" path="res://Assets/Sprites/Tiles/Logic/MovementLogicTIleMap.png" id="5_ds48i"]
 [ext_resource type="TileSet" uid="uid://bjlusfts0e6u6" path="res://Tilesets/torch_set.tres" id="5_idd1r"]
+[ext_resource type="TileSet" uid="uid://dy56evsu7hfxr" path="res://Tilesets/terrain_tile_set.tres" id="6_e376l"]
 [ext_resource type="TileSet" uid="uid://dvw5f0e610k6" path="res://Tilesets/pickup_set.tres" id="7_6r6ib"]
 [ext_resource type="PackedScene" uid="uid://dfpv6fhikmmav" path="res://Scenes/UI/DialogInterface.tscn" id="7_28dga"]
 [ext_resource type="TileSet" uid="uid://bamqvivf771yo" path="res://Tilesets/decorations_set.tres" id="8_cp7g0"]
@@ -137,6 +138,17 @@ tile_set = SubResource("TileSet_w0n8b")
 z_index = -15
 tile_set = SubResource("TileSet_duywq")
 
+[node name="TerrainMapLayer" type="TileMapLayer" parent="."]
+z_index = -10
+tile_set = ExtResource("6_e376l")
+
+[node name="DecorationTileMapLayer" type="TileMapLayer" parent="."]
+z_index = -7
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+tile_set = ExtResource("8_cp7g0")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -5
 y_sort_enabled = true
@@ -152,13 +164,6 @@ y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
-
-[node name="DecorationTileMapLayer" type="TileMapLayer" parent="YSort"]
-z_index = -1
-y_sort_enabled = true
-texture_filter = 1
-texture_repeat = 1
-tile_set = ExtResource("8_cp7g0")
 
 [node name="DecorationWallMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
@@ -186,6 +191,7 @@ tile_set = ExtResource("11_3rmix")
 
 [node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
 tile_map_layer_path = NodePath("../../TileMapLayer")
+terrain_map_layer_path = NodePath("../../TerrainMapLayer")
 pickup_map_layer_path = NodePath("../PickupMapLayer")
 movement_logic_map_layer_path = NodePath("../../MovementLogicMapLayer")
 doors_map_layer_path = NodePath("../DoorsMapLayer")

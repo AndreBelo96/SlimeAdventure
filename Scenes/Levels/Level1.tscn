@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dexgigywr4y64" path="res://Scripts/Levels/level1.gd" id="1_4ra4s"]
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_6h7ik"]
-[ext_resource type="Texture2D" uid="uid://bqo0mtv6o2b28" path="res://Assets/Sprites/Player/TutorialAnim.png" id="3_46127"]
-[ext_resource type="Texture2D" uid="uid://dwe62dfjc6hw5" path="res://Assets/Sprites/UI/fumetto.png" id="3_a7ai2"]
+[ext_resource type="Texture2D" uid="uid://dnqdnyt2ngoiq" path="res://Assets/Sprites/Player/TutorialAnim.png" id="3_46127"]
+[ext_resource type="Texture2D" uid="uid://bxdoga3fp1xp" path="res://Assets/Sprites/UI/fumetto.png" id="3_a7ai2"]
 [ext_resource type="Script" uid="uid://dllx26b364vtj" path="res://Scripts/UI/Animation.gd" id="3_et1el"]
-[ext_resource type="Texture2D" uid="uid://bs44wg42s5imi" path="res://Assets/Sprites/UI/Key.png" id="4_oiwlb"]
+[ext_resource type="Texture2D" uid="uid://cwtca5da37kj" path="res://Assets/Sprites/UI/Key.png" id="4_oiwlb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f7ef"]
 atlas = ExtResource("3_46127")
@@ -334,7 +334,10 @@ script = ExtResource("1_4ra4s")
 [node name="MovementLogicMapLayer" parent="." index="3"]
 tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAABAP7/AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="4"]
+[node name="TerrainMapLayer" parent="." index="4"]
+tile_map_data = PackedByteArray("AAD//wEAAwAAAAAAAAD//wAAAwAAAAAAAAD/////AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAABAP7/AwAAAAAAAAACAP7/AwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAACAAEAAwAAAAAAAAABAAEAAwAAAAAAAAAAAAEAAwAAAAAAAAAAAAAAAwAAAAAAAAA=")
+
+[node name="TileMapLayer" parent="." index="5"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQACAP7/AQAAAAAAAQACAP//AQAAAAAAAQACAAAAAQAAAAAAAQACAAEAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQAAAAAAAQAAAAAAAgA=")
 
 [node name="NPCMapLayer" parent="YSort" index="6"]

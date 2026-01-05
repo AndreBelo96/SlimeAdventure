@@ -2,54 +2,51 @@
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_oxoqu"]
 [ext_resource type="Script" uid="uid://wstnwcivml1d" path="res://Scripts/Tiles/TileSpikeSwitch.gd" id="2_eqr8q"]
-[ext_resource type="Texture2D" uid="uid://cgpqqhtc0sly1" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8bfao"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ideo7"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(792, 50, 66, 50)
+[ext_resource type="Texture2D" uid="uid://bejvl5h40jidu" path="res://Assets/Sprites/Tiles/Logic_Tileset.png" id="3_ideo7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhqym"]
-atlas = ExtResource("3_8bfao")
+atlas = ExtResource("3_ideo7")
 region = Rect2(726, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qber0"]
-atlas = ExtResource("3_8bfao")
+atlas = ExtResource("3_ideo7")
 region = Rect2(660, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dhguu"]
-atlas = ExtResource("3_8bfao")
+atlas = ExtResource("3_ideo7")
 region = Rect2(594, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_22rs6"]
-atlas = ExtResource("3_8bfao")
+atlas = ExtResource("3_ideo7")
 region = Rect2(528, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gcta"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(528, 50, 66, 50)
+atlas = ExtResource("3_ideo7")
+region = Rect2(462, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_faoed"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(594, 50, 66, 50)
+atlas = ExtResource("3_ideo7")
+region = Rect2(462, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ienfd"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(660, 50, 66, 50)
+atlas = ExtResource("3_ideo7")
+region = Rect2(528, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hju6"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(726, 50, 66, 50)
+atlas = ExtResource("3_ideo7")
+region = Rect2(594, 50, 66, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7l7d"]
-atlas = ExtResource("3_8bfao")
-region = Rect2(792, 50, 66, 50)
+atlas = ExtResource("3_ideo7")
+region = Rect2(660, 50, 66, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yj2g"]
+atlas = ExtResource("3_ideo7")
+region = Rect2(726, 50, 66, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pf1ww"]
 animations = [{
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_ideo7")
-}, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_vhqym")
 }, {
@@ -61,15 +58,15 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_22rs6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5gcta")
 }],
 "loop": false,
 "name": &"OFF",
 "speed": 30.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_5gcta")
-}, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_faoed")
 }, {
@@ -81,6 +78,9 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_c7l7d")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1yj2g")
 }],
 "loop": false,
 "name": &"ON",
@@ -96,4 +96,4 @@ region_rect = Rect2(793, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_pf1ww")
-animation = &"OFF"
+animation = &"ON"

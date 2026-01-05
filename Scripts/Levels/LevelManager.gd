@@ -4,7 +4,6 @@ extends Node2D
 @onready var player = $YSort/Player
 @onready var hud_manager: LevelHUDManager = $CanvasHUD/HUD
 @onready var pickup_layer: Node2D = $YSort/PickupMapLayer
-@onready var tilemap_layer: Node2D = $TileMapLayer
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var level_logic: Node = $LevelLogic

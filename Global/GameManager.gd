@@ -3,13 +3,10 @@ extends Node
 
 ## Level Variables
 const Death = DeathType.Type
-const NORMAL_TILE_POSITION := 7
-const SPIKE_STEP_TILE_POSITION := 8
-const SPIKE_TILE_POSITION := 12
-const WALL_TILE_POSITION := 13
-#const BORDER_TILE_POSITION := 14
-#const FLIP_BORDER_TILE_POSITION := 15
-const SWITCH_TILE_POSITION := 19
+const SPIKE_STEP_TILE_POSITION := 7
+const SPIKE_TILE_POSITION := 11
+const WALL_TILE_POSITION := 12
+const SWITCH_TILE_POSITION := 13
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
 ## Variabili correnti

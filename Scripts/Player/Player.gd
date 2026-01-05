@@ -8,6 +8,7 @@ signal steps_changed(new_count: int)
 signal move_finished
 
 @export var tile_map_layer_path: NodePath
+@export var terrain_map_layer_path: NodePath
 @export var pickup_map_layer_path: NodePath
 @export var movement_logic_map_layer_path: NodePath
 @export var doors_map_layer_path: NodePath

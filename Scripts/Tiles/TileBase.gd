@@ -10,7 +10,7 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 signal state_changed(tile: TileBase, new_state: String)
 
 var is_active := false
-const TILESET := preload("res://Assets/Sprites/Tiles/Tileset.png")
+const TILESET := preload("res://Assets/Sprites/Tiles/Logic_Tileset.png")
 var atlas_texture := AtlasTexture.new()
 
 func _ready():

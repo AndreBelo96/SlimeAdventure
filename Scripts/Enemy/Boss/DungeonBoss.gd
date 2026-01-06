@@ -40,12 +40,13 @@ func _process(delta: float) -> void:
 ### ------- Turn ------- ###
 
 func take_turn():
+	if state == BossState.DEAD:
+		return
+	
 	if is_adjacent_to_slime():
 		state = BossState.ATTACKING
-		#_start_attack()
 	else:
 		state = BossState.MOVING
-		#_start_move()
 
 ### ------- Move ------- ###
 

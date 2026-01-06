@@ -82,4 +82,4 @@ region_rect = Rect2(1255, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_cbrgv")
-animation = &"UNPRESSED"
+animation = &"PRESSED"

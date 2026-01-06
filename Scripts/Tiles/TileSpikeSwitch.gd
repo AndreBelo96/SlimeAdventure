@@ -8,8 +8,8 @@ func _ready():
 	print("TileSpikes ready:", name, "script:", get_script())
 	super._ready()
 	add_to_group("spine")
-	set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
+	#set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
+	#sprite.texture = atlas_texture
 
 func set_initial_state():
 	match azione:

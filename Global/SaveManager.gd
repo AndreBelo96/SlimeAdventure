@@ -40,12 +40,12 @@ func save_progress(level: int, steps: int, time: float) -> bool:
 	_write_file()
 	return is_record
 
-func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, has_pickaxe: bool) -> bool:
+func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, _has_pickaxe: bool) -> bool:
 	var is_record := false
 	
 	if victory:
 		is_record = save_progress(level, steps, time)
-		save_data["player"]["has_pickaxe"] = has_pickaxe
+		save_data["player"]["has_pickaxe"] = _has_pickaxe
 
 	save_data["total_steps"] += steps
 	save_data["total_time"] += time

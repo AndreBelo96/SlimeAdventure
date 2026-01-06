@@ -47,19 +47,19 @@ region = Rect2(726, 50, 66, 50)
 [sub_resource type="SpriteFrames" id="SpriteFrames_pf1ww"]
 animations = [{
 "frames": [{
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_vhqym")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_qber0")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_dhguu")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_22rs6")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_5gcta")
 }],
 "loop": false,
@@ -67,19 +67,19 @@ animations = [{
 "speed": 30.0
 }, {
 "frames": [{
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_faoed")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_ienfd")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_0hju6")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_c7l7d")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_1yj2g")
 }],
 "loop": false,
@@ -96,4 +96,4 @@ region_rect = Rect2(793, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_pf1ww")
-animation = &"ON"
+animation = &"OFF"

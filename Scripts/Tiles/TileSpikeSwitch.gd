@@ -8,8 +8,6 @@ func _ready():
 	print("TileSpikes ready:", name, "script:", get_script())
 	super._ready()
 	add_to_group("spine")
-	#set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
-	#sprite.texture = atlas_texture
 
 func set_initial_state():
 	match azione:
@@ -26,14 +24,16 @@ func set_initial_frame(anim_name: String):
 	$AnimatedTile.frame = 0
 
 func disattiva():
+	print("TILE: CHANGE STATE DIS")
 	attivo = false
 	$AnimatedTile.play("OFF")
 	peso = 1
 
 func attiva():
+	print("TILE: CHANGE STATE ACT")
 	attivo = true
 	$AnimatedTile.play("ON")
-	peso = 8
+	peso = 6
 	emit_signal("state_changed", self, "ON")
 
 func on_player_enter():
@@ -41,6 +41,8 @@ func on_player_enter():
 		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES, "chiave": chiave})
 
 func on_enemy_enter(_enemy: EnemyBase):
+	print("TILE: ENEMY ENTER")
 	if attivo:
+		print("TILE: ACTIVE")
 		_enemy.receive_hit("damage")
 		emit_signal("tile_triggered", self, "enemy_hit", {"enemy": _enemy})

@@ -9,17 +9,27 @@ var boss_hit_by_switch := false
 var switch_waiting_reset := false
 var last_switch_pressed = null
 
+# -- Enemies --
+var _enemy_phase_done := false
+var _tiles_phase_done := false
+
+
 signal global_step(step_count: int)
 
 func _ready():
+	add_to_group("level_logic")
+	
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
-	add_to_group("level_logic")
+	
+	boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
 
 # ------ Enemy ------ #
 func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
+	print(" - TILE EFFECT - ")
 	var tile = get_tile_under_enemy(pos)
 	if tile and tile.has_method("on_enemy_enter"):
+		print("TILE EXIST AT POS: " + str(pos))
 		tile.on_enemy_enter(enemy)
 
 func get_tile_under_enemy(pos: Vector2i) -> TileBase:
@@ -30,23 +40,15 @@ func get_tile_under_enemy(pos: Vector2i) -> TileBase:
 				return child
 	return null
 
-func _on_tile_state_changed(tile: TileBase, _new_state: String):
-	var tile_pos = tile_layer.local_to_map(tile.position)
-	
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		
-		if enemy.posizione_tile == tile_pos:
-			tile.on_enemy_enter(enemy)
-
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
 		if child is TileBase:
 			if not child.is_connected("tile_triggered", Callable(self, "_on_tile_triggered")):
 				child.connect("tile_triggered", Callable(self, "_on_tile_triggered"))
 			
-			# Se non è già connesso il cambio di stato
-			if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
-				child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
+			### Se non è già connesso il cambio di stato
+			#if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
+				#child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
 
 func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 	match action:
@@ -65,6 +67,8 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			
 			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
 			_handle_switch(chiave, azione)
+			_tiles_phase_done = true
+			_try_resolve_enemy_damage(boss)
 		"enemy_hit":
 			boss_hit_by_switch = true
 		_:
@@ -89,9 +93,12 @@ func _handle_switch(chiave: String, azione: String):
 					GameLogger.info("Spine disattivate chiave = %s" % chiave)
 
 func on_player_step(step_count: int):
-	emit_signal("global_step", step_count)
+	print(" --------- PLAYER STEP TURN --------- ")
 	
-	print("Passo del player")
+	_enemy_phase_done = false
+	_tiles_phase_done = false
+	
+	emit_signal("global_step", step_count)
 	
 	# --- RESET POST SWITCH ---
 	if switch_waiting_reset:
@@ -102,8 +109,29 @@ func on_player_step(step_count: int):
 	
 	# --- Movimento nemici ---
 	for enemy in get_tree().get_nodes_in_group("enemy"):
+		print("POSIZIONE INIZIALE: " + str(enemy.posizione_tile))
 		if enemy.should_move(step_count):
+			print(" -- MOVIMENTO -- ")
 			enemy.take_turn()
+		else:
+			print(" -- POSIZIONE FISSA -- ")
+			_on_enemy_finished_turn(enemy)
+
+func _on_enemy_finished_turn(enemy):
+	print("POSIZIONE POST: " + str(enemy.posizione_tile))
+	_enemy_phase_done = true
+	_try_resolve_enemy_damage(enemy)
+
+func _try_resolve_enemy_damage(enemy):
+	if not _enemy_phase_done:
+		return
+	if not _tiles_phase_done:
+		return
+
+	apply_tile_effect_to_enemy(enemy, enemy.posizione_tile)
+
+	_enemy_phase_done = false
+	_tiles_phase_done = false
 
 func _reset_switch_and_spikes():
 	if last_switch_pressed and last_switch_pressed.is_in_group("interruttori"):

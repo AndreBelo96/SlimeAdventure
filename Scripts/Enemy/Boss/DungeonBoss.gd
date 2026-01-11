@@ -14,6 +14,7 @@ const STEPS_TO_TRIGGER = 2
 @onready var visual_map = $"../../TileMapLayer"
 var pathfinder: Pathfinder
 
+signal finished_turn(enemy)
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
 func _ready():
@@ -57,11 +58,14 @@ func _start_move():
 	if next_tile != posizione_tile:
 		await move_to(next_tile)
 
-	_apply_tile_effect_here()
+	#_apply_tile_effect_here()
 	
 	action_in_progress = false
 	idle_entered = false
 	state = BossState.IDLE
+	
+	print("MOVIMENTO TERMINATO")
+	emit_signal("finished_turn", self)
 
 func _ensure_pathfinder() -> bool:
 	
@@ -125,6 +129,7 @@ func damage_animation():
 	pass
 
 func _apply_tile_effect_here():
+	print("--- NON ENTRA TILE EFFECT ENEMY---")
 	if level_logic:
 		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
 

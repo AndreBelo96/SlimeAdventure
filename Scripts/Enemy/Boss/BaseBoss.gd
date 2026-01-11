@@ -51,6 +51,7 @@ func breath():
 	pass
 
 func receive_hit(event_type: String, data := {}):
+	print("HIT BOSS")
 	match event_type:
 		"damage":
 			take_damage(data.get("amount", 1))

@@ -22,7 +22,8 @@ func _ready():
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
 	
-	boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
+	if boss:
+		boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
 
 # ------ Enemy ------ #
 func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):

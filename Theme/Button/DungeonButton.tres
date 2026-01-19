@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://dhwt37qt37a0m"]
 
-[ext_resource type="FontFile" uid="uid://1aawnxhf7ivl" path="res://Assets/Fonts/MedievalSharp-Regular.ttf" id="1_tj7q7"]
+[ext_resource type="FontFile" uid="uid://b4oxpyuygsaww" path="res://Assets/Fonts/MedievalSharp-Regular.ttf" id="1_tj7q7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3d0jf"]
 content_margin_left = 4.0

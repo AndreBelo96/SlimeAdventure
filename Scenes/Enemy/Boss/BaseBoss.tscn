@@ -16,6 +16,7 @@ animations = [{
 }]
 
 [node name="BaseBoss" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_qh0r3")
 
 [node name="Center" type="Marker2D" parent="."]

@@ -65,6 +65,13 @@ func _start_move():
 	state = BossState.IDLE
 	
 	print("MOVIMENTO TERMINATO")
+	print("---- DEBUG YSORT BOSS: ----")
+	print("BOSS  global Y:", global_position.y)
+	print("BOSS marker Y:", $Center.global_position.y)
+	print("BOSS  z_index:", z_index)
+	print("BOSS  y_sort:", y_sort_enabled)
+	print("BOSS  parent:", get_parent().name)
+	print("---------------------")
 	emit_signal("finished_turn", self)
 
 func _ensure_pathfinder() -> bool:

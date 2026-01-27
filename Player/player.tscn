@@ -280,15 +280,9 @@ script = ExtResource("1_63ylr")
 point_light_path = NodePath("PointLight2D")
 
 [node name="Center" type="Marker2D" parent="."]
-position = Vector2(0, 1)
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-7, 0, -3, 5, 3, 5, 7, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_h402l")
 animation = &"Move"
 frame = 16
@@ -296,6 +290,7 @@ frame_progress = 1.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
+position = Vector2(0, -1)
 color = Color(1, 1, 0.705882, 1)
 energy = 0.0
 texture = ExtResource("3_ghh27")

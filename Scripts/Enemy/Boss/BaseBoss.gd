@@ -34,6 +34,10 @@ func _ready():
 			connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
 	print("Boss ready - level_logic:", level_logic)
 
+func _draw():
+	print("DRAW ENEMY")
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
+
 func snap_to_tile_center(coords: Vector2i):
 	var tile_pos = tilemap.map_to_local(coords)
 	global_position = tile_pos - $Center.position

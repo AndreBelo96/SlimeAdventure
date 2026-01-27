@@ -3,20 +3,14 @@
 [ext_resource type="Script" uid="uid://bikpj2rd5ldl0" path="res://Scripts/Decorations/Interactive/Torch/BaseTorch.gd" id="1_1oivh"]
 [ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="2_ehuel"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rj8ef"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1oivh"]
 
 [node name="Torch" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_1oivh")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_rj8ef")
-animation = &"Idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("2_ehuel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1oivh")

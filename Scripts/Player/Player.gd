@@ -47,6 +47,12 @@ func _ready():
 	npc_map_layer = get_required_node(npc_map_layer_path, "npc_map_layer")
 	point_light = get_required_node(point_light_path, "point_light") as PointLight2D
 
+	
+	print("Player z_as_relative:", self.z_as_relative)
+	for child in get_children():
+		if child is CanvasItem:
+			print(child.name, "z_as_relative:", child.z_as_relative)
+	
 	movement_handler.setup(self, tile_map_layer, movement_logic_map_layer, doors_map_layer, npc_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
 	animation_handler.setup($AnimatedSprite2D)
@@ -58,6 +64,10 @@ func _ready():
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
 	
 	grid_position = movement_handler.grid_position
+
+func _draw():
+	print("DRAW PLAYER")
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
 
 func turn_on_lights(duration: float = 0.0) -> void:
 	light_handler.enable(0.5)
@@ -84,6 +94,14 @@ func on_movement_finished():
 	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
+	
+	print("---- DEBUG YSORT PLAYER: ----")
+	print("PLAYER  global Y:", global_position.y)
+	print("PLAYER marker Y:", $Center.global_position.y)
+	print("PLAYER  z_index:", z_index)
+	print("PLAYER  y_sort:", y_sort_enabled)
+	print("PLAYER  parent:", get_parent().name)
+	print("---------------------")
 	
 	can_move = true
 	emit_signal("move_finished")

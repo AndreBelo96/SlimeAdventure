@@ -4,78 +4,78 @@
 [ext_resource type="Texture2D" uid="uid://skqg5qrk2vh4" path="res://Assets/Sprites/Decorations/set_blazier.png" id="2_e8s5a"]
 [ext_resource type="Script" uid="uid://cpkfmx3lrvi5f" path="res://Scripts/Decorations/Interactive/Torch/Torch.gd" id="2_m3bx2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ymag"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3bx2"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(0, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hag5y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8fep"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(30, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pp5is"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_irvbg"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(60, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cryp0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbwld"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(90, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ahirr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijs3m"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(120, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4d188"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_afcit"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(150, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_djwyw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m4b2"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(180, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iepdn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hx6ad"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(210, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qaddd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_51se3"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(240, 0, 30, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_momlj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1v4h"]
 atlas = ExtResource("2_e8s5a")
 region = Rect2(270, 0, 30, 49)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ujev6"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_de8sq"]
 animations = [{
 "frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_3ymag")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_m3bx2")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_hag5y")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_t8fep")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_pp5is")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_irvbg")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_cryp0")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_fbwld")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_ahirr")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ijs3m")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_4d188")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_afcit")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_djwyw")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_5m4b2")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_iepdn")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_hx6ad")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_qaddd")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_51se3")
 }, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_momlj")
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_h1v4h")
 }],
 "loop": true,
 "name": &"default",
@@ -85,12 +85,10 @@ animations = [{
 [node name="Torch" instance=ExtResource("1_m0a6g")]
 script = ExtResource("2_m3bx2")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-position = Vector2(0, -21)
-sprite_frames = SubResource("SpriteFrames_ujev6")
-animation = &"default"
-autoplay = "default"
-frame_progress = 0.989219
-
-[node name="PointLight2D" parent="." index="1"]
+[node name="PointLight2D" parent="." index="0"]
 texture_scale = 3.0
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_de8sq")
+autoplay = "default"

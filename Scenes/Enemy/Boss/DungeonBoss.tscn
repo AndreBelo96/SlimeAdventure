@@ -271,11 +271,10 @@ animations = [{
 }]
 
 [node name="DungeonBoss" instance=ExtResource("1_nqbnp")]
-y_sort_enabled = true
 script = ExtResource("2_5gm8k")
 
 [node name="Animation" parent="." index="1"]
-position = Vector2(-7, -35)
 sprite_frames = SubResource("SpriteFrames_4kcxs")
 animation = &"IDLE"
 autoplay = "IDLE"
+offset = Vector2(-7, -35)

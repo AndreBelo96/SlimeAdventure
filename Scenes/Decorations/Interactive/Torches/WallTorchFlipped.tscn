@@ -78,15 +78,16 @@ animations = [{
 [node name="Torch" instance=ExtResource("1_lg4xs")]
 script = ExtResource("2_vlxei")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-position = Vector2(-14, -42)
-sprite_frames = SubResource("SpriteFrames_3wkoe")
-autoplay = "Idle"
-frame_progress = 0.674172
-flip_h = true
-
-[node name="PointLight2D" parent="." index="1"]
+[node name="PointLight2D" parent="." index="0"]
 position = Vector2(-14, -42)
 energy = 1.58
 blend_mode = 2
 texture_scale = 2.0
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_3wkoe")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.674172
+offset = Vector2(-14, -42)
+flip_h = true

@@ -282,11 +282,11 @@ point_light_path = NodePath("PointLight2D")
 [node name="Center" type="Marker2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_h402l")
 animation = &"Move"
 frame = 16
 frame_progress = 1.0
+offset = Vector2(0, -1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false

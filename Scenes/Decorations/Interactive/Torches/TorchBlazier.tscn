@@ -89,6 +89,6 @@ script = ExtResource("2_m3bx2")
 texture_scale = 3.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_de8sq")
 autoplay = "default"
+offset = Vector2(0, -22)

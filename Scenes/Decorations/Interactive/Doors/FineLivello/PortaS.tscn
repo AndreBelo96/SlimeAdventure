@@ -7,5 +7,5 @@
 script = ExtResource("1_detor")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(12, -24)
 animation = &"Closed_S"
+offset = Vector2(-8, -61)

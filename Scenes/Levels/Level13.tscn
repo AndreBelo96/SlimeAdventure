@@ -28,10 +28,10 @@ tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAgD/////AQAAAAAAAgD///7/AQAAAAA
 tile_map_data = PackedByteArray("AAD9//j/AAAEAAEAAAABAPj/AAAEAAEAAAA=")
 
 [node name="PickupMapLayer" parent="YSort" index="3"]
-tile_map_data = PackedByteArray("AAD///L/AAAAAAAAAwAEAO7/AAAAAAAAAwAJAO3/AAAAAAAAAwAKAPD/AAAAAAAAAwANAO//AAAAAAAAAwAUAO7/AAAAAAAAAwA=")
+tile_map_data = PackedByteArray("AAD///L/AAAAAAAAAwAJAO3/AAAAAAAAAwAKAPD/AAAAAAAAAwAUAO7/AAAAAAAAAwAOAO//AAAAAAAAAwA=")
 
 [node name="TorchMapLayer" parent="YSort" index="7"]
-tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgA=")
+tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgAGAO7/AAAAAAAAAQA=")
 
 [node name="DungeonBoss" parent="YSort" index="8" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
 tilemap = NodePath("../../TileMapLayer")

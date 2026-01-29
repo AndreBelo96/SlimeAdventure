@@ -33,7 +33,7 @@ func attiva():
 	print("TILE: CHANGE STATE ACT")
 	attivo = true
 	$AnimatedTile.play("ON")
-	peso = 5
+	peso = 8
 	emit_signal("state_changed", self, "ON")
 
 func on_player_enter():

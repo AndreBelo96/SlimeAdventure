@@ -72,6 +72,8 @@ func take_damage(dmg: int):
 	
 	vita -= dmg
 	
+	change_steps()
+	
 	# Aggiorna la barra HUD
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
@@ -91,6 +93,8 @@ func die():
 	animation.play("DEATH")
 	emit_signal("defeated")
 
+func change_steps():
+	pass
 
 func activate():
 	active = true

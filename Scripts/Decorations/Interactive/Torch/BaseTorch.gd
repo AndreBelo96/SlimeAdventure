@@ -19,16 +19,8 @@ var flicker_tween: Tween
 func _ready() -> void:
 	add_to_group("torches")
 	set_state(start_on)
-	
-	print("---- DEBUG YSORT TORCHES: ----")
-	print("TORCHES  global Y:", global_position.y)
-	print("TORCHES  z_index:", z_index)
-	print("TORCHES  y_sort:", y_sort_enabled)
-	print("TORCHES  parent:", get_parent().name)
-	print("---------------------")
 
 func _draw():
-	print("DRAW ENEMY")
 	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
 
 func set_state(state: bool) -> void:

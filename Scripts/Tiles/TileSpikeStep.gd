@@ -24,7 +24,7 @@ func _on_global_step(step_count: int):
 func _raise_spikes():
 	isUp = true
 	animation.play("UP")
-	peso = 5
+	peso = 8
 
 func _lower_spikes():
 	isUp = false

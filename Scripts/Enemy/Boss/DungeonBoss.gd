@@ -7,7 +7,7 @@ var _breath_timer := 0.0
 var _waiting_time := 0.0
 
 var step_counter = 0
-const STEPS_TO_TRIGGER = 2
+var steps_to_trigger = 3
 
 @onready var slime := get_tree().get_first_node_in_group("player")
 @onready var movement_map :=  $"../../MovementLogicMapLayer"
@@ -87,7 +87,7 @@ func _ensure_pathfinder() -> bool:
 	return true
 
 func should_move(_step_count: int) -> bool:
-	return _step_count % STEPS_TO_TRIGGER == 0
+	return _step_count % steps_to_trigger == 0
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -136,9 +136,14 @@ func damage_animation():
 	pass
 
 func _apply_tile_effect_here():
-	print("--- NON ENTRA TILE EFFECT ENEMY---")
 	if level_logic:
 		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
+
+func change_steps():
+	print("--------- BOSS COLPITO:  CAMBIO PASSI!!! -----------")
+	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
+	steps_to_trigger -= 1
+	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
 
 ### ------- Attack ------- ###
 

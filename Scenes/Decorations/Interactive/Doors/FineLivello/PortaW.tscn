@@ -7,5 +7,5 @@
 script = ExtResource("1_v1oet")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(12, -24)
 animation = &"Closed_W"
+offset = Vector2(-8, -61)

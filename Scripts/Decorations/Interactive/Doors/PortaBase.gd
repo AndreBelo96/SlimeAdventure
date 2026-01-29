@@ -7,6 +7,14 @@ var is_open: bool = false
 func _ready():
 	add_to_group("porte")
 	update_visual()
+	
+	print("---- DEBUG YSORT PORTA: ----")
+	print("PORTA  global Y:", global_position.y)
+	print("PORTA  z_index:", z_index)
+	print("PORTA  y_sort:", y_sort_enabled)
+	print("PORTA  parent:", get_parent().name)
+	print("---------------------")
+	
 
 func setup(dir: String):
 	direction = dir
@@ -21,3 +29,6 @@ func update_visual():
 	var sprite = $AnimatedSprite2D
 	var state = "Open_" if is_open else "Closed_"
 	sprite.play(state + direction)
+
+func _draw():
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)

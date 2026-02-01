@@ -22,6 +22,7 @@ var posizione_tile: Vector2i
 @onready var level_logic = get_tree().get_first_node_in_group("level_logic")
 
 signal defeated
+signal damaged(boss)
 
 func _ready():
 	add_to_group("enemy")
@@ -78,6 +79,8 @@ func take_damage(dmg: int):
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
 		hud.update_progress_bar(dmg)
+	
+	emit_signal("damaged", self)
 	
 	if vita <= 0:
 		die()

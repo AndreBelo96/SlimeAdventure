@@ -5,6 +5,7 @@ extends Node
 @export var tile_layer: Node2D
 @export var boss: EnemyBase
 
+var boss_hit_count := 0
 var boss_hit_by_switch := false
 var switch_waiting_reset := false
 var last_switch_pressed = null
@@ -24,6 +25,7 @@ func _ready():
 	
 	if boss:
 		boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
+		boss.connect("damaged", Callable(self, "_on_boss_damaged"))
 
 # ------ Enemy ------ #
 func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
@@ -144,3 +146,15 @@ func disable_all_spikes():
 	for child in tile_layer.get_children():
 		if child.is_in_group("spine"):
 			child.disattiva()
+
+func _on_boss_damaged(_boss):
+	boss_hit_count += 1
+	
+	if boss_hit_count == 1:
+		for child in tile_layer.get_children():
+			if child.is_in_group("spine") and child.chiave == "A":
+				child.disattiva()
+	elif boss_hit_count == 2:
+		for child in tile_layer.get_children():
+			if child.is_in_group("spine") and child.chiave == "B":
+				child.disattiva()

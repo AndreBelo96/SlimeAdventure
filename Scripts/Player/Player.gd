@@ -94,6 +94,8 @@ func on_movement_finished():
 	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
+
+	_check_boss_collision() ## TODO Testa, magari esplode pure se il boss è morto
 	
 	print("---- DEBUG YSORT PLAYER: ----")
 	print("PLAYER  global Y:", global_position.y)
@@ -160,3 +162,16 @@ func force_move(dir: Vector2i) -> void:
 	
 	can_move = false
 	movement_handler.move_to(movement_handler.grid_position + dir)
+
+func _check_boss_collision():
+	var bosses = get_tree().get_nodes_in_group("enemy")
+	for boss in bosses:
+		if boss.posizione_tile == grid_position:
+			_on_player_touch_boss()
+			return
+
+func _on_player_touch_boss():
+	print("PLAYER TOCCA BOSS → MORTE")
+	var level_logic = get_tree().get_first_node_in_group("level_logic")
+	if level_logic:
+		level_logic._on_tile_triggered(self, "death", {"death_type": GameManager.Death.ENEMY})

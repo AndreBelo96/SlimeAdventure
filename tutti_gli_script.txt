@@ -1,8 +1,3 @@
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\DebugBorder.gd
-###############################################
-
 # Classe interna per disegnare il bordo
 extends Control
 class_name DebugBorder
@@ -11,12 +6,6 @@ class_name DebugBorder
 
 func _draw():
 	draw_rect(Rect2(Vector2.ZERO, size), Color(1,0,0,1), false, thickness)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\DisplayManager.gd
-###############################################
-
 extends Node
 
 # Proprietà per la modalità schermo e la risoluzione
@@ -50,12 +39,6 @@ func apply_resolution(resolution_passed: int):
 		get_window().size = resolution
 	
 	get_tree().root.content_scale_size = resolution
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\GameLogger.gd
-###############################################
-
 # Logger.gd
 extends Node
 
@@ -86,24 +69,15 @@ func warn(message: String) -> void:
 
 func error(message: String) -> void:
 	write_log("ERROR", message)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\GameManager.gd
-###############################################
-
 # Scripts/GameManager.gd
 extends Node
 
 ## Level Variables
 const Death = DeathType.Type
-const NORMAL_TILE_POSITION := 7
-const SPIKE_STEP_TILE_POSITION := 8
-const SPIKE_TILE_POSITION := 12
-const WALL_TILE_POSITION := 13
-#const BORDER_TILE_POSITION := 14
-#const FLIP_BORDER_TILE_POSITION := 15
-const SWITCH_TILE_POSITION := 19
+const SPIKE_STEP_TILE_POSITION := 7
+const SPIKE_TILE_POSITION := 11
+const WALL_TILE_POSITION := 12
+const SWITCH_TILE_POSITION := 13
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
 ## Variabili correnti
@@ -118,6 +92,10 @@ var total_steps: int = 0
 var total_deaths: Dictionary = {}
 
 var dark_overlay_service := DarkOverlayService.new()
+
+# ----- Powerup variables ----- #
+var has_pickaxe = false
+
 
 var location_selected = Location.TUTORIAL
 var level_locations := {
@@ -165,10 +143,10 @@ var last_attempt := {
 }
 
 const DIRECTION_BITS = {
-	Vector2i(1, 0): 1,
-	Vector2i(-1, 0): 2,
+	Vector2i(0, -1): 1,
+	Vector2i(1, 0): 2,
 	Vector2i(0, 1): 4,
-	Vector2i(0, -1): 8
+	Vector2i(-1, 0): 8,
 }
 
 func _ready():
@@ -182,6 +160,7 @@ func _ready():
 	#Setup var
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
+	has_pickaxe = SaveManager.has_pickaxe()
 	total_steps = totals.steps
 	total_time = totals.time
 	total_deaths = totals.deaths
@@ -210,7 +189,7 @@ func end_level(victory: bool):
 	last_attempt["deaths"] = death_counts.duplicate(true)
 	last_attempt["victory"] = victory
 	
-	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory)
+	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory, has_pickaxe)
 	last_attempt["is_record"] = isRecord
 
 	# reset conteggio morti per prossimo livello
@@ -312,12 +291,6 @@ func reset_game():
 	total_time = 0.0
 	total_steps = 0
 	get_tree().change_scene_to_file("res://Scenes/Level1.tscn")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\PortraitManager.gd
-###############################################
-
 # PortraitManager.gd
 extends Node
 
@@ -327,6 +300,7 @@ const PORTRAITS = {
 	"Nonno": Rect2(Vector2(0,0), Vector2(32,32)),
 	"Slime_Sunglasses": Rect2(Vector2(32,0), Vector2(32,32)),
 	"Slime": Rect2(Vector2(64,0), Vector2(32,32)),
+	"Ludovico": Rect2(Vector2(96,0), Vector2(32,32))
 }
 
 func get_portrait(portrait_name: String) -> Texture2D:
@@ -337,18 +311,15 @@ func get_portrait(portrait_name: String) -> Texture2D:
 	tex.atlas = ATLAS
 	tex.region = PORTRAITS[portrait_name]
 	return tex
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\SaveManager.gd
-###############################################
-
 extends Node
 
 const SAVE_PATH := "user://save_data.save"
 
 ## Struttura dati persistente
 var save_data := {
+	"player": {                  # dati giocatore
+		"has_pickaxe": false
+	},
 	"levels": {},                # dati per livello
 	"max_level_reach": 1,        # livello massimo sbloccato
 	"total_steps": 0,            # passi totali
@@ -382,11 +353,12 @@ func save_progress(level: int, steps: int, time: float) -> bool:
 	_write_file()
 	return is_record
 
-func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool) -> bool:
+func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, _has_pickaxe: bool) -> bool:
 	var is_record := false
 	
 	if victory:
 		is_record = save_progress(level, steps, time)
+		save_data["player"]["has_pickaxe"] = _has_pickaxe
 
 	save_data["total_steps"] += steps
 	save_data["total_time"] += time
@@ -411,6 +383,10 @@ func load_progress() -> Dictionary:
 	var result: Variant = JSON.parse_string(content)
 	if result is Dictionary:
 		save_data = result
+	
+	if not save_data.has("player"):
+		save_data["player"] = {"has_pickaxe": false}
+	
 	return save_data
 
 func reset_save():
@@ -437,17 +413,14 @@ func get_totals() -> Dictionary:
 		"deaths": save_data.get("death_counts", {})
 	}
 
+func has_pickaxe() -> bool:
+	return save_data.get("player", {}).get("has_pickaxe", false)
+
 ## --- Private --- ##
 func _write_file():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data, "\t"))
 	file.close()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\SettingsManager.gd
-###############################################
-
 extends Node
 
 var master_volume: float = 50
@@ -494,12 +467,6 @@ func get_locale_from_index(index: int) -> String:
 			return "en"
 		_:
 			return "en"
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\SoundManager.gd
-###############################################
-
 # Scripts/SoundManager.gd
 extends Node
 
@@ -576,12 +543,6 @@ func apply_from_settings(settings: Node):
 	set_music_volume(settings.music_volume / 100.0)
 	set_sfx_volume(settings.sfx_volume / 100.0)
 	set_environment_volume(settings.environment_volume / 100.0)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\ThemeManager.gd
-###############################################
-
 # ThemeManager.gd
 extends Node
 
@@ -602,32 +563,22 @@ func get_theme_for_location_type(location_type: int) -> Theme:
 
 func get_sound_for_location_type(location_type: int) -> String:
 	return BUTTON_SOUNDS.get(location_type, DEFAULT_SOUND)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Global\VoiceManager.gd
-###############################################
-
 extends Node
 
 const SLIME = "Slime"
 const NONNO = "Nonno Slime"
+const LUDOVICO = "Ludovico"
 const DEFAULT = "Default"
 
 const SPEEDS = {
 	SLIME: 2,
 	NONNO: 6,
+	LUDOVICO: 4,
 	DEFAULT: 3,
 }
 
 func get_speed(character: String) -> int:
 	return SPEEDS.get(character, SPEEDS[DEFAULT])
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Backgrounds\BackgroundManager.gd
-###############################################
-
 # -- BackgroundManager.gd -- #
 extends Node2D
 class_name BackgroundManager
@@ -750,12 +701,6 @@ func _update_panel_content(data: Dictionary, delta: float) -> void:
 		elapsed_time, 
 		delta
 	)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Backgrounds\DarkOverlayService.gd
-###############################################
-
 # Scripts/Backgrounds/DarkOverlayService.gd
 extends Resource
 class_name DarkOverlayService
@@ -782,12 +727,6 @@ const DEFAULT_COLOR: Color = Color.WHITE
 
 func get_for_level(level: int) -> Color:
 	return DARK_OVERLAY_BY_LEVEL.get(level, DEFAULT_COLOR)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Backgrounds\IBackgroundGenerator.gd
-###############################################
-
 # Scripts/Backgrounds/IBackgroundGenerator.gd
 extends Resource
 class_name IBackgroundGenerator
@@ -804,12 +743,6 @@ func create_panel(_panel_size: Vector2) -> Node:
 
 func update_panel(_node: Node, _row: int, _col: int, _elapsed_time: float, _delta: float) -> void:
 	push_error("update_panel non implementato in %s" % self)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Backgrounds\PanelBackgroundGenerator.gd
-###############################################
-
 # Scripts/Backgrounds/PanelBackgroundGenerator.gd
 extends IBackgroundGenerator
 class_name PanelBackgroundGenerator
@@ -849,12 +782,6 @@ func update_panel(node: Node, _row: int, _col: int, elapsed_time: float, _delta:
 func _calculate_scale(elapsed_time: float) -> float:
 	var wave := sin(elapsed_time * ANIMATION_SPEED) * 0.5 + 0.5
 	return SCALE_MIN + (SCALE_MAX - SCALE_MIN) * wave
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Backgrounds\SkullBackgroundGenerator.gd
-###############################################
-
 # Scripts/Backgrounds/SkullBackgroundGenerator.gd
 extends IBackgroundGenerator
 class_name SkullBackgroundGenerator
@@ -899,12 +826,6 @@ func update_panel(node: Node, _row: int, _col: int, elapsed_time: float, _delta:
 func _calculate_scale(elapsed_time: float) -> float:
 	var wave := sin(elapsed_time * ANIMATION_SPEED) * 0.5 + WAVE_OFFSET
 	return SCALE_MIN + SCALE_RANGE * wave
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Doors\PortaBase.gd
-###############################################
-
 extends Node2D
 class_name PortaBase
 
@@ -914,6 +835,14 @@ var is_open: bool = false
 func _ready():
 	add_to_group("porte")
 	update_visual()
+	
+	print("---- DEBUG YSORT PORTA: ----")
+	print("PORTA  global Y:", global_position.y)
+	print("PORTA  z_index:", z_index)
+	print("PORTA  y_sort:", y_sort_enabled)
+	print("PORTA  parent:", get_parent().name)
+	print("---------------------")
+	
 
 func setup(dir: String):
 	direction = dir
@@ -929,55 +858,28 @@ func update_visual():
 	var state = "Open_" if is_open else "Closed_"
 	sprite.play(state + direction)
 
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Doors\PortaE.gd
-###############################################
-
+func _draw():
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
 extends PortaBase
 
 func _ready():
 	super._ready()
 	setup("E")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Doors\PortaN.gd
-###############################################
-
 extends PortaBase
 
 func _ready():
 	super._ready()
 	setup("N")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Doors\PortaS.gd
-###############################################
-
 extends PortaBase
 
 func _ready():
 	super._ready()
 	setup("S")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Doors\PortaW.gd
-###############################################
-
 extends PortaBase
 
 func _ready():
 	super._ready()
 	setup("W")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Torch\BackWallTorch.gd
-###############################################
-
 extends BaseTorch
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -985,16 +887,12 @@ extends BaseTorch
 func _ready() -> void:
 	sprite.modulate.a = 0.4
 	super._ready()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Torch\BaseTorch.gd
-###############################################
-
 extends Node2D
 class_name BaseTorch
 
 @onready var light: PointLight2D = $PointLight2D
+
+var start_on := true
 
 # Parametri configurabili
 @export var energy_min: float = 0.9
@@ -1004,57 +902,106 @@ class_name BaseTorch
 @export var flicker_time_min: float = 0.1
 @export var flicker_time_max: float = 0.5
 
+var is_on: bool = true
+var flicker_tween: Tween
+
 func _ready() -> void:
-	_start_flicker()
+	add_to_group("torches")
+	set_state(start_on)
+
+func _draw():
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
+
+func set_state(state: bool) -> void:
+	if state:
+		turn_on()
+	else:
+		turn_off()
 
 func _start_flicker() -> void:
+	if not is_on:
+		return
+	
 	_flicker()
 
 func _flicker() -> void:
-	var tween := create_tween()
+	if not is_on:
+		return
+	
+	flicker_tween = create_tween()
 
 	var new_energy := randf_range(energy_min, energy_max)
-	tween.tween_property(light, "energy", new_energy, randf_range(flicker_time_min, flicker_time_max)) \
+	flicker_tween.tween_property(light, "energy", new_energy, randf_range(flicker_time_min, flicker_time_max)) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	var new_scale := randf_range(scale_min, scale_max)
-	tween.tween_property(light, "scale", Vector2.ONE * new_scale, randf_range(flicker_time_min, flicker_time_max)) \
+	flicker_tween.tween_property(light, "scale", Vector2.ONE * new_scale, randf_range(flicker_time_min, flicker_time_max)) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-	tween.connect("finished", Callable(self, "_flicker"))
+	flicker_tween.connect("finished", Callable(self, "_flicker"))
 
+func turn_on() -> void:
+	if is_on:
+		return
+	
+	is_on = true
+	light.enabled = true
+	_start_flicker()
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Decorations\Interactive\Torch\Torch.gd
-###############################################
-
+func turn_off() -> void:
+	if not is_on:
+		return
+	
+	is_on = false
+	
+	if flicker_tween and flicker_tween.is_valid():
+		flicker_tween.kill()
+	
+	light.energy = 0.0
+	light.enabled = false
 extends BaseTorch
 
 func _ready() -> void:
 	super._ready()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Enemy\Boss\BaseBoss.gd
-###############################################
-
 # EnemyBase.gd
 class_name EnemyBase
 extends Node2D
 
+enum BossState {
+	IDLE,
+	MOVING,
+	ATTACKING,
+	DEAD
+}
+
+var state: BossState = BossState.IDLE
+var action_in_progress := false
+var idle_entered := false
+
 var vita: int
+var active := false
 var posizione_tile: Vector2i
 
 @export var tilemap: TileMapLayer
 @onready var animation : AnimatedSprite2D = $Animation
 @onready var level_logic = get_tree().get_first_node_in_group("level_logic")
 
+signal defeated
+
 func _ready():
 	add_to_group("enemy")
+	active = false
+	set_process(false)
+	
+	set_physics_process(false)
 	if level_logic:
 		if not is_connected("tile_triggered", Callable(level_logic, "_on_tile_triggered")):
 			connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
 	print("Boss ready - level_logic:", level_logic)
+
+func _draw():
+	print("DRAW ENEMY")
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
 
 func snap_to_tile_center(coords: Vector2i):
 	var tile_pos = tilemap.map_to_local(coords)
@@ -1073,6 +1020,7 @@ func breath():
 	pass
 
 func receive_hit(event_type: String, data := {}):
+	print("HIT BOSS")
 	match event_type:
 		"damage":
 			take_damage(data.get("amount", 1))
@@ -1082,31 +1030,41 @@ func receive_hit(event_type: String, data := {}):
 			pass
 
 func take_damage(dmg: int):
+	if state == BossState.DEAD:
+		return
+	
+	damage_animation()
+	
 	vita -= dmg
-
+	
+	change_steps()
+	
 	# Aggiorna la barra HUD
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
 		hud.update_progress_bar(dmg)
 	
-	print("Boss colpito! Vita attuale:", vita)
 	if vita <= 0:
 		die()
 
+func damage_animation():
+	pass
+
 func die():
-	print("Il boss è morto!")
-	queue_free()
+	if state == BossState.DEAD:
+		return
 
-	# Notifica al level manager
-	var level_manager = get_tree().get_first_node_in_group("level_manager")
-	if level_manager:
-		level_manager.on_boss_defeated()
+	state = BossState.DEAD
+	animation.play("DEATH")
+	emit_signal("defeated")
 
+func change_steps():
+	pass
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Enemy\Boss\DungeonBoss.gd
-###############################################
-
+func activate():
+	active = true
+	set_process(true)
+	set_physics_process(true)
 # Boss.gd
 extends EnemyBase
 
@@ -1114,18 +1072,16 @@ var min_breath_time := 1.0
 var max_breath_time := 3.0
 var _breath_timer := 0.0
 var _waiting_time := 0.0
-var _is_breathing := false
-var _is_moving = false
 
 var step_counter = 0
-const STEPS_TO_TRIGGER = 2
-
+var steps_to_trigger = 3
 
 @onready var slime := get_tree().get_first_node_in_group("player")
-@onready var movement_map :=  $"../MovementLogicMapLayer"
-@onready var visual_map = $"../TileMapLayer"
+@onready var movement_map :=  $"../../MovementLogicMapLayer"
+@onready var visual_map = $"../../TileMapLayer"
 var pathfinder: Pathfinder
 
+signal finished_turn(enemy)
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
 func _ready():
@@ -1136,9 +1092,54 @@ func _ready():
 	_reset_breath_timer()
 
 func _process(delta: float) -> void:
-	_breath_timer += delta
-	if _breath_timer >= _waiting_time:
-		breath()
+	match state:
+		BossState.IDLE:
+			_update_idle(delta)
+		BossState.MOVING:
+			if not action_in_progress:
+				_start_move()
+		BossState.ATTACKING:
+			if not action_in_progress:
+				_start_attack()
+		BossState.DEAD:
+			pass
+
+
+### ------- Turn ------- ###
+
+func take_turn():
+	if state == BossState.DEAD:
+		return
+	
+	if is_adjacent_to_slime():
+		state = BossState.ATTACKING
+	else:
+		state = BossState.MOVING
+
+### ------- Move ------- ###
+
+func _start_move():
+	action_in_progress = true
+	
+	var next_tile = find_next_tile()
+	if next_tile != posizione_tile:
+		await move_to(next_tile)
+
+	#_apply_tile_effect_here()
+	
+	action_in_progress = false
+	idle_entered = false
+	state = BossState.IDLE
+	
+	print("MOVIMENTO TERMINATO")
+	print("---- DEBUG YSORT BOSS: ----")
+	print("BOSS  global Y:", global_position.y)
+	print("BOSS marker Y:", $Center.global_position.y)
+	print("BOSS  z_index:", z_index)
+	print("BOSS  y_sort:", y_sort_enabled)
+	print("BOSS  parent:", get_parent().name)
+	print("---------------------")
+	emit_signal("finished_turn", self)
 
 func _ensure_pathfinder() -> bool:
 	
@@ -1153,27 +1154,7 @@ func _ensure_pathfinder() -> bool:
 	return true
 
 func should_move(_step_count: int) -> bool:
-	return _step_count % STEPS_TO_TRIGGER == 0
-
-func _apply_tile_effect_here():
-	if level_logic:
-		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
-
-func take_turn():
-	_pathfind_and_move()
-
-func _pathfind_and_move():
-	if _is_moving:
-		return
-
-	if is_adjacent_to_slime():
-		attack()
-	else:
-		var next_tile = find_next_tile()
-		if next_tile != posizione_tile:
-			await move_to(next_tile)
-	
-	_apply_tile_effect_here()
+	return _step_count % steps_to_trigger == 0
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -1191,52 +1172,87 @@ func is_adjacent_to_slime() -> bool:
 	return dx <= 1 and dy <= 1 and not (dx == 0 and dy == 0)
 
 func move_to(next_tile: Vector2i):
+	animation.play("WALK")
 	await _animate_move_to(next_tile)
 	posizione_tile = next_tile
 	snap_to_tile_center(next_tile)
 
 func _animate_move_to(tile: Vector2i) -> void:
-	_is_moving = true
-
-	#animation.play("MOVE")
 	var target_pos = tilemap.map_to_local(tile) - $Center.position
-
-	# movimento smooth (0.2s)
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", target_pos, 0.2)
-
 	await tween.finished
 
-	animation.play("IDLE")
-	_is_moving = false
+
+### ------- Take Dmg ------- ###
+
+func damage_animation():
+	animation.modulate = Color(2, 2, 2)
+	await get_tree().create_timer(0.2).timeout
+	animation.modulate = Color(1, 1, 1)
+	
+	var tween := create_tween()
+	tween.tween_property(self, "position:y", position.y - 20, 0.15)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(self, "position:y", position.y, 0.2)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_IN)
+	
+	pass
+
+func _apply_tile_effect_here():
+	if level_logic:
+		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
+
+func change_steps():
+	print("--------- BOSS COLPITO:  CAMBIO PASSI!!! -----------")
+	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
+	steps_to_trigger -= 1
+	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
+
+### ------- Attack ------- ###
+
+func _start_attack():
+	action_in_progress = true
+	
+	slime.lock_input()
+	animation.play("ATTACK")
+	await animation.animation_finished
+	attack()
+	
+	action_in_progress = false
+	idle_entered = false
+	state = BossState.IDLE
 
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
 
-##################
-## -- Breath -- ##
-##################
+### ------- Breath ------- ###
+
+func _update_idle(delta):
+	if not idle_entered:
+		animation.play("IDLE")
+		idle_entered = true
+	
+	_breath_timer += delta
+	if _breath_timer >= _waiting_time:
+		_start_breath()
+		idle_entered = false
+
+func _start_breath():
+	if animation.is_playing():
+		return
+	animation.play("BREATH")
+	_reset_breath_timer()
 
 func breath():
-	_is_breathing = true
-	
-	animation.play("BREATH")
-	await animation.animation_finished
-	
-	_is_breathing = false
-	animation.play("IDLE")
-
 	_reset_breath_timer()
 
 func _reset_breath_timer():
 	_breath_timer = 0.0
 	_waiting_time = randf_range(min_breath_time, max_breath_time)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Camera.gd
-###############################################
-
 extends Camera2D
 
 func get_player_position_rounded() -> Vector2:
@@ -1245,12 +1261,6 @@ func get_player_position_rounded() -> Vector2:
 
 func _process(_delta: float) -> void:
 	global_position = $"../YSort/Player".global_position
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\level1.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1269,65 +1279,138 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level10.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
 	set_current_level_number(10)
 	victory_mode = VictoryMode.TILES
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level11.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
 	set_current_level_number(11)
 	victory_mode = VictoryMode.TILES
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level12.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
 	set_current_level_number(12)
 	victory_mode = VictoryMode.TILES
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level13.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
+
+@export var pickaxe_pickup_scene: PackedScene
 
 func _ready():
 	is_boss_level = true
 	super._ready()
 	set_current_level_number(13)
 	victory_mode = VictoryMode.BOSS
+	
+	await get_tree().process_frame
+	await play_boss_intro()
 
+
+func play_boss_intro() -> void:
+	player.enter_cutscene()
+	time_running = false
+	
+	switch_all_torches(false)
+	await get_tree().create_timer(0.5).timeout
+	
+	await force_player_steps(4, Vector2i(0, -1))
+	
+	var intro_dialogue = [
+		{
+			"name": "Slime", 
+			"text": "Non si vede un'ostia dio cane", 
+			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
+		}
+	]
+	
+	dialog_interface.show_dialogue(intro_dialogue)
+	await dialog_interface.dialogue_finished
+	
+	await get_tree().create_timer(0.7).timeout
+	switch_all_torches(true)
+	await get_tree().create_timer(1.0).timeout
+
+	intro_dialogue = [
+		{
+			"name": "Slime", 
+			"text": "Così va meglio", 
+			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
+		}
+	]
+	
+	dialog_interface.show_dialogue(intro_dialogue)
+	await dialog_interface.dialogue_finished
+
+	await get_tree().create_timer(0.5).timeout
+	
+	intro_dialogue = [
+		{
+			"name": "Ludovico", 
+			"text": "Mo te sfondo er culo!!", 
+			"portrait": PortraitManager.get_portrait("Ludovico"),
+			"voice": "res://Assets/Audio/Voice/LudovicoVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.LUDOVICO)
+		},
+		{
+			"name": "Slime", 
+			"text": "No il culo no dai!!", 
+			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
+			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
+		}
+	]
+	
+	dialog_interface.show_dialogue(intro_dialogue)
+	await dialog_interface.dialogue_finished
+	
+	time_running = true
+	player.exit_cutscene()
+	$YSort/DungeonBoss.activate()
+
+func switch_all_torches(state: bool) -> void:
+	for torch in get_tree().get_nodes_in_group("torches"):
+		torch.set_state(state)
+
+func force_player_steps(steps_to_do: int, dir: Vector2) -> void:
+	for i in range(steps_to_do):
+		player.force_move(dir)
+		await player.move_finished
 
 func _on_boss_died():
 	on_boss_defeated()
 
+# ---- Boss defeated ---- #
+func _on_boss_defeated_custom():
+	disable_all_spikes()
+	drop_pickaxe_pickup()
+	
+func disable_all_spikes():
+	if level_logic.has_method("disable_all_spikes"):
+		level_logic.disable_all_spikes()
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\level2.gd
-###############################################
-
+func drop_pickaxe_pickup():
+	if not pickaxe_pickup_scene:
+		return
+	
+	var bosses := get_tree().get_nodes_in_group("enemy")
+	if bosses.is_empty():
+		return
+	
+	var boss: Node2D = bosses[0]
+	
+	var pickup := pickaxe_pickup_scene.instantiate() as PickupBase
+	pickup_layer.add_child(pickup)
+	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile), boss.posizione_tile)
+	pickup.is_active = true
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1346,12 +1429,6 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\level3.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1377,12 +1454,6 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\level4.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1472,12 +1543,6 @@ func _ready():
 	]
 
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\level5.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1498,24 +1563,12 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level6.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
 	set_current_level_number(6)
 	victory_mode = VictoryMode.TILES
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level7.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1549,24 +1602,12 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level8.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	super._ready()
 	set_current_level_number(8)
 	victory_mode = VictoryMode.TILES
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\Level9.gd
-###############################################
-
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
@@ -1585,12 +1626,6 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\LevelLogic.gd
-###############################################
-
 # -- LevelLogic.gd -- #
 extends Node
 
@@ -1599,18 +1634,31 @@ extends Node
 @export var boss: EnemyBase
 
 var boss_hit_by_switch := false
+var switch_waiting_reset := false
+var last_switch_pressed = null
+
+# -- Enemies --
+var _enemy_phase_done := false
+var _tiles_phase_done := false
+
 
 signal global_step(step_count: int)
 
 func _ready():
+	add_to_group("level_logic")
+	
 	call_deferred("_connect_all_tiles")
 	call_deferred("_connect_player_signal")
-	add_to_group("level_logic")
+	
+	if boss:
+		boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
 
 # ------ Enemy ------ #
 func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
+	print(" - TILE EFFECT - ")
 	var tile = get_tile_under_enemy(pos)
 	if tile and tile.has_method("on_enemy_enter"):
+		print("TILE EXIST AT POS: " + str(pos))
 		tile.on_enemy_enter(enemy)
 
 func get_tile_under_enemy(pos: Vector2i) -> TileBase:
@@ -1619,19 +1667,7 @@ func get_tile_under_enemy(pos: Vector2i) -> TileBase:
 		if child is TileBase:
 			if child.global_position.distance_to(target_world_pos) < 1.0:
 				return child
-	
 	return null
-
-func _on_tile_state_changed(tile: TileBase, _new_state: String):
-	var tile_pos = tile_layer.local_to_map(tile.position)
-	
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		if enemy._is_moving:
-			continue
-		
-		if enemy.posizione_tile == tile_pos:
-			tile.on_enemy_enter(enemy)
-			boss_hit_by_switch = true
 
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
@@ -1639,9 +1675,9 @@ func _connect_all_tiles() -> void:
 			if not child.is_connected("tile_triggered", Callable(self, "_on_tile_triggered")):
 				child.connect("tile_triggered", Callable(self, "_on_tile_triggered"))
 			
-			# Se non è già connesso il cambio di stato
-			if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
-				child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
+			### Se non è già connesso il cambio di stato
+			#if not child.is_connected("state_changed", Callable(self, "_on_tile_state_changed")):
+				#child.connect("state_changed", Callable(self, "_on_tile_state_changed"))
 
 func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 	match action:
@@ -1653,16 +1689,27 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [sender.name, str(sender.is_active), str(sender.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
-			var azione = data.get("azione", "disattiva")
+			var azione = data.get("azione", "")
+			
+			if azione == "attiva":
+				last_switch_pressed = sender
+			
 			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
 			_handle_switch(chiave, azione)
+			_tiles_phase_done = true
+			_try_resolve_enemy_damage(boss)
+		"enemy_hit":
+			boss_hit_by_switch = true
 		_:
 			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
 
 func _handle_switch(chiave: String, azione: String):
 	
+	print("Gestione dell'azione: ", azione)
+	
 	if azione == "attiva":
 		boss_hit_by_switch = false
+		switch_waiting_reset = true
 	
 	for child in tile_layer.get_children():
 		if child.is_in_group("spine") and child.chiave == chiave:
@@ -1675,21 +1722,62 @@ func _handle_switch(chiave: String, azione: String):
 					GameLogger.info("Spine disattivate chiave = %s" % chiave)
 
 func on_player_step(step_count: int):
+	print(" --------- PLAYER STEP TURN --------- ")
+	
+	_enemy_phase_done = false
+	_tiles_phase_done = false
+	
 	emit_signal("global_step", step_count)
+	
+	# --- RESET POST SWITCH ---
+	if switch_waiting_reset:
+		if not boss_hit_by_switch:
+			_reset_switch_and_spikes()
+		switch_waiting_reset = false
+		boss_hit_by_switch = false
+	
+	# --- Movimento nemici ---
 	for enemy in get_tree().get_nodes_in_group("enemy"):
+		print("POSIZIONE INIZIALE: " + str(enemy.posizione_tile))
 		if enemy.should_move(step_count):
+			print(" -- MOVIMENTO -- ")
 			enemy.take_turn()
+		else:
+			print(" -- POSIZIONE FISSA -- ")
+			_on_enemy_finished_turn(enemy)
 
+func _on_enemy_finished_turn(enemy):
+	print("POSIZIONE POST: " + str(enemy.posizione_tile))
+	_enemy_phase_done = true
+	_try_resolve_enemy_damage(enemy)
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\LevelManager.gd
-###############################################
+func _try_resolve_enemy_damage(enemy):
+	if not _enemy_phase_done:
+		return
+	if not _tiles_phase_done:
+		return
 
+	apply_tile_effect_to_enemy(enemy, enemy.posizione_tile)
+
+	_enemy_phase_done = false
+	_tiles_phase_done = false
+
+func _reset_switch_and_spikes():
+	if last_switch_pressed and last_switch_pressed.is_in_group("interruttori"):
+		last_switch_pressed.reset_switch()
+
+	last_switch_pressed = null
+
+func disable_all_spikes():
+	for child in tile_layer.get_children():
+		if child.is_in_group("spine"):
+			child.disattiva()
 # -- LevelManager.gd -- #
 extends Node2D
 
 @onready var player = $YSort/Player
 @onready var hud_manager: LevelHUDManager = $CanvasHUD/HUD
+@onready var pickup_layer: Node2D = $YSort/PickupMapLayer
 @onready var pause_menu: Control = $CanvasHUD/Pause
 @onready var dialog_interface: DialogueInterface = $CanvasHUD/DialogInterface
 @onready var level_logic: Node = $LevelLogic
@@ -1712,6 +1800,7 @@ var all_tiles_active := false
 var boss_defeated := false
 var time_running := true
 var is_boss_level := false
+
 
 func _ready():
 	GameLogger.info("Inizio livello %d" % GameManager.current_level)
@@ -1740,6 +1829,14 @@ func _ready():
 	
 	tile_manager.initialize()
 	exit_position = tile_manager.get_exit_position()
+	
+	var pickups = get_tree().get_nodes_in_group("pickups")
+
+	for pickup in pickups:
+		var tile_coords = tile_manager.get_coords_from_global_position(pickup.global_position)
+		var tile_pos = pickup_layer.map_to_local(tile_coords)
+		pickup.snap_to_tile_center(tile_pos, tile_coords)
+	
 
 func _process(delta):
 	if time_running:
@@ -1767,9 +1864,11 @@ func setup_hud():
 	hud_manager.setup_base_level()
 	
 	if is_boss_level:
-		var boss = get_tree().get_first_node_in_group("boss")
-		var boss_hp = boss.vita if boss else 3
-		hud_manager.setup_boss_level(boss_hp)
+		var boss = get_tree().get_first_node_in_group("enemy")
+		if boss:
+			boss.defeated.connect(on_boss_defeated)
+			var boss_hp = boss.vita if boss else 3
+			hud_manager.setup_boss_level(boss_hp)
 
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
@@ -1811,7 +1910,11 @@ func _on_player_died():
 # ================================================================
 func on_boss_defeated():
 	boss_defeated = true
+	_on_boss_defeated_custom()
 	check_victory_condition()
+
+func _on_boss_defeated_custom():
+	pass
 
 func check_victory_condition():
 	match victory_mode:
@@ -1829,8 +1932,8 @@ func check_victory_condition():
 func _open_exit():
 	GameLogger.info("Uscita sbloccata!")
 	
+	# Livelli senza uscita fisica
 	if exit_position == Vector2.ZERO:
-		# Livelli senza uscita fisica
 		player.on_player_won()
 		return
 	
@@ -1865,12 +1968,6 @@ func _on_player_won():
 # -- UTILS -- #
 func set_current_level_number(current_level: int):
 	GameManager.current_level = current_level
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Levels\LevelTileManager.gd
-###############################################
-
 # TileManager.gd
 extends Node
 class_name LevelTileManager
@@ -1949,17 +2046,44 @@ func activate_exit_particles(exit_cell: Vector2i):
 				var particles = nodo.get_node("GlowParticles") as GPUParticles2D
 				particles.emitting = true
 			return
+extends Node2D
 
+var min_breath_time := 1.0
+var max_breath_time := 3.0
+var _breath_timer := 0.0
+var _waiting_time := 0.0
+var _is_breathing := false
+@onready var animation : AnimatedSprite2D = $Animation
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Pickups\PickupBase.gd
-###############################################
+func _ready():
+	_reset_breath_timer()
 
+func _process(delta: float) -> void:
+	_breath_timer += delta
+	if _breath_timer >= _waiting_time:
+		breath()
+
+func breath():
+	_is_breathing = true
+	
+	animation.play("BREATH")
+	await animation.animation_finished
+	
+	_is_breathing = false
+	animation.play("IDLE")
+
+	_reset_breath_timer()
+
+func _reset_breath_timer():
+	_breath_timer = 0.0
+	_waiting_time = randf_range(min_breath_time, max_breath_time)
 # PickupBase.gd
 extends Node2D
 class_name PickupBase
 
-enum ItemType { NONE, SUNGLASSES, LANTERN, MACE }
+@onready var center: Marker2D = $Center
+
+enum ItemType { NONE, SUNGLASSES, LANTERN, PICKAXE }
 var item_type: ItemType = ItemType.NONE
 
 const float_amount := 1.0
@@ -1968,14 +2092,15 @@ const float_speed := 2.0
 var start_y: float = 0.0
 var elapsed: float = 0.0
 var is_active: bool = true
+var posizione_tile: Vector2i
 
 func _ready():
-	start_y = position.y
+	add_to_group("pickups")
 	on_ready_custom()
 
 func _process(delta):
 	elapsed += delta
-	position.y = start_y + sin(elapsed * float_speed) * float_amount
+	global_position.y = start_y + sin(elapsed * float_speed) * float_amount
 
 func on_ready_custom() -> void:
 	pass
@@ -1985,6 +2110,7 @@ func set_active(state: bool) -> void:
 	visible = state
 
 func on_player_enter(player: Node) -> void:
+	print("Posizione: ", str(global_position))
 	SoundManager.play_sfx("res://Assets/Audio/Pickup.wav")
 	on_player_enter_custom(player)
 
@@ -1996,11 +2122,10 @@ func hide_temporarily(duration: float = 5.0) -> void:
 	await get_tree().create_timer(duration).timeout
 	set_active(true)
 
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Pickups\PickupLantern.gd
-###############################################
-
+func snap_to_tile_center(tile_pos, tile_coord):
+	global_position = tile_pos - center.position
+	posizione_tile = tile_coord
+	start_y = global_position.y
 # PickupSunglasses.gd
 extends PickupBase
 
@@ -2010,27 +2135,15 @@ func on_ready_custom() -> void:
 func on_player_enter_custom(player: Node) -> void:
 	player.turn_on_lights(7.0)
 	hide_temporarily()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Pickups\PickupMace.gd
-###############################################
-
-# PickupMace.gd
+# PickupPickaxe.gd
 extends PickupBase
 
 func on_ready_custom() -> void:
-	item_type = ItemType.MACE
+	item_type = ItemType.PICKAXE
 
 func on_player_enter_custom(_player: Node) -> void:
-	#player.add_mace()
+	GameManager.has_pickaxe = true
 	queue_free()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Pickups\PickupSunglasses.gd
-###############################################
-
 # PickupSunglasses.gd
 extends PickupBase
 
@@ -2040,12 +2153,6 @@ func on_ready_custom() -> void:
 func on_player_enter_custom(_player: Node) -> void:
 	# Esegui eventuale effetto specifico
 	queue_free()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\DeathType.gd
-###############################################
-
 # DeathType.gd
 # Enum per i tipi di morte dello slime
 class_name DeathType
@@ -2056,12 +2163,6 @@ enum Type {
 	ENEMY,    # Contatto con nemico
 	TIMEOUT   # Scaduto il tempo
 }
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\Player.gd
-###############################################
-
 extends Node2D
 
 const DEATH = DeathType.Type
@@ -2069,8 +2170,10 @@ const DEATH = DeathType.Type
 signal player_died(death_type: int)
 signal player_won
 signal steps_changed(new_count: int)
+signal move_finished
 
 @export var tile_map_layer_path: NodePath
+@export var terrain_map_layer_path: NodePath
 @export var pickup_map_layer_path: NodePath
 @export var movement_logic_map_layer_path: NodePath
 @export var doors_map_layer_path: NodePath
@@ -2080,6 +2183,8 @@ signal steps_changed(new_count: int)
 
 var steps: int = 0
 var input_enabled := true
+var is_cutscene := false 
+var grid_position: Vector2i
 
 @onready var tile_map_layer
 @onready var pickup_map_layer
@@ -2107,6 +2212,12 @@ func _ready():
 	npc_map_layer = get_required_node(npc_map_layer_path, "npc_map_layer")
 	point_light = get_required_node(point_light_path, "point_light") as PointLight2D
 
+	
+	print("Player z_as_relative:", self.z_as_relative)
+	for child in get_children():
+		if child is CanvasItem:
+			print(child.name, "z_as_relative:", child.z_as_relative)
+	
 	movement_handler.setup(self, tile_map_layer, movement_logic_map_layer, doors_map_layer, npc_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
 	animation_handler.setup($AnimatedSprite2D)
@@ -2116,6 +2227,12 @@ func _ready():
 	interaction_handler.check_tile()
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
+	
+	grid_position = movement_handler.grid_position
+
+func _draw():
+	print("DRAW PLAYER")
+	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
 
 func turn_on_lights(duration: float = 0.0) -> void:
 	light_handler.enable(0.5)
@@ -2134,11 +2251,33 @@ func _unhandled_input(event):
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
-	print("Posizione globale player: ", global_position)
-	steps += 1
-	emit_signal("steps_changed", steps)
+	
+	if not is_cutscene:
+		steps += 1
+		emit_signal("steps_changed", steps)
+	
+	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
+	
+	print("---- DEBUG YSORT PLAYER: ----")
+	print("PLAYER  global Y:", global_position.y)
+	print("PLAYER marker Y:", $Center.global_position.y)
+	print("PLAYER  z_index:", z_index)
+	print("PLAYER  y_sort:", y_sort_enabled)
+	print("PLAYER  parent:", get_parent().name)
+	print("---------------------")
+	
+	can_move = true
+	emit_signal("move_finished")
+
+func enter_cutscene() -> void:
+	is_cutscene = true
+	lock_input()
+
+func exit_cutscene() -> void:
+	is_cutscene = false
+	unlock_input()
 
 func on_player_won():
 	input_enabled = false
@@ -2172,11 +2311,20 @@ func get_required_node(path: NodePath, description: String) -> Node:
 	assert(node, "%s non assegnato nel Player" % description)
 	return node
 
+func lock_input() -> void:
+	input_enabled = false
+	can_move = false
 
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\PlayerAnimation.gd
-###############################################
+func unlock_input() -> void:
+	input_enabled = true
+	can_move = true
 
+func force_move(dir: Vector2i) -> void:
+	if movement_handler.is_moving:
+		return
+	
+	can_move = false
+	movement_handler.move_to(movement_handler.grid_position + dir)
 class_name PlayerAnimation
 extends Resource
 
@@ -2215,12 +2363,6 @@ func play_death(death_type: int):
 # --- PRIVATI ---
 func _play_sfx(path: String) -> void:
 	SoundManager.play_sfx(path)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\PlayerInput.gd
-###############################################
-
 class_name PlayerInput
 extends Resource
 
@@ -2236,12 +2378,6 @@ func get_direction(event) -> Vector2i:
 		if event.is_action_pressed(action):
 			return directions[action]
 	return Vector2i.ZERO
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\PlayerInteraction.gd
-###############################################
-
 # PlayerInteraction.gd
 extends Resource
 class_name PlayerInteraction
@@ -2281,24 +2417,20 @@ func _get_tile_under_player() -> TileBase:
 	return null
 
 func _get_pickup_under_player() -> PickupBase:
-	var player_pos = player.global_position
 	for child in pickup_layer.get_children():
 		if child is PickupBase and child.is_active:
-			var tile_pos = child.global_position
-			if is_point_on_iso_tile(tile_pos, player_pos):
+			var tile_coord = child.posizione_tile
+			if have_same_coord(player.grid_position , tile_coord):
 				GameLogger.info("Pickup -> Player sopra= " + str(child.name))
 				return child
 	return null
 
+func have_same_coord(player_tile_coord: Vector2, pickup_tile_coord: Vector2):
+	return player_tile_coord == pickup_tile_coord
+
 func is_point_on_iso_tile(tile_pos: Vector2, point: Vector2) -> bool:
 	var local = point - tile_pos
 	return abs(local.x / 2) + abs(local.y) <= TILE_HALF_SIZE
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\PlayerLight.gd
-###############################################
-
 class_name PlayerLight
 extends Resource
 
@@ -2332,12 +2464,6 @@ func disable(fade_time: float = 1) -> void:
 	var tween = light.create_tween()
 	tween.tween_property(light, "energy", 0.0, fade_time)
 	tween.tween_callback(func(): light.visible = false)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Player\PlayerMovement.gd
-###############################################
-
 class_name PlayerMovement
 extends Resource
 
@@ -2474,12 +2600,6 @@ func find_child_at_coords(layer, coords: Vector2i) -> Node:
 			if get_coords_from_global_position_in_layer(center.global_position, layer) == coords:
 				return child
 	return null
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileActivator.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 signal tile_state_changed
@@ -2546,7 +2666,7 @@ func _on_animated_tile_animation_finished() -> void:
 	var current_anim = animation_player.animation
 
 	if current_anim == "Activate":
-		# Glow blu
+		# Glow white
 		animation_player.modulate = Color(2, 2, 2)
 		particles.emitting = true;
 		await get_tree().create_timer(0.2).timeout
@@ -2557,12 +2677,6 @@ func _on_animated_tile_animation_finished() -> void:
 		animation_player.modulate = Color(2, 0.6, 0.3)
 		await get_tree().create_timer(0.3).timeout
 		animation_player.modulate = Color(1, 1, 1) 
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileBase.gd
-###############################################
-
 # Scripts/Tiles/TileBase.gd
 extends Node2D
 class_name TileBase
@@ -2575,7 +2689,7 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 signal state_changed(tile: TileBase, new_state: String)
 
 var is_active := false
-const TILESET := preload("res://Assets/Sprites/Tiles/Tileset.png")
+const TILESET := preload("res://Assets/Sprites/Tiles/Logic_Tileset.png")
 var atlas_texture := AtlasTexture.new()
 
 func _ready():
@@ -2601,67 +2715,35 @@ func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_hei
 		Vector2(tile_x * block_w + offset, tile_y * block_h + offset),
 		Vector2(tile_width, tile_height)
 	)
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileBorder.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 func _ready():
 	super._ready()
 	#set_region_from_coords(GameManager.BORDER_TILE_POSITION, GameManager.get_tileset_row_for_level())
 	#sprite.texture = atlas_texture
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileFlipBorder.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 func _ready():
 	super._ready()
 	set_region_from_coords(GameManager.FLIP_BORDER_TILE_POSITION, GameManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileNormal.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 func _ready():
 	super._ready()
-	set_region_from_coords(GameManager.NORMAL_TILE_POSITION, GameManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileSpike.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 func _ready():
 	super._ready()
 	set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
-	peso = 5
+	peso = 8
 
 func on_player_enter():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES})
 
 func on_enemy_enter(_enemy: EnemyBase):
 	_enemy.receive_hit("damage")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileSpikeStep.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 @onready var animation = $AnimatedTile
@@ -2688,7 +2770,7 @@ func _on_global_step(step_count: int):
 func _raise_spikes():
 	isUp = true
 	animation.play("UP")
-	peso = 5
+	peso = 8
 
 func _lower_spikes():
 	isUp = false
@@ -2702,12 +2784,6 @@ func on_player_enter():
 func on_enemy_enter(_enemy: EnemyBase):
 	if (isUp):
 		_enemy.receive_hit("damage")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileSpikeSwitch.gd
-###############################################
-
 extends "res://Scripts/Tiles/TileBase.gd"
 
 var chiave := "A"
@@ -2718,8 +2794,6 @@ func _ready():
 	print("TileSpikes ready:", name, "script:", get_script())
 	super._ready()
 	add_to_group("spine")
-	set_region_from_coords(GameManager.SPIKE_TILE_POSITION, GameManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
 
 func set_initial_state():
 	match azione:
@@ -2736,14 +2810,16 @@ func set_initial_frame(anim_name: String):
 	$AnimatedTile.frame = 0
 
 func disattiva():
+	print("TILE: CHANGE STATE DIS")
 	attivo = false
 	$AnimatedTile.play("OFF")
 	peso = 1
 
 func attiva():
+	print("TILE: CHANGE STATE ACT")
 	attivo = true
 	$AnimatedTile.play("ON")
-	peso = 5
+	peso = 8
 	emit_signal("state_changed", self, "ON")
 
 func on_player_enter():
@@ -2751,14 +2827,11 @@ func on_player_enter():
 		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES, "chiave": chiave})
 
 func on_enemy_enter(_enemy: EnemyBase):
+	print("TILE: ENEMY ENTER")
 	if attivo:
+		print("TILE: ACTIVE")
 		_enemy.receive_hit("damage")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileSwitch.gd
-###############################################
-
+		emit_signal("tile_triggered", self, "enemy_hit", {"enemy": _enemy})
 extends "res://Scripts/Tiles/TileBase.gd"
 
 var chiave := "A"
@@ -2768,8 +2841,8 @@ var azione := "disattiva"
 func _ready():
 	super._ready()
 	add_to_group("interruttori")
-	set_region_from_coords(GameManager.SWITCH_TILE_POSITION, GameManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
+	#set_region_from_coords(GameManager.SWITCH_TILE_POSITION, GameManager.get_tileset_row_for_level())
+	#sprite.texture = atlas_texture
 
 func on_player_enter():
 	if not attivato:
@@ -2777,26 +2850,28 @@ func on_player_enter():
 		$AnimatedTile.play("PRESSED")
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
 
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\Tiles\TileWall.gd
-###############################################
-
+func reset_switch():
+	if attivato:
+		attivato = false
+		$AnimatedTile.play("UNPRESSED")
+		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": "disattiva"})
 extends "res://Scripts/Tiles/TileBase.gd"
 
 func _ready():
 	super._ready()
 	set_region_from_coords(GameManager.WALL_TILE_POSITION, GameManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
+	peso = 999
 
 func can_enter() -> bool:
-	return false
+	
+	return GameManager.has_pickaxe
 
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\Animation.gd
-###############################################
-
+func on_player_enter():
+	#TODO animazione rottura se ho il piccone
+	#TODO rumore
+	#queue_free() -> se lo aggiungi devi cambaire e mettere quello normale altrimenti cade
+	pass
 extends Node2D
 
 @onready var animation: AnimatedSprite2D = $ExampleAnimation
@@ -2825,12 +2900,6 @@ func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 	
 	await animation.animation_finished
 	await get_tree().create_timer(1.0).timeout
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\BaseMenu.gd
-###############################################
-
 extends Control
 class_name BaseMenu
 ## Classe base per tutti i menu.
@@ -2963,12 +3032,6 @@ func handle_navigation(_event):
 
 func handle_selection(_index: int):
 	GameLogger.warn("handle_selection() non implementato — deve essere definito nella sottoclasse")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\Defeat.gd
-###############################################
-
 extends BaseMenu
 
 func setup_languages():
@@ -3012,19 +3075,16 @@ func handle_selection(_index):
 		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
 	elif (_index == 2):
 		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\DialogInterface.gd
-###############################################
-
 # -- DialogInterface.gd -- #
 extends Control
 class_name DialogueInterface
 
+signal dialogue_finished
+
 @onready var text_label = $Panel/TextLabel
 @onready var name_label = $Panel/NameLabel
 @onready var portrait = $Panel/Portrait
+
 @export var player: Node2D
 @export var level_manager: Node2D
 
@@ -3035,7 +3095,6 @@ var key_pressed = false
 var skip_typing = false
 
 func show_dialogue(dialogue: Array):
-	
 	if get_tree().paused:
 		return
 	
@@ -3065,6 +3124,8 @@ func _show_line():
 		
 		if level_manager:
 			level_manager.time_running = true
+			
+		emit_signal("dialogue_finished")
 		return
 
 	var line = current_dialogue[current_index]
@@ -3107,12 +3168,6 @@ func advance_dialogue():
 	else:
 		current_index += 1
 		_show_line()
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\HowToPlay.gd
-###############################################
-
 extends Control
 
 
@@ -3152,12 +3207,6 @@ func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 func _on_button_pressed() -> void:
 	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
-
-
-###############################################
-# FILE: D:\GIT\Godot\SlimeAdventure\Scripts\UI\LevelHUDManager.gd
-###############################################
-
 # -- LevelHUDManager.gd -- #
 extends Control
 
@@ -3194,4 +3243,892 @@ func setup_base_level():
 	tile_label.visible = true
 	$MarginContainer/Sprite2D.visible = true
 	boss_life_bar.visible = false
+# Script LevelMenu
+extends BaseMenu
 
+@onready var level_container: GridContainer = $ColorRect/MarginContainer/VBoxContainer/CenterContainer2/LevelButtonContainer
+@onready var location: Label = $ColorRect/MarginContainer/VBoxContainer/CenterContainer4/Location
+
+const ROW_SIZE := 5
+
+var loader = preload("res://Scripts/UI/Buttons/LevelLoader.gd")
+var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
+
+func _ready():
+	loader = LevelLoader.new()
+	factory = LevelButtonFactory.new()
+	
+	location.text = GameManager.Location.keys()[GameManager.location_selected]
+	load_level_buttons()
+
+func load_level_buttons():
+	for child in level_container.get_children():
+		child.queue_free()
+		
+	buttons.clear()
+	selectors.clear()
+	base_positions.clear()
+
+	var levels_info = loader.get_level_data_for_location(GameManager.location_selected)
+	var levels_range = GameManager.get_level_range_for_location(GameManager.location_selected)
+
+	for i in range(levels_info.size()):
+		var info = levels_info[i]
+		var relative_index = levels_range.find(loader.extract_level_number(info.path)) + 1
+		var location_id = int(GameManager.location_selected)
+		var display_number = "%d.%d" % [location_id, relative_index]
+
+		var container = factory.create_level_button(display_number, info.disabled, info.theme)
+		level_container.add_child(container)
+
+		var button = container.get_child(0) as Button
+		var selector_control = container.get_child(1)
+		var selector_label = selector_control.get_node("Selector") as Label
+
+		if button == null or selector_label == null:
+			push_warning("Level button factory structure mismatch at index %d" % i)
+			continue
+
+		buttons.append(button)
+		selectors.append([selector_label])
+		base_positions[selector_label] = selector_label.position
+
+	var back_button = $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
+	var back_selector = [$ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
+	
+	buttons.append(back_button)
+	selectors.append(back_selector)
+	
+	await get_tree().process_frame
+	for sel in back_selector:
+		base_positions[sel] = sel.position
+	
+	if buttons.size() > 0:
+		set_current_selection(0)
+	
+	setup_mouse()
+
+func is_level_disabled() -> bool:
+	return current_selection > GameManager.max_level_reach
+
+func handle_navigation(_event):
+	var max_index = buttons.size() - 1  # include anche il back button
+		
+	if Input.is_action_just_pressed("move_right") and current_selection < max_index:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection += 1
+	elif Input.is_action_just_pressed("move_left") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection -= 1
+	elif Input.is_action_just_pressed("move_down") and current_selection < max_index:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection = current_selection + ROW_SIZE if current_selection + ROW_SIZE <= max_index else max_index
+	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection = current_selection - ROW_SIZE if current_selection - ROW_SIZE >= 0 else 0
+	
+	set_current_selection(current_selection)
+
+func handle_selection(_index):
+	if _index == buttons.size() - 1:
+		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+		return
+	
+	if(is_level_disabled()):
+		return
+	
+	var info = loader.get_level_data_for_location(GameManager.location_selected)[_index]
+	_on_level_button_pressed(info.path, info.sound)
+
+func _on_level_button_pressed(path: String, _sound: String):
+	var level_num = loader.extract_level_number(path)
+	GameManager.current_level = level_num
+
+	var is_first_level_of_location = level_num == GameManager.get_level_range_for_location(GameManager.location_selected)[0]
+	
+	#SoundManager.play_sfx(sound);
+	
+	if is_first_level_of_location:
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		var loader_scene = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
+		loader_scene.scene_to_load = path
+		loader_scene.transition_text = GameManager.Location.keys()[GameManager.get_location_for_level(level_num)]
+		loader_scene.location_id = int(GameManager.get_location_for_level(level_num))
+		get_tree().root.add_child(loader_scene)
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		get_tree().change_scene_to_file(path)
+extends BaseMenu
+
+func setup_languages():
+	#$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
+	pass
+
+func setup_buttons():
+	buttons = [
+		$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Tutorial,
+		$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Dungeon,
+		$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Forest,
+		$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
+	]
+
+func setup_selectors():
+	selectors = [
+		[$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control/Selector],
+		[$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control/Selector],
+		[$MarginContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control/Selector],
+		[$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
+	]
+	
+	await get_tree().process_frame
+	for group in selectors:
+		for sel in group:
+			base_positions[sel] = sel.position
+
+func handle_navigation(_event):
+	if Input.is_action_just_pressed("move_right") and current_selection < 3:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection += 1
+	elif Input.is_action_just_pressed("move_left") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection -= 1
+	elif Input.is_action_just_pressed("move_down") and current_selection < 3:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection = 3
+	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection = 0
+	
+	set_current_selection(current_selection)
+
+func handle_selection(_index):
+	if (_index == 3):
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+		return
+	
+	var location_name = GameManager.Location.keys()[_index]
+	
+	if GameManager.is_location_locked(location_name):
+		#SoundManager.play_sfx("res://Assets/Audio/LockedBtn.wav") # TODO un suono diverso e setup tasto bloccato, disegni sopra lucchetto?
+		print("Location bloccata:", location_name)
+		return
+	
+	# Se è sbloccata, procedi
+	GameManager.location_selected = GameManager.Location.values()[_index]
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	
+	if (_index == 0):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
+	elif (_index == 1):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
+	elif (_index == 2):
+		get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
+extends BaseMenu
+
+func setup_languages():
+	$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
+	$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button/Profile.text = "Profile"
+	$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Scoreboard.text = "Scoreboard"
+	$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button/Option.text = tr("OPTIONS_BTN")
+	$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button/Exit.text = tr("EXIT_BTN")
+
+func setup_buttons():
+	buttons = [
+		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button,
+		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button,
+		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button,
+		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button,
+		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button
+	]
+
+func setup_selectors():
+	selectors = [
+		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorR],
+	]
+	
+	await get_tree().process_frame
+	for group in selectors:
+		for sel in group:
+			base_positions[sel] = sel.position
+
+func handle_navigation(_event):
+	if Input.is_action_just_pressed("move_down") and current_selection < 4:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection += 1
+	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection -= 1
+	
+	set_current_selection(current_selection)
+
+func handle_selection(_index):
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	if (_index == 0):
+		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+	elif (_index == 1):
+		pass
+	elif (_index == 2):
+		pass
+	elif (_index == 3):
+		get_tree().change_scene_to_file("res://Scenes/UI/OptionMenu.tscn")
+	elif (_index == 4):
+		get_tree().quit()
+extends Control
+
+var panels: Array[PanelContainer] = []
+
+#Buttons
+@onready var gameplay_btn: Button = %GameplayBtn
+@onready var graphics_btn: Button = %GraphicsBtn
+@onready var audio_btn: Button = %AudioBtn
+@onready var controls_btn: Button = %ControlsBtn
+
+@onready var master_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider
+@onready var music_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider
+@onready var sound_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
+@onready var environment_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/EnvironmentSlider
+@onready var difficult_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
+@onready var fullscreen_option = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option
+@onready var resolution_option: OptionButton = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option
+@onready var langauge_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
+
+
+func _ready():	
+	populate_option_menu()
+	setup_language()
+	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
+	setup_panel_btn()
+	show_panel(panels[0])
+	gameplay_btn.grab_focus()
+
+func populate_option_menu() -> void:
+	difficult_option.add_item(tr("DIFFICULT_1"))
+	difficult_option.add_item(tr("DIFFICULT_2"))
+	difficult_option.add_item(tr("DIFFICULT_3"))
+	difficult_option.select(SettingsManager.difficulty)
+	
+	langauge_option.add_item(tr("LANGUAGE_1"))
+	langauge_option.add_item("LANGUAGE_2")
+	langauge_option.select(SettingsManager.language)
+
+	resolution_option.add_item("2560x1440")
+	resolution_option.add_item("1920x1080")
+	resolution_option.add_item("1280x720")
+	resolution_option.add_item("640x360")
+	resolution_option.select(SettingsManager.resolution)
+	
+	fullscreen_option.add_item(tr("FULLSCREEN_CHK"))
+	fullscreen_option.add_item("Schermo Intero Senza Bordi")
+	fullscreen_option.add_item("Finestra")
+	
+	master_slider.value = SettingsManager.master_volume
+	music_slider.value = SettingsManager.music_volume
+	sound_slider.value = SettingsManager.sfx_volume
+	environment_slider.value = SettingsManager.environment_volume
+
+func setup_language() -> void:
+	
+	%GameplayBtn.text = tr("GAMEPLAY_BTN")
+	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/Label.text = tr("DIFFICULT_LABEL")
+	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("LANGUAGE_LABEL")
+	
+	%GraphicsBtn.text = tr("GRAPHICS_BTN")
+	$MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Label.text = tr("FULLSCREEN_CHK")
+	$MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("RESOLUTION_LABEL")
+	
+	%AudioBtn.text = tr("AUDIO_BTN")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/Label.text = tr("VOLUME_1")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/Label.text = tr("VOLUME_2")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/Label.text = tr("VOLUME_3")
+	$MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/Label.text = tr("VOLUME_4")
+	
+	%ControlsBtn.text = tr("CONTROLS_BTN")
+	
+	$MarginContainer/HBoxContainer/VBoxContainer/Back.text = tr("BACK_BTN")
+	
+	pass
+
+func setup_panel_btn() -> void:
+	gameplay_btn.pressed.connect(show_panel.bind(panels[0]))
+	graphics_btn.pressed.connect(show_panel.bind(panels[1]))
+	audio_btn.pressed.connect(show_panel.bind(panels[2]))
+	controls_btn.pressed.connect(show_panel.bind(panels[3]))
+
+func show_panel(panel_to_show: PanelContainer) -> void:
+	for panel in panels:
+		panel.hide()
+	
+	panel_to_show.show()
+
+
+# --- Connect methods --- #
+
+# -- Gameplay -- #
+func _on_difficulty_option_item_selected(index: int) -> void:
+	SettingsManager.difficulty = index
+	SettingsManager.save_settings()
+
+func _on_langauge_option_item_selected(index: int) -> void:
+	SettingsManager.language = index
+	var lang = SettingsManager.get_locale_from_index(index)
+	TranslationServer.set_locale(lang)
+	setup_language()
+	SettingsManager.save_settings()
+
+# -- Graphics -- #
+func _on_fullscreen_option_item_selected(index: int) -> void:
+	SettingsManager.fullscreen = index
+	DisplayManager.apply_fullscreen(index)
+	SettingsManager.save_settings()
+
+func _on_resolution_option_item_selected(index: int) -> void:
+	SettingsManager.resolution = index
+	DisplayManager.apply_resolution(index)
+	SettingsManager.save_settings()
+
+# -- Sound -- #
+func _on_master_slider_value_changed(value: float) -> void:
+	SettingsManager.master_volume = value
+	SoundManager.set_master_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_music_slider_value_changed(value: float) -> void:
+	SettingsManager.music_volume = value
+	SoundManager.set_music_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_sound_slider_value_changed(value: float) -> void:
+	SettingsManager.sfx_volume = value
+	SoundManager.set_sfx_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_environment_slider_value_changed(value: float) -> void:
+	SettingsManager.environment_volume = value
+	SoundManager.set_environment_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_back_pressed() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+extends BaseMenu
+
+func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	setup_languages()
+	setup_buttons()
+	setup_selectors()
+	setup_mouse()
+
+func setup_languages():
+	pass
+
+func setup_buttons():
+	buttons = [
+		$MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue,
+		$MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry,
+		$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu
+	]
+
+func setup_selectors():
+	
+	selectors = [
+		[$MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorR],
+		[$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR],
+	]
+
+func handle_navigation(_delta):
+	if !visible:
+		return
+	
+	if Input.is_action_just_pressed("move_down") and current_selection < 2:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection += 1
+	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection -= 1
+	
+	set_current_selection(current_selection)
+
+func handle_selection(_index):
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	if (_index == 0):
+		get_tree().paused = false
+		visible = false
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	elif (_index == 1):
+		get_tree().paused = false
+		visible = false
+		GameManager.restart_level()
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	elif (_index == 2):
+		get_tree().paused = false
+		GameManager.return_to_menu()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _on_pause_visible():
+	if !visible:
+		return
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	for group in selectors:
+		for sel in group:
+			base_positions[sel] = sel.position
+	
+	set_current_selection(0)
+extends BaseMenu
+
+func _ready() -> void:
+	super._ready()
+	setup_results()
+
+func setup_results():
+	var sprite = $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Control/Victory
+	
+	# Dati dell’ultima run, salvati in GameManager.end_level()
+	var last = GameManager.last_attempt
+	var completed_level: int = int(last["level"])
+	var run_steps: int = int(last["steps"])
+	var run_time: float = float(last["time"])
+	var is_record: bool = bool(last.get("is_record", false))
+
+	# Mostra i risultati della run appena conclusa
+	$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualSteps.text = "Steps: %d" % [run_steps]
+	$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualTime.text = "Time: %.2f" % [run_time]
+	
+	var best_steps := "-"
+	var best_time := "-"
+	
+	var level_data := SaveManager.get_level_data(completed_level)
+	if level_data.size() > 0:
+		best_steps = str(level_data.get("steps", "-"))
+		best_time = "%.2f" % float(level_data.get("time", 0.0))
+	else:
+		# prima volta: non c'erano dati, mostra i valori della run
+		best_steps = str(run_steps)
+		best_time = "%.2f" % run_time
+
+	$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestSteps.text = "Steps: %s" % [best_steps]
+	$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestTime.text = "Time: %s" % [best_time]
+	
+	if is_record:
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Record.text = "New record!!"
+		sprite.texture = preload("res://Assets/Sprites/Player/Sunglasses.png")
+	else:
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Record.text = "Nice!!"
+		var atlas := AtlasTexture.new()
+		atlas.atlas = preload("res://Assets/Sprites/Player/SlimeSet.png")
+		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))
+		sprite.texture = atlas
+
+	GameManager.isRecord = false
+
+func setup_languages():
+	pass
+
+func setup_buttons():
+	buttons = [
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next,
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection,
+		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu
+	]
+
+func setup_selectors():
+	selectors = [
+		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorR],
+		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorR],
+		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorR],
+	]
+	await get_tree().process_frame
+	
+	for group in selectors:
+		for sel in group:
+			base_positions[sel] = sel.position
+
+func handle_navigation(_event):
+	if Input.is_action_just_pressed("move_down") and current_selection < 2:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection += 1
+	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
+		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		current_selection -= 1
+	
+	set_current_selection(current_selection)
+
+
+func handle_selection(_index):
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	if (_index == 0):
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		GameManager.next_level()
+	elif (_index == 1):
+		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+	elif (_index == 2):
+		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+class_name LevelButtonFactory
+extends Object
+
+func create_level_button(label: String, is_disabled: bool, theme: Theme) -> VBoxContainer:
+	var container = VBoxContainer.new()
+	container.custom_minimum_size = Vector2(80, 60)
+	container.set_anchors_preset(Control.PRESET_CENTER)
+
+	# Il pulsante
+	var button = Button.new()
+	button.text = label
+	button.disabled = is_disabled
+	button.focus_mode = Control.FOCUS_NONE
+	button.theme = theme
+	button.set_size(Vector2(80, 20))
+	button.set_custom_minimum_size(Vector2(80, 20))
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	container.add_child(button)
+
+	# Il selector sotto al pulsante
+	var selector_container = Control.new()
+	
+	var selector_label = Label.new()
+	selector_label.name = "Selector"
+	selector_label.text = ""
+	selector_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	selector_label.rotation_degrees = -90
+	selector_label.position = (Vector2(24, 20))
+	selector_label.theme = preload("res://Theme/Title/normal_theme.tres")
+	selector_container.add_child(selector_label)
+
+	container.add_child(selector_container)
+
+	return container
+class_name LevelLoader
+extends Object
+
+const THEME_TUTORIAL := preload("res://Theme/Button/TutorialButton.tres")
+const THEME_DUNGEON := preload("res://Theme/Button/DungeonButton.tres")
+const THEME_DEFAULT := preload("res://Theme/DefaultButton.tres")
+
+const SOUND_TUTORIAL := "res://Assets/Audio/TutorialBtnClick.wav"
+const SOUND_DUNGEON := "res://Assets/Audio/TutorialBtnClick.wav" #TODO da fare
+const SOUND_DEFAULT := "res://Assets/Audio/DefaultBtnClick.wav"
+
+func get_level_data_for_location(loc: int) -> Array[Dictionary]:
+	var levels_info: Array[Dictionary] = []
+	var files = get_levels_for_location(loc)
+	for file in files:
+		var num = extract_level_number(file)
+		levels_info.append({
+			"number": num,
+			"path": "res://Scenes/Levels/" + file,
+			"disabled": num > GameManager.max_level_reach,
+			"theme": get_theme_for_location(loc),
+			"sound": get_sound_for_location(loc)
+		})
+	return levels_info
+
+func get_sound_for_location(loc: int) -> String:
+	match loc:
+		GameManager.Location.TUTORIAL:
+			return SOUND_TUTORIAL
+		GameManager.Location.DUNGEON:
+			return SOUND_DUNGEON
+		_:
+			return SOUND_DEFAULT
+
+func get_theme_for_location(loc: int) -> Theme:
+	match loc:
+		GameManager.Location.TUTORIAL:
+			return THEME_TUTORIAL
+		GameManager.Location.DUNGEON:
+			return THEME_DUNGEON
+		_:
+			return THEME_DEFAULT
+
+func get_levels_for_location(loc: int) -> Array[String]:
+	var dir = DirAccess.open("res://Scenes/Levels/")
+	if not dir:
+		return []
+
+	var level_files: Array[String] = []
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".tscn") and file_name.begins_with("Level"):
+			var level_num = extract_level_number(file_name)
+			if GameManager.get_location_for_level(level_num) == loc:
+				level_files.append(file_name)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+
+	# Ordina per numero di livello
+	level_files.sort_custom(func(a, b):
+		return extract_level_number(a) < extract_level_number(b)
+	)
+
+	return level_files
+
+func extract_level_number(filename: String) -> int:
+	var level_name = filename.get_basename()
+	var digits := ""
+	for c in level_name:
+		if c in "0123456789":
+			digits += c
+	return int(digits)
+extends Node
+class_name DungeonManager
+
+var chain_frames: SpriteFrames
+const chain_sfx: String = "res://Assets/Audio/Catene/ChainTransition.wav"
+
+var chains_data = [
+	{"position": Vector2(200, 200), "scale": Vector2(2, 2)},
+	{"position": Vector2(300, 200), "scale": Vector2(1, 1)},
+	{"position": Vector2(400, 100), "scale": Vector2(1.5, 1.5)}
+]
+
+var sprites_data = [
+	{"texture": preload("res://Assets/Sprites/Decorations/Chains/chain_wall.png"), "position": Vector2(800, 200), "scale": Vector2(5, 5), "delay": 0.0}
+]
+
+func spawn_chains(parent: Node) -> void:
+	for data in chains_data:
+		var chain = AnimatedSprite2D.new()
+		chain.sprite_frames = chain_frames
+		chain.animation = chain_frames.get_animation_names()[0]
+		chain.position = data["position"]
+		chain.scale = data["scale"]
+		chain.modulate = Color(0, 0, 0, 1)
+		chain.stop()
+		parent.add_child(chain)
+		chain.frame_changed.connect(Callable(self, "_on_chain_frame_changed").bind(chain))
+		
+		_start_chain(chain)
+
+
+func spawn_sprites(parent: Node) -> void:
+	for data in sprites_data:
+		var spr = Sprite2D.new()
+		spr.texture = data["texture"]
+		spr.position = data["position"]
+		spr.scale = data["scale"]
+		spr.rotation = 45;
+		spr.modulate = Color(0, 0, 0, 1)
+		parent.add_child(spr)
+
+
+func _start_chain(chain: AnimatedSprite2D) -> void:
+	chain.frame = randi() % chain_frames.get_frame_count(chain.animation)
+	chain.play()
+
+func _on_chain_frame_changed(chain: AnimatedSprite2D) -> void:
+	if chain.frame == 0 or chain.frame == 18:
+		if chain_sfx != "":
+			SoundManager.play_sfx(chain_sfx)
+extends Control
+
+@export var scene_to_load: String
+@export var transition_text: String = "Loading..."
+@export var location_id: int = 0
+
+@export var dungeon_frames: SpriteFrames
+@export var forest_frames: SpriteFrames
+
+@onready var animation_player = $AnimationPlayer
+
+
+func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
+	
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	$MarginContainer/VBoxContainer/Titolo.text = transition_text
+
+	match location_id:
+		GameManager.Location.TUTORIAL:
+			pass
+		GameManager.Location.DUNGEON:
+			var chain_manager = DungeonManager.new()
+			chain_manager.chain_frames = dungeon_frames
+			$MarginContainer.add_child(chain_manager)
+			chain_manager.spawn_chains($MarginContainer)
+			chain_manager.spawn_sprites($MarginContainer)
+		GameManager.Location.FOREST:
+			pass
+	
+	animation_player.play("FadeIn")
+	await animation_player.animation_finished
+	
+	await get_tree().create_timer(2).timeout
+	
+	animation_player.play("FadeOut")
+	await animation_player.animation_finished
+
+	get_tree().paused = false
+	var packed_scene := load(scene_to_load)
+	get_tree().change_scene_to_packed(packed_scene)
+
+	queue_free()
+
+func _input(_event: InputEvent) -> void:
+	get_viewport().set_input_as_handled()
+
+func _unhandled_input(_event: InputEvent) -> void:
+	get_viewport().set_input_as_handled()
+extends RefCounted
+class_name Pathfinder
+
+# Direzioni valide (4-way grid)
+# Devono corrispondere ai tuoi DIRECTION_BITS del player
+const DIRS := [
+	Vector2i(1, 0),
+	Vector2i(-1, 0),
+	Vector2i(0, 1),
+	Vector2i(0, -1)
+]
+
+var movement_map: TileMapLayer
+var visual_map: TileMapLayer
+var DIRECTION_BITS: Dictionary
+
+func _init(_movement_map: TileMapLayer, _visual_map: TileMapLayer, _direction_bits: Dictionary):
+	movement_map = _movement_map
+	visual_map = _visual_map
+	DIRECTION_BITS = _direction_bits
+
+# --------------------------------------------------
+# Punto di ingresso → restituisce LA PROSSIMA TILE
+# --------------------------------------------------
+func get_next_step(start: Vector2i, goal: Vector2i) -> Vector2i:
+	if start == goal:
+		return start
+
+	var path := a_star(start, goal)
+
+	if path.size() >= 2:
+		return path[1]	# path[0] = start, path[1] = next step
+	else:
+		return start	# Nessun percorso → resta fermo
+
+
+# --------------------------------------------------
+# Implementazione A*
+# --------------------------------------------------
+func a_star(start: Vector2i, goal: Vector2i) -> Array:
+	var open := {}
+	var closed := {}
+	var came_from := {}
+
+	open[start] = {"g": 0, "f": heuristic(start, goal)}
+
+	while open.size() > 0:
+		var current: Vector2i = get_lowest_f(open)
+		var current_data = open[current]
+
+		if current == goal:
+			return reconstruct_path(came_from, current)
+
+		closed[current] = true
+		open.erase(current)
+
+		for dir in DIRS:
+			var neighbor = current + dir
+
+			if closed.has(neighbor):
+				continue
+
+			if not can_move(current, neighbor):
+				continue
+
+			var tile_cost = get_tile_cost(neighbor)
+			var tentative_g = current_data["g"] + tile_cost
+
+			if not open.has(neighbor) or tentative_g < open[neighbor]["g"]:
+				came_from[neighbor] = current
+				open[neighbor] = {
+					"g": tentative_g,
+					"f": tentative_g + heuristic(neighbor, goal)
+				}
+	
+	print("A*: nessun percorso da ", start, " a ", goal)
+	return []  # Nessun percorso trovato
+
+
+# --------------------------------------------------
+# Movement mask check (identico al player)
+# --------------------------------------------------
+func can_move(from: Vector2i, to: Vector2i) -> bool:
+	
+	if movement_map == null:
+		push_error("movement_map is null in Pathfinder, check initialization!")
+		return false
+	
+	var tile_data := movement_map.get_cell_tile_data(from)
+	if tile_data == null:
+		return false
+
+	var mask = tile_data.get_custom_data("MovementMask")
+	if mask == null:
+		return true	# nessuna restrizione → libero
+
+	var dir := to - from
+	var bit = DIRECTION_BITS.get(dir, 0)
+
+	# Se il bit è presente → quella direzione è BLOCCATA
+	return (mask & bit) == 0
+
+
+# --------------------------------------------------
+# Funzioni di supporto per A*
+# --------------------------------------------------
+func get_tile_cost(pos: Vector2i) -> int:
+	if visual_map == null:
+		return 999
+	
+	var tile_instance = get_tile_instance_at(pos)
+	
+	if tile_instance == null:
+		return 999
+	
+	if "peso" in tile_instance:
+		return tile_instance.peso
+	else:
+		return 1
+
+func get_tile_instance_at(pos: Vector2i) -> TileBase:
+	if visual_map == null:
+		return null
+
+	var world_pos = visual_map.map_to_local(pos) + visual_map.global_position
+	for child in visual_map.get_children():
+		if child is TileBase:
+			if child.global_position.distance_to(world_pos) < 1.0:
+				return child
+	return null
+
+func heuristic(a: Vector2i, b: Vector2i) -> int:
+	return abs(a.x - b.x) + abs(a.y - b.y)
+
+func get_lowest_f(open: Dictionary) -> Vector2i:
+	var best = open.keys()[0]
+	var best_f = open[best]["f"]
+
+	for k in open.keys():
+		if open[k]["f"] < best_f:
+			best_f = open[k]["f"]
+			best = k
+
+	return best
+
+func reconstruct_path(came_from: Dictionary, current: Vector2i) -> Array:
+	var path := [current]
+	while came_from.has(current):
+		current = came_from[current]
+		path.insert(0, current)
+	return path

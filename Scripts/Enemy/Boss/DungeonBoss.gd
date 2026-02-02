@@ -9,9 +9,16 @@ var _waiting_time := 0.0
 var step_counter = 0
 var steps_to_trigger = 3
 
+@onready var sprite := $Animation
+
+@export var ceiling_debris_scene: PackedScene
+@export var attack_impact_frame := 3 # IL FRAME DELL'IMPATTO
+var _impact_done := false
+
 @onready var slime := get_tree().get_first_node_in_group("player")
 @onready var movement_map :=  $"../../MovementLogicMapLayer"
 @onready var visual_map = $"../../TileMapLayer"
+@onready var camera := get_viewport().get_camera_2d()
 var pathfinder: Pathfinder
 
 signal finished_turn(enemy)
@@ -153,11 +160,24 @@ func _start_attack():
 	slime.lock_input()
 	animation.play("ATTACK")
 	await animation.animation_finished
-	attack()
+	attack() #TODO togliebile
 	
 	action_in_progress = false
 	idle_entered = false
 	state = BossState.IDLE
+
+func _on_attack_impact():
+	print("IMPATTO!") # test
+	# 1. Tremolio camera
+	if camera:
+		camera.shake(12.0, 0.25)
+
+	# 2. Particelle
+	_spawn_ceiling_debris()
+	#_spawn_impact_particles()
+
+	# 3. Danno
+	#attack()
 
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
@@ -186,3 +206,24 @@ func breath():
 func _reset_breath_timer():
 	_breath_timer = 0.0
 	_waiting_time = randf_range(min_breath_time, max_breath_time)
+
+
+func _on_animation_frame_changed() -> void:
+	if sprite.animation != "ATTACK":
+		_impact_done = false
+		return
+
+	if sprite.frame == attack_impact_frame and not _impact_done:
+		_impact_done = true
+		_on_attack_impact()
+
+func _spawn_ceiling_debris():
+	if ceiling_debris_scene == null or camera == null:
+		return
+	
+	var debris = ceiling_debris_scene.instantiate()
+	camera.add_child(debris)
+
+	debris.position = Vector2(0, -90) #TODO fixme
+	
+	debris.play()

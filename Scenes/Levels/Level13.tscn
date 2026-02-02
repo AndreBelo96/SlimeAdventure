@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://dpwph0vc5qke6"]
+[gd_scene load_steps=6 format=4 uid="uid://dpwph0vc5qke6"]
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_s2gsb"]
 [ext_resource type="Script" uid="uid://cy0g0tki6hcqn" path="res://Scripts/Levels/Level13.gd" id="2_4x05o"]
 [ext_resource type="PackedScene" uid="uid://bkdy28olfk76v" path="res://Scenes/Enemy/Boss/DungeonBoss.tscn" id="3_4x05o"]
 [ext_resource type="PackedScene" uid="uid://cwej3r6jf671d" path="res://Scenes/Pickups/PickupPickaxe.tscn" id="3_hm5oj"]
+[ext_resource type="PackedScene" uid="uid://bv858l3n78he5" path="res://Scenes/Decorations/Particelle/CeilingDebris.tscn" id="5_tml81"]
 
 [node name="Level" instance=ExtResource("1_s2gsb")]
 script = ExtResource("2_4x05o")
@@ -34,4 +35,5 @@ tile_map_data = PackedByteArray("AAD///L/AAAAAAAAAwAJAO3/AAAAAAAAAwAKAPD/AAAAAAA
 tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgAGAO7/AAAAAAAAAQA=")
 
 [node name="DungeonBoss" parent="YSort" index="8" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
+ceiling_debris_scene = ExtResource("5_tml81")
 tilemap = NodePath("../../TileMapLayer")

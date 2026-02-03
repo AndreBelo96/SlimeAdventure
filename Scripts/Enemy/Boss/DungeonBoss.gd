@@ -94,7 +94,7 @@ func _ensure_pathfinder() -> bool:
 	return true
 
 func should_move(_step_count: int) -> bool:
-	return _step_count % steps_to_trigger == 0
+	return _step_count % steps_to_trigger == 0 #TODO error
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -170,13 +170,13 @@ func _on_attack_impact():
 	print("IMPATTO!") # test
 	# 1. Tremolio camera
 	if camera:
-		camera.shake(12.0, 0.25)
+		camera.shake(6.0, 0.25)
 
 	# 2. Particelle
 	_spawn_ceiling_debris()
-	#_spawn_impact_particles()
+	_spawn_impact_particles()
 
-	# 3. Danno
+	# 3. Danno TODO capire se farlo qui o lasciarlo dove è
 	#attack()
 
 func attack():
@@ -227,3 +227,6 @@ func _spawn_ceiling_debris():
 	debris.position = Vector2(0, -90) #TODO fixme
 	
 	debris.play()
+
+func _spawn_impact_particles():
+	$HitParticles.emitting = true

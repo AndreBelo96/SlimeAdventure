@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://co1o3jnm2k22u"]
+[gd_scene load_steps=45 format=3 uid="uid://co1o3jnm2k22u"]
 
 [ext_resource type="Script" uid="uid://c1fjb5sv2xie8" path="res://Scripts/Player/Player.gd" id="1_63ylr"]
 [ext_resource type="Shader" uid="uid://boy2syminp1lv" path="res://Shader/player_victory.gdshader" id="2_gwnis"]
@@ -9,9 +9,14 @@
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99805444, 0.12454742), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwnis"]
+width = 16
+height = 16
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k53q1"]
 shader = ExtResource("2_gwnis")
-shader_parameter/dissolve_value = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_gwnis")
+shader_parameter/dissolve_value = 0.72400003439
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dx2on"]
 atlas = ExtResource("2_sw1bk")

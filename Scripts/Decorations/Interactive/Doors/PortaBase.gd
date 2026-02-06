@@ -29,6 +29,3 @@ func update_visual():
 	var sprite = $AnimatedSprite2D
 	var state = "Open_" if is_open else "Closed_"
 	sprite.play(state + direction)
-
-func _draw():
-	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)

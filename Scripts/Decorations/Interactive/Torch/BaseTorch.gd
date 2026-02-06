@@ -20,9 +20,6 @@ func _ready() -> void:
 	add_to_group("torches")
 	set_state(start_on)
 
-func _draw():
-	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
-
 func set_state(state: bool) -> void:
 	if state:
 		turn_on()

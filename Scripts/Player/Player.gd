@@ -65,10 +65,6 @@ func _ready():
 	
 	grid_position = movement_handler.grid_position
 
-func _draw():
-	print("DRAW PLAYER")
-	draw_line(Vector2.ZERO, Vector2.DOWN * 10, Color.BLACK, 4)
-
 func turn_on_lights(duration: float = 0.0) -> void:
 	light_handler.enable(0.5)
 	if duration > 0.0:

@@ -8,10 +8,13 @@ var _waiting_time := 0.0
 
 var step_counter = 0
 var steps_to_trigger = 3
+var warned_tiles: Array[Vector2i] = []
 
 @onready var sprite := $Animation
 
 @export var ceiling_debris_scene: PackedScene
+@export var warning_tile_scene: PackedScene
+var active_warnings: Array[Node2D] = []
 @export var attack_impact_frame := 3 # IL FRAME DELL'IMPATTO
 var _impact_done := false
 
@@ -30,6 +33,9 @@ func _ready():
 	posizione_tile = Vector2i(-1, -8)
 	snap_to_tile_center(posizione_tile)
 	_reset_breath_timer()
+	
+	if level_logic:
+		level_logic.connect("global_step", Callable(self, "_on_global_step"))
 
 func _process(delta: float) -> void:
 	match state:
@@ -147,10 +153,7 @@ func _apply_tile_effect_here():
 		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
 
 func change_steps():
-	print("--------- BOSS COLPITO:  CAMBIO PASSI!!! -----------")
-	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
 	steps_to_trigger -= 1
-	print("--------- BOSS COLPITO: ", steps_to_trigger, " -----------")
 
 ### ------- Attack ------- ###
 
@@ -181,6 +184,43 @@ func _on_attack_impact():
 
 func attack():
 	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
+
+func _on_global_step(step_count: int) -> void:
+	_clear_attack_warning()
+
+	if (step_count + 1) % steps_to_trigger == 0:
+		_show_attack_warning()
+
+func _get_attack_tiles() -> Array[Vector2i]: #TODO da qualche aprte c'è il emtodo epr controllare il paleyr 
+	var result: Array[Vector2i] = []
+	for dx in [-1, 0, 1]:
+		for dy in [-1, 0, 1]:
+			if dx == 0 and dy == 0:
+				continue
+			result.append(posizione_tile + Vector2i(dx, dy))
+	return result
+
+func _show_attack_warning():
+	if warning_tile_scene == null:
+		push_error("Boss: warning_tile_scene not set")
+		return
+
+	var tiles := _get_attack_tiles()
+
+	for cell in tiles:
+		var warning := warning_tile_scene.instantiate()
+		var tile_world_pos = tilemap.map_to_local(cell)
+		warning.global_position = tile_world_pos
+		get_tree().current_scene.add_child(warning)
+		active_warnings.append(warning)
+
+
+func _clear_attack_warning():
+	for warning in active_warnings:
+		if is_instance_valid(warning):
+			warning.queue_free()
+
+	active_warnings.clear()
 
 ### ------- Breath ------- ###
 

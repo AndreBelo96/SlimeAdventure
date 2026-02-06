@@ -11,7 +11,6 @@ func _ready():
 	await get_tree().process_frame
 	await play_boss_intro()
 
-
 func play_boss_intro() -> void:
 	player.enter_cutscene()
 	time_running = false

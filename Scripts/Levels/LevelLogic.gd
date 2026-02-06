@@ -14,7 +14,6 @@ var last_switch_pressed = null
 var _enemy_phase_done := false
 var _tiles_phase_done := false
 
-
 signal global_step(step_count: int)
 
 func _ready():

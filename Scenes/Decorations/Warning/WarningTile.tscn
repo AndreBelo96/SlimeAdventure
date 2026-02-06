@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://87vtlkrmbmqs"]
+
+[ext_resource type="Script" uid="uid://dsdotr387sdsj" path="res://Scripts/Decorations/Warning/WarningTile.gd" id="1_5qe7j"]
+[ext_resource type="Texture2D" uid="uid://bwm02oa4jvxjn" path="res://Assets/Sprites/Decorations/WarningTile/WarningTile.png" id="2_f6tty"]
+
+[node name="WarningTile" type="Node2D"]
+z_index = -8
+script = ExtResource("1_5qe7j")
+
+[node name="Center" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.4)
+texture = ExtResource("2_f6tty")

@@ -13,7 +13,8 @@ point_count = 2
 shader = ExtResource("2_gwnis")
 shader_parameter/white_value = 1.0
 shader_parameter/alpha_value = 1.0
-shader_parameter/smoothness = 0.0250000011875
+shader_parameter/smoothness = 0.02
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dx2on"]
 atlas = ExtResource("2_sw1bk")

@@ -185,9 +185,12 @@ func _on_player_won():
 	GameManager.current_time = level_time
 	GameManager.total_steps += steps
 	GameManager.total_time += level_time
+	
+	await player.on_finish_level()
+	
 	GameLogger.info("Completato livello %d in %d secondi con %d passi" % [GameManager.current_level, level_time, steps])
 	GameManager.end_level(true)
-	await get_tree().create_timer(1).timeout
+	#await get_tree().create_timer(1).timeout
 	GameManager.change_scene_to_victory()
 
 # -- UTILS -- #

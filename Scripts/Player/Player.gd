@@ -28,6 +28,7 @@ var grid_position: Vector2i
 @onready var npc_map_layer
 @onready var point_light
 
+
 @onready var input_handler = PlayerInput.new()
 @onready var movement_handler = PlayerMovement.new()
 @onready var interaction_handler = PlayerInteraction.new()
@@ -35,6 +36,8 @@ var grid_position: Vector2i
 @onready var light_handler = PlayerLight.new()
 
 @onready var light_timer = $LightTimer
+@onready var end_level_particles = $CPUParticles2D
+@onready var shader_material = $AnimatedSprite2D.material
 
 var can_move := true
 
@@ -66,9 +69,12 @@ func _ready():
 	grid_position = movement_handler.grid_position
 
 func turn_on_lights(duration: float = 0.0) -> void:
+	if not light_handler.light:
+		return
+	
 	light_handler.enable(0.5)
-	if duration > 0.0:
-		light_timer.start(duration)
+	light_timer.stop()
+	light_timer.start(duration)
 
 func _on_light_timer_timeout() -> void:
 	light_handler.disable(1.0)
@@ -90,7 +96,7 @@ func on_movement_finished():
 	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
-
+	
 	_check_boss_collision() ## TODO Testa, magari esplode pure se il boss è morto
 	
 	print("---- DEBUG YSORT PLAYER: ----")
@@ -160,6 +166,9 @@ func force_move(dir: Vector2i) -> void:
 	movement_handler.move_to(movement_handler.grid_position + dir)
 
 func _check_boss_collision():
+	if not is_inside_tree():
+		return
+	
 	var bosses = get_tree().get_nodes_in_group("enemy")
 	for boss in bosses:
 		if boss.posizione_tile == grid_position:
@@ -171,3 +180,20 @@ func _on_player_touch_boss():
 	var level_logic = get_tree().get_first_node_in_group("level_logic")
 	if level_logic:
 		level_logic._on_tile_triggered(self, "death", {"death_type": GameManager.Death.ENEMY})
+
+func on_finish_level():
+	print("FINISH LEVEL PLAYER ANIMATION")
+	var tween = self.create_tween()
+	tween.tween_property(shader_material, "shader_parameter/white_value", 0.0, 1)
+	end_level_particles.emitting = true
+	await tween.finished
+	
+	var fade_tween = self.create_tween()
+	fade_tween.tween_property(shader_material, "shader_parameter/alpha_value", 0.0, 1)
+	end_level_particles.emitting = false
+	await fade_tween.finished
+
+func reset_end_level_variables():
+	shader_material.set_shader_parameter("white_value", 1.0)
+	shader_material.set_shader_parameter("alpha_value", 1.0)
+	end_level_particles.emitting = false

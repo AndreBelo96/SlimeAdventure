@@ -13,11 +13,11 @@ void fragment() {
 	// Se player è overlappato (si possono rpednere colori della sprite e dello screen
 	// Fare un outline bianca con z index = 100 (easy)
 
-    if (pixelColor.a == 1.0) {
-        // factor = 0 sotto la linea → bianco, 1 sopra → colore originale
-        float factor = smoothstep(white_value - smoothness, white_value, UV.y);
-        pixelColor.rgb = mix(pixelColor.rgb, vec3(1.0), factor);
-    }
+	if (pixelColor.a == 1.0) {
+		// factor = 0 sotto la linea → bianco, 1 sopra → colore originale
+		float factor = smoothstep(white_value - smoothness, white_value, UV.y);
+		pixelColor.rgb = mix(pixelColor.rgb, vec3(1.0), factor);
+	}
 
 	 if (pixelColor.a > 0.0) {
 		float factor = smoothstep(alpha_value - smoothness, alpha_value, UV.y);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dysj5yr4onuf8"]
+[gd_scene load_steps=5 format=3 uid="uid://dysj5yr4onuf8"]
 
 [ext_resource type="Script" uid="uid://1dne7xk7mqos" path="res://Scripts/UI/LevelHUDManager.gd" id="1_6d7lo"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_ks3ap"]
+[ext_resource type="PackedScene" uid="uid://d1x3f5w6lmqxr" path="res://Scenes/UI/Utils/RoundProgressBar.tscn" id="3_b2arx"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6d7lo"]
 load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
@@ -69,3 +70,8 @@ scale = Vector2(0.851566, 1.11979)
 texture = SubResource("CompressedTexture2D_6d7lo")
 region_enabled = true
 region_rect = Rect2(397, 1, 64, 48)
+
+[node name="RoundProgressBar" parent="MarginContainer" instance=ExtResource("3_b2arx")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4

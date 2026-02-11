@@ -6,6 +6,7 @@ signal player_died(death_type: int)
 signal player_won
 signal steps_changed(new_count: int)
 signal move_finished
+signal light_time_changed(current: float, max: float)
 
 @export var tile_map_layer_path: NodePath
 @export var terrain_map_layer_path: NodePath
@@ -71,13 +72,26 @@ func _ready():
 func turn_on_lights(duration: float = 0.0) -> void:
 	if not light_handler.light:
 		return
-	
 	light_handler.enable(0.5)
 	light_timer.stop()
 	light_timer.start(duration)
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud:
+		hud.setup_progressbar(duration, duration)
+
+func _process(_delta):
+	if light_timer.is_stopped():
+		return
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud:
+		hud.setup_progressbar(light_timer.time_left, light_timer.wait_time)
 
 func _on_light_timer_timeout() -> void:
+	var hud = get_tree().get_first_node_in_group("hud")
 	light_handler.disable(1.0)
+	light_timer.stop()
+	if hud:
+		hud.deactivate_progressbar()
 
 func _unhandled_input(event):
 	if should_ignore_input():

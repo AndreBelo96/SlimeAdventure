@@ -34,3 +34,9 @@ func setup_base_level():
 	tile_label.visible = true
 	$MarginContainer/Sprite2D.visible = true
 	boss_life_bar.visible = false
+
+func setup_progressbar(current: float, _max: float):
+	$MarginContainer/RoundProgressBar.activate(current, _max)
+
+func deactivate_progressbar():
+	$MarginContainer/RoundProgressBar.deactivate()

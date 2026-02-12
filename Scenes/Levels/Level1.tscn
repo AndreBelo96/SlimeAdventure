@@ -337,29 +337,31 @@ tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAA
 [node name="TerrainMapLayer" parent="." index="4"]
 tile_map_data = PackedByteArray("AAD//wEAAwAAAAAAAAD//wAAAwAAAAAAAAD/////AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAABAP7/AwAAAAAAAAACAP7/AwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAACAAEAAwAAAAAAAAABAAEAAwAAAAAAAAAAAAEAAwAAAAAAAAAAAAAAAwAAAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="5"]
+[node name="TileMapLayer" parent="." index="6"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQACAP7/AQAAAAAAAQACAP//AQAAAAAAAQACAAAAAQAAAAAAAQACAAEAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQAAAAAAAQAAAAAAAgA=")
-
-[node name="NPCMapLayer" parent="YSort" index="6"]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAQA=")
 
 [node name="Animation" type="Node2D" parent="." index="7"]
 script = ExtResource("3_et1el")
 
 [node name="Fumetto" type="Sprite2D" parent="Animation" index="0"]
-position = Vector2(50, -12)
-scale = Vector2(0.05, 0.05)
+z_index = 10
+position = Vector2(48, -12)
 texture = ExtResource("3_a7ai2")
 
 [node name="ExampleAnimation" type="AnimatedSprite2D" parent="Animation" index="1"]
-position = Vector2(54, -17)
-scale = Vector2(0.3, 0.3)
+z_index = 15
+position = Vector2(51, -13)
+scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_fs1dn")
 animation = &"UP"
 
 [node name="Arrow" type="Sprite2D" parent="Animation" index="2"]
-position = Vector2(36, -15)
-scale = Vector2(0.3, 0.3)
+z_index = 15
+position = Vector2(38, -13)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_oiwlb")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
+
+[node name="NPCMapLayer" parent="YSort" index="5"]
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAQA=")

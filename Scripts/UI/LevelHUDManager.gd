@@ -4,8 +4,9 @@ extends Control
 class_name LevelHUDManager
 
 @onready var steps_label = $MarginContainer/StepsLabel
-@onready var time_label = $MarginContainer/TimeLabel
+@onready var time_label = $MarginContainer/VBoxContainer/TimeLabel
 @onready var tile_label = $MarginContainer/TileToActive
+@onready var round_progressbar = $MarginContainer/VBoxContainer/RoundProgressBar
 @onready var boss_life_bar = $MarginContainer/ProgressBar
 
 func _ready():
@@ -36,7 +37,7 @@ func setup_base_level():
 	boss_life_bar.visible = false
 
 func setup_progressbar(current: float, _max: float):
-	$MarginContainer/RoundProgressBar.activate(current, _max)
+	round_progressbar.activate(current, _max)
 
 func deactivate_progressbar():
-	$MarginContainer/RoundProgressBar.deactivate()
+	round_progressbar.deactivate()

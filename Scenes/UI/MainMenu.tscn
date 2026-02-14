@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene load_steps=18 format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://dgk8voxxoch2l" path="res://Shader/title_shader.gdshader" id="2_744d7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://gtjkb1m14ay1" path="res://Assets/Sprites/UI/bg_far.png" id="2_m48tj"]
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="3_ab04i"]
 [ext_resource type="Texture2D" uid="uid://jltpnsvh06g3" path="res://Assets/Sprites/UI/vignette.png" id="3_dvisc"]
+[ext_resource type="Texture2D" uid="uid://budxhorqug58o" path="res://Assets/Sprites/UI/bg_mid.png" id="4_dvisc"]
 [ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
 [ext_resource type="Texture2D" uid="uid://hyab2xg348xo" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
 [ext_resource type="Shader" uid="uid://bo5v8kgyx6j5n" path="res://Shader/blink_shader.gdshader" id="8_ynupv"]
@@ -52,13 +53,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_wrbul")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Far" type="Parallax2D" parent="."]
 repeat_size = Vector2(960, 0)
 autoscroll = Vector2(-15, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Far"]
 position = Vector2(481, 180)
 texture = ExtResource("2_m48tj")
+
+[node name="Mid" type="Parallax2D" parent="."]
+repeat_size = Vector2(960, 0)
+autoscroll = Vector2(-60, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mid"]
+position = Vector2(481, 180)
+texture = ExtResource("4_dvisc")
 
 [node name="Fog" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_hys1s")

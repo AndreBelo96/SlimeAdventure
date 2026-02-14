@@ -2,18 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://dgk8voxxoch2l" path="res://Shader/title_shader.gdshader" id="2_744d7"]
-[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_b5bqd"]
-[ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_jex3y"]
-[ext_resource type="Texture2D" uid="uid://hds5jufi8vfr" path="res://Assets/Sprites/UI/bg_far.png" id="2_m48tj"]
+[ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_b5bqd"]
+[ext_resource type="Texture2D" uid="uid://b8qbud87vb3ps" path="res://Assets/Sprites/Title.png" id="2_jex3y"]
+[ext_resource type="Texture2D" uid="uid://gtjkb1m14ay1" path="res://Assets/Sprites/UI/bg_far.png" id="2_m48tj"]
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="3_ab04i"]
-[ext_resource type="Texture2D" uid="uid://ujtntmpg2em2" path="res://Assets/Sprites/UI/vignette.png" id="3_dvisc"]
-[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
-[ext_resource type="Texture2D" uid="uid://cprycl3pfs3hf" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
+[ext_resource type="Texture2D" uid="uid://jltpnsvh06g3" path="res://Assets/Sprites/UI/vignette.png" id="3_dvisc"]
+[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
+[ext_resource type="Texture2D" uid="uid://hyab2xg348xo" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
 [ext_resource type="Shader" uid="uid://bo5v8kgyx6j5n" path="res://Shader/blink_shader.gdshader" id="8_ynupv"]
-
-[sub_resource type="Curve" id="Curve_dvisc"]
-_data = [Vector2(0.0019455254, 0.9999999), 0.0, 0.0, 0, 0, Vector2(1, 0.20926863), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hys1s"]
 shader = ExtResource("3_ab04i")
@@ -29,6 +25,10 @@ shader_parameter/time = 0.0
 width = 480
 height = 400
 noise = SubResource("FastNoiseLite_dvisc")
+
+[sub_resource type="Curve" id="Curve_dvisc"]
+_data = [Vector2(0.0019455254, 0.9999999), 0.0, 0.0, 0, 0, Vector2(1, 0.20926863), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl3t2"]
 shader = ExtResource("2_744d7")
@@ -60,6 +60,12 @@ autoscroll = Vector2(-15, 0)
 position = Vector2(481, 180)
 texture = ExtResource("2_m48tj")
 
+[node name="Fog" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hys1s")
+position = Vector2(319, 177)
+scale = Vector2(1.4238281, 1)
+texture = SubResource("NoiseTexture2D_ab04i")
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(640, 180)
 amount = 50
@@ -80,13 +86,7 @@ radial_accel_max = 1.0
 angle_max = 295.5
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_dvisc")
-color = Color(0.34407577, 0.34407574, 0.34407574, 1)
-
-[node name="Fog" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_hys1s")
-position = Vector2(319, 177)
-scale = Vector2(1.4238281, 1)
-texture = SubResource("NoiseTexture2D_ab04i")
+color = Color(0.4045111, 0.40451118, 0.40451103, 1)
 
 [node name="Vignettatura" type="Sprite2D" parent="."]
 position = Vector2(319, 180)

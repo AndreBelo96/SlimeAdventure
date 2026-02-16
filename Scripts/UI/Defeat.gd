@@ -1,24 +1,31 @@
 extends BaseMenu
 
+func _ready():
+	setup_languages()
+	setup_buttons()
+	setup_selectors()
+	setup_mouse()
+	set_current_selection(0)
+
 func setup_languages():
 	pass
 
 func setup_buttons():
-	buttons = [
+	buttons_main = [
 		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart,
 		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection,
 		$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu,
 	]
 
 func setup_selectors():
-	selectors = [
+	selectors_main = [
 		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorR],
 		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorR],
 		[$ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorR],
 	]
 	
 	await get_tree().process_frame
-	for group in selectors:
+	for group in selectors_main:
 		for sel in group:
 			base_positions[sel] = sel.position
 
@@ -38,6 +45,6 @@ func handle_selection(_index):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		GameManager.restart_level()
 	elif (_index == 1):
-		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+		GameManager.return_to_location_menu()
 	elif (_index == 2):
-		get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+		GameManager.return_to_menu()

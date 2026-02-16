@@ -20,6 +20,8 @@ var total_time: float = 0.0
 var total_steps: int = 0
 var total_deaths: Dictionary = {}
 
+var menu_state := BaseMenu.MenuState.MAIN_MENU
+
 var dark_overlay_service := DarkOverlayService.new()
 
 # ----- Powerup variables ----- #
@@ -213,6 +215,11 @@ func restart_level():
 	get_tree().change_scene_to_file("res://Scenes/Levels/Level%d.tscn" % current_level)
 
 func return_to_menu():
+	menu_state = BaseMenu.MenuState.MAIN_MENU
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+
+func return_to_location_menu():
+	menu_state = BaseMenu.MenuState.LOCATION_SELECT
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
 
 func reset_game():

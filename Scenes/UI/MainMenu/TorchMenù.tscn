@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqd131solu8ks"]
+
+[ext_resource type="Script" uid="uid://clwatmendh7dh" path="res://Scripts/UI/MainMenu/TorchMenù.gd" id="1_jpf3g"]
+[ext_resource type="Texture2D" uid="uid://b3aj03otg4pho" path="res://Assets/Sprites/UI/MainMenu/Toarch.png" id="2_krr8w"]
+[ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="3_mxa2m"]
+
+[sub_resource type="Gradient" id="Gradient_g3tnv"]
+offsets = PackedFloat32Array(0.11065574, 1)
+colors = PackedColorArray(0.2848504, 0.28485027, 0.28485018, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ilk2j"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 161.83484), 0.0, 0.0, 0, 0, Vector2(1, -151.9266), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_t4i3t"]
+_data = [Vector2(0, 0.9858797), 0.0, 0.0, 0, 0, Vector2(1, 0.49637938), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0ydst"]
+offsets = PackedFloat32Array(0, 0.08401639, 0.3954918, 0.7295082, 1)
+colors = PackedColorArray(0.81422967, 0.99999934, 0.46956545, 1, 1, 1, 0.22745098, 1, 0.7192356, 0.38793945, 1.1551381e-06, 1, 0.7176471, 0.1882353, 0.1882353, 1, 1, 1, 1, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_du3qh"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 32, 0, 167, 39, -157, 39, -32, 0)
+
+[node name="TorchMenù" type="Node2D"]
+script = ExtResource("1_jpf3g")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+position = Vector2(0, -5)
+amount = 15
+lifetime = 2.5
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_g3tnv")
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+position = Vector2(0, -8)
+amount = 60
+lifetime = 1.2
+preprocess = 2.0
+randomness = 0.5
+lifetime_randomness = 0.4
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(0, -1)
+spread = 27.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+angle_min = 20.0
+angle_max = 35.0
+angle_curve = SubResource("Curve_ilk2j")
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_t4i3t")
+color_ramp = SubResource("Gradient_0ydst")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_krr8w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
+color = Color(1, 0.4509804, 0.25490198, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 6.0
+texture = ExtResource("3_mxa2m")
+texture_scale = 2.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, -1)
+occluder = SubResource("OccluderPolygon2D_du3qh")

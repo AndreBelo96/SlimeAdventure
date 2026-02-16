@@ -1,8 +1,8 @@
 # Script LevelMenu
 extends BaseMenu
 
-@onready var level_container: GridContainer = $ColorRect/MarginContainer/VBoxContainer/CenterContainer2/LevelButtonContainer
-@onready var location: Label = $ColorRect/MarginContainer/VBoxContainer/CenterContainer4/Location
+@onready var level_container: GridContainer = $MarginContainer/VBoxContainer/CenterContainer2/LevelButtonContainer
+@onready var location: Label = $MarginContainer/VBoxContainer/CenterContainer4/Location
 
 const ROW_SIZE := 5
 
@@ -20,8 +20,8 @@ func load_level_buttons():
 	for child in level_container.get_children():
 		child.queue_free()
 		
-	buttons.clear()
-	selectors.clear()
+	buttons_main.clear()
+	selectors_main.clear()
 	base_positions.clear()
 
 	var levels_info = loader.get_level_data_for_location(GameManager.location_selected)
@@ -44,22 +44,23 @@ func load_level_buttons():
 			push_warning("Level button factory structure mismatch at index %d" % i)
 			continue
 
-		buttons.append(button)
-		selectors.append([selector_label])
+		buttons_main.append(button)
+		selectors_main.append([selector_label])
 		base_positions[selector_label] = selector_label.position
 
-	var back_button = $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
-	var back_selector = [$ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $ColorRect/MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
+	var back_button = $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
+	var back_selector = [$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
 	
-	buttons.append(back_button)
-	selectors.append(back_selector)
+	buttons_main.append(back_button)
+	selectors_main.append(back_selector)
 	
 	await get_tree().process_frame
 	for sel in back_selector:
 		base_positions[sel] = sel.position
 	
-	if buttons.size() > 0:
-		set_current_selection(0)
+	current_state = MenuState.MAIN_MENU
+	update_active_menu()
+	set_current_selection(0)
 	
 	setup_mouse()
 
@@ -87,7 +88,7 @@ func handle_navigation(_event):
 func handle_selection(_index):
 	if _index == buttons.size() - 1:
 		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
-		get_tree().change_scene_to_file("res://Scenes/UI/LocationSelection.tscn")
+		GameManager.return_to_location_menu()
 		return
 	
 	if(is_level_disabled()):

@@ -11,6 +11,17 @@ class_name BaseMenu
 # --------------------------
 # --- VARIABILI COMUNI  ---
 # --------------------------
+enum MenuState { MAIN_MENU, LOCATION_SELECT }
+var current_state : MenuState = MenuState.MAIN_MENU
+
+# --- Bottoni e selettori separati ---
+var buttons_main : Array[Button] = []
+var buttons_location : Array[Button] = []
+
+# Array di array di selettori (ogni gruppo contiene 1 o 2 Node2D)
+var selectors_main : Array = []
+var selectors_location : Array = []
+
 var current_selection := 0
 var buttons: Array = []
 var selectors: Array = []
@@ -26,10 +37,25 @@ const SFX_CONFIRM = "res://Assets/Audio/BtnConfirm.wav"
 # --------------------------
 func _ready() -> void:
 	setup_languages()
-	setup_buttons()
-	setup_selectors()
+	setup_main_buttons()
+	setup_location_buttons()
 	setup_mouse()
+	setup_main_selectors()
+	setup_location_selectors()
+	
+	current_state = GameManager.menu_state
+	update_active_menu()
 	set_current_selection(0)
+	
+	var main_container = $MenuContainer
+	var location_container = $LocationContainer
+
+	if current_state == MenuState.MAIN_MENU:
+		main_container.visible = true
+		location_container.visible = false
+	else:
+		main_container.visible = false
+		location_container.visible = true
 
 # --------------------------
 # --- INPUT MANAGEMENT ---
@@ -52,9 +78,13 @@ func setup_languages():
 # --------------------------
 # --- BUTTONS / MOUSE -----
 # --------------------------
-func setup_buttons():
+func setup_main_buttons():
 	GameLogger.warn("setup_buttons() non implementato — deve essere definito nella sottoclasse")
 
+func setup_location_buttons():
+	GameLogger.warn("setup_buttons() non implementato — deve essere definito nella sottoclasse")
+
+##TODO Da rivedere
 func setup_mouse():
 	for i in range(buttons.size()):
 		var btn = buttons[i]
@@ -74,31 +104,39 @@ func store_base_positions() -> void:
 		base_positions[selector] = selector.position
 
 # --------------------------
-# --- SELECTORS -----------
+# --- SELECTORS ------------
 # --------------------------
-func setup_selectors():
+func setup_main_selectors():
+	push_warning("setup_selectors() non implementato — deve essere definito nella sottoclasse")
+
+func setup_location_selectors():
 	push_warning("setup_selectors() non implementato — deve essere definito nella sottoclasse")
 
 func set_current_selection(_current_selection: int):
+	update_active_menu()
+	
 	for i in range(buttons.size()):
 		var btn = buttons[i]
 		if i == _current_selection:
 			btn.add_theme_color_override("font_color", Color.WHITE)
+			btn.modulate = Color(1, 1, 1)
 		else:
 			btn.add_theme_color_override("font_color", Color.BLACK)
+			btn.modulate = Color8(176, 176, 176)
+	
 	
 	for group in selectors:
 		for sel in group:
 			sel.text = ""
-
+	
 	if _current_selection >= selectors.size():
 		return
-
+	
 	var group = selectors[_current_selection]
 	group[0].text = ">"
 	if group.size() > 1:
 		group[1].text = "<"
-
+	
 	await get_tree().process_frame
 	_start_tween(group)
 
@@ -123,10 +161,38 @@ func _start_tween(group: Array):
 		sel.set_meta("tween", tween)
 
 # --------------------------
-# --- INPUT LOGIC ---------
+# --- INPUT LOGIC ----------
 # --------------------------
 func handle_navigation(_event):
 	GameLogger.warn("handle_navigation() non implementato — deve essere definito nella sottoclasse")
 
 func handle_selection(_index: int):
 	GameLogger.warn("handle_selection() non implementato — deve essere definito nella sottoclasse")
+
+# --------------------------
+# --- UTILITY --------------
+# --------------------------
+func get_current_buttons() -> Array:
+	return buttons_main if current_state == MenuState.MAIN_MENU else buttons_location
+
+func get_current_selectors() -> Array:
+	return selectors_main if current_state == MenuState.MAIN_MENU else selectors_location
+
+func update_active_menu():
+# Aggiorna array attivi in base allo stato
+	if current_state == MenuState.MAIN_MENU:
+		buttons = buttons_main
+		selectors = selectors_main
+	elif current_state == MenuState.LOCATION_SELECT:
+		buttons = buttons_location
+		selectors = selectors_location
+
+	# Nascondi tutti i selectors dei menu
+	for group in selectors_main + selectors_location:
+		for sel in group:
+			sel.visible = false
+
+	# Mostra solo i selectors del menu attivo
+	for group in selectors:
+		for sel in group:
+			sel.visible = true

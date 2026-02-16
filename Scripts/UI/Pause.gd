@@ -11,7 +11,7 @@ func setup_languages():
 	pass
 
 func setup_buttons():
-	buttons = [
+	buttons_main = [
 		$MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue,
 		$MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry,
 		$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu
@@ -19,7 +19,7 @@ func setup_buttons():
 
 func setup_selectors():
 	
-	selectors = [
+	selectors_main = [
 		[$MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorR],
 		[$MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorR],
 		[$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR],

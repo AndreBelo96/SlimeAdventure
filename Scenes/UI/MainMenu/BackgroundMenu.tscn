@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://de3pdo6kx35dv"]
+
+[ext_resource type="Texture2D" uid="uid://dttldyyqmevx8" path="res://Assets/Sprites/UI/MainMenu/bg_far.png" id="1_arbor"]
+[ext_resource type="Texture2D" uid="uid://dkfadm5tpgctv" path="res://Assets/Sprites/UI/MainMenu/bg_mid.png" id="2_06v3u"]
+[ext_resource type="PackedScene" uid="uid://bqd131solu8ks" path="res://Scenes/UI/MainMenu/TorchMenù.tscn" id="3_ceffg"]
+[ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="4_ho8kw"]
+[ext_resource type="Texture2D" uid="uid://ujtntmpg2em2" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1slq"]
+shader = ExtResource("4_ho8kw")
+shader_parameter/speed = 0.2
+shader_parameter/scale = 3.0
+shader_parameter/intensity = 0.15
+shader_parameter/fog_color = Color(0.7, 0.9, 1, 1)
+shader_parameter/time = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dvisc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0gido"]
+width = 480
+height = 400
+noise = SubResource("FastNoiseLite_dvisc")
+
+[sub_resource type="Curve" id="Curve_0kdox"]
+_data = [Vector2(0.0019455254, 0.9999999), 0.0, 0.0, 0, 0, Vector2(1, 0.20926863), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BackgroundMenu" type="Node2D"]
+
+[node name="Far" type="Parallax2D" parent="."]
+repeat_size = Vector2(960, 0)
+autoscroll = Vector2(-15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Far"]
+position = Vector2(481, 180)
+texture = ExtResource("1_arbor")
+
+[node name="Mid" type="Parallax2D" parent="."]
+repeat_size = Vector2(960, 0)
+autoscroll = Vector2(-60, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mid"]
+position = Vector2(481, 180)
+texture = ExtResource("2_06v3u")
+
+[node name="TorchMenù" parent="Mid" instance=ExtResource("3_ceffg")]
+position = Vector2(161, 152)
+
+[node name="TorchMenù2" parent="Mid" instance=ExtResource("3_ceffg")]
+position = Vector2(801, 152)
+
+[node name="TorchMenù3" parent="Mid" instance=ExtResource("3_ceffg")]
+position = Vector2(1121, 152)
+
+[node name="TorchMenù4" parent="Mid" instance=ExtResource("3_ceffg")]
+position = Vector2(1761, 152)
+
+[node name="Fog" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_u1slq")
+position = Vector2(319, 177)
+scale = Vector2(1.4238281, 1)
+texture = SubResource("NoiseTexture2D_0gido")
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+position = Vector2(640, 180)
+amount = 50
+lifetime = 11.0
+preprocess = 3.0
+randomness = 0.23
+emission_shape = 3
+emission_rect_extents = Vector2(1, 360)
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = -60.6
+angular_velocity_max = 60.0
+linear_accel_min = -1.0
+linear_accel_max = 1.0
+radial_accel_max = 1.0
+angle_max = 295.5
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_0kdox")
+color = Color(0.4045111, 0.40451118, 0.40451103, 1)
+
+[node name="Vignettatura" type="Sprite2D" parent="."]
+position = Vector2(319, 180)
+scale = Vector2(0.5753389, 0.5205091)
+texture = ExtResource("5_o8273")

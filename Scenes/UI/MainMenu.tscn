@@ -1,35 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene load_steps=14 format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://dgk8voxxoch2l" path="res://Shader/title_shader.gdshader" id="2_744d7"]
-[ext_resource type="FontFile" uid="uid://cl2j3sd1wf5ch" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_b5bqd"]
-[ext_resource type="Texture2D" uid="uid://b8qbud87vb3ps" path="res://Assets/Sprites/Title.png" id="2_jex3y"]
-[ext_resource type="Texture2D" uid="uid://gtjkb1m14ay1" path="res://Assets/Sprites/UI/bg_far.png" id="2_m48tj"]
-[ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="3_ab04i"]
-[ext_resource type="Texture2D" uid="uid://jltpnsvh06g3" path="res://Assets/Sprites/UI/vignette.png" id="3_dvisc"]
-[ext_resource type="Texture2D" uid="uid://budxhorqug58o" path="res://Assets/Sprites/UI/bg_mid.png" id="4_dvisc"]
-[ext_resource type="FontFile" uid="uid://c83gt86tj7nvb" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
-[ext_resource type="Texture2D" uid="uid://hyab2xg348xo" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
+[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_b5bqd"]
+[ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_jex3y"]
+[ext_resource type="PackedScene" uid="uid://de3pdo6kx35dv" path="res://Scenes/UI/MainMenu/BackgroundMenu.tscn" id="2_kl3t2"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
+[ext_resource type="Texture2D" uid="uid://cprycl3pfs3hf" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
 [ext_resource type="Shader" uid="uid://bo5v8kgyx6j5n" path="res://Shader/blink_shader.gdshader" id="8_ynupv"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hys1s"]
-shader = ExtResource("3_ab04i")
-shader_parameter/speed = 0.2
-shader_parameter/scale = 3.0
-shader_parameter/intensity = 0.15
-shader_parameter/fog_color = Color(0.7, 0.9, 1, 1)
-shader_parameter/time = 0.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dvisc"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ab04i"]
-width = 480
-height = 400
-noise = SubResource("FastNoiseLite_dvisc")
-
-[sub_resource type="Curve" id="Curve_dvisc"]
-_data = [Vector2(0.0019455254, 0.9999999), 0.0, 0.0, 0, 0, Vector2(1, 0.20926863), 0.0, 0.0, 0, 0]
-point_count = 2
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="9_dvisc"]
+[ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="10_ab04i"]
+[ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="11_hys1s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl3t2"]
 shader = ExtResource("2_744d7")
@@ -53,56 +34,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_wrbul")
 
-[node name="Far" type="Parallax2D" parent="."]
-repeat_size = Vector2(960, 0)
-autoscroll = Vector2(-15, 0)
+[node name="BackgroundMenu" parent="." instance=ExtResource("2_kl3t2")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Far"]
-position = Vector2(481, 180)
-texture = ExtResource("2_m48tj")
-
-[node name="Mid" type="Parallax2D" parent="."]
-repeat_size = Vector2(960, 0)
-autoscroll = Vector2(-60, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Mid"]
-position = Vector2(481, 180)
-texture = ExtResource("4_dvisc")
-
-[node name="Fog" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_hys1s")
-position = Vector2(319, 177)
-scale = Vector2(1.4238281, 1)
-texture = SubResource("NoiseTexture2D_ab04i")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(640, 180)
-amount = 50
-lifetime = 11.0
-preprocess = 3.0
-randomness = 0.23
-emission_shape = 3
-emission_rect_extents = Vector2(1, 360)
-direction = Vector2(-1, 0)
-gravity = Vector2(0, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 80.0
-angular_velocity_min = -60.6
-angular_velocity_max = 60.0
-linear_accel_min = -1.0
-linear_accel_max = 1.0
-radial_accel_max = 1.0
-angle_max = 295.5
-scale_amount_max = 5.0
-scale_amount_curve = SubResource("Curve_dvisc")
-color = Color(0.4045111, 0.40451118, 0.40451103, 1)
-
-[node name="Vignettatura" type="Sprite2D" parent="."]
-position = Vector2(319, 180)
-scale = Vector2(0.5753389, 0.5205091)
-texture = ExtResource("3_dvisc")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MenuContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,37 +48,37 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 65)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Title" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="TextureRect" parent="MenuContainer/VBoxContainer/CenterContainer"]
 material = SubResource("ShaderMaterial_kl3t2")
 layout_mode = 2
 texture = ExtResource("2_jex3y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -155,13 +89,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="Start" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button"]
+[node name="Start" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -177,7 +111,7 @@ theme_override_font_sizes/font_size = 20
 text = "Start"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -188,13 +122,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2"]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -205,7 +139,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -213,7 +147,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Profile" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button"]
+[node name="Profile" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -229,7 +163,7 @@ theme_override_font_sizes/font_size = 20
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -240,13 +174,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3"]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -257,7 +191,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -265,7 +199,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Scoreboard" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+[node name="Scoreboard" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -281,7 +215,7 @@ theme_override_font_sizes/font_size = 20
 text = "Scoreboard"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -292,13 +226,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer4" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4"]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -309,7 +243,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -317,7 +251,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Option" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button"]
+[node name="Option" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -333,7 +267,7 @@ theme_override_font_sizes/font_size = 20
 text = "Option"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -344,13 +278,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer5" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5"]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -361,7 +295,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -369,7 +303,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Exit" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button"]
+[node name="Exit" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -385,7 +319,7 @@ theme_override_font_sizes/font_size = 20
 text = "Exit"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -396,20 +330,20 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MenuContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MenuContainer/VBoxContainer2"]
 material = SubResource("ShaderMaterial_dvisc")
 layout_mode = 2
 texture = ExtResource("5_k8um8")
 expand_mode = 5
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="MenuContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
@@ -417,4 +351,174 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 10
 text = "Version 0.1 Alpha"
+horizontal_alignment = 1
+
+[node name="LocationContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("9_dvisc")
+text = "Location Selection"
+
+[node name="CenterContainer2" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LocationContainer" type="GridContainer" parent="LocationContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
+
+[node name="Tutorial" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("10_ab04i")
+text = "Tutorial"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
+
+[node name="Dungeon" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("11_hys1s")
+text = "Dungeon"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+layout_mode = 2
+
+[node name="Forest" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("10_ab04i")
+text = "Forest"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 88.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="CenterContainer3" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_jex3y")
+theme_override_font_sizes/font_size = 20
+text = " <"
 horizontal_alignment = 1

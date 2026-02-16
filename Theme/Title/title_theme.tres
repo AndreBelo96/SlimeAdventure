@@ -5,7 +5,7 @@
 [resource]
 default_font = ExtResource("1_1euxi")
 default_font_size = 40
-Label/colors/font_color = Color(0.99607843, 1, 0.9372549, 1)
+Label/colors/font_color = Color(0.7855839, 0.8460241, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3

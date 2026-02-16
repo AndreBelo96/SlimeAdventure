@@ -22,7 +22,7 @@ offsets = PackedFloat32Array(0, 0.08401639, 0.3954918, 0.7295082, 1)
 colors = PackedColorArray(0.81422967, 0.99999934, 0.46956545, 1, 1, 1, 0.22745098, 1, 0.7192356, 0.38793945, 1.1551381e-06, 1, 0.7176471, 0.1882353, 0.1882353, 1, 1, 1, 1, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_du3qh"]
-polygon = PackedVector2Array(-4, -4, 4, -4, 32, 0, 167, 39, -157, 39, -32, 0)
+polygon = PackedVector2Array(-4, -4, 4, -4, 22, 1, 167, 39, -157, 39, -21, 1)
 
 [node name="TorchMenù" type="Node2D"]
 script = ExtResource("1_jpf3g")
@@ -71,7 +71,7 @@ color = Color(1, 0.4509804, 0.25490198, 1)
 energy = 2.0
 shadow_enabled = true
 shadow_filter = 2
-shadow_filter_smooth = 6.0
+shadow_filter_smooth = 2.0
 texture = ExtResource("3_mxa2m")
 texture_scale = 2.0
 

@@ -36,7 +36,7 @@ func setup_main_selectors():
 	]
 	
 	await get_tree().process_frame
-	for group in selectors:
+	for group in selectors_main:
 		for sel in group:
 			base_positions[sel] = sel.position
 
@@ -49,7 +49,7 @@ func setup_location_selectors():
 	]
 	
 	await get_tree().process_frame
-	for group in selectors:
+	for group in selectors_location:
 		for sel in group:
 			base_positions[sel] = sel.position
 
@@ -123,6 +123,8 @@ func fade_in_main_menu():
 	current_state = MenuState.MAIN_MENU
 	update_active_menu()
 	
+	call_deferred("rebuild_base_positions")
+	
 	# Forza visibilità prima di settare l'indice
 	for group in selectors:
 		for sel in group:
@@ -145,6 +147,8 @@ func fade_in_main_menu():
 func fade_in_location_menu():
 	current_state = MenuState.LOCATION_SELECT
 	update_active_menu()
+	
+	call_deferred("rebuild_base_positions")
 	
 	for group in selectors:
 		for sel in group:

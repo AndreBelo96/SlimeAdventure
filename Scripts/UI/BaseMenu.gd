@@ -141,6 +141,10 @@ func set_current_selection(_current_selection: int):
 	_start_tween(group)
 
 func _start_tween(group: Array):
+	print("--- Base positions PROVA!!! ---")
+	for sel in group:
+		print(sel.name, ": base = ", base_positions.get(sel, sel.position))
+	
 	var vertical = group.size() == 1
 	
 	for sel in group:
@@ -148,12 +152,22 @@ func _start_tween(group: Array):
 			sel.get_meta("tween").kill()
 		
 		var base = base_positions.get(sel, sel.position)
+		
+		if base == null:
+			base = sel.position
+			base_positions[sel] = base
+
+		sel.position = base
+		
 		var offset = Vector2.ZERO
 
 		if vertical:
 			offset = Vector2(0, -5)
 		else:
 			offset = Vector2(-5, 0) if sel == group[0] else Vector2(5, 0)
+		
+		print("--- PROVA PROVA!!! ---")
+		print(sel.name, ": current = ", sel.position, ", offset = ", offset)
 		
 		var tween = create_tween().set_loops()
 		tween.tween_property(sel, "position", base + offset, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -196,3 +210,12 @@ func update_active_menu():
 	for group in selectors:
 		for sel in group:
 			sel.visible = true
+
+func rebuild_base_positions():
+	base_positions.clear()
+	for group in selectors:
+		for sel in group:
+			call_deferred("_store_base_position", sel)
+
+func _store_base_position(sel):
+	base_positions[sel] = sel.position

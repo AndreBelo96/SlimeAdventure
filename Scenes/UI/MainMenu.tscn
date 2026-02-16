@@ -391,7 +391,7 @@ columns = 3
 layout_mode = 2
 
 [node name="Tutorial" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
-custom_minimum_size = Vector2(130, 45)
+custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("10_ab04i")
@@ -419,7 +419,7 @@ text = ">"
 layout_mode = 2
 
 [node name="Dungeon" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(130, 45)
+custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("11_hys1s")
@@ -447,7 +447,7 @@ text = ">"
 layout_mode = 2
 
 [node name="Forest" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(130, 45)
+custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("10_ab04i")

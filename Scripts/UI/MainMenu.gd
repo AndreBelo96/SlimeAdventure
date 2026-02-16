@@ -56,23 +56,23 @@ func setup_location_selectors():
 func handle_navigation(_event):
 	if current_state == MenuState.MAIN_MENU:
 		if Input.is_action_just_pressed("move_down") and current_selection < 4:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection += 1
 		elif Input.is_action_just_pressed("move_up") and current_selection > 0:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection -= 1
 	elif current_state == MenuState.LOCATION_SELECT:
 		if Input.is_action_just_pressed("move_right") and current_selection < 3:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection += 1
 		elif Input.is_action_just_pressed("move_left") and current_selection > 0:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection -= 1
 		elif Input.is_action_just_pressed("move_down") and current_selection < 3:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection = 3
 		elif Input.is_action_just_pressed("move_up") and current_selection > 0:
-			SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+			SoundManager.play_sfx(SFX_MOVE)
 			current_selection = 0
 	
 	set_current_selection(current_selection)

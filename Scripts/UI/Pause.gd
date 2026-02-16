@@ -30,16 +30,16 @@ func handle_navigation(_delta):
 		return
 	
 	if Input.is_action_just_pressed("move_down") and current_selection < 2:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection += 1
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection -= 1
 	
 	set_current_selection(current_selection)
 
 func handle_selection(_index):
-	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	SoundManager.play_sfx(SFX_CONFIRM)
 	if (_index == 0):
 		get_tree().paused = false
 		visible = false

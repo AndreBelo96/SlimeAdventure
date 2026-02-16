@@ -30,7 +30,7 @@ var input_enabled := true
 
 ## --- Costanti per i suoni (overrideabile se serve) ---
 const SFX_MOVE = "res://Assets/Audio/TutorialBtnClick.wav"
-const SFX_CONFIRM = "res://Assets/Audio/BtnConfirm.wav"
+const SFX_CONFIRM = "res://Assets/Audio/TutorialBtnClick.wav"
 
 # --------------------------
 # ------- LIFECYCLE --------

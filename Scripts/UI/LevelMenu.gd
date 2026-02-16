@@ -71,23 +71,23 @@ func handle_navigation(_event):
 	var max_index = buttons.size() - 1  # include anche il back button
 		
 	if Input.is_action_just_pressed("move_right") and current_selection < max_index:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection += 1
 	elif Input.is_action_just_pressed("move_left") and current_selection > 0:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection -= 1
 	elif Input.is_action_just_pressed("move_down") and current_selection < max_index:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection = current_selection + ROW_SIZE if current_selection + ROW_SIZE <= max_index else max_index
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
-		SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+		SoundManager.play_sfx(SFX_MOVE)
 		current_selection = current_selection - ROW_SIZE if current_selection - ROW_SIZE >= 0 else 0
 	
 	set_current_selection(current_selection)
 
 func handle_selection(_index):
 	if _index == buttons.size() - 1:
-		SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+		SoundManager.play_sfx(SFX_CONFIRM)
 		GameManager.return_to_location_menu()
 		return
 	

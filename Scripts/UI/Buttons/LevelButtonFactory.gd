@@ -3,7 +3,7 @@ extends Object
 
 func create_level_button(label: String, is_disabled: bool, theme: Theme) -> VBoxContainer:
 	var container = VBoxContainer.new()
-	container.custom_minimum_size = Vector2(80, 60)
+	container.custom_minimum_size = Vector2(93, 48)
 	container.set_anchors_preset(Control.PRESET_CENTER)
 
 	# Il pulsante
@@ -12,8 +12,8 @@ func create_level_button(label: String, is_disabled: bool, theme: Theme) -> VBox
 	button.disabled = is_disabled
 	button.focus_mode = Control.FOCUS_NONE
 	button.theme = theme
-	button.set_size(Vector2(80, 20))
-	button.set_custom_minimum_size(Vector2(80, 20))
+	button.set_size(Vector2(93, 48))
+	button.set_custom_minimum_size(Vector2(93, 48))
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	container.add_child(button)

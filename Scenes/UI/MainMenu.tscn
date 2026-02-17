@@ -423,6 +423,7 @@ custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("11_hys1s")
+theme_override_constants/h_separation = 4
 text = "Dungeon"
 
 [node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]

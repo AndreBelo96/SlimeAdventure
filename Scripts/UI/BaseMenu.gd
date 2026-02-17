@@ -86,10 +86,14 @@ func setup_location_buttons():
 
 ##TODO Da rivedere
 func setup_mouse():
-	for i in range(buttons.size()):
-		var btn = buttons[i]
-		btn.connect("mouse_entered", Callable(self, "_on_label_mouse_entered").bind(i))
-		btn.connect("pressed", Callable(self, "_on_button_pressed").bind(i))
+	_connect_mouse_for(buttons_main)
+	_connect_mouse_for(buttons_location)
+
+func _connect_mouse_for(button_array: Array):
+	for i in range(button_array.size()):
+		var btn = button_array[i]
+		btn.mouse_entered.connect(_on_label_mouse_entered.bind(i))
+		btn.pressed.connect(_on_button_pressed.bind(i))
 
 func _on_label_mouse_entered(index):
 	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")

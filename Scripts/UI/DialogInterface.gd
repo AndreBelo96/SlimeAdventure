@@ -4,16 +4,35 @@ class_name DialogueInterface
 
 signal dialogue_finished
 
-@onready var text_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/TextLabel
-@onready var name_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/NameLabel
-@onready var portrait = $MarginContainer/PanelContainer/HBoxContainer/PanelContainer/Portrait
+@onready var text_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/TextLabel
+@onready var name_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelName/NameLabel
+@onready var portrait = $MarginContainer/PanelContainer/HBoxContainer/PanelPotrait/Portrait
 
 @export var player: Node2D
 @export var level_manager: Node2D
 
+const DIALOG_PANEL_STYLE = preload("res://Theme/DialogueInterface/dialogue_panel.tres")
+
+var location_colors := {
+	GameManager.Location.TUTORIAL: {
+		"border": Color("#dcdcdc"),
+		"name": Color("#959595"),
+		"text": Color("#dcdcdc")
+	},
+	GameManager.Location.DUNGEON: {
+		"border": Color("#adb4cb"),
+		"name": Color("#38477a"),
+		"text": Color("#adb4cb")
+	},
+	GameManager.Location.FOREST: {
+		"border": Color("#43a047"),
+		"name": Color("#1b5e20"),
+		"text": Color("#2e7d32")
+	}
+}
+
 # Velocità tween
-const TWEEN_TIME := 0.25
-var tween: Tween = null
+const TWEEN_TIME := 0.5
 
 const max_visible_lines  := 3
 var current_pages: Array = []
@@ -28,6 +47,8 @@ var skip_typing = false
 func show_dialogue(dialogue: Array):
 	if get_tree().paused:
 		return
+	
+	_apply_location_theme()
 	
 	if player:
 		player.can_move = false
@@ -44,10 +65,12 @@ func show_dialogue(dialogue: Array):
 	current_dialogue = dialogue
 	current_index = 0
 	visible = true
+	await _scale_in()
 	_show_line()
 
 func _show_line() -> void:
 	if current_index >= current_dialogue.size():
+		await _scale_out()
 		visible = false
 		
 		if player:
@@ -62,7 +85,6 @@ func _show_line() -> void:
 	var line = current_dialogue[current_index]
 	name_label.text = line.get("name", "")
 	portrait.texture = line.get("portrait", null)
-	#_type_text(line["text"])
 	_prepare_pages(line["text"])
 	current_page_index = 0
 	_type_text(current_pages[current_page_index])
@@ -136,3 +158,64 @@ func advance_dialogue():
 	else:
 		current_index += 1
 		_show_line()
+
+
+### --- Slimy Animations --- ###
+func _scale_in():
+	scale = Vector2(0.7, 1.3)
+	modulate.a = 0.0
+
+	var tween = create_tween()
+
+	tween.set_parallel(true)
+
+	tween.tween_property(self, "scale", Vector2(1.15, 0.85), 0.25)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(self, "modulate:a", 1.0, 0.2)
+
+	await tween.finished
+
+	var bounce = create_tween()
+	bounce.tween_property(self, "scale", Vector2(0.95, 1.05), 0.12)
+	bounce.tween_property(self, "scale", Vector2(1.02, 0.98), 0.12)
+	bounce.tween_property(self, "scale", Vector2.ONE, 0.12)
+
+func _scale_out():
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	tween.tween_property(self, "scale", Vector2(0.85, 0.85), 0.25)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "position", position + Vector2(0, 100), 0.25)
+	tween.tween_property(self, "modulate:a", 0.0, 0.25)
+	
+	await tween.finished
+	visible = false
+
+### --- Location color --- ###
+func _apply_location_theme():
+	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var theme_data = location_colors.get(location, null)
+	
+	if theme_data == null:
+		return
+	
+	var border_potrait = $MarginContainer/PanelContainer/HBoxContainer/PanelPotrait
+	var border_name = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelName
+	var border_text = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText
+	
+	_apply_border(border_potrait, theme_data["border"])
+	_apply_border(border_name, theme_data["border"])
+	_apply_border(border_text, theme_data["border"])
+	
+	# Cambiare background nome
+	text_label.add_theme_color_override("default_color", theme_data["text"])
+	name_label.add_theme_color_override("font_color", theme_data["name"])
+
+func _apply_border(panel: PanelContainer, color: Color):
+	var style := DIALOG_PANEL_STYLE.duplicate() as StyleBoxFlat
+	style.border_color = color
+	panel.add_theme_stylebox_override("panel", style)

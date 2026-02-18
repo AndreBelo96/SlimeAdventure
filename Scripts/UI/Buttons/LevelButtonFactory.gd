@@ -26,7 +26,7 @@ func create_level_button(label: String, is_disabled: bool, theme: Theme) -> VBox
 	selector_label.text = ""
 	selector_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	selector_label.rotation_degrees = -90
-	selector_label.position = (Vector2(24, 20))
+	selector_label.position = (Vector2(33, 20))
 	selector_label.theme = preload("res://Theme/Title/normal_theme.tres")
 	selector_container.add_child(selector_label)
 

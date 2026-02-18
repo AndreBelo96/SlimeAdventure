@@ -64,7 +64,7 @@ func _unhandled_input(event):
 	if not visible or not input_enabled:
 		return
 
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_released("ui_accept"):
 		handle_selection(current_selection)
 	else:
 		handle_navigation(event)
@@ -84,7 +84,6 @@ func setup_main_buttons():
 func setup_location_buttons():
 	GameLogger.warn("setup_buttons() non implementato — deve essere definito nella sottoclasse")
 
-##TODO Da rivedere
 func setup_mouse():
 	_connect_mouse_for(buttons_main)
 	_connect_mouse_for(buttons_location)

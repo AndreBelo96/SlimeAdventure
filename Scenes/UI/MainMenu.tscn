@@ -403,9 +403,9 @@ layout_mode = 2
 [node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_left = 48.0
+offset_left = 42.0
 offset_top = 20.0
-offset_right = 88.0
+offset_right = 82.0
 offset_bottom = 60.0
 rotation = -1.5708
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -432,9 +432,9 @@ layout_mode = 2
 [node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_left = 48.0
+offset_left = 42.0
 offset_top = 20.0
-offset_right = 88.0
+offset_right = 82.0
 offset_bottom = 60.0
 rotation = -1.5708
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -460,9 +460,9 @@ layout_mode = 2
 [node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_left = 48.0
+offset_left = 42.0
 offset_top = 20.0
-offset_right = 88.0
+offset_right = 82.0
 offset_bottom = 60.0
 rotation = -1.5708
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

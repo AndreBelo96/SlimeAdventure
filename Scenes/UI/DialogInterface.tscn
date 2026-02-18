@@ -1,7 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfpv6fhikmmav"]
+[gd_scene load_steps=9 format=3 uid="uid://dfpv6fhikmmav"]
 
 [ext_resource type="Script" uid="uid://cdekipkcivo67" path="res://Scripts/UI/DialogInterface.gd" id="1_mog3c"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="2_chml1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chml1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0veh"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.11764706, 0.11764706, 0.14117648, 0.88235295)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6784314, 0.7058824, 0.79607844, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sl8lf"]
+bg_color = Color(0.11764706, 0.11764706, 0.14117648, 0.88235295)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6784314, 0.7058824, 0.79607844, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s6ce"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owlpp"]
+bg_color = Color(0.11764706, 0.11764706, 0.14117648, 0.88235295)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6784314, 0.7058824, 0.79607844, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mm7k"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="DialogInterface" type="Control"]
 layout_mode = 3
@@ -9,44 +66,68 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -87.0
+offset_top = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("1_mog3c")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
 
-[node name="NameLabel" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = -31.0
-offset_right = 129.0
-offset_bottom = -1.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chml1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m0veh")
+
+[node name="Portrait" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sl8lf")
+
+[node name="NameLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 theme = ExtResource("2_chml1")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_4s6ce")
 text = "Slime:"
 
-[node name="Portrait" type="TextureRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 88.0
-grow_vertical = 2
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_owlpp")
 
-[node name="TextLabel" type="RichTextLabel" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 100.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("2_chml1")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mm7k")
 text = "Prova 1,2 ,3"

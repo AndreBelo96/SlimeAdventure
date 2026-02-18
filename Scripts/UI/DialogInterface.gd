@@ -4,9 +4,10 @@ class_name DialogueInterface
 
 signal dialogue_finished
 
-@onready var text_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/TextLabel
+@onready var text_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer/TextLabel
 @onready var name_label = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelName/NameLabel
 @onready var portrait = $MarginContainer/PanelContainer/HBoxContainer/PanelPotrait/Portrait
+@onready var skip = $MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer/Skip
 
 @export var player: Node2D
 @export var level_manager: Node2D
@@ -43,6 +44,10 @@ var current_index = 0
 var is_typing = false
 var key_pressed = false
 var skip_typing = false
+
+func _process(_delta):
+	if skip.visible:
+		skip.modulate.a = 0.5 + sin(Time.get_ticks_msec() * 0.01) * 0.5
 
 func show_dialogue(dialogue: Array):
 	if get_tree().paused:
@@ -121,6 +126,8 @@ func _prepare_pages(full_text: String) -> void:
 func _type_text(text: String):
 	is_typing = true
 	skip_typing = false
+	skip.visible = false
+	
 	text_label.text = ""
 	var line = current_dialogue[current_index]
 	
@@ -139,6 +146,7 @@ func _type_text(text: String):
 		
 		await get_tree().create_timer(0.03, false).timeout
 	is_typing = false
+	skip.visible = true
 
 func _unhandled_input(event):
 	if not visible:
@@ -152,13 +160,14 @@ func advance_dialogue():
 		skip_typing = true
 		return
 	
+	skip.visible = false
+	
 	if current_page_index < current_pages.size() - 1:
 		current_page_index += 1
 		_type_text(current_pages[current_page_index])
 	else:
 		current_index += 1
 		_show_line()
-
 
 ### --- Slimy Animations --- ###
 func _scale_in():
@@ -214,6 +223,7 @@ func _apply_location_theme():
 	# Cambiare background nome
 	text_label.add_theme_color_override("default_color", theme_data["text"])
 	name_label.add_theme_color_override("font_color", theme_data["name"])
+	skip.add_theme_color_override("font_color", theme_data["text"])
 
 func _apply_border(panel: PanelContainer, color: Color):
 	var style := DIALOG_PANEL_STYLE.duplicate() as StyleBoxFlat

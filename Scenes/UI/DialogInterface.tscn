@@ -84,9 +84,22 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_m0veh")
 
-[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText"]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_chml1")
-theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/normal_font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_1mm7k")
+scroll_active = false
+
+[node name="Skip" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+text = "▶"
+vertical_alignment = 2

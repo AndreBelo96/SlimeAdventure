@@ -1,5 +1,7 @@
 extends BaseMenu
 
+@onready var root_container = $ColorRect/MarginContainer
+
 func _ready():
 	setup_languages()
 	setup_buttons()
@@ -7,6 +9,9 @@ func _ready():
 	setup_mouse()
 	set_current_selection(0)
 	setup_results()
+	
+	await get_tree().process_frame
+	animate_screen_enter()
 
 func setup_results():
 	var sprite = $ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Control/Victory
@@ -90,3 +95,11 @@ func handle_selection(_index):
 		GameManager.return_to_location_menu()
 	elif (_index == 2):
 		GameManager.return_to_menu()
+
+func animate_screen_enter():
+	root_container.modulate.a = 0.0
+	root_container.scale = Vector2(0.96, 0.96)
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(root_container, "modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(root_container, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

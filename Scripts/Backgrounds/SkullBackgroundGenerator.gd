@@ -3,7 +3,7 @@ extends IBackgroundGenerator
 class_name SkullBackgroundGenerator
 
 # --- Configurazioni ---
-const BG_COLOR: Color = Color(0.184, 0.227, 0.184, 1) # #2f3a2f
+const BG_COLOR: Color = Color("22283a")
 const TEXTURE_PATH: String = "res://Assets/Sprites/UI/background_set.png"
 const REGION_RECT: Rect2 = Rect2(Vector2(36, 0), Vector2(18, 18))
 const BASE_TILE_SIZE: Vector2 = Vector2(18, 18)

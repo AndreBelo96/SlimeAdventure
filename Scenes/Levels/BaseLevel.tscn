@@ -220,3 +220,5 @@ visible = false
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 script = ExtResource("18_wwx3o")
+
+[node name="Effects" type="Node2D" parent="Camera2D"]

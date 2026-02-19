@@ -80,9 +80,7 @@ script = ExtResource("2_p120o")
 
 [node name="PointLight2D" parent="." index="0"]
 position = Vector2(14, -42)
-energy = 1.58
-blend_mode = 2
-texture_scale = 2.0
+texture_scale = 1.5
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_3wkoe")

@@ -10,6 +10,9 @@ extends Node2D
 @onready var dark_overlay = $DarkOverlay
 @onready var background_manager: BackgroundManager = $BackgroundManager
 
+const DUNGEON_EFFECT = preload("res://Scenes/UI/Effetti/DungeonParticles.tscn")
+const FOG_EFFECT = preload("res://Scenes/UI/Effetti/FogEffect.tscn")
+
 enum VictoryMode {
 	TILES,
 	BOSS,
@@ -34,6 +37,8 @@ func _ready():
 	$MovementLogicMapLayer.add_to_group("movement_logic")
 	pause_menu.visible = false
 	pause_menu.hide()
+	
+	spawn_effect_for_theme()
 	
 	dark_overlay.visible = GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level)
 	
@@ -196,3 +201,25 @@ func _on_player_won():
 # -- UTILS -- #
 func set_current_level_number(current_level: int):
 	GameManager.current_level = current_level
+
+func spawn_effect_for_theme():
+	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var particles_istance: PackedScene = null
+	var fog_istance: PackedScene = null
+
+	match location :
+		GameManager.Location.DUNGEON:
+			particles_istance = DUNGEON_EFFECT
+			fog_istance = FOG_EFFECT
+		GameManager.Location.FOREST:
+			return
+		GameManager.Location.TUTORIAL:
+			return
+
+	if particles_istance:
+		var effect = particles_istance.instantiate()
+		$Camera2D/Effects.add_child(effect)
+	
+	if fog_istance:
+		var effect = fog_istance.instantiate()
+		$Camera2D/Effects.add_child(effect)

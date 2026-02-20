@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.109804, 0.262745, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,33 +36,33 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme = ExtResource("2_owefo")
 text = "Victory!!"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -73,14 +73,14 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Next" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+[node name="Next" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 focus_mode = 0
 flat = true
 
-[node name="Next" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next"]
+[node name="Next" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -93,7 +93,7 @@ theme_override_font_sizes/font_size = 20
 text = "Next Level"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -104,11 +104,11 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -119,14 +119,14 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="BackLevelSelection" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="BackLevelSelection" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 focus_mode = 0
 flat = true
 
-[node name="BackLevelSelection" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection"]
+[node name="BackLevelSelection" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -139,7 +139,7 @@ theme_override_font_sizes/font_size = 20
 text = "Back To Level Select"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -150,11 +150,11 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SelectorL" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -165,14 +165,14 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="BackMainMenu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="BackMainMenu" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 focus_mode = 0
 flat = true
 
-[node name="BackMainMenu" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu"]
+[node name="BackMainMenu" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -185,7 +185,7 @@ theme_override_font_sizes/font_size = 20
 text = "Back To Main Menù"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -196,72 +196,73 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="Points" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Points" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Actual" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points"]
+[node name="Actual" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Actual" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
+[node name="Actual" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 text = "Current"
 
-[node name="ActualSteps" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
+[node name="ActualSteps" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 theme_override_font_sizes/font_size = 18
 text = "Steps:"
 
-[node name="ActualTime" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
+[node name="ActualTime" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 theme_override_font_sizes/font_size = 18
 text = "Time:"
 
-[node name="Best" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points"]
+[node name="Best" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
 
-[node name="Best" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
+[node name="Best" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 text = "Best"
 
-[node name="BestSteps" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
+[node name="BestSteps" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 theme_override_font_sizes/font_size = 18
 text = "Steps:"
 
-[node name="BestTime" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
+[node name="BestTime" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/Points/Best"]
 layout_mode = 2
 theme = ExtResource("4_1fos3")
 theme_override_font_sizes/font_size = 18
 text = "Time:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 alignment = 1
 
-[node name="Record" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Record" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_1fos3")
 text = "New Record!!"
 
-[node name="Control" type="Control" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="Victory" type="Sprite2D" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Control"]
+[node name="Victory" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control"]
 scale = Vector2(4, 4)
 texture = ExtResource("3_e4620")

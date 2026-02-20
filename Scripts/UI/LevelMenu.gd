@@ -107,11 +107,19 @@ func _on_level_button_pressed(path: String, _sound: String):
 	
 	if is_first_level_of_location:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		set_all_lights_active($BackgroundMenu, false)
 		var loader_scene = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 		loader_scene.scene_to_load = path
 		loader_scene.transition_text = GameManager.Location.keys()[GameManager.get_location_for_level(level_num)]
 		loader_scene.location_id = int(GameManager.get_location_for_level(level_num))
+		
 		get_tree().root.add_child(loader_scene)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		get_tree().change_scene_to_file(path)
+
+func set_all_lights_active(node: Node, active: bool) -> void:
+	if node is Light2D:
+		node.visible = active
+	for child in node.get_children():
+		set_all_lights_active(child, active)

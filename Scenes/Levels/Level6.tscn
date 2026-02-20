@@ -28,4 +28,4 @@ tile_map_data = PackedByteArray("AAAGAPv/AAAAAAAACAA=")
 tile_map_data = PackedByteArray("AAAHAPv/AgAAAAAAAAA=")
 
 [node name="TorchMapLayer" parent="YSort" index="7"]
-tile_map_data = PackedByteArray("AAABAPv/AAAAAAAAAQAEAPv/AAAAAAAAAQD//wAAAAAAAAAAAgD9//z/AAAAAAAAAgD9//7/AAAAAAAAAgD9//f/AAAAAAAAAgD///b/AAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAABAPv/AAAAAAAAAQAEAPv/AAAAAAAAAQD//wAAAAAAAAAAAgD9//z/AAAAAAAAAgD9//7/AAAAAAAAAgD9//f/AAAAAAAAAgD///b/AAAAAAAAAQACAP7/AAAAAAAABQA=")

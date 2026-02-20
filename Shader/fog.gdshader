@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
-uniform float speed = 0.2;
-uniform float scale = 2.0;
-uniform float intensity = 0.5;
-uniform vec4 fog_color : source_color = vec4(0.7, 0.9, 1.0, 1.0);
+uniform float speed = 0.1;
+uniform float scale = 1;
+uniform float intensity = 1;
+uniform vec4 fog_color : source_color = vec4(0.8, 0.9, 1.0, 1.0);
 
 uniform float time;
 
@@ -34,7 +34,7 @@ void fragment() {
 
 	float n = noise(uv);
 
-	float alpha = smoothstep(0.4, 0.7, n) * intensity;
+	float alpha = smoothstep(0.4, 0.7, n) * intensity * 1.5;
 
 	COLOR = vec4(fog_color.rgb, alpha);
 }

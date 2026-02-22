@@ -58,9 +58,6 @@ func show_dialogue(dialogue: Array):
 	if player:
 		player.can_move = false
 	
-	if level_manager:
-		level_manager.time_running = false
-	
 	for line in dialogue:
 		if typeof(line) != TYPE_DICTIONARY or not line.has("text"):
 			push_error("Dialogue line is invalid: " + str(line))
@@ -80,10 +77,7 @@ func _show_line() -> void:
 		
 		if player:
 			player.can_move = true
-		
-		if level_manager:
-			level_manager.time_running = true
-			
+	
 		emit_signal("dialogue_finished")
 		return
 
@@ -177,11 +171,7 @@ func _scale_in():
 	var tween = create_tween()
 
 	tween.set_parallel(true)
-
-	tween.tween_property(self, "scale", Vector2(1.15, 0.85), 0.25)\
-		.set_trans(Tween.TRANS_BACK)\
-		.set_ease(Tween.EASE_OUT)
-
+	tween.tween_property(self, "scale", Vector2(1.15, 0.85), 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "modulate:a", 1.0, 0.2)
 
 	await tween.finished
@@ -195,9 +185,7 @@ func _scale_out():
 	var tween = create_tween()
 	tween.set_parallel(true)
 	
-	tween.tween_property(self, "scale", Vector2(0.85, 0.85), 0.25)\
-		.set_trans(Tween.TRANS_BACK)\
-		.set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "scale", Vector2(0.85, 0.85), 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "position", position + Vector2(0, 100), 0.25)
 	tween.tween_property(self, "modulate:a", 0.0, 0.25)
 	

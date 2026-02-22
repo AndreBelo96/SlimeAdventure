@@ -31,3 +31,5 @@ func _ready():
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)
+	await dialog_interface.dialogue_finished
+	time_running = true

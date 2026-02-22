@@ -13,7 +13,6 @@ func _ready():
 
 func play_boss_intro() -> void:
 	player.enter_cutscene()
-	time_running = false
 	
 	switch_all_torches(false)
 	await get_tree().create_timer(0.5).timeout

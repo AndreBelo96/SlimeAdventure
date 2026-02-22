@@ -50,7 +50,6 @@ func _process(delta: float) -> void:
 		BossState.DEAD:
 			pass
 
-
 ### ------- Turn ------- ###
 
 func take_turn():
@@ -100,7 +99,9 @@ func _ensure_pathfinder() -> bool:
 	return true
 
 func should_move(_step_count: int) -> bool:
-	return _step_count % steps_to_trigger == 0 #TODO error
+	if state == BossState.DEAD:
+		return false
+	return _step_count % steps_to_trigger == 0
 
 func find_next_tile() -> Vector2i:
 	if not _ensure_pathfinder():
@@ -129,7 +130,6 @@ func _animate_move_to(tile: Vector2i) -> void:
 	tween.tween_property(self, "global_position", target_pos, 0.2)
 	await tween.finished
 
-
 ### ------- Take Dmg ------- ###
 
 func damage_animation():
@@ -153,7 +153,7 @@ func _apply_tile_effect_here():
 		level_logic.apply_tile_effect_to_enemy(self, posizione_tile)
 
 func change_steps():
-	steps_to_trigger -= 1
+	steps_to_trigger = max(1, steps_to_trigger - 1)
 
 ### ------- Attack ------- ###
 
@@ -187,6 +187,9 @@ func attack():
 
 func _on_global_step(step_count: int) -> void:
 	_clear_attack_warning()
+	
+	if state == BossState.DEAD:
+		return
 
 	if (step_count + 1) % steps_to_trigger == 0:
 		_show_attack_warning()

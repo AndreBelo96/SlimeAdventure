@@ -99,3 +99,6 @@ func activate():
 	active = true
 	set_process(true)
 	set_physics_process(true)
+
+func is_dead() -> bool:
+	return state == BossState.DEAD

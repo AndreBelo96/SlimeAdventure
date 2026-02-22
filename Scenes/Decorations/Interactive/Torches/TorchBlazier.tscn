@@ -86,9 +86,9 @@ animations = [{
 script = ExtResource("2_m3bx2")
 
 [node name="PointLight2D" parent="." index="0"]
-texture_scale = 3.0
+texture_scale = 2.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_de8sq")
 autoplay = "default"
-offset = Vector2(0, -22)
+offset = Vector2(0, -20)

@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dttldyyqmevx8" path="res://Assets/Sprites/UI/MainMenu/bg_far.png" id="1_arbor"]
 [ext_resource type="Texture2D" uid="uid://dkfadm5tpgctv" path="res://Assets/Sprites/UI/MainMenu/bg_mid.png" id="2_06v3u"]
 [ext_resource type="PackedScene" uid="uid://bqd131solu8ks" path="res://Scenes/UI/MainMenu/TorchMenù.tscn" id="3_ceffg"]
-[ext_resource type="Texture2D" uid="uid://c8755lbwh0eph" path="res://Assets/Sprites/UI/MainMenu/fg.png" id="4_06v3u"]
+[ext_resource type="Texture2D" uid="uid://dwx14vysutofa" path="res://Assets/Sprites/UI/MainMenu/fg.png" id="4_06v3u"]
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="4_ho8kw"]
-[ext_resource type="Texture2D" uid="uid://jltpnsvh06g3" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
+[ext_resource type="Texture2D" uid="uid://ujtntmpg2em2" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u1slq"]
 shader = ExtResource("4_ho8kw")

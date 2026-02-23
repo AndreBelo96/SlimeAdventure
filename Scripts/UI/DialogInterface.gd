@@ -45,6 +45,11 @@ var is_typing = false
 var key_pressed = false
 var skip_typing = false
 
+var initial_position: Vector2
+
+func _ready():
+	initial_position = position
+
 func _process(_delta):
 	if skip.visible:
 		skip.modulate.a = 0.5 + sin(Time.get_ticks_msec() * 0.01) * 0.5
@@ -191,6 +196,12 @@ func _scale_out():
 	
 	await tween.finished
 	visible = false
+	
+	position = initial_position
+	scale = Vector2.ONE
+	text_label.text = ""
+	name_label.text = ""
+	portrait.texture = null
 
 ### --- Location color --- ###
 func _apply_location_theme():

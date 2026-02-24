@@ -5,7 +5,7 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6rof2"]
 texture = ExtResource("9_w8df5")
 texture_region_size = Vector2i(66, 83)
-0:1/next_alternative_id = 3
+0:1/next_alternative_id = 4
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 28)
 0:1/2 = 2
@@ -29,6 +29,18 @@ texture_region_size = Vector2i(66, 83)
 4:1/0/texture_origin = Vector2i(0, 28)
 5:1/0 = 0
 5:1/0/texture_origin = Vector2i(0, 25)
+6:1/next_alternative_id = 2
+6:1/0 = 0
+6:1/0/texture_origin = Vector2i(0, 28)
+6:1/1 = 1
+6:1/1/flip_h = true
+6:1/1/texture_origin = Vector2i(0, 28)
+7:1/next_alternative_id = 2
+7:1/0 = 0
+7:1/0/texture_origin = Vector2i(-10, 31)
+7:1/1 = 1
+7:1/1/flip_h = true
+7:1/1/texture_origin = Vector2i(10, 31)
 
 [resource]
 tile_shape = 1

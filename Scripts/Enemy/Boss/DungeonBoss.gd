@@ -9,6 +9,7 @@ var _waiting_time := 0.0
 var step_counter = 0
 var steps_to_trigger = 3
 var warned_tiles: Array[Vector2i] = []
+var warning = false
 
 @onready var sprite := $Animation
 
@@ -71,6 +72,10 @@ func _start_move():
 		await move_to(next_tile)
 
 	#_apply_tile_effect_here()
+	
+	if warning:
+		_show_attack_warning()
+		warning = false
 	
 	action_in_progress = false
 	idle_entered = false
@@ -191,8 +196,11 @@ func _on_global_step(step_count: int) -> void:
 	if state == BossState.DEAD:
 		return
 
-	if (step_count + 1) % steps_to_trigger == 0:
+	if (step_count + 1) % steps_to_trigger == 0 and steps_to_trigger > 1:
 		_show_attack_warning()
+	
+	if steps_to_trigger == 1:
+		warning = true
 
 func _get_attack_tiles() -> Array[Vector2i]: #TODO da qualche aprte c'è il emtodo epr controllare il paleyr 
 	var result: Array[Vector2i] = []

@@ -9,6 +9,22 @@ const SOUND_TUTORIAL := "res://Assets/Audio/TutorialBtnClick.wav"
 const SOUND_DUNGEON := "res://Assets/Audio/TutorialBtnClick.wav" #TODO da fare
 const SOUND_DEFAULT := "res://Assets/Audio/DefaultBtnClick.wav"
 
+const ALL_LEVELS := [
+	"Level1.tscn",
+	"Level2.tscn",
+	"Level3.tscn",
+	"Level4.tscn",
+	"Level5.tscn",
+	"Level6.tscn",
+	"Level7.tscn",
+	"Level8.tscn",
+	"Level9.tscn",
+	"Level10.tscn",
+	"Level11.tscn",
+	"Level12.tscn",
+	"Level13.tscn",
+]
+
 func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 	var levels_info: Array[Dictionary] = []
 	var files = get_levels_for_location(loc)
@@ -42,20 +58,14 @@ func get_theme_for_location(loc: int) -> Theme:
 			return THEME_DEFAULT
 
 func get_levels_for_location(loc: int) -> Array[String]:
-	var dir = DirAccess.open("res://Scenes/Levels/")
-	if not dir:
-		return []
 
 	var level_files: Array[String] = []
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
+	
+	for file_name in ALL_LEVELS:
 		if file_name.ends_with(".tscn") and file_name.begins_with("Level"):
 			var level_num = extract_level_number(file_name)
 			if GameManager.get_location_for_level(level_num) == loc:
 				level_files.append(file_name)
-		file_name = dir.get_next()
-	dir.list_dir_end()
 
 	# Ordina per numero di livello
 	level_files.sort_custom(func(a, b):

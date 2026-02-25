@@ -65,7 +65,7 @@ func load_level_buttons():
 	setup_mouse()
 
 func is_level_disabled() -> bool:
-	return current_selection > GameManager.max_level_reach
+	return current_selection + 1 > GameManager.max_level_reach
 
 func handle_navigation(_event):
 	var max_index = buttons.size() - 1  # include anche il back button

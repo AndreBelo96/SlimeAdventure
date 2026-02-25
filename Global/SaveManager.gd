@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_PATH := "user://save_data.save"
+const SAVE_PATH := "user://save_data.save" #C:\Users\Andrea\AppData\Roaming\Godot\app_userdata\Slime Adventure
 
 ## Struttura dati persistente
 var save_data := {

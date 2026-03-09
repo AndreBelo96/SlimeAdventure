@@ -76,6 +76,9 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
+		if not player.input_enabled:
+			return
+		
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		toggle_pause()
 
@@ -130,7 +133,7 @@ func _on_steps_changed(new_count: int) -> void:
 	check_victory()
 
 func _on_player_died():
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(1.5, true).timeout
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
 	GameManager.end_level(false)

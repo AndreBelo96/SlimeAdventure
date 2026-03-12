@@ -147,7 +147,7 @@ func on_player_died(death_type: int):
 	emit_signal("player_died")
 
 func _play_void_death():
-	z_index = -100
+	z_index = -10
 
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "position:y", position.y + 500, 1.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)

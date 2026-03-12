@@ -219,17 +219,17 @@ func _show_attack_warning():
 	var tiles := _get_attack_tiles()
 
 	for cell in tiles:
-		var warning := warning_tile_scene.instantiate()
+		var warning_tile := warning_tile_scene.instantiate()
 		var tile_world_pos = tilemap.map_to_local(cell)
-		warning.global_position = tile_world_pos
-		get_tree().current_scene.add_child(warning)
-		active_warnings.append(warning)
+		warning_tile.global_position = tile_world_pos
+		get_tree().current_scene.add_child(warning_tile)
+		active_warnings.append(warning_tile)
 
 
 func _clear_attack_warning():
-	for warning in active_warnings:
-		if is_instance_valid(warning):
-			warning.queue_free()
+	for active_warning in active_warnings:
+		if is_instance_valid(active_warning):
+			active_warning.queue_free()
 
 	active_warnings.clear()
 

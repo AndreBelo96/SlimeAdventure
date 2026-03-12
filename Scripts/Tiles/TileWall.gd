@@ -11,7 +11,7 @@ func can_enter() -> bool:
 	return GameManager.has_pickaxe
 
 func on_player_enter():
-	#TODO animazione rottura se ho il piccone
+	$AnimatedTile.play("EXPLOSION")
 	#TODO rumore
-	#queue_free() -> se lo aggiungi devi cambaire e mettere quello normale altrimenti cade
+	peso = 1
 	pass

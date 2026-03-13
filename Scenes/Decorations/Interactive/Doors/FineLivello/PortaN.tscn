@@ -7,5 +7,6 @@
 script = ExtResource("1_lveiy")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, 1)
 animation = &"Closed_N"
-offset = Vector2(-33, -66)
+offset = Vector2(-33, -67)

@@ -221,7 +221,7 @@ script = ExtResource("1_503en")
 [node name="Center" type="Marker2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_tkm07")
 animation = &"Open_W"
 centered = false
-offset = Vector2(-20, -37)

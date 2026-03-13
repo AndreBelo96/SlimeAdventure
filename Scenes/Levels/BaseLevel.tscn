@@ -138,10 +138,6 @@ tile_set = SubResource("TileSet_w0n8b")
 z_index = -15
 tile_set = SubResource("TileSet_duywq")
 
-[node name="TerrainMapLayer" type="TileMapLayer" parent="."]
-z_index = -10
-tile_set = ExtResource("6_e376l")
-
 [node name="DecorationTileMapLayer" type="TileMapLayer" parent="."]
 z_index = -7
 y_sort_enabled = true
@@ -158,6 +154,11 @@ tile_set = ExtResource("2_ljv4m")
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="TerrainMapLayer" type="TileMapLayer" parent="YSort"]
+z_index = -10
+y_sort_enabled = true
+tile_set = ExtResource("6_e376l")
 
 [node name="WallMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
@@ -191,7 +192,6 @@ tile_set = ExtResource("11_3rmix")
 
 [node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
 tile_map_layer_path = NodePath("../../TileMapLayer")
-terrain_map_layer_path = NodePath("../../TerrainMapLayer")
 pickup_map_layer_path = NodePath("../PickupMapLayer")
 movement_logic_map_layer_path = NodePath("../../MovementLogicMapLayer")
 doors_map_layer_path = NodePath("../DoorsMapLayer")

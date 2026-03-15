@@ -1,23 +1,9 @@
 extends Node
 
-const SAVE_PATH := "user://save_data.save" #C:\Users\Andrea\AppData\Roaming\Godot\app_userdata\Slime Adventure
+var current_slot : int = 1
 
 ## Struttura dati persistente
-var save_data := {
-	"player": {                  # dati giocatore
-		"has_pickaxe": false
-	},
-	"levels": {},                # dati per livello
-	"max_level_reach": 1,        # livello massimo sbloccato
-	"total_steps": 0,            # passi totali
-	"total_time": 0.0,           # tempo totale giocato
-	"death_counts": {            # morti globali divise per tipo
-		"0": 0,   # DeathType.SPIKES
-		"1": 0,   # DeathType.VOID
-		"2": 0,   # DeathType.ENEMY
-		"3": 0    # DeathType.TIMEOUT
-	}
-}
+var save_data := get_default_save_data()
 
 ## --- Public API --- ##
 
@@ -60,10 +46,17 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 	return is_record
 
 func load_progress() -> Dictionary:
-	if not FileAccess.file_exists(SAVE_PATH):
+	print("Loading slot:", current_slot)
+	print("Path:", get_save_path())
+	
+	if not FileAccess.file_exists(get_save_path()):
+		print("Save NOT found")
+		save_data = get_default_save_data()
 		return save_data
 	
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	print("Save FOUND")
+	
+	var file := FileAccess.open(get_save_path(), FileAccess.READ)
 	var content := file.get_as_text()
 	file.close()
 	
@@ -73,6 +66,8 @@ func load_progress() -> Dictionary:
 	
 	if not save_data.has("player"):
 		save_data["player"] = {"has_pickaxe": false}
+	
+	print(content)
 	
 	return save_data
 
@@ -103,8 +98,35 @@ func get_totals() -> Dictionary:
 func has_pickaxe() -> bool:
 	return save_data.get("player", {}).get("has_pickaxe", false)
 
+func get_default_save_data() -> Dictionary:
+	return {
+		"created_at": Time.get_unix_time_from_system(),
+		"last_played": Time.get_unix_time_from_system(),
+		"player": {                  # dati giocatore
+			"has_pickaxe": false
+		},
+		"levels": {},                # dati per livello
+		"max_level_reach": 1,        # livello massimo sbloccato
+		"total_steps": 0,            # passi totali
+		"total_time": 0.0,           # tempo totale giocato
+		"death_counts": {            # morti globali divise per tipo
+			"0": 0,   # DeathType.SPIKES
+			"1": 0,   # DeathType.VOID
+			"2": 0,   # DeathType.ENEMY
+			"3": 0    # DeathType.TIMEOUT
+		}
+	}
+
+#C:\Users\Andrea\AppData\Roaming\Godot\app_userdata\Slime Adventure
+func get_save_path() -> String:
+	return "user://save_slot_%d.save" % current_slot
+
+func slot_exists(slot:int) -> bool:
+	var path = "user://save_slot_%d.save" % slot
+	return FileAccess.file_exists(path)
+
 ## --- Private --- ##
 func _write_file():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var file = FileAccess.open(get_save_path(), FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data, "\t"))
 	file.close()

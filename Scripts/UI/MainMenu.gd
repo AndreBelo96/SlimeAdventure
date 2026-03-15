@@ -25,6 +25,15 @@ func setup_location_buttons():
 		$LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
 	]
 
+func setup_save_buttons():
+	buttons_save = [
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button,
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button,
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button,
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button,
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button
+	]
+
 ## ----- Selectors setup ----- ##
 func setup_main_selectors():
 	selectors_main  = [
@@ -53,8 +62,23 @@ func setup_location_selectors():
 		for sel in group:
 			base_positions[sel] = sel.position
 
+func setup_save_selectors():
+	selectors_save  = [
+		[$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/SelectorR],
+		[$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/SelectorR],
+		[$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR],
+		[$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorR],
+		[$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorR],
+	]
+	
+	await get_tree().process_frame
+	for group in selectors_save:
+		for sel in group:
+			base_positions[sel] = sel.position
+
+## ----- Handle btn ----- ##
 func handle_navigation(_event):
-	if current_state == MenuState.MAIN_MENU:
+	if current_state == MenuState.MAIN_MENU or current_state == MenuState.SAVE_MENU:
 		if Input.is_action_just_pressed("move_down") and current_selection < 4:
 			SoundManager.play_sfx(SFX_MOVE)
 			current_selection += 1
@@ -78,12 +102,11 @@ func handle_navigation(_event):
 	set_current_selection(current_selection)
 
 func handle_selection(_index):
-	
 	if current_state == MenuState.MAIN_MENU:
 		SoundManager.play_sfx(SFX_CONFIRM)
 		match _index:
 			0:
-				fade_in_location_menu()
+				fade_in_save_menu()
 				set_current_selection(0)
 				return
 			1:
@@ -95,10 +118,26 @@ func handle_selection(_index):
 				return
 			4:
 				get_tree().quit()
+	
+	elif current_state == MenuState.SAVE_MENU:
+		if (_index == 4):
+			SoundManager.play_sfx(SFX_CONFIRM)
+			fade_in_main_menu()
+			set_current_selection(0)
+			return
+		
+		SoundManager.play_sfx(SFX_CONFIRM)
+		GameManager.current_save_slot = _index + 1
+		SaveManager.current_slot = _index + 1
+		SaveManager.load_progress()
+		GameManager.reload_save_data()
+		fade_in_location_menu()
+		set_current_selection(0)
+		
 	elif current_state == MenuState.LOCATION_SELECT:
 		if (_index == 3):
 			SoundManager.play_sfx(SFX_CONFIRM)
-			fade_in_main_menu()
+			fade_in_save_menu()
 			set_current_selection(0)
 			return
 		
@@ -119,6 +158,7 @@ func handle_selection(_index):
 		elif (_index == 2):
 			get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
 
+## ----- Fade in/out btn ----- ##
 func fade_in_main_menu():
 	current_state = MenuState.MAIN_MENU
 	update_active_menu()
@@ -134,14 +174,45 @@ func fade_in_main_menu():
 	set_current_selection(current_selection)
 	
 	var main_container = $MenuContainer
+	var save_conteiner = $SaveSelectContainer
 	var location_container = $LocationContainer
 	
 	main_container.modulate.a = 0
 	main_container.visible = true
 	
 	var tween = create_tween()
+	tween.tween_property(save_conteiner, "modulate:a", 0, 0.6)
 	tween.tween_property(location_container, "modulate:a", 0, 0.6)
 	tween.tween_property(main_container, "modulate:a", 1, 0.6)
+	save_conteiner.visible = false
+	location_container.visible = false
+
+func fade_in_save_menu():
+	current_state = MenuState.SAVE_MENU
+	update_active_menu()
+	
+	call_deferred("rebuild_base_positions")
+	
+	# Forza visibilità prima di settare l'indice
+	for group in selectors:
+		for sel in group:
+			sel.visible = true
+	
+	current_selection = 0
+	set_current_selection(current_selection)
+	
+	var main_container = $MenuContainer
+	var save_conteiner = $SaveSelectContainer
+	var location_container = $LocationContainer
+	
+	save_conteiner.modulate.a = 0
+	save_conteiner.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property(main_container, "modulate:a", 0, 0.6)
+	tween.tween_property(location_container, "modulate:a", 0, 0.6)
+	tween.tween_property(save_conteiner, "modulate:a", 1, 0.6)
+	main_container.visible = false
 	location_container.visible = false
 
 func fade_in_location_menu():
@@ -158,6 +229,7 @@ func fade_in_location_menu():
 	set_current_selection(current_selection)
 	
 	var main_container = $MenuContainer
+	var save_conteiner = $SaveSelectContainer
 	var location_container = $LocationContainer
 	
 	location_container.modulate.a = 0
@@ -165,5 +237,7 @@ func fade_in_location_menu():
 	
 	var tween = create_tween()
 	tween.tween_property(main_container, "modulate:a", 0, 0.6)
+	tween.tween_property(save_conteiner, "modulate:a", 0, 0.6)
 	tween.tween_property(location_container, "modulate:a", 1, 0.6)
+	save_conteiner.visible = false
 	main_container.visible = false

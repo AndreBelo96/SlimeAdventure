@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene load_steps=16 format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="2_744d7"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="4_jex3y"]
 [ext_resource type="Texture2D" uid="uid://cprycl3pfs3hf" path="res://Assets/Sprites/Logo.png" id="5_k8um8"]
 [ext_resource type="Shader" uid="uid://bo5v8kgyx6j5n" path="res://Shader/blink_shader.gdshader" id="8_ynupv"]
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="9_ab04i"]
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="9_dvisc"]
 [ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="10_ab04i"]
 [ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="11_hys1s"]
@@ -23,6 +24,18 @@ shader = ExtResource("8_ynupv")
 shader_parameter/flash_duration = 1.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hys1s"]
+bg_color = Color(0, 0, 0, 0.45882353)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.8666667)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -37,6 +50,7 @@ script = ExtResource("1_wrbul")
 [node name="BackgroundMenu" parent="." instance=ExtResource("2_kl3t2")]
 
 [node name="MenuContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,6 +85,7 @@ theme_override_constants/separation = 30
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
+alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -354,7 +369,6 @@ text = "Version 0.1 Alpha"
 horizontal_alignment = 1
 
 [node name="SaveSelectContainer" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -389,6 +403,7 @@ theme_override_constants/separation = 30
 [node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
+alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -645,6 +660,171 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="SaveDataContainer" type="MarginContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hys1s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_ab04i")
+text = "Titolo"
+horizontal_alignment = 1
+
+[node name="DataContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="LvlReach" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level reached: 14"
+
+[node name="PlayTime" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play time: 13m 36s"
+
+[node name="Steps" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Steps: 1234"
+
+[node name="Deaths" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Deaths: 12"
+
+[node name="BtnContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Play" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Delete" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Delete"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_b5bqd")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
 text = " <"
 horizontal_alignment = 1
 

@@ -32,10 +32,11 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 	if victory:
 		is_record = save_progress(level, steps, time)
 		save_data["player"]["has_pickaxe"] = _has_pickaxe
-
+	
 	save_data["total_steps"] += steps
 	save_data["total_time"] += time
-
+	save_data["last_played"] = Time.get_unix_time_from_system()
+	
 	for death_type in deaths.keys():
 		var key = str(death_type)
 		if not save_data["death_counts"].has(key):
@@ -52,6 +53,7 @@ func load_progress() -> Dictionary:
 	if not FileAccess.file_exists(get_save_path()):
 		print("Save NOT found")
 		save_data = get_default_save_data()
+		_write_file()
 		return save_data
 	
 	print("Save FOUND")
@@ -72,13 +74,7 @@ func load_progress() -> Dictionary:
 	return save_data
 
 func reset_save():
-	save_data = {
-		"levels": {},
-		"max_level_reach": 1,
-		"total_steps": 0,
-		"total_time": 0.0,
-		"death_counts": {"0":0,"1":0,"2":0,"3":0}
-	}
+	save_data = get_default_save_data()
 	_write_file()
 
 ## --- Utils --- ##
@@ -117,6 +113,23 @@ func get_default_save_data() -> Dictionary:
 		}
 	}
 
+func get_slot_preview(slot:int) -> Dictionary:
+	var path = "user://save_slot_%d.save" % slot
+	
+	if not FileAccess.file_exists(path):
+		return {}
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	var content = file.get_as_text()
+	file.close()
+	
+	var result = JSON.parse_string(content)
+	
+	if result is Dictionary:
+		return result
+	
+	return {}
+
 #C:\Users\Andrea\AppData\Roaming\Godot\app_userdata\Slime Adventure
 func get_save_path() -> String:
 	return "user://save_slot_%d.save" % current_slot
@@ -124,6 +137,11 @@ func get_save_path() -> String:
 func slot_exists(slot:int) -> bool:
 	var path = "user://save_slot_%d.save" % slot
 	return FileAccess.file_exists(path)
+
+func delete_slot(slot:int):
+	var path = "user://save_slot_%d.save" % slot
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(path)
 
 ## --- Private --- ##
 func _write_file():

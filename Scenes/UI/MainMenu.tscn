@@ -664,10 +664,13 @@ text = " <"
 horizontal_alignment = 1
 
 [node name="SaveDataContainer" type="MarginContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 5
 
 [node name="Panel" type="Panel" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer"]
 layout_mode = 2
@@ -681,6 +684,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
+alignment = 1
 
 [node name="Title" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
 layout_mode = 2
@@ -691,11 +695,11 @@ horizontal_alignment = 1
 [node name="DataContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="LvlReach" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+[node name="LastPlayed" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Level reached: 14"
+text = "Last Played: 14/03/2026"
 
 [node name="PlayTime" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
 custom_minimum_size = Vector2(200, 20)
@@ -703,17 +707,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Play time: 13m 36s"
 
-[node name="Steps" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+[node name="LvlReach" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Steps: 1234"
-
-[node name="Deaths" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
-custom_minimum_size = Vector2(200, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Deaths: 12"
+text = "Level reached: 14"
 
 [node name="BtnContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
 layout_mode = 2

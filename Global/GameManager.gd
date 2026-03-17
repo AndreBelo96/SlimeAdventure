@@ -7,6 +7,7 @@ const SPIKE_STEP_TILE_POSITION := 7
 const SPIKE_TILE_POSITION := 11
 const WALL_TILE_POSITION := 12
 const SWITCH_TILE_POSITION := 13
+const NUMBER_OF_LEVELS := 13
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
 ## Variabili correnti

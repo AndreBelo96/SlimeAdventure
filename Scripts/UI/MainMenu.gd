@@ -2,6 +2,11 @@ extends BaseMenu
 
 @onready var container_data := $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer
 
+var buttons_save_data_full : Array[Button] = []
+var buttons_save_data_empty : Array[Button] = []
+var selectors_save_data_full = []
+var selectors_save_data_empty = []
+
 func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button/Profile.text = "Profile"
@@ -37,11 +42,15 @@ func setup_save_buttons():
 	]
 
 func setup_save_data_buttons():
-	buttons_save_data = [
-		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button,
-		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button,
-		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button
-	]
+	var btn_play = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button
+	var btn_delete = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button
+	var btn_back = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button
+	
+	buttons_save_data_full = [btn_play, btn_delete, btn_back]
+	buttons_save_data_empty = [btn_play, btn_back]
+	
+	# default
+	buttons_save_data = buttons_save_data_full
 
 ## ----- Selectors setup ----- ##
 func setup_main_selectors():
@@ -86,11 +95,23 @@ func setup_save_selectors():
 			base_positions[sel] = sel.position
 
 func setup_save_data_selectors():
-	selectors_save_data  = [
-		[$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/SelectorR],
-		[$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/SelectorR],
-		[$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/SelectorL, $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/SelectorR],
-	]
+	var sel_play = [
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/SelectorL, 
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/SelectorR
+		]
+	var sel_delete = [
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/SelectorL, 
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/SelectorR
+		]
+	var sel_back = [
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/SelectorL, 
+		$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/SelectorR
+		]
+	
+	selectors_save_data_full = [sel_play, sel_delete, sel_back]
+	selectors_save_data_empty = [sel_play, sel_back]
+	
+	selectors_save_data = selectors_save_data_full
 	
 	await get_tree().process_frame
 	for group in selectors_save_data:
@@ -158,7 +179,6 @@ func handle_main_menu_selection(index):
 			get_tree().change_scene_to_file("res://Scenes/UI/OptionMenu.tscn")
 		4:
 			get_tree().quit()
-	set_current_selection(0)
 
 func handle_save_menu_selection(index):
 	SoundManager.play_sfx(SFX_CONFIRM)
@@ -169,10 +189,20 @@ func handle_save_menu_selection(index):
 	SaveManager.current_slot = index + 1
 	SaveManager.load_progress()
 	GameManager.reload_save_data()
+	
 	current_state = MenuState.SAVE_SLOT_ACTIONS
 	update_save_data_panel(index+1)
+	
+	update_active_menu()
+	call_deferred("rebuild_base_positions")
+	for group in selectors:
+		for sel in group:
+			sel.visible = true
+	current_selection = 0
+	set_current_selection(current_selection)
+	input_enabled = true
+	
 	container_data.visible = true
-	set_current_selection(0)
 
 func handle_save_data_menu_selection(index):
 	SoundManager.play_sfx(SFX_CONFIRM)
@@ -203,12 +233,11 @@ func handle_location_selection(index):
 	if index == 3:
 		SoundManager.play_sfx(SFX_CONFIRM)
 		fade_in_save_menu()
-		set_current_selection(0)
 		return
 
 	var location_name = GameManager.Location.keys()[index]
 
-	if GameManager.is_location_locked(location_name):
+	if GameManager.is_location_locked(location_name): #TODO far capire sono bloccate
 		print("Location bloccata:", location_name)
 		return
 
@@ -267,31 +296,38 @@ func update_save_data_panel(slot:int):
 	if data.get("levels", {}).is_empty():
 		show_empty_slot()
 		return
-
+	
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button/Play.text = "Continue"
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2.visible = true
+	buttons_save_data = buttons_save_data_full
+	selectors_save_data = selectors_save_data_full
+	
 	var totals = {
-		"steps": data.get("total_steps", 0),
-		"time": data.get("total_time", 0.0),
-		"deaths": data.get("death_counts", {})
+		"time": data.get("total_time", 0.0)
 	}
 
 	var max_level = data.get("max_level_reach", 1)
-	var deaths_total := 0
-	for d in totals.deaths.values():
-		deaths_total += int(d)
+	var last_played = format_date_smart(data.get("last_played", 0))
 	var playtime = format_time(totals.time)
 	
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = "Save slot %d" % slot
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "Level Reached: %d" % max_level
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = "Save slot %d" % slot + " - %d" % get_completion_percent(data) + "%"
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LastPlayed.text = "Last Played: " + last_played
 	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime.text = "Playtime: %s" % playtime
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/Steps.text = "Steps: %d" % totals.steps
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/Deaths.text = "Deaths: %d" % deaths_total
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "Level Reached: %d" % max_level
 
 func show_empty_slot():
 	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = "Empty Slot"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "-"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime.text = "-"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/Steps.text = "-"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/Deaths.text = "-"
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LastPlayed.text = "Last Played: - "
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime.text = "Playtime: - "
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "Level Reached: - "
+	
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button/Play.text = "New game"
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2.visible = false
+	buttons_save_data = buttons_save_data_empty
+	selectors_save_data = selectors_save_data_empty
+	update_active_menu()
+	current_selection = 0
+	set_current_selection(current_selection)
 
 func format_time(seconds:float) -> String:
 	var total = int(seconds)
@@ -299,3 +335,36 @@ func format_time(seconds:float) -> String:
 	var minutes = (total % 3600) / 60
 	var secs = total % 60
 	return "%02d:%02d:%02d" % [hours, minutes, secs]
+
+func format_date_smart(unix_time:int) -> String:
+	if unix_time == 0:
+		return "-"
+
+	var now_dict = Time.get_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
+	var date_dict = Time.get_datetime_dict_from_unix_time(unix_time)
+
+	if now_dict.year == date_dict.year \
+	and now_dict.month == date_dict.month \
+	and now_dict.day == date_dict.day:
+		return "Today"
+
+	# ieri
+	var yesterday = Time.get_unix_time_from_system() - 86400
+	var y_dict = Time.get_datetime_dict_from_unix_time(yesterday)
+
+	if y_dict.year == date_dict.year \
+	and y_dict.month == date_dict.month \
+	and y_dict.day == date_dict.day:
+		return "Yesterday"
+
+	return "%02d/%02d/%d" % [
+		date_dict.day,
+		date_dict.month,
+		date_dict.year
+	]
+
+func get_completion_percent(data: Dictionary) -> int:
+	var completed = data.get("levels", {}).size()
+	var total_levels = GameManager.NUMBER_OF_LEVELS
+	
+	return int((completed / float(total_levels)) * 100)

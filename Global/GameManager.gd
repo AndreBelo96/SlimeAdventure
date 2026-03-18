@@ -141,7 +141,6 @@ func end_level(victory: bool):
 	current_time = 0.0
 
 # -- Locations -- #
-
 func get_all_locations() -> Array:
 	return Location.keys()
 
@@ -223,6 +222,8 @@ func return_to_menu():
 
 func return_to_location_menu():
 	menu_state = BaseMenu.MenuState.LOCATION_SELECT
+	SaveManager.load_progress()
+	GameManager.reload_save_data()
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
 
 func reset_game():

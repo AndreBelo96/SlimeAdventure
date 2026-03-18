@@ -6,7 +6,6 @@ var current_slot : int = 1
 var save_data := get_default_save_data()
 
 ## --- Public API --- ##
-
 func save_progress(level: int, steps: int, time: float) -> bool:
 	var level_key = str(level)
 	var is_record := false

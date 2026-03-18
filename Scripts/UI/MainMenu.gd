@@ -410,6 +410,8 @@ func confirm_delete():
 
 func _on_delete_confirmed():
 	SaveManager.delete_slot(GameManager.current_save_slot)
+	SaveManager.load_progress()
+	GameManager.reload_save_data()
 	input_enabled = true
 	update_save_data_panel(GameManager.current_save_slot)
 

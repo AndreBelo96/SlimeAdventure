@@ -72,6 +72,7 @@ func _ready() -> void:
 		main_container.visible = false
 		save_container.visible = false
 		location_container.visible = true
+		update_location_buttons()
 
 # --------------------------
 # --- INPUT MANAGEMENT ---
@@ -199,6 +200,9 @@ func _start_tween(group: Array):
 		tween.tween_property(sel, "position", base + offset, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(sel, "position", base, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		sel.set_meta("tween", tween)
+
+func update_location_buttons():
+	push_warning("update_location_buttons() non implementato — deve essere definito nella sottoclasse")
 
 # --------------------------
 # --- INPUT LOGIC ----------

@@ -66,12 +66,29 @@ func load_progress() -> Dictionary:
 	if result is Dictionary:
 		save_data = result
 	
-	if not save_data.has("player"):
-		save_data["player"] = {"has_pickaxe": false}
+	_migrate_save_data()
+	_write_file()
 	
 	print(content)
 	
 	return save_data
+
+func _migrate_save_data():
+	var version = save_data.get("version", 0)
+	
+	if version < 1:
+		if not save_data.has("player"):
+			save_data["player"] = {"has_pickaxe": false}
+		
+		if not save_data.has("death_counts"):
+			save_data["death_counts"] = {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0
+			}
+		
+		save_data["version"] = 1
 
 func reset_save():
 	save_data = get_default_save_data()
@@ -96,6 +113,7 @@ func has_pickaxe() -> bool:
 
 func get_default_save_data() -> Dictionary:
 	return {
+		"version": 1,
 		"created_at": Time.get_unix_time_from_system(),
 		"last_played": Time.get_unix_time_from_system(),
 		"player": {                  # dati giocatore

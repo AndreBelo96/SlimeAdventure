@@ -6,6 +6,7 @@ var buttons_save_data_full : Array[Button] = []
 var buttons_save_data_empty : Array[Button] = []
 var selectors_save_data_full = []
 var selectors_save_data_empty = []
+var slot_selected = 0
 
 func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
@@ -45,6 +46,10 @@ func setup_save_data_buttons():
 	var btn_play = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button
 	var btn_delete = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button
 	var btn_back = $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button
+	
+	btn_play.set_meta("action", "play")
+	btn_delete.set_meta("action", "delete")
+	btn_back.set_meta("action", "back")
 	
 	buttons_save_data_full = [btn_play, btn_delete, btn_back]
 	buttons_save_data_empty = [btn_play, btn_back]
@@ -189,7 +194,7 @@ func handle_save_menu_selection(index):
 	SaveManager.current_slot = index + 1
 	SaveManager.load_progress()
 	GameManager.reload_save_data()
-	
+	slot_selected = index
 	current_state = MenuState.SAVE_SLOT_ACTIONS
 	update_save_data_panel(index+1)
 	
@@ -206,17 +211,20 @@ func handle_save_menu_selection(index):
 
 func handle_save_data_menu_selection(index):
 	SoundManager.play_sfx(SFX_CONFIRM)
-	match index:
-		0:
+	var btn = buttons_save_data[index]
+	var action = btn.get_meta("action")
+	match action:
+		"play":
 			container_data.visible = false
 			fade_in_location_menu()
+			update_location_buttons()
 			return
-		1:
+		"delete":
+			confirm_delete()
+			return
+		"back":
 			input_enabled = false
-			SaveManager.delete_slot(GameManager.current_save_slot)
-		2:
-			input_enabled = false
-			
+	
 	current_state = MenuState.SAVE_MENU
 	container_data.visible = false
 	update_active_menu()
@@ -224,7 +232,7 @@ func handle_save_data_menu_selection(index):
 	for group in selectors:
 		for sel in group:
 			sel.visible = true
-	current_selection = 0
+	current_selection = slot_selected
 	set_current_selection(current_selection)
 	input_enabled = true
 
@@ -290,6 +298,23 @@ func fade_to(target: Control):
 	await tween.finished
 	input_enabled = true
 
+func update_location_buttons():
+	var locations = GameManager.Location.keys()
+	
+	for i in range(buttons_location.size()):
+		var btn = buttons_location[i]
+		
+		# se è il back → skip
+		if i >= locations.size():
+			continue
+		
+		var location_name = locations[i]
+
+		if GameManager.is_location_locked(location_name):
+			btn.disabled = true
+		else:
+			btn.disabled = false
+
 ## ---- Update Data ---- ##
 func update_save_data_panel(slot:int):
 	var data = SaveManager.get_slot_preview(slot)
@@ -331,7 +356,9 @@ func show_empty_slot():
 
 func format_time(seconds:float) -> String:
 	var total = int(seconds)
-	var hours = total / 3600
+	@warning_ignore("integer_division")
+	var hours = int(total / 3600)
+	@warning_ignore("integer_division")
 	var minutes = (total % 3600) / 60
 	var secs = total % 60
 	return "%02d:%02d:%02d" % [hours, minutes, secs]
@@ -340,6 +367,7 @@ func format_date_smart(unix_time:int) -> String:
 	if unix_time == 0:
 		return "-"
 
+	@warning_ignore("narrowing_conversion")
 	var now_dict = Time.get_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
 	var date_dict = Time.get_datetime_dict_from_unix_time(unix_time)
 
@@ -368,3 +396,22 @@ func get_completion_percent(data: Dictionary) -> int:
 	var total_levels = GameManager.NUMBER_OF_LEVELS
 	
 	return int((completed / float(total_levels)) * 100)
+
+## ---- Delete ---- ##
+
+func confirm_delete():
+	input_enabled = false
+	var dialog = ConfirmationDialog.new()
+	dialog.dialog_text = "Sei sicuro di voler cancellare questo salvataggio?"
+	add_child(dialog)
+	dialog.confirmed.connect(_on_delete_confirmed)
+	dialog.canceled.connect(_on_delete_canceled)
+	dialog.popup_centered()
+
+func _on_delete_confirmed():
+	SaveManager.delete_slot(GameManager.current_save_slot)
+	input_enabled = true
+	update_save_data_panel(GameManager.current_save_slot)
+
+func _on_delete_canceled():
+	input_enabled = true

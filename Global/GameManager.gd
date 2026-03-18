@@ -214,8 +214,8 @@ func next_level():
 func get_dark_overlay_for_level() -> Color:
 	return dark_overlay_service.get_for_level(current_level)
 
-func restart_level():
-	get_tree().change_scene_to_file("res://Scenes/Levels/Level%d.tscn" % current_level)
+func restart_level(level: int):
+	get_tree().change_scene_to_file("res://Scenes/Levels/Level%d.tscn" % level)
 
 func return_to_menu():
 	menu_state = BaseMenu.MenuState.MAIN_MENU

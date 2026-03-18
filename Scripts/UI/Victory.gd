@@ -85,6 +85,7 @@ func setup_languages():
 func setup_buttons():
 	buttons_main = [
 		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next,
+		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/Retry,
 		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection,
 		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu
 	]
@@ -92,6 +93,7 @@ func setup_buttons():
 func setup_selectors():
 	selectors_main = [
 		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorR],
 		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorR],
 		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorR],
 	]
@@ -102,7 +104,7 @@ func setup_selectors():
 			base_positions[sel] = sel.position
 
 func handle_navigation(_event):
-	if Input.is_action_just_pressed("move_down") and current_selection < 2:
+	if Input.is_action_just_pressed("move_down") and current_selection < buttons.size()-1:
 		SoundManager.play_sfx(SFX_MOVE)
 		current_selection += 1
 	elif Input.is_action_just_pressed("move_up") and current_selection > 0:
@@ -119,12 +121,14 @@ func handle_selection(_index):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		GameManager.next_level()
 	elif (_index == 1):
-		GameManager.return_to_location_menu()
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		GameManager.restart_level(GameManager.current_level - 1)
 	elif (_index == 2):
+		GameManager.return_to_location_menu()
+	elif (_index == 3):
 		GameManager.return_to_menu()
 
 ### --- Animazioni entrata e uscita della schermata --- ###
-
 func animate_screen_enter():
 	var tween = create_tween()
 	root.modulate.a = 1.0

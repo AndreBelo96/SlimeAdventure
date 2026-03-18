@@ -47,7 +47,7 @@ func handle_selection(_index):
 	elif (_index == 1):
 		get_tree().paused = false
 		visible = false
-		GameManager.restart_level()
+		GameManager.restart_level(GameManager.current_level)
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	elif (_index == 2):
 		get_tree().paused = false

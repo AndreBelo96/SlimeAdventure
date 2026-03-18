@@ -68,7 +68,7 @@ func handle_selection(_index):
 	SoundManager.play_sfx(SFX_CONFIRM)
 	if (_index == 0):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		GameManager.restart_level()
+		GameManager.restart_level(GameManager.current_level)
 	elif (_index == 1):
 		GameManager.return_to_location_menu()
 	elif (_index == 2):

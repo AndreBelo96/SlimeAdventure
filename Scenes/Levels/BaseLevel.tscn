@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene load_steps=25 format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" uid="uid://b0ephypyc3vya" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" uid="uid://cs20dsk7jtn58" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -118,6 +118,18 @@ custom_data_layer_0/name = "MovementMask"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_i0kmu")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e376l"]
+lifetime_randomness = 0.08
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 21.9
+velocity_pivot = Vector3(0, -1, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.919
+initial_velocity_min = 57.21
+initial_velocity_max = 69.76
+gravity = Vector3(0, 10, 0)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_l5mnm")
 
@@ -200,6 +212,12 @@ npc_map_layer_path = NodePath("../NPCMapLayer")
 [node name="TorchMapLayer" type="TileMapLayer" parent="YSort"]
 y_sort_enabled = true
 tile_set = ExtResource("5_idd1r")
+
+[node name="ExitParticles" type="GPUParticles2D" parent="YSort"]
+y_sort_enabled = true
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_e376l")
 
 [node name="DarkOverlay" type="CanvasModulate" parent="."]
 visible = false

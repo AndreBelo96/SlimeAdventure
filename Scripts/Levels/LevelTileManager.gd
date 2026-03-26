@@ -69,10 +69,11 @@ func get_exit_position() -> Vector2:
 func get_coords_from_global_position(global_pos: Vector2) -> Vector2i:
 	return tile_layer.local_to_map(tile_layer.to_local(global_pos))
 
-func activate_exit_particles(exit_cell: Vector2i):
-	for nodo in tile_layer.get_children():
-		if tile_layer.local_to_map(nodo.position) == exit_cell:
-			if nodo.has_node("GlowParticles"):
-				var particles = nodo.get_node("GlowParticles") as GPUParticles2D
-				particles.emitting = true
-			return
+func activate_exit_particles(exit_particles: GPUParticles2D, exit_cell: Vector2i):
+	
+	if exit_particles == null:
+		push_warning("Particles non assegnate!")
+		return
+	
+	exit_particles.global_position = logic_map.to_global(logic_map.map_to_local(exit_cell))
+	exit_particles.emitting = true

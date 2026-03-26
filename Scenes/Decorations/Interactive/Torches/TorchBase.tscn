@@ -12,7 +12,7 @@ script = ExtResource("1_1oivh")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 blend_mode = 2
 texture = ExtResource("2_ehuel")
-texture_scale = 1.5
+texture_scale = 1.25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1oivh")

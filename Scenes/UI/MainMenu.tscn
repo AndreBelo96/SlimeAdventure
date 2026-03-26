@@ -50,7 +50,6 @@ script = ExtResource("1_wrbul")
 [node name="BackgroundMenu" parent="." instance=ExtResource("2_kl3t2")]
 
 [node name="MenuContainer" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -369,6 +368,7 @@ text = "Version 0.1 Alpha"
 horizontal_alignment = 1
 
 [node name="SaveSelectContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

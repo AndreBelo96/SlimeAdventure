@@ -401,12 +401,13 @@ func get_completion_percent(data: Dictionary) -> int:
 
 func confirm_delete():
 	input_enabled = false
-	var dialog = ConfirmationDialog.new()
-	dialog.dialog_text = "Sei sicuro di voler cancellare questo salvataggio?"
+	var dialog_scene = load("res://Scenes/UI/DeleteDialog.tscn")
+	var dialog = dialog_scene.instantiate()
 	add_child(dialog)
+	dialog.visible = true
 	dialog.confirmed.connect(_on_delete_confirmed)
 	dialog.canceled.connect(_on_delete_canceled)
-	dialog.popup_centered()
+
 
 func _on_delete_confirmed():
 	SaveManager.delete_slot(GameManager.current_save_slot)

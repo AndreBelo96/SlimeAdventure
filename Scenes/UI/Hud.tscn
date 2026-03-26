@@ -1,8 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://dysj5yr4onuf8"]
+[gd_scene load_steps=7 format=3 uid="uid://dysj5yr4onuf8"]
 
 [ext_resource type="Script" uid="uid://1dne7xk7mqos" path="res://Scripts/UI/LevelHUDManager.gd" id="1_6d7lo"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_ks3ap"]
 [ext_resource type="PackedScene" uid="uid://d1x3f5w6lmqxr" path="res://Scenes/UI/Utils/RoundProgressBar.tscn" id="3_b2arx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2arx"]
+bg_color = Color(0, 0, 0, 0.2784314)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ov73"]
+bg_color = Color(0.6901961, 0.08235294, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.56286263, 0.11260132, 0.3427236, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6d7lo"]
 load_path = "res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
@@ -59,6 +78,8 @@ custom_minimum_size = Vector2(200, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_b2arx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3ov73")
 max_value = 3.0
 step = 1.0
 value = 3.0

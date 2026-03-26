@@ -171,7 +171,8 @@ func _open_exit():
 		player.on_player_won()
 		return
 	
-	tile_manager.activate_exit_particles(exit_position)
+	var exit_particles = $YSort/ExitParticles
+	tile_manager.activate_exit_particles(exit_particles, exit_position)
 
 func check_victory():
 	if exit_position == Vector2.ZERO:

@@ -138,7 +138,6 @@ func _try_resolve_enemy_damage(enemy):
 func _reset_switch_and_spikes():
 	if last_switch_pressed and last_switch_pressed.is_in_group("interruttori"):
 		last_switch_pressed.reset_switch()
-
 	last_switch_pressed = null
 
 func disable_all_spikes():

@@ -71,10 +71,7 @@ func take_damage(dmg: int):
 	
 	change_steps()
 	
-	# Aggiorna la barra HUD
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud:
-		hud.update_progress_bar(dmg)
+	update_HUD_life(dmg)
 	
 	emit_signal("damaged", self)
 	
@@ -94,6 +91,11 @@ func die():
 
 func change_steps():
 	pass
+
+func update_HUD_life(dmg: int):
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud:
+		hud.update_progress_bar(dmg)
 
 func activate():
 	active = true

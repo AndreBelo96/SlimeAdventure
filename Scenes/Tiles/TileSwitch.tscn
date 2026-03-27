@@ -1,8 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://chb3jeju61dfw"]
+[gd_scene load_steps=15 format=3 uid="uid://chb3jeju61dfw"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_tp50i"]
 [ext_resource type="Script" uid="uid://cll7cyji0qkcm" path="res://Scripts/Tiles/TileSwitch.gd" id="2_465eo"]
+[ext_resource type="Shader" uid="uid://bxntyhwyfft2s" path="res://Shader/deactivate.gdshader" id="3_kciud"]
 [ext_resource type="Texture2D" uid="uid://bejvl5h40jidu" path="res://Assets/Sprites/Tiles/Logic_Tileset.png" id="3_nkv5n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjyja"]
+shader = ExtResource("3_kciud")
+shader_parameter/darkness = 0.0
+shader_parameter/desaturate = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nkv5n"]
 atlas = ExtResource("3_nkv5n")
@@ -81,5 +87,6 @@ region_enabled = true
 region_rect = Rect2(1255, 51, 64, 48)
 
 [node name="AnimatedTile" parent="." index="2"]
+material = SubResource("ShaderMaterial_pjyja")
 sprite_frames = SubResource("SpriteFrames_cbrgv")
 animation = &"PRESSED"

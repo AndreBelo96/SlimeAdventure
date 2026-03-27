@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwej3r6jf671d"]
+[gd_scene load_steps=4 format=3 uid="uid://cwej3r6jf671d"]
 
 [ext_resource type="PackedScene" uid="uid://ba2esyl04ctby" path="res://Scenes/Pickups/Pickup.tscn" id="1_i848m"]
 [ext_resource type="Script" uid="uid://bi8pfe17wuqp4" path="res://Scripts/Pickups/PickupPickaxe.gd" id="2_lr2xi"]
+[ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="3_qv8uy"]
 
 [node name="Pickup" instance=ExtResource("1_i848m")]
 script = ExtResource("2_lr2xi")
@@ -9,3 +10,7 @@ script = ExtResource("2_lr2xi")
 [node name="Sprite" parent="." index="0"]
 region_enabled = true
 region_rect = Rect2(64, 0, 32, 32)
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2"]
+texture = ExtResource("3_qv8uy")
+texture_scale = 0.25

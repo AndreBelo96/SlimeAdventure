@@ -2,29 +2,20 @@ extends Control
 
 var panels: Array[PanelContainer] = []
 
-#Buttons
-@onready var gameplay_btn: Button = %GameplayBtn
-@onready var graphics_btn: Button = %GraphicsBtn
-@onready var audio_btn: Button = %AudioBtn
-@onready var controls_btn: Button = %ControlsBtn
-
-@onready var master_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider
-@onready var music_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider
-@onready var sound_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
-@onready var environment_slider: HSlider = $MarginContainer/HBoxContainer/AudioPanel/MarginContainer/VBoxContainer/VBoxContainer4/EnvironmentSlider
-@onready var difficult_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
-@onready var fullscreen_option = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option
-@onready var resolution_option: OptionButton = $MarginContainer/HBoxContainer/GraphicsPanel/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option
-@onready var langauge_option: OptionButton = $MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
+@onready var master_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider
+@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider
+@onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
+@onready var difficult_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
+@onready var fullscreen_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option
+@onready var resolution_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option
+@onready var langauge_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
 
 
 func _ready():	
 	populate_option_menu()
 	setup_language()
-	panels = [%GameplayPanel, %GraphicsPanel, %AudioPanel, %ControlsPanel]
-	setup_panel_btn()
+	panels = [%Generale, %Audio, %Video]
 	show_panel(panels[0])
-	gameplay_btn.grab_focus()
 
 func populate_option_menu() -> void:
 	difficult_option.add_item(tr("DIFFICULT_1"))
@@ -49,10 +40,8 @@ func populate_option_menu() -> void:
 	master_slider.value = SettingsManager.master_volume
 	music_slider.value = SettingsManager.music_volume
 	sound_slider.value = SettingsManager.sfx_volume
-	environment_slider.value = SettingsManager.environment_volume
 
 func setup_language() -> void:
-	
 	%GameplayBtn.text = tr("GAMEPLAY_BTN")
 	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer/Label.text = tr("DIFFICULT_LABEL")
 	$MarginContainer/HBoxContainer/GameplayPanel/MarginContainer/VBoxContainer/HBoxContainer2/Label.text = tr("LANGUAGE_LABEL")
@@ -73,18 +62,11 @@ func setup_language() -> void:
 	
 	pass
 
-func setup_panel_btn() -> void:
-	gameplay_btn.pressed.connect(show_panel.bind(panels[0]))
-	graphics_btn.pressed.connect(show_panel.bind(panels[1]))
-	audio_btn.pressed.connect(show_panel.bind(panels[2]))
-	controls_btn.pressed.connect(show_panel.bind(panels[3]))
-
 func show_panel(panel_to_show: PanelContainer) -> void:
 	for panel in panels:
 		panel.hide()
 	
 	panel_to_show.show()
-
 
 # --- Connect methods --- #
 

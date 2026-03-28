@@ -10,10 +10,7 @@ func apply_display_settings(settings: Node):
 
 func apply_fullscreen(checked_fullscreen: int):
 	is_fullscreen = checked_fullscreen
-	if is_fullscreen == 0:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-		get_tree().root.content_scale_size = resolution
-	elif is_fullscreen == 1:
+	if is_fullscreen == 1:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		get_tree().root.content_scale_size = resolution
 	else:

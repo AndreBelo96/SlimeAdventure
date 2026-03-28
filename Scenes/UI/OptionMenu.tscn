@@ -13,6 +13,69 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5nvs0")
 
+[node name="Video" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 150.0
+offset_top = 324.5
+offset_right = 710.0
+offset_bottom = 486.5
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Video"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Video/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_uqd0o")
+text = "Video"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="Video/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+theme = ExtResource("3_u6f48")
+text = "Fullscreen"
+horizontal_alignment = 1
+
+[node name="Fullscreen_option" type="OptionButton" parent="Video/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="Video/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+theme = ExtResource("3_u6f48")
+text = "Resolution"
+horizontal_alignment = 1
+
+[node name="Resolution_option" type="OptionButton" parent="Video/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 4
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -48,10 +111,11 @@ horizontal_alignment = 1
 modulate = Color(0.7162335, 0.81091446, 1, 1)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 
 [node name="Generale" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 metadata/_tab_index = 0
@@ -110,7 +174,6 @@ theme = ExtResource("3_u6f48")
 
 [node name="Audio" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 metadata/_tab_index = 1
@@ -177,85 +240,21 @@ horizontal_alignment = 1
 layout_mode = 2
 value = 50.0
 
-[node name="Video" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-metadata/_tab_index = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_uqd0o")
-text = "Video"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-theme = ExtResource("3_u6f48")
-text = "Fullscreen"
-horizontal_alignment = 1
-
-[node name="Fullscreen_option" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 50)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-theme = ExtResource("3_u6f48")
-text = "Resolution"
-horizontal_alignment = 1
-
-[node name="Resolution_option" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(250, 50)
-layout_mode = 2
-size_flags_vertical = 4
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Apply" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Apply"
-
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
-size_flags_horizontal = 3
 text = "Back"
 
+[connection signal="item_selected" from="Video/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option" to="." method="_on_fullscreen_option_item_selected"]
+[connection signal="item_selected" from="Video/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option" to="." method="_on_resolution_option_item_selected"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption" to="." method="_on_difficulty_option_item_selected"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption" to="." method="_on_langauge_option_item_selected"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider" to="." method="_on_sound_slider_value_changed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option" to="." method="_on_fullscreen_option_item_selected"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option" to="." method="_on_resolution_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]

@@ -8,7 +8,7 @@ func _ready():
 	var intro_dialogue = [
 		{
 			"name": "Nonno Slime", 
-			"text": "Alcune volte per completare il livello sarai costretto a spegnere alcune tile per terminarlo! E ricorda, alcuni livelli per terminarli dovrai arrivare alla casella di uscita!", 
+			"text": tr("GRANDPA_LVL_3_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
 			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)

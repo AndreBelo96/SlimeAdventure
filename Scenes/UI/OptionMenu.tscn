@@ -76,15 +76,6 @@ custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.007843138, 1, 0.2509804)
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 modulate = Color(0.65167266, 0.7670325, 1, 1)
 layout_mode = 1
@@ -111,11 +102,10 @@ horizontal_alignment = 1
 modulate = Color(0.7162335, 0.81091446, 1, 1)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
 [node name="Generale" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 metadata/_tab_index = 0
@@ -174,6 +164,7 @@ theme = ExtResource("3_u6f48")
 
 [node name="Audio" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 metadata/_tab_index = 1

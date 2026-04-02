@@ -72,12 +72,7 @@ func _on_sound_slider_value_changed(value: float) -> void:
 	SoundManager.set_sfx_volume(value / 100.0)
 	SettingsManager.save_settings()
 
-func _on_environment_slider_value_changed(value: float) -> void:
-	SettingsManager.environment_volume = value
-	SoundManager.set_environment_volume(value / 100.0)
-	SettingsManager.save_settings()
-
 # -- Back -- #
 func _on_back_pressed() -> void:
-	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

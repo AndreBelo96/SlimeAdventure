@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene load_steps=17 format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="2_744d7"]
@@ -12,6 +12,7 @@
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="9_dvisc"]
 [ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="10_ab04i"]
 [ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="11_hys1s"]
+[ext_resource type="PackedScene" uid="uid://8ie6gpqhyi75" path="res://Scenes/UI/OptionMenu.tscn" id="13_hys1s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl3t2"]
 shader = ExtResource("2_744d7")
@@ -999,3 +1000,7 @@ theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 20
 text = " <"
 horizontal_alignment = 1
+
+[node name="OptionMenu" parent="." instance=ExtResource("13_hys1s")]
+visible = false
+layout_mode = 1

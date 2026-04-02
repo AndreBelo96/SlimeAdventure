@@ -10,8 +10,8 @@ var slot_selected = 0
 
 func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
-	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button/Profile.text = "Profile"
-	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Scoreboard.text = "Scoreboard"
+	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button/Profile.text = tr("PROFILE_BTN")
+	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Scoreboard.text = tr("SCOREBOARD_BTN")
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button/Option.text = tr("OPTIONS_BTN")
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button/Exit.text = tr("EXIT_BTN")
 
@@ -181,7 +181,7 @@ func handle_main_menu_selection(index):
 		2:
 			pass
 		3:
-			get_tree().change_scene_to_file("res://Scenes/UI/OptionMenu.tscn")
+			fade_in_option_menu()
 		4:
 			get_tree().quit()
 
@@ -262,6 +262,9 @@ func fade_in_main_menu():
 func fade_in_save_menu():
 	await switch_menu(MenuState.SAVE_MENU, $SaveSelectContainer)
 
+func fade_in_option_menu():
+	await switch_menu(MenuState.OPTION_MENU, $OptionMenu)
+
 func fade_in_location_menu():
 	await switch_menu(MenuState.LOCATION_SELECT, $LocationContainer)
 
@@ -281,7 +284,8 @@ func fade_to(target: Control):
 	var containers = [
 		$MenuContainer,
 		$SaveSelectContainer,
-		$LocationContainer
+		$LocationContainer,
+		$OptionMenu
 	]
 	target.modulate.a = 0
 	target.visible = true

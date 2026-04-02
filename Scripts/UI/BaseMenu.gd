@@ -11,7 +11,7 @@ class_name BaseMenu
 # --------------------------
 # --- VARIABILI COMUNI  ---
 # --------------------------
-enum MenuState { MAIN_MENU, SAVE_MENU, SAVE_SLOT_ACTIONS, LOCATION_SELECT }
+enum MenuState { MAIN_MENU, SAVE_MENU, OPTION_MENU, SAVE_SLOT_ACTIONS, LOCATION_SELECT }
 var current_state : MenuState = MenuState.MAIN_MENU
 
 # --- Bottoni e selettori separati ---

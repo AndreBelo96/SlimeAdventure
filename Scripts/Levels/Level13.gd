@@ -22,7 +22,7 @@ func play_boss_intro() -> void:
 	var intro_dialogue = [
 		{
 			"name": "Slime", 
-			"text": "Non si vede un'ostia dio cane", 
+			"text": tr("SLIME_LVL_13_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
@@ -39,7 +39,7 @@ func play_boss_intro() -> void:
 	intro_dialogue = [
 		{
 			"name": "Slime", 
-			"text": "Così va meglio", 
+			"text": tr("SLIME_LVL_13_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
@@ -61,7 +61,7 @@ func play_boss_intro() -> void:
 		},
 		{
 			"name": "Slime", 
-			"text": "No il culo no dai!!", 
+			"text": "Non possiamo andare ognuno per la sua strada vero?", 
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)

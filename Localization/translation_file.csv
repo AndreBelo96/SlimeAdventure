@@ -1,18 +1,29 @@
 keys,it,en
 MAIN_MENU,,
 START_BTN,Inizia,Start
-HOW_TO_PLAY_BTN,Come giocare,How to play
-OPTIONS_BTN,Opzioni,Options
+PROFILE_BTN,Profilo,Profile
+SCOREBOARD_BTN,Classifica,Scoreboard
+OPTIONS_BTN,Impostazioni,Settings
 EXIT_BTN,Esci,Exit
+SAVE_MENU,,
+SAVE_LINE,Salvataggio,Save
+LAST_PLAYED,Ultimo avvio,Last played
+PLAY_TIME,Tempo di gioco,Play time
+LEVEL_MAX,Livello raggiunto,Level reached
+PLAY_BTN,Gioca,Play time
+DELETE_BTN,Elimina,Delete
+DELETE_CONFIRM_LBL,Sei sicuro di voler cancellare questo salvataggio?,Are you sure you want to delete this save?
+CANCEL_BTN,Annulla,Cancel
 OPTION_MENU,,
-GAMEPLAY_BTN,Gameplay,Gameplay
+TITLE_SETTINGS,Impostazioni,Settings
+GAMEPLAY_BTN,Gioco,Gameplay
 DIFFICULT_LABEL,Difficoltà,Difficulty
 DIFFICULT_1,Facile,Easy
-DIFFICULT_2,Medio,Medium
+DIFFICULT_2,Normale,Normal
 DIFFICULT_3,Difficile,Hard
 LANGUAGE_LABEL,Lingua,Language
-LANGUAGE_1,Italiano,Italian
-LANGUAGE_2,Inglese,English
+LANGUAGE_1,Italiano,Italiano
+LANGUAGE_2,English,English
 GRAPHICS_BTN,Grafica,Graphics
 FULLSCREEN_CHK,Schermo intero,Fullscreen
 RESOLUTION_LABEL,Risoluzione,Resolution
@@ -23,3 +34,46 @@ VOLUME_3,Volume Suoni,Sound Volume
 VOLUME_4,Volume Ambiente,Environment Volume
 CONTROLS_BTN,Controlli,Controls
 BACK_BTN,Indietro,Back
+LOCATION_MENU,,
+LOCATION_TITLE,Selezione Location,Location Selection
+TUTORIAL_BTN,Tutorial,Tutorial
+DUNGEON_BTN,Segrete,Dungeon
+FOREST_BTN,Foresta,Forest
+TRANSATION_ENTER,Entrando in,Enter in
+LVL_SELECTION_LBL,Selezione Livello,Level Selection
+LOADING_LABEL,Caricamento,Loading
+PAUSE_MENU - VICTORY - DEFEAT,,
+CONTINUE_BTN,Continua,Continue
+RETRY_BTN,Riprova,Retry
+BACK_MAIN_MENU_BTN,Torna al menù iniziale,Back to main menù
+NEXT_LVL_BTN,Prossimo Livello,Next Level
+BACK_LVL_SELECTION,Torna alla selezione livelli,Back to Lavel Selection
+BEST_LBL,Migliore,Best
+CURRENT_LBL,Attuale,Current
+STEPS_LBL,Passi,Steps
+TIME_LBL,Tempo,Time
+VICTORY_LBL,Vittoria,Victory
+DEFEAT_LBL,Sconfitta,Defeat
+LVL TEXT,,
+GRANDPA_LVL_1_TXT_1,Usa le frecce direzionali per muoverti. Cerca di attivare tutte le tile per avanzare!!,Use the arrow keys to move. Try to activate all the tiles to advance!
+GRANDPA_LVL_2_TXT_1,"Perfetto, bravissimo! Ora prova a terminare questo da solo!","Perfect, great! Now try finishing this one yourself!"
+GRANDPA_LVL_3_TXT_1,"Alcune volte per completare il livello sarai costretto a spegnere alcune tile per terminarlo! E ricorda, alcuni livelli per terminarli dovrai arrivare alla casella di uscita!","Sometimes, to complete the level, you'll have to turn off some tiles! And remember, some levels require you to reach the exit box to complete them!"
+SLIME_LVL_4_TXT_1,Ehm… Nonno? Che cos’è quella cosa strana lì per terra? Ha due occhi finti… con il vetro davanti!,Um… Grandpa? What's that weird thing on the ground? It has two fake eyes… with glass in front of them!
+GRANDPA_LVL_4_TXT_1,"Oh, quelli, nipotino, sono… come li chiamano… “occhiali da sole”. Li usano gli avventurieri per sembrare più… fighi... o forse per proteggersi dalla luce, non ricordo bene.","Oh, those, nephew, are… what do they call them… “sunglasses.” Adventurers use them to look more… cool… or maybe to protect themselves from the light, I don’t remember exactly."
+SLIME_LVL_4_TXT_2,Avventurieri? Quelli che entrano qui a urlare “Per il tesoro!” e poi noi li sciogliamo un po’?,"Adventurers? The ones who come in here shouting ""For the treasure!"" and then we loosen them up a bit?"
+GRANDPA_LVL_4_TXT_2,"Esattamente! Sono strani esseri, sempre in cerca di gloria, ricchezze e… beh, cadaveri come questo. Ma non ti preoccupare: noi Slime siamo più saggi. Noi restiamo a casa.","Exactly! They're strange beings, always seeking glory, riches, and... well, corpses like this. But don't worry: we Slimes are wiser. We're staying home."
+SLIME_LVL_4_TXT_3,"Nonno, e se questi occhiali avessero visto cose incredibili? Montagne altissime! Cieli sconfinati! Luoghi pieni di luce! Cosa c’è fuori da queste segrete?","Grandpa, what if these glasses had seen incredible things? Towering mountains! Endless skies! Places filled with light! What lies beyond these dungeons?"
+GRANDPA_LVL_4_TXT_3,"Ehm… fuori? Beh… ci sono altre stanze… e… forse scale? Io… io non sono mai uscito, a dire il vero.","Um… outside? Well… there are other rooms… and… maybe stairs? I… I've never been out, to be honest."
+SLIME_LVL_4_TXT_4,Allora devo farlo io! Se questi occhiali hanno visto il mondo… io voglio vederlo con i miei occhi di slime! Non resterò per sempre qui sotto. Voglio saltare là fuori e scoprire cosa c’è oltre queste segrete!,Then I have to do it! If these glasses have seen the world... I want to see it with my slime eyes! I won't stay down here forever. I want to jump out there and discover what's beyond these dungeons!
+GRANDPA_LVL_4_TXT_4,"Hai lo stesso fuoco che avevo io da giovane blob… Vai, piccolo mio. Segui ciò che brilla nei tuoi occhi… Ma stai attento: là fuori non ci saranno solo torce e muffa.","You have the same fire I had as a young blob… Go, little one. Follow what shines in your eyes… But be careful: there won't be only torches and mold out there."
+SLIME_LVL_4_TXT_5,"Allora meglio iniziare subito! Grazie, Nonno. La mia avventura comincia… ora!","Then I'd better get started right away! Thanks, Grandpa. My adventure begins... now!"
+SLIME_LVL_5_TXT_1,Cosa aveva detto nonno sulle trappole? Qualcosa sul non toccarle mi pare...,"What did Grandpa say about the traps? Something about not touching them, I think..."
+SLIME_LVL_7_TXT_1,Ah si ora ricordo:,Ah yes now I remember:
+SLIME_LVL_7_TXT_2,"\""Le spine possono ucciderti, soprattutto quelle a passi, stai attento! AH.. AH.. AH..\""","\""Thorns can kill you, especially the stepping ones, be careful! AH.. AH.. AH..\"""
+SLIME_LVL_7_TXT_3,"Già mi manca, non vedo l'ora di tornare per raccontargli tutto!","I miss him already, I can't wait to come back to tell him all about it!"
+SLIME_LVL_9_TXT_1,Chissà se nonno si riferiva a questo quando parlava delle torce e la muffa...,I wonder if this is what grandpa was referring to when he talked about the torches and the mold...
+SLIME_LVL_13_TXT_1,"Non si vede nulla, come faò a continuare in queste condizioni? Il mio viaggio è già finito?",I can't see anything. How can I continue in these conditions? Is my journey already over?
+SLIME_LVL_13_TXT_2,Che fortuna!! Così va meglio!!,How lucky!! That's better!!
+LUDOVICO_LVL_13_TXT_1,,
+SLIME_LVL_13_TXT_3,,
+LUDOVICO_LVL_13_TXT_2,,

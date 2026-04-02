@@ -8,7 +8,7 @@ func _ready():
 	var intro_dialogue = [
 		{
 			"name": "Nonno Slime", 
-			"text": "Perfetto, bravissimo! Ora prova a terminare questo da solo!", 
+			"text": tr("GRANDPA_LVL_2_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
 			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)

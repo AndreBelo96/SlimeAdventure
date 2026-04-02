@@ -8,7 +8,7 @@ func _ready():
 	var intro_dialogue = [
 		{
 			"name": "Nonno Slime", 
-			"text": "Usa le frecce direzionali per muoverti. Cerca di attivare tutte le tile per avanzare!!", 
+			"text": tr("GRANDPA_LVL_1_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
 			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)

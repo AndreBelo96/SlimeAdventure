@@ -9,21 +9,21 @@ func _ready():
 	var intro_dialogue = [
 		{
 			"name": "Slime", 
-			"text": "Ah si ora ricordo: ", 
+			"text": tr("SLIME_LVL_7_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		{
 			"name": "Slime", 
-			"text": "\"Le spine possono ucciderti, soprattutto quelle a passi, stai attento! AH.. AH.. AH..\"", 
+			"text": tr("SLIME_LVL_7_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		{
 			"name": "Slime", 
-			"text": "Già mi manca, non vedo l'ora di tornare per raccontargli tutto!", 
+			"text": tr("SLIME_LVL_7_TXT_3"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)

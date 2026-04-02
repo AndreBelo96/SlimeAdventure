@@ -10,7 +10,7 @@ func _ready():
 	var intro_dialogue = [
 		{
 			"name": "Slime", 
-			"text": "Cosa aveva detto nonno sulle trappole? Qualcosa sul non toccarle mi pare...", 
+			"text": tr("SLIME_LVL_5_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
 			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)

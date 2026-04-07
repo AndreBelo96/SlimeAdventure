@@ -14,6 +14,6 @@ func can_enter() -> bool:
 func on_player_enter():
 	if !isBreak:
 		$AnimatedTile.play("EXPLOSION")
-		#TODO rumore
+		SoundManager.play_sfx("res://Assets/Audio/SmashStone.wav")
 		peso = 1
 		isBreak = true

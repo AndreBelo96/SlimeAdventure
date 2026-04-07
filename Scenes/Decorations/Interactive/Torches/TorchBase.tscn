@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdlw61vwbucp"]
+[gd_scene load_steps=5 format=3 uid="uid://cdlw61vwbucp"]
 
 [ext_resource type="Script" uid="uid://bikpj2rd5ldl0" path="res://Scripts/Decorations/Interactive/Torch/BaseTorch.gd" id="1_1oivh"]
 [ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="2_ehuel"]
+[ext_resource type="AudioStream" uid="uid://d4nh2g6mefeou" path="res://Assets/Audio/Fire.wav" id="3_xa863"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1oivh"]
 
@@ -16,3 +17,9 @@ texture_scale = 1.25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1oivh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xa863")
+volume_db = -15.0
+autoplay = true
+max_distance = 300.0

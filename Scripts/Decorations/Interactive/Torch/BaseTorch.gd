@@ -2,6 +2,7 @@ extends Node2D
 class_name BaseTorch
 
 @onready var light: PointLight2D = $PointLight2D
+@onready var audio = $AudioStreamPlayer2D
 
 var start_on := true
 

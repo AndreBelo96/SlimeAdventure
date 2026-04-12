@@ -10,7 +10,7 @@ SAVE_LINE,Salvataggio,Save
 LAST_PLAYED,Ultimo avvio,Last played
 PLAY_TIME,Tempo di gioco,Play time
 LEVEL_MAX,Livello raggiunto,Level reached
-PLAY_BTN,Gioca,Play time
+PLAY_BTN,Gioca,Start
 DELETE_BTN,Elimina,Delete
 DELETE_CONFIRM_LBL,Sei sicuro di voler cancellare questo salvataggio?,Are you sure you want to delete this save?
 CANCEL_BTN,Annulla,Cancel
@@ -75,5 +75,5 @@ SLIME_LVL_9_TXT_1,Chissà se nonno si riferiva a questo quando parlava delle tor
 SLIME_LVL_13_TXT_1,"Non si vede nulla, come faò a continuare in queste condizioni? Il mio viaggio è già finito?",I can't see anything. How can I continue in these conditions? Is my journey already over?
 SLIME_LVL_13_TXT_2,Che fortuna!! Così va meglio!!,How lucky!! That's better!!
 LUDOVICO_LVL_13_TXT_1,,
-SLIME_LVL_13_TXT_3,,
+SLIME_LVL_13_TXT_3,Non possiamo andare ognuno per la sua strada vero?,
 LUDOVICO_LVL_13_TXT_2,,

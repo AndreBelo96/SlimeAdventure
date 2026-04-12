@@ -2,11 +2,22 @@ extends BaseMenu
 
 @onready var container_data := $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer
 
+@onready var lastPlayedLbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LastPlayed
+@onready var playTimeLbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime
+@onready var lvlReachLbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach
+
+@onready var save1Lbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Save1
+@onready var save2Lbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button/Save2
+@onready var save3Lbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Save3
+@onready var save4Lbl := $SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button/Save4
+
 var buttons_save_data_full : Array[Button] = []
 var buttons_save_data_empty : Array[Button] = []
 var selectors_save_data_full = []
 var selectors_save_data_empty = []
 var slot_selected = 0
+
+
 
 func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")
@@ -14,6 +25,25 @@ func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Scoreboard.text = tr("SCOREBOARD_BTN")
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button/Option.text = tr("OPTIONS_BTN")
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button/Exit.text = tr("EXIT_BTN")
+	
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button/Back.text = tr("BACK_BTN")
+	save1Lbl.text = "%s 1" % tr("SAVE_LINE")
+	save2Lbl.text = "%s 2" % tr("SAVE_LINE")
+	save3Lbl.text = "%s 3" % tr("SAVE_LINE")
+	save4Lbl.text = "%s 4" % tr("SAVE_LINE")
+	
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button/Play.text = tr("PLAY_BTN")
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button/Delete.text = tr("DELETE_BTN")
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button/Back.text = tr("BACK_BTN")
+	lastPlayedLbl.text = tr("LAST_PLAYED")
+	playTimeLbl.text = tr("PLAY_TIME")
+	lvlReachLbl.text = tr("LEVEL_MAX")
+	
+	$LocationContainer/VBoxContainer/CenterContainer/Title.text = tr("LOCATION_TITLE")
+	$LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Back.text = tr("BACK_BTN")
+	$LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Dungeon.text = tr("DUNGEON_BTN")
+	$LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Forest.text = tr("FOREST_BTN")
+	
 
 ## ----- Buttons setup ----- ##
 func setup_main_buttons():
@@ -326,7 +356,6 @@ func update_save_data_panel(slot:int):
 		show_empty_slot()
 		return
 	
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button/Play.text = "Continue"
 	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2.visible = true
 	buttons_save_data = buttons_save_data_full
 	selectors_save_data = selectors_save_data_full
@@ -339,18 +368,17 @@ func update_save_data_panel(slot:int):
 	var last_played = format_date_smart(data.get("last_played", 0))
 	var playtime = format_time(totals.time)
 	
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = "Save slot %d" % slot + " - %d" % get_completion_percent(data) + "%"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LastPlayed.text = "Last Played: " + last_played
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime.text = "Playtime: %s" % playtime
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "Level Reached: %d" % max_level
+	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = tr("SAVE_LINE") + " %d" % slot + " - %d" % get_completion_percent(data) + "%"
+	lastPlayedLbl.text = tr("LAST_PLAYED") + ": " + last_played
+	playTimeLbl.text = tr("PLAY_TIME") + ": %s" % playtime
+	lvlReachLbl.text =  tr("LEVEL_MAX") + ": %d" % max_level
 
 func show_empty_slot():
 	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/Title.text = "Empty Slot"
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LastPlayed.text = "Last Played: - "
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/PlayTime.text = "Playtime: - "
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer/LvlReach.text = "Level Reached: - "
+	lastPlayedLbl.text = tr("LAST_PLAYED") + ": - "
+	playTimeLbl.text =tr("PLAY_TIME") + ": - "
+	lvlReachLbl.text = tr("LEVEL_MAX") + ": - "
 	
-	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button/Play.text = "New game"
 	$SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2.visible = false
 	buttons_save_data = buttons_save_data_empty
 	selectors_save_data = selectors_save_data_empty

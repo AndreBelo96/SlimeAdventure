@@ -1,5 +1,10 @@
 extends BaseMenu
 
+@onready var pause: Label = $MarginContainer/VBoxContainer/Pausa
+@onready var continueBtn: Label = $MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue/Continue
+@onready var retry: Label = $MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry/Retry
+@onready var mainMenu: Label = $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu/MainMenu
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	setup_languages()
@@ -8,7 +13,10 @@ func _ready():
 	setup_mouse()
 
 func setup_languages():
-	pass
+	pause.text = tr("PAUSE_LBL")
+	continueBtn.text = tr("CONTINUE_BTN")
+	retry.text = tr("RETRY_BTN")
+	mainMenu.text = tr("BACK_MAIN_MENU_BTN")
 
 func setup_buttons():
 	buttons_main = [

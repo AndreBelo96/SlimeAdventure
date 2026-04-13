@@ -3,6 +3,7 @@ extends BaseMenu
 
 @onready var level_container: GridContainer = $MarginContainer/VBoxContainer/CenterContainer2/LevelButtonContainer
 @onready var location: Label = $MarginContainer/VBoxContainer/CenterContainer4/Location
+@onready var _title: Label = $MarginContainer/VBoxContainer/CenterContainer/Title
 
 const ROW_SIZE := 5
 
@@ -12,8 +13,8 @@ var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
 func _ready():
 	loader = LevelLoader.new()
 	factory = LevelButtonFactory.new()
-	
-	location.text = GameManager.Location.keys()[GameManager.location_selected]
+	location.text = tr(GameManager.location_translation_keys[GameManager.location_selected]) #TODO meglio un metodo
+	_title.text = tr("LVL_SELECTION_LBL")
 	load_level_buttons()
 
 func load_level_buttons():
@@ -47,9 +48,11 @@ func load_level_buttons():
 		buttons_main.append(button)
 		selectors_main.append([selector_label])
 		base_positions[selector_label] = selector_label.position
-
-	var back_button = $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
+	
 	var back_selector = [$MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/SelectorR]
+	var back_button = $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button
+	
+	#back_button.text = tr("BACK_BTN")
 	
 	buttons_main.append(back_button)
 	selectors_main.append(back_selector)

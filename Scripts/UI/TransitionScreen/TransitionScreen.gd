@@ -30,6 +30,8 @@ func _ready():
 	
 	_apply_location_theme()
 	
+	_setup_languages()
+	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	$MarginContainer/VBoxContainer/Titolo.text = transition_text
 
@@ -58,6 +60,12 @@ func _ready():
 	get_tree().change_scene_to_packed(packed_scene)
 
 	queue_free()
+
+
+func _setup_languages():
+	enter_label.text = tr("TRANSATION_ENTER")
+	title_label.text = tr(GameManager.location_translation_keys[GameManager.location_selected])
+	loading_label.text = tr("LOADING_LABEL")
 
 func _input(_event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()

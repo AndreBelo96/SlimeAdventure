@@ -39,10 +39,11 @@ LOCATION_TITLE,Selezione Location,Location Selection
 TUTORIAL_BTN,Tutorial,Tutorial
 DUNGEON_BTN,Segrete,Dungeon
 FOREST_BTN,Foresta,Forest
-TRANSATION_ENTER,Entrando in,Enter in
+TRANSATION_ENTER,Entrando in...,Enter in...
 LVL_SELECTION_LBL,Selezione Livello,Level Selection
-LOADING_LABEL,Caricamento,Loading
+LOADING_LABEL,Caricamento...,Loading...
 PAUSE_MENU - VICTORY - DEFEAT,,
+PAUSE_LBL,Pausa,Pause
 CONTINUE_BTN,Continua,Continue
 RETRY_BTN,Riprova,Retry
 BACK_MAIN_MENU_BTN,Torna al menù iniziale,Back to main menù

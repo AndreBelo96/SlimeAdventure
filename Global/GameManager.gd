@@ -10,6 +10,13 @@ const SWITCH_TILE_POSITION := 13
 const NUMBER_OF_LEVELS := 13
 
 enum Location { TUTORIAL, DUNGEON, FOREST }
+
+var location_translation_keys = {
+	Location.TUTORIAL: "TUTORIAL_BTN",
+	Location.DUNGEON: "DUNGEON_BTN",
+	Location.FOREST: "FOREST_BTN"
+}
+
 ## Variabili correnti
 var current_level: int = 1
 var current_time: float = 0.0

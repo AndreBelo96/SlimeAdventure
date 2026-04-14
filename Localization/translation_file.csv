@@ -53,6 +53,8 @@ BEST_LBL,Migliore,Best
 CURRENT_LBL,Attuale,Current
 STEPS_LBL,Passi,Steps
 TIME_LBL,Tempo,Time
+NICE,Bene!,Nice!
+RECORD,Nuovo record!!,New record!!
 VICTORY_LBL,Vittoria,Victory
 DEFEAT_LBL,Sconfitta,Defeat
 LVL TEXT,,

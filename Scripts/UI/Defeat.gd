@@ -3,7 +3,12 @@ extends BaseMenu
 @onready var root = $MarginContainer
 
 @onready var title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
+
 @onready var title = $MarginContainer/VBoxContainer/CenterContainer/Title
+@onready var retry = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart/Restart
+@onready var level_selection = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection/BackLevelSelection
+@onready var back_menu = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu/BackMainMenu
+
 @onready var buttons_container  = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer
 @onready var image_container = $MarginContainer/VBoxContainer/HBoxContainer/Control
 @onready var image = $MarginContainer/VBoxContainer/HBoxContainer/Control/AnimatedSprite2D
@@ -33,7 +38,10 @@ func _ready():
 	animate_screen_enter()
 
 func setup_languages():
-	pass
+	title.text = tr("DEFEAT_LBL")
+	retry.text = tr("RETRY_BTN")
+	level_selection.text = tr("BACK_LVL_SELECTION")
+	back_menu.text = tr("BACK_MAIN_MENU_BTN")
 
 func setup_buttons():
 	buttons_main = [

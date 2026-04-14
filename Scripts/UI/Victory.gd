@@ -3,7 +3,21 @@ extends BaseMenu
 @onready var root = $MarginContainer
 
 @onready var title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
+
 @onready var title = $MarginContainer/VBoxContainer/CenterContainer/Title
+@onready var next_level = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next/Next
+@onready var retry = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/Retry/Retry
+@onready var level_selection = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection/BackLevelSelection
+@onready var back_menu = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu/BackMainMenu
+
+@onready var actual = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/Actual
+@onready var actual_steps = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualSteps
+@onready var actual_time = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualTime
+
+@onready var best = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/Best
+@onready var best_steps = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestSteps
+@onready var best_time = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestTime
+
 @onready var buttons_container  = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer
 @onready var results_container = $MarginContainer/VBoxContainer/HBoxContainer3/Points
 @onready var record = $MarginContainer/VBoxContainer/HBoxContainer/Record
@@ -49,29 +63,22 @@ func setup_results():
 	isRecordBool = is_record
 
 	# Mostra i risultati della run appena conclusa
-	$MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualSteps.text = "Steps: %d" % [run_steps]
-	$MarginContainer/VBoxContainer/HBoxContainer3/Points/Actual/ActualTime.text = "Time: %.2f" % [run_time]
-
-	var best_steps := "-"
-	var best_time := "-"
+	actual_steps.text = actual_steps.text + " %d" % [run_steps]
+	actual_time.text = actual_time.text + " %.2f" % [run_time]
 
 	var level_data := SaveManager.get_level_data(completed_level)
 	if level_data.size() > 0:
-		best_steps = str(level_data.get("steps", "-"))
-		best_time = "%.2f" % float(level_data.get("time", 0.0))
+		best_steps.text = best_steps.text + str(level_data.get("steps", "-"))
+		best_time.text = best_time.text + "%.2f" % float(level_data.get("time", 0.0))
 	else:
-		# prima volta: non c'erano dati, mostra i valori della run
-		best_steps = str(run_steps)
-		best_time = "%.2f" % run_time
-
-	$MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestSteps.text = "Steps: %s" % [best_steps]
-	$MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestTime.text = "Time: %s" % [best_time]
-
+		best_steps.text = best_steps.text + str(run_steps)
+		best_time.text = best_time.text + "%.2f" % run_time
+	
 	if is_record:
-		record.text = "New record!!"
+		record.text = tr("RECORD")
 		sprite.texture = preload("res://Assets/Sprites/Player/Sunglasses.png")
 	else:
-		record.text = "Nice!!"
+		record.text = tr("NICE")
 		var atlas := AtlasTexture.new()
 		atlas.atlas = preload("res://Assets/Sprites/Player/SlimeSet.png")
 		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))
@@ -80,7 +87,19 @@ func setup_results():
 	GameManager.isRecord = false
 
 func setup_languages():
-	pass
+	title.text = tr("VICTORY_LBL")
+	next_level.text = tr("NEXT_LVL_BTN")
+	retry.text = tr("RETRY_BTN")
+	level_selection.text = tr("BACK_LVL_SELECTION")
+	back_menu.text = tr("BACK_MAIN_MENU_BTN")
+	
+	actual.text = tr("CURRENT_LBL")
+	actual_steps.text = tr("STEPS_LBL") + ":"
+	actual_time.text = tr("TIME_LBL") + ":"
+	
+	best.text = tr("BEST_LBL")
+	best_steps.text = tr("STEPS_LBL") + ": "
+	best_time.text = tr("TIME_LBL") + ": "
 
 func setup_buttons():
 	buttons_main = [

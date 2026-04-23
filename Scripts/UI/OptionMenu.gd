@@ -74,5 +74,5 @@ func _on_sound_slider_value_changed(value: float) -> void:
 
 # -- Back -- #
 func _on_back_pressed() -> void:
-	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/TutorialBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

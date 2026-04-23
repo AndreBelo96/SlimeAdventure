@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cmuwmspta6dkl"]
+[gd_resource type="TileSet" format=3 uid="uid://cmuwmspta6dkl"]
 
 [ext_resource type="PackedScene" uid="uid://dy3p1262vrlln" path="res://Scenes/NPCs/NonnoSlime.tscn" id="1_rtrtb"]
 

@@ -49,10 +49,10 @@ func on_player_enter():
 	is_active = !is_active
 	if is_active:
 		animation_player.play("Activate")
-		SoundManager.play_sfx("res://Assets/Audio/AccendeTile.wav")
+		SoundManager.play_sfx("res://Assets/Audio/Sound/AccendeTile.wav")
 	else:
 		animation_player.play("Deactivate")
-		SoundManager.play_sfx("res://Assets/Audio/SpegneTile.wav")
+		SoundManager.play_sfx("res://Assets/Audio/Sound/SpegneTile.wav")
 	
 	emit_signal("tile_triggered", self, "activate", {"is_active": is_active})
 	emit_signal("tile_state_changed")

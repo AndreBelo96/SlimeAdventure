@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bamqvivf771yo"]
+[gd_resource type="TileSet" format=3 uid="uid://bamqvivf771yo"]
 
 [ext_resource type="Texture2D" uid="uid://ct3tleqbvlpwc" path="res://Assets/Sprites/Decorations/set_decoration_static.png" id="1_cjmba"]
 

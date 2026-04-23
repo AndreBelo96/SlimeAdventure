@@ -12,7 +12,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_5_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		}
 	]

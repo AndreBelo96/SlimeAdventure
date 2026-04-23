@@ -35,5 +35,5 @@ func play_animation(animation_name: String, flip_h: bool, flip_v: bool) -> void:
 
 
 func _on_button_pressed() -> void:
-	SoundManager.play_sfx("res://Assets/Audio/DefaultBtnClick.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/DefaultBtnClick.wav")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")

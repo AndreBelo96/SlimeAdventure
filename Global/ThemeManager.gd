@@ -7,11 +7,11 @@ const BUTTON_THEMES := {
 }
 
 const BUTTON_SOUNDS := {
-	GameManager.Location.TUTORIAL: "res://Assets/Audio/TutorialBtnClick.wav",
-	GameManager.Location.DUNGEON: "res://Assets/Audio/TutorialBtnClick.wav"
+	GameManager.Location.TUTORIAL: "res://Assets/Audio/Sound/TutorialBtnClick.wav",
+	GameManager.Location.DUNGEON: "res://Assets/Audio/Sound/TutorialBtnClick.wav"
 }
 
-const DEFAULT_SOUND = "res://Assets/Audio/DefaultBtnClick.wav"
+const DEFAULT_SOUND = "res://Assets/Audio/Sound/DefaultBtnClick.wav"
 
 func get_theme_for_location_type(location_type: int) -> Theme:
 	return BUTTON_THEMES.get(location_type, null)

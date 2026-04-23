@@ -175,7 +175,7 @@ func _start_attack():
 	state = BossState.IDLE
 
 func _on_attack_impact():
-	print("IMPATTO!") # test
+	
 	# 1. Tremolio camera
 	if camera:
 		camera.shake(6.0, 0.25)
@@ -184,6 +184,7 @@ func _on_attack_impact():
 	_spawn_ceiling_debris()
 	_spawn_impact_particles()
 
+	SoundManager.play_sfx("res://Assets/Audio/Sound/SmashStone.wav")
 	# 3. Danno TODO capire se farlo qui o lasciarlo dove è
 	#attack()
 

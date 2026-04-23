@@ -24,7 +24,7 @@ func play_boss_intro() -> void:
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_13_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		}
 	]
@@ -41,7 +41,7 @@ func play_boss_intro() -> void:
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_13_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		}
 	]
@@ -54,18 +54,25 @@ func play_boss_intro() -> void:
 	intro_dialogue = [
 		{
 			"name": "Ludovico", 
-			"text": "Mo te sfondo er culo!!", 
+			"text": tr("LUDOVICO_LVL_13_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Ludovico"),
-			"voice": "res://Assets/Audio/Voice/LudovicoVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/LudovicoVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.LUDOVICO)
 		},
 		{
 			"name": "Slime", 
-			"text": "Non possiamo andare ognuno per la sua strada vero?", 
+			"text": tr("SLIME_LVL_13_TXT_3"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
-		}
+		},
+		{
+			"name": "Ludovico", 
+			"text": tr("LUDOVICO_LVL_13_TXT_2"),
+			"portrait": PortraitManager.get_portrait("Ludovico"),
+			"voice": "res://Assets/Audio/Sound/Voice/LudovicoVoice.wav",
+			"voice_speed": VoiceManager.get_speed(VoiceManager.LUDOVICO)
+		},
 	]
 	
 	dialog_interface.show_dialogue(intro_dialogue)

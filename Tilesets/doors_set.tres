@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dwiuj3egvhemc"]
+[gd_resource type="TileSet" format=3 uid="uid://dwiuj3egvhemc"]
 
 [ext_resource type="PackedScene" uid="uid://0x63sxigcn8w" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaE.tscn" id="1_0iiht"]
 [ext_resource type="PackedScene" uid="uid://ckr2xduwmue4o" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaN.tscn" id="2_qmgbn"]

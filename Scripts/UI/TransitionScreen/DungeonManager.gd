@@ -2,7 +2,7 @@ extends Node
 class_name DungeonManager
 
 var chain_frames: SpriteFrames
-const chain_sfx: String = "res://Assets/Audio/Catene/ChainTransition.wav"
+const chain_sfx: String = "res://Assets/Audio/Sound/Catene/ChainTransition.wav"
 
 var chains_data = [
 	{"position": Vector2(200, 200), "scale": Vector2(2, 2)},

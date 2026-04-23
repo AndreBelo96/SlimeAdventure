@@ -11,21 +11,21 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_7_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		{
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_7_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		{
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_7_TXT_3"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 	]

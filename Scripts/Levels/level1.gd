@@ -10,7 +10,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": tr("GRANDPA_LVL_1_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		}
 	]

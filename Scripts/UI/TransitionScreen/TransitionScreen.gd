@@ -33,7 +33,6 @@ func _ready():
 	_setup_languages()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	$MarginContainer/VBoxContainer/Titolo.text = transition_text
 
 	match location_id:
 		GameManager.Location.TUTORIAL:

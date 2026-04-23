@@ -12,7 +12,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_4_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -20,7 +20,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": tr("GRANDPA_LVL_4_TXT_1"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -28,7 +28,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_4_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -36,7 +36,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": tr("GRANDPA_LVL_4_TXT_2"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -44,7 +44,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_4_TXT_3"),
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -52,7 +52,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": tr("GRANDPA_LVL_4_TXT_3"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -60,7 +60,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_4_TXT_4"),
 			"portrait": PortraitManager.get_portrait("Slime"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		
@@ -68,7 +68,7 @@ func _ready():
 			"name": "Nonno Slime", 
 			"text": tr("GRANDPA_LVL_4_TXT_4"),
 			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Voice/GranpaVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
 			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
 		},
 		
@@ -76,7 +76,7 @@ func _ready():
 			"name": "Slime", 
 			"text": tr("SLIME_LVL_4_TXT_5"),
 			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Voice/SlimeVoice.wav",
+			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
 			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
 		},
 		

@@ -5,9 +5,9 @@ const THEME_TUTORIAL := preload("res://Theme/Button/TutorialButton.tres")
 const THEME_DUNGEON := preload("res://Theme/Button/DungeonButton.tres")
 const THEME_DEFAULT := preload("res://Theme/DefaultButton.tres")
 
-const SOUND_TUTORIAL := "res://Assets/Audio/TutorialBtnClick.wav"
-const SOUND_DUNGEON := "res://Assets/Audio/TutorialBtnClick.wav" #TODO da fare
-const SOUND_DEFAULT := "res://Assets/Audio/DefaultBtnClick.wav"
+const SOUND_TUTORIAL := "res://Assets/Audio/Sound/TutorialBtnClick.wav"
+const SOUND_DUNGEON := "res://Assets/Audio/Sound/TutorialBtnClick.wav" #TODO da fare
+const SOUND_DEFAULT := "res://Assets/Audio/Sound/DefaultBtnClick.wav"
 
 const ALL_LEVELS := [
 	"Level1.tscn",

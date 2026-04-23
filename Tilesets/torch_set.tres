@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bjlusfts0e6u6"]
+[gd_resource type="TileSet" format=3 uid="uid://bjlusfts0e6u6"]
 
 [ext_resource type="PackedScene" uid="uid://bwhgiflj7dpce" path="res://Scenes/Decorations/Interactive/Torches/WallTorch.tscn" id="1_lqth3"]
 [ext_resource type="PackedScene" uid="uid://bdkehbk8cpfag" path="res://Scenes/Decorations/Interactive/Torches/WallTorchFlipped.tscn" id="2_vof11"]

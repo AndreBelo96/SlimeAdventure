@@ -33,8 +33,8 @@ var base_positions := {}
 var input_enabled := true
 
 ## --- Costanti per i suoni (overrideabile se serve) ---
-const SFX_MOVE = "res://Assets/Audio/TutorialBtnClick.wav"
-const SFX_CONFIRM = "res://Assets/Audio/TutorialBtnClick.wav"
+const SFX_MOVE = "res://Assets/Audio/Sound/TutorialBtnClick.wav"
+const SFX_CONFIRM = "res://Assets/Audio/Sound/TutorialBtnClick.wav"
 
 # --------------------------
 # ------- LIFECYCLE --------
@@ -120,7 +120,7 @@ func _connect_mouse_for(button_array: Array):
 		btn.pressed.connect(_on_button_pressed.bind(i))
 
 func _on_label_mouse_entered(index):
-	SoundManager.play_sfx("res://Assets/Audio/TutorialBtnClick.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/TutorialBtnClick.wav")
 	current_selection = index
 	set_current_selection(current_selection)
 

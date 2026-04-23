@@ -32,7 +32,7 @@ func set_active(state: bool) -> void:
 
 func on_player_enter(player: Node) -> void:
 	print("Posizione: ", str(global_position))
-	SoundManager.play_sfx("res://Assets/Audio/Pickup.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Pickup.wav")
 	on_player_enter_custom(player)
 
 func on_player_enter_custom(_player: Node) -> void:

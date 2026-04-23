@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bekimpr1d4j4a"]
+[gd_resource type="Theme" format=3 uid="uid://bekimpr1d4j4a"]
 
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_4t21b"]
 [ext_resource type="Texture2D" uid="uid://d13buv6ufq7y7" path="res://Assets/Sprites/Buttons/button_set.png" id="2_dtrx1"]

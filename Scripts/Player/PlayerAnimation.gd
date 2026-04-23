@@ -13,7 +13,7 @@ func play_idle():
 
 func play_move():
 	anim_sprite.play("Move")
-	_play_sfx("res://Assets/Audio/Jump.wav")
+	_play_sfx("res://Assets/Audio/Sound/Jump.wav")
 
 func play_death(death_type: int):
 	if not anim_sprite:
@@ -22,15 +22,15 @@ func play_death(death_type: int):
 	match death_type:
 		DEATH.SPIKES:
 			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
+			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
 		DEATH.VOID:
-			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
+			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
 		DEATH.ENEMY:
 			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
+			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
 		DEATH.TIMEOUT:
 			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Death.wav")
+			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
 
 
 # --- PRIVATI ---

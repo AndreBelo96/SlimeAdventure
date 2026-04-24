@@ -3,6 +3,9 @@ class_name BaseTorch
 
 @onready var light: PointLight2D = $PointLight2D
 
+@onready var sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var sound2: AudioStreamPlayer2D = $AudioStreamPlayer2D2
+
 var start_on := true
 
 # Parametri configurabili
@@ -55,6 +58,8 @@ func turn_on() -> void:
 	is_on = true
 	light.enabled = true
 	_start_flicker()
+	sound.play()
+	sound2.play()
 
 func turn_off() -> void:
 	if not is_on:
@@ -67,3 +72,5 @@ func turn_off() -> void:
 	
 	light.energy = 0.0
 	light.enabled = false
+	sound.stop()
+	sound2.stop()

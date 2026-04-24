@@ -131,6 +131,7 @@ func move_to(next_tile: Vector2i):
 
 func _animate_move_to(tile: Vector2i) -> void:
 	var target_pos = tilemap.map_to_local(tile) - $Center.position
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Steps/Steps.wav")
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", target_pos, 0.2)
 	await tween.finished
@@ -141,6 +142,8 @@ func damage_animation():
 	animation.modulate = Color(2, 2, 2)
 	await get_tree().create_timer(0.2).timeout
 	animation.modulate = Color(1, 1, 1)
+	
+	SoundManager.play_sfx("res://Assets/Audio/Sound/BossColpito.wav")
 	
 	var tween := create_tween()
 	tween.tween_property(self, "position:y", position.y - 20, 0.15)\
@@ -225,7 +228,6 @@ func _show_attack_warning():
 		warning_tile.global_position = tile_world_pos
 		get_tree().current_scene.add_child(warning_tile)
 		active_warnings.append(warning_tile)
-
 
 func _clear_attack_warning():
 	for active_warning in active_warnings:

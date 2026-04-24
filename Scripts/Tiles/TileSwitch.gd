@@ -15,6 +15,7 @@ func on_player_enter():
 	if not attivato:
 		attivato = true
 		$AnimatedTile.play("PRESSED")
+		SoundManager.play_sfx("res://Assets/Audio/Sound/SwitchClick.wav")
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
 		deactivate()
 
@@ -22,6 +23,7 @@ func reset_switch():
 	if attivato:
 		attivato = false
 		$AnimatedTile.play("UNPRESSED")
+		SoundManager.play_sfx("res://Assets/Audio/Sound/ReverseSwitchClick.wav")
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": "disattiva"})
 		activate()
 

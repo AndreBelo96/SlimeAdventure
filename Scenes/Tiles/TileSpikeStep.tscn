@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sj0kk6hfxx1b"]
+[gd_scene format=3 uid="uid://sj0kk6hfxx1b"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_ncc36"]
 [ext_resource type="Script" uid="uid://dujj6e4stpg2o" path="res://Scripts/Tiles/TileSpikeStep.gd" id="2_kl1oj"]
@@ -87,7 +87,7 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="TileBase" instance=ExtResource("1_ncc36")]
+[node name="TileBase" unique_id=575458497 instance=ExtResource("1_ncc36")]
 script = ExtResource("2_kl1oj")
 
 [node name="Tile" parent="." index="1"]

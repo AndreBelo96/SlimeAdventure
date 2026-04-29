@@ -10,6 +10,7 @@ var environment_volume: float = 1.0
 
 var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
+var environment_players: Array[AudioStreamPlayer] = []
 
 func _ready():
 	music_player = AudioStreamPlayer.new()
@@ -21,6 +22,13 @@ func _ready():
 		p.bus = "SFX"
 		add_child(p)
 		sfx_players.append(p)
+	
+	for i in range(6):
+		var p = AudioStreamPlayer.new()
+		p.bus = "Environment"
+		add_child(p)
+		environment_players.append(p)
+	
 
 
 func play_music(path: String, loop := true):
@@ -52,6 +60,21 @@ func play_sfx(path: String):
 	
 	sfx_players[0].stream = stream
 	sfx_players[0].play()
+
+func play_environment(path: String):
+	var stream = load(path)
+	if not stream:
+		push_warning("ENV file not found: %s" % path)
+		return
+	
+	for p in environment_players:
+		if not p.playing:
+			p.stream = stream
+			p.play()
+			return
+	
+	environment_players[0].stream = stream
+	environment_players[0].play()
 
 func set_master_volume(value: float):
 	master_volume = clamp(value, 0.0, 1.0)

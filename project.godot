@@ -30,6 +30,7 @@ VoiceManager="*res://Global/VoiceManager.gd"
 GameLogger="*res://Global/GameLogger.gd"
 SettingsManager="*res://Global/SettingsManager.gd"
 DisplayManager="*res://Global/DisplayManager.gd"
+AudioPresets="*uid://bgtaj0l76q6rb"
 
 [debug]
 
@@ -39,6 +40,7 @@ settings/stdout/print_fps=true
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/borderless=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080

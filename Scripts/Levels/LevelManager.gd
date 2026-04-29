@@ -9,6 +9,7 @@ extends Node2D
 @onready var level_logic: Node = $LevelLogic
 @onready var dark_overlay = $DarkOverlay
 @onready var background_manager: BackgroundManager = $BackgroundManager
+@onready var ambient_controller = $AmbientAudioController
 
 const DUNGEON_EFFECT = preload("res://Scenes/UI/Effetti/DungeonParticles.tscn")
 const FOG_EFFECT = preload("res://Scenes/UI/Effetti/FogEffect.tscn")

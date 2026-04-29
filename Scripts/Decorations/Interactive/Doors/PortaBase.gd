@@ -23,7 +23,7 @@ func setup(dir: String):
 func open():
 	if not is_open:
 		is_open = true
-		SoundManager.play_sfx("res://Assets/Audio/Sound/Door.wav")
+		SoundManager.play_sfx("res://Assets/Audio/Sound/Doors/Door.wav")
 		update_visual()
 
 func update_visual():

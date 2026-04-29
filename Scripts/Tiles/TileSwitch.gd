@@ -16,6 +16,10 @@ func on_player_enter():
 		attivato = true
 		$AnimatedTile.play("PRESSED")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/SwitchClick.wav")
+		
+		await $AnimatedTile.animation_finished
+		await get_tree().create_timer(0.2).timeout
+		
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
 		deactivate()
 

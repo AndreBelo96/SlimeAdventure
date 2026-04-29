@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://b7aiuxd32mxfh"]
+[gd_scene format=4 uid="uid://b7aiuxd32mxfh"]
 
 [ext_resource type="Script" uid="uid://dexgigywr4y64" path="res://Scripts/Levels/level1.gd" id="1_4ra4s"]
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_6h7ik"]
@@ -328,37 +328,37 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Level" instance=ExtResource("1_6h7ik")]
+[node name="Level" unique_id=1999297193 instance=ExtResource("1_6h7ik")]
 script = ExtResource("1_4ra4s")
 
-[node name="MovementLogicMapLayer" parent="." index="3"]
+[node name="MovementLogicMapLayer" parent="." index="3" unique_id=2011242274]
 tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAABAP7/AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="5"]
+[node name="TileMapLayer" parent="." index="5" unique_id=1578614900]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQACAP7/AQAAAAAAAQACAP//AQAAAAAAAQACAAAAAQAAAAAAAQACAAEAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQAAAAAAAQAAAAAAAgA=")
 
-[node name="TerrainMapLayer" parent="YSort" index="0"]
+[node name="TerrainMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="0" unique_id=1113098733]
 tile_map_data = PackedByteArray("AAD//wEAAwAAAAAAAAAAAAEAAwAAAAAAAAABAAEAAwAAAAAAAAACAAEAAwAAAAAAAAAAAAAAAwAAAAAAAAD//wAAAwAAAAAAAAD/////AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAABAP7/AwAAAAAAAAACAP7/AwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAA=")
 
-[node name="NPCMapLayer" parent="YSort" index="6"]
+[node name="NPCMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="6" unique_id=1537239280]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAQA=")
 
-[node name="Animation" type="Node2D" parent="." index="7"]
+[node name="Animation" type="Node2D" parent="." index="7" unique_id=31288231]
 script = ExtResource("3_et1el")
 
-[node name="Fumetto" type="Sprite2D" parent="Animation" index="0"]
+[node name="Fumetto" type="Sprite2D" parent="Animation" index="0" unique_id=17726050]
 z_index = 10
 position = Vector2(48, -12)
 texture = ExtResource("3_a7ai2")
 
-[node name="ExampleAnimation" type="AnimatedSprite2D" parent="Animation" index="1"]
+[node name="ExampleAnimation" type="AnimatedSprite2D" parent="Animation" index="1" unique_id=1000866931]
 z_index = 15
 position = Vector2(51, -13)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_fs1dn")
 animation = &"UP"
 
-[node name="Arrow" type="Sprite2D" parent="Animation" index="2"]
+[node name="Arrow" type="Sprite2D" parent="Animation" index="2" unique_id=1250409983]
 z_index = 15
 position = Vector2(38, -13)
 scale = Vector2(0.2, 0.2)

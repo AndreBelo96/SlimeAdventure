@@ -5,6 +5,7 @@ extends "res://Scripts/Levels/LevelManager.gd"
 func _ready():
 	is_boss_level = true
 	super._ready()
+	ambient_controller.ambient_events = AudioPresets.DUNGEON_AMBIENT
 	set_current_level_number(13)
 	victory_mode = VictoryMode.BOSS
 	

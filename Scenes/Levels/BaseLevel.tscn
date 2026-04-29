@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://epn6jxi3iejh"]
+[gd_scene format=3 uid="uid://epn6jxi3iejh"]
 
 [ext_resource type="Script" uid="uid://b0ephypyc3vya" path="res://Scripts/Levels/LevelManager.gd" id="1_l5mnm"]
 [ext_resource type="Script" uid="uid://cs20dsk7jtn58" path="res://Scripts/Levels/LevelLogic.gd" id="2_1s4qq"]
@@ -19,6 +19,7 @@
 [ext_resource type="TileSet" uid="uid://dwiuj3egvhemc" path="res://Tilesets/doors_set.tres" id="12_iw06x"]
 [ext_resource type="PackedScene" uid="uid://dysj5yr4onuf8" path="res://Scenes/UI/Hud.tscn" id="15_pg1qu"]
 [ext_resource type="Script" uid="uid://4lfgwtv2807" path="res://Scripts/Levels/Camera.gd" id="18_wwx3o"]
+[ext_resource type="PackedScene" uid="uid://bqg7ls8sn38gs" path="res://Scenes/Sounds/DungeonAudioController.tscn" id="20_qjl7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ahpxb"]
 texture = ExtResource("3_orymm")
@@ -130,113 +131,115 @@ initial_velocity_min = 57.21
 initial_velocity_max = 69.76
 gravity = Vector3(0, 10, 0)
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" unique_id=2004832850]
 script = ExtResource("1_l5mnm")
 
-[node name="LevelLogic" type="Node" parent="." node_paths=PackedStringArray("player", "tile_layer")]
+[node name="LevelLogic" type="Node" parent="." unique_id=1134660148 node_paths=PackedStringArray("player", "tile_layer")]
 script = ExtResource("2_1s4qq")
 player = NodePath("../YSort/Player")
 tile_layer = NodePath("../TileMapLayer")
 
-[node name="BackgroundManager" parent="." instance=ExtResource("3_lq64p")]
+[node name="BackgroundManager" parent="." unique_id=1364242012 instance=ExtResource("3_lq64p")]
 
-[node name="LogicMapLayer" type="TileMapLayer" parent="."]
+[node name="LogicMapLayer" type="TileMapLayer" parent="." unique_id=40547736]
 z_index = -15
 texture_filter = 1
 texture_repeat = 1
 tile_set = SubResource("TileSet_w0n8b")
 
-[node name="MovementLogicMapLayer" type="TileMapLayer" parent="."]
+[node name="MovementLogicMapLayer" type="TileMapLayer" parent="." unique_id=2011242274]
 z_index = -15
 tile_set = SubResource("TileSet_duywq")
 
-[node name="DecorationTileMapLayer" type="TileMapLayer" parent="."]
+[node name="DecorationTileMapLayer" type="TileMapLayer" parent="." unique_id=168772598]
 z_index = -7
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("8_cp7g0")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1578614900]
 z_index = -5
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("2_ljv4m")
 
-[node name="YSort" type="Node2D" parent="."]
+[node name="YSort" type="Node2D" parent="." unique_id=946289436]
 y_sort_enabled = true
 
-[node name="TerrainMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="TerrainMapLayer" type="TileMapLayer" parent="YSort" unique_id=1113098733]
 z_index = -10
 y_sort_enabled = true
 tile_set = ExtResource("6_e376l")
 
-[node name="WallMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="WallMapLayer" type="TileMapLayer" parent="YSort" unique_id=1074901650]
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("4_3jiy3")
 
-[node name="DecorationWallMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="DecorationWallMapLayer" type="TileMapLayer" parent="YSort" unique_id=1475528400]
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("8_cp7g0")
 
-[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="DoorsMapLayer" type="TileMapLayer" parent="YSort" unique_id=1148768136]
 y_sort_enabled = true
 tile_set = ExtResource("12_iw06x")
 
-[node name="PickupMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="PickupMapLayer" type="TileMapLayer" parent="YSort" unique_id=98613881]
 y_sort_enabled = true
 tile_set = ExtResource("7_6r6ib")
 
-[node name="StairMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="StairMapLayer" type="TileMapLayer" parent="YSort" unique_id=1307512692]
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 tile_set = ExtResource("8_p3cyg")
 
-[node name="NPCMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="NPCMapLayer" type="TileMapLayer" parent="YSort" unique_id=1537239280]
 y_sort_enabled = true
 tile_set = ExtResource("11_3rmix")
 
-[node name="Player" parent="YSort" instance=ExtResource("2_xyu3k")]
+[node name="Player" parent="YSort" unique_id=2008489264 instance=ExtResource("2_xyu3k")]
 tile_map_layer_path = NodePath("../../TileMapLayer")
 pickup_map_layer_path = NodePath("../PickupMapLayer")
 movement_logic_map_layer_path = NodePath("../../MovementLogicMapLayer")
 doors_map_layer_path = NodePath("../DoorsMapLayer")
 npc_map_layer_path = NodePath("../NPCMapLayer")
 
-[node name="TorchMapLayer" type="TileMapLayer" parent="YSort"]
+[node name="TorchMapLayer" type="TileMapLayer" parent="YSort" unique_id=680211866]
 y_sort_enabled = true
 tile_set = ExtResource("5_idd1r")
 
-[node name="ExitParticles" type="GPUParticles2D" parent="YSort"]
+[node name="ExitParticles" type="GPUParticles2D" parent="YSort" unique_id=703753535]
 y_sort_enabled = true
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_e376l")
 
-[node name="DarkOverlay" type="CanvasModulate" parent="."]
+[node name="DarkOverlay" type="CanvasModulate" parent="." unique_id=485546223]
 visible = false
 color = Color(0, 0, 0, 1)
 
-[node name="CanvasHUD" type="CanvasLayer" parent="."]
+[node name="CanvasHUD" type="CanvasLayer" parent="." unique_id=166202819]
 
-[node name="HUD" parent="CanvasHUD" instance=ExtResource("15_pg1qu")]
+[node name="HUD" parent="CanvasHUD" unique_id=1600448888 instance=ExtResource("15_pg1qu")]
 
-[node name="DialogInterface" parent="CanvasHUD" node_paths=PackedStringArray("player", "level_manager") instance=ExtResource("7_28dga")]
+[node name="DialogInterface" parent="CanvasHUD" unique_id=1405656063 node_paths=PackedStringArray("player", "level_manager") instance=ExtResource("7_28dga")]
 visible = false
 player = NodePath("../../YSort/Player")
 level_manager = NodePath("../..")
 
-[node name="Pause" parent="CanvasHUD" instance=ExtResource("4_k28r4")]
+[node name="Pause" parent="CanvasHUD" unique_id=1428742185 instance=ExtResource("4_k28r4")]
 visible = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1487993314]
 zoom = Vector2(2, 2)
 script = ExtResource("18_wwx3o")
 
-[node name="Effects" type="Node2D" parent="Camera2D"]
+[node name="Effects" type="Node2D" parent="Camera2D" unique_id=610305132]
+
+[node name="AmbientAudioController" parent="." unique_id=361909780 instance=ExtResource("20_qjl7l")]

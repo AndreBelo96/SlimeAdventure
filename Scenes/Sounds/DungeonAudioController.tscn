@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bqg7ls8sn38gs"]
+
+[ext_resource type="Script" uid="uid://c6512c7obp7yp" path="res://Scripts/Environment/AmbientAudioController.gd" id="1_h38fi"]
+
+[node name="AmbientAudioController" type="Node" unique_id=361909780]
+script = ExtResource("1_h38fi")

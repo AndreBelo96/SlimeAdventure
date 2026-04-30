@@ -1,9 +1,11 @@
 extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
+	ambient_preset = AudioPresets.DUNGEON_AMBIENT
+	
 	super._ready()
 	set_current_level_number(4)
-	ambient_controller.ambient_events = AudioPresets.DUNGEON_AMBIENT
+	
 	victory_mode = VictoryMode.TILES
 	
 	await get_tree().create_timer(0.2).timeout

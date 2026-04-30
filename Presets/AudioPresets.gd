@@ -1,7 +1,7 @@
 # AudioPresets.gd
 extends Node
 
-const DUNGEON_AMBIENT = [
+const DUNGEON_AMBIENT: Array[Dictionary] = [
 	{
 		"sounds": [
 			"res://Assets/Audio/Sound/drip.wav"

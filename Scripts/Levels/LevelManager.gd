@@ -30,6 +30,7 @@ var all_tiles_active := false
 var boss_defeated := false
 var time_running := true
 var is_boss_level := false
+var ambient_preset: Array[Dictionary] = []
 
 
 func _ready():
@@ -69,6 +70,11 @@ func _ready():
 		var tile_coords = tile_manager.get_coords_from_global_position(pickup.global_position)
 		var tile_pos = pickup_layer.map_to_local(tile_coords)
 		pickup.snap_to_tile_center(tile_pos, tile_coords)
+	
+	if ambient_preset.is_empty():
+		return
+	
+	ambient_controller.setup(ambient_preset)
 
 func _process(delta):
 	if time_running:

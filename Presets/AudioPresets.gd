@@ -18,3 +18,5 @@ const DUNGEON_AMBIENT: Array[Dictionary] = [
 		"max_time": 25.0
 	}
 ]
+
+const DUNGEON_MUSIC: String = "res://Assets/Audio/Music/Levels/dungeon_song.wav"

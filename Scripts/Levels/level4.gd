@@ -2,6 +2,8 @@ extends "res://Scripts/Levels/LevelManager.gd"
 
 func _ready():
 	ambient_preset = AudioPresets.DUNGEON_AMBIENT
+	music_track = AudioPresets.DUNGEON_MUSIC
+	music_autoplay = false
 	
 	super._ready()
 	set_current_level_number(4)
@@ -88,3 +90,5 @@ func _ready():
 	dialog_interface.show_dialogue(intro_dialogue)
 	await dialog_interface.dialogue_finished
 	time_running = true
+	
+	SoundManager.play_music(music_track)

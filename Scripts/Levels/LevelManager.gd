@@ -31,6 +31,8 @@ var boss_defeated := false
 var time_running := true
 var is_boss_level := false
 var ambient_preset: Array[Dictionary] = []
+var music_track: String = ""
+var music_autoplay := true
 
 
 func _ready():
@@ -47,6 +49,9 @@ func _ready():
 	
 	setup_background()
 	setup_hud()
+	
+	if music_autoplay and music_track != "":
+		SoundManager.play_music(music_track)
 	
 	player.connect("player_won", Callable(self, "_on_player_won"))
 	player.connect("steps_changed", Callable(self, "_on_steps_changed"))
@@ -144,6 +149,7 @@ func _on_player_died():
 	GameManager.current_steps = steps
 	GameManager.current_time = level_time
 	GameManager.end_level(false)
+	SoundManager.stop_music()
 	GameManager.change_scene_to_defeat()
 
 # ================================================================
@@ -208,6 +214,7 @@ func _on_player_won():
 	GameLogger.info("Completato livello %d in %d secondi con %d passi" % [GameManager.current_level, level_time, steps])
 	GameManager.end_level(true)
 	#await get_tree().create_timer(1).timeout
+	SoundManager.stop_music()
 	GameManager.change_scene_to_victory()
 
 # -- UTILS -- #

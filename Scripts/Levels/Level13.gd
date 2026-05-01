@@ -5,6 +5,8 @@ extends "res://Scripts/Levels/LevelManager.gd"
 func _ready():
 	is_boss_level = true
 	ambient_preset = AudioPresets.DUNGEON_AMBIENT
+	music_track = AudioPresets.DUNGEON_MUSIC
+	music_autoplay = false
 	
 	super._ready()
 	set_current_level_number(13)
@@ -83,6 +85,8 @@ func play_boss_intro() -> void:
 	time_running = true
 	player.exit_cutscene()
 	$YSort/DungeonBoss.activate()
+	
+	SoundManager.play_music(music_track)
 
 func switch_all_torches(state: bool) -> void:
 	for torch in get_tree().get_nodes_in_group("torches"):

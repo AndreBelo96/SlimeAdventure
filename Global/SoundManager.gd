@@ -28,8 +28,6 @@ func _ready():
 		p.bus = "Environment"
 		add_child(p)
 		environment_players.append(p)
-	
-
 
 func play_music(path: String, loop := true):
 	var stream = load(path)
@@ -41,7 +39,6 @@ func play_music(path: String, loop := true):
 		music_player.stop()
 		music_player.stream = stream
 		music_player.play()
-		music_player.stream.loop = loop
 
 func stop_music():
 	music_player.stop()

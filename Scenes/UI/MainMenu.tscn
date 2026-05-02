@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://53bn22cjs3s7"]
+[gd_scene format=3 uid="uid://53bn22cjs3s7"]
 
 [ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu.gd" id="1_wrbul"]
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="2_744d7"]
@@ -37,7 +37,7 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=741361820]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,9 +48,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_wrbul")
 
-[node name="BackgroundMenu" parent="." instance=ExtResource("2_kl3t2")]
+[node name="BackgroundMenu" parent="." unique_id=621712294 instance=ExtResource("2_kl3t2")]
 
-[node name="MenuContainer" type="MarginContainer" parent="."]
+[node name="MenuContainer" type="MarginContainer" parent="." unique_id=633130489]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -63,38 +63,38 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer" unique_id=269480131]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer" unique_id=1528508164]
 custom_minimum_size = Vector2(450, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Title" type="TextureRect" parent="MenuContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="TextureRect" parent="MenuContainer/VBoxContainer/CenterContainer" unique_id=1206396207]
 material = SubResource("ShaderMaterial_kl3t2")
 layout_mode = 2
 texture = ExtResource("2_jex3y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer" unique_id=1328555496]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer" unique_id=1326995082]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=953276010]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=56986736]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1273008406]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -105,13 +105,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1625158968]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="Start" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button"]
+[node name="Start" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button" unique_id=1530825836]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -127,7 +127,7 @@ theme_override_font_sizes/font_size = 20
 text = "Start"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=89362069]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -138,13 +138,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=232546922]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2" unique_id=1426287299]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1983842340]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -155,7 +155,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=2146792892]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -163,7 +163,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Profile" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button"]
+[node name="Profile" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button" unique_id=909993784]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -179,7 +179,7 @@ theme_override_font_sizes/font_size = 20
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=436134652]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -190,13 +190,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer3" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=157040481]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3" unique_id=1719375984]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=345703095]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -207,7 +207,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=2142653523]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -215,7 +215,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Scoreboard" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+[node name="Scoreboard" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=273594923]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -231,7 +231,7 @@ theme_override_font_sizes/font_size = 20
 text = "Scoreboard"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1929153213]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -242,13 +242,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer4" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer4" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1882190134]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4" unique_id=702931492]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=1793065374]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -259,7 +259,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=24137210]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -267,7 +267,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Option" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button"]
+[node name="Option" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button" unique_id=1701433067]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -283,7 +283,7 @@ theme_override_font_sizes/font_size = 20
 text = "Option"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=58943879]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -294,13 +294,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer5" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer5" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1730735872]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5" unique_id=126185136]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=742014173]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -311,7 +311,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=2137804966]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -319,7 +319,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Exit" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button"]
+[node name="Exit" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button" unique_id=1626941422]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -335,7 +335,7 @@ theme_override_font_sizes/font_size = 20
 text = "Exit"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=102157589]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -346,20 +346,20 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MenuContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MenuContainer" unique_id=1743754104]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MenuContainer/VBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MenuContainer/VBoxContainer2" unique_id=1397128485]
 material = SubResource("ShaderMaterial_dvisc")
 layout_mode = 2
 texture = ExtResource("5_k8um8")
 expand_mode = 5
 
-[node name="Label" type="Label" parent="MenuContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="MenuContainer/VBoxContainer2" unique_id=1000769228]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
@@ -369,7 +369,7 @@ theme_override_font_sizes/font_size = 10
 text = "Version 0.1 Alpha"
 horizontal_alignment = 1
 
-[node name="SaveSelectContainer" type="MarginContainer" parent="."]
+[node name="SaveSelectContainer" type="MarginContainer" parent="." unique_id=292151941]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -382,38 +382,38 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer" unique_id=206464345]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="CenterContainer" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer" unique_id=1009869155]
 custom_minimum_size = Vector2(450, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Title" type="TextureRect" parent="SaveSelectContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="TextureRect" parent="SaveSelectContainer/VBoxContainer/CenterContainer" unique_id=1874626682]
 material = SubResource("ShaderMaterial_kl3t2")
 layout_mode = 2
 texture = ExtResource("2_jex3y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer" unique_id=452828222]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer" unique_id=1066240109]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=45258808]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=609476099]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=980419192]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -424,13 +424,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1824688047]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="Save1" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button"]
+[node name="Save1" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button" unique_id=1795621883]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -446,7 +446,7 @@ theme_override_font_sizes/font_size = 20
 text = "Save 1"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1103664556]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -457,13 +457,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1212296418]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2" unique_id=1632719558]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1860190712]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -474,7 +474,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=630603235]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -482,7 +482,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Save2" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button"]
+[node name="Save2" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button" unique_id=624102770]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -498,7 +498,7 @@ theme_override_font_sizes/font_size = 20
 text = "Save 2"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1241456892]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -509,13 +509,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer3" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=642824035]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3" unique_id=260045356]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1456136124]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -526,7 +526,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1489935549]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -534,7 +534,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Save3" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+[node name="Save3" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=945499937]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -550,7 +550,7 @@ theme_override_font_sizes/font_size = 20
 text = "Save 3"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=949749656]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -561,13 +561,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer4" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer4" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1327449766]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4" unique_id=933106227]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=535607211]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -578,7 +578,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=1082627918]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -586,7 +586,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Save4" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button"]
+[node name="Save4" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/Button" unique_id=379330109]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -602,7 +602,7 @@ theme_override_font_sizes/font_size = 20
 text = "Save 4"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer" unique_id=728869705]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -613,13 +613,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer5" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer5" type="CenterContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2018011302]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5" unique_id=608706483]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=858541605]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -630,7 +630,7 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=1407006413]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -638,7 +638,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Back" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button"]
+[node name="Back" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/Button" unique_id=353206394]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -654,7 +654,7 @@ theme_override_font_sizes/font_size = 20
 text = "Back"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer" unique_id=791134413]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -665,7 +665,7 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="SaveDataContainer" type="MarginContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer"]
+[node name="SaveDataContainer" type="MarginContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer" unique_id=337185622]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -674,11 +674,11 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 5
 
-[node name="Panel" type="Panel" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer"]
+[node name="Panel" type="Panel" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer" unique_id=685660285]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hys1s")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel" unique_id=85981898]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -688,49 +688,49 @@ grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Title" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer" unique_id=237343949]
 layout_mode = 2
 theme = ExtResource("9_ab04i")
 text = "Titolo"
 horizontal_alignment = 1
 
-[node name="DataContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+[node name="DataContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer" unique_id=48342239]
 layout_mode = 2
 
-[node name="LastPlayed" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+[node name="LastPlayed" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer" unique_id=1256151007]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Last Played: 14/03/2026"
 
-[node name="PlayTime" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+[node name="PlayTime" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer" unique_id=689291396]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Play time: 13m 36s"
 
-[node name="LvlReach" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer"]
+[node name="LvlReach" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/DataContainer" unique_id=1815779825]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Level reached: 14"
 
-[node name="BtnContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer"]
+[node name="BtnContainer" type="VBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer" unique_id=1343300986]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer" unique_id=1930345805]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer" unique_id=1800606813]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer" unique_id=17401930]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 focus_mode = 0
@@ -738,7 +738,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Play" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button"]
+[node name="Play" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer/Button" unique_id=672180199]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -749,17 +749,17 @@ grow_vertical = 2
 text = "Play"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer" unique_id=923971204]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = " <"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer" unique_id=1339092476]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=276382458]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
@@ -767,7 +767,7 @@ theme_override_font_sizes/font_size = 17
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=2136563547]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 focus_mode = 0
@@ -775,7 +775,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Delete" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button"]
+[node name="Delete" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2/Button" unique_id=1929482318]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -787,7 +787,7 @@ theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
 text = "Delete"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=101443137]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
@@ -795,17 +795,17 @@ theme_override_font_sizes/font_size = 17
 text = " <"
 horizontal_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer" unique_id=580801036]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+[node name="SelectorL" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=669007495]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+[node name="Button" type="Button" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=299417215]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 focus_mode = 0
@@ -813,7 +813,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Back" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button"]
+[node name="Back" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3/Button" unique_id=1117817393]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -824,14 +824,14 @@ grow_vertical = 2
 text = "Back"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3"]
+[node name="SelectorR" type="Label" parent="SaveSelectContainer/VBoxContainer/HBoxContainer/SaveDataContainer/Panel/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=580197245]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = " <"
 horizontal_alignment = 1
 
-[node name="LocationContainer" type="MarginContainer" parent="."]
+[node name="LocationContainer" type="MarginContainer" parent="." unique_id=1108842714]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -843,41 +843,41 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer" unique_id=2044649046]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="CenterContainer" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=1507909573]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer" unique_id=1404754155]
 layout_mode = 2
 theme = ExtResource("9_dvisc")
 text = "Location Selection"
 
-[node name="CenterContainer2" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=153315001]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LocationContainer" type="GridContainer" parent="LocationContainer/VBoxContainer/CenterContainer2"]
+[node name="LocationContainer" type="GridContainer" parent="LocationContainer/VBoxContainer/CenterContainer2" unique_id=1542258578]
 layout_mode = 2
 theme_override_constants/h_separation = 30
 columns = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=1244100851]
 layout_mode = 2
 
-[node name="Tutorial" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+[node name="Tutorial" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer" unique_id=1628270044]
 custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("10_ab04i")
 text = "Tutorial"
 
-[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer" unique_id=1626816280]
 layout_mode = 2
 
-[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control"]
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control" unique_id=1602925961]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 42.0
@@ -892,10 +892,10 @@ theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 30
 text = ">"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=329841418]
 layout_mode = 2
 
-[node name="Dungeon" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+[node name="Dungeon" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2" unique_id=1960138484]
 custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
@@ -903,10 +903,10 @@ theme = ExtResource("11_hys1s")
 theme_override_constants/h_separation = 4
 text = "Dungeon"
 
-[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2"]
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2" unique_id=82484304]
 layout_mode = 2
 
-[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control"]
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control" unique_id=852638805]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 42.0
@@ -921,20 +921,20 @@ theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 30
 text = ">"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=575818812]
 layout_mode = 2
 
-[node name="Forest" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+[node name="Forest" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3" unique_id=304150437]
 custom_minimum_size = Vector2(124, 64)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("10_ab04i")
 text = "Forest"
 
-[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3"]
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3" unique_id=33958482]
 layout_mode = 2
 
-[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control"]
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control" unique_id=1370987591]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 42.0
@@ -949,13 +949,13 @@ theme_override_fonts/font = ExtResource("4_jex3y")
 theme_override_font_sizes/font_size = 30
 text = ">"
 
-[node name="CenterContainer3" type="CenterContainer" parent="LocationContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=2137273673]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer3" unique_id=2075837683]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1982435771]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -966,7 +966,7 @@ theme_override_font_sizes/font_size = 20
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="Button" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=795876614]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -974,7 +974,7 @@ theme_override_fonts/font = ExtResource("2_b5bqd")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Back" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+[node name="Back" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=1064796151]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -990,7 +990,7 @@ theme_override_font_sizes/font_size = 25
 text = "Back"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=2018579138]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -1001,6 +1001,6 @@ theme_override_font_sizes/font_size = 20
 text = " <"
 horizontal_alignment = 1
 
-[node name="OptionMenu" parent="." instance=ExtResource("13_hys1s")]
+[node name="OptionMenu" parent="." unique_id=1067255253 instance=ExtResource("13_hys1s")]
 visible = false
 layout_mode = 1

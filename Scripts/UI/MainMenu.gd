@@ -43,7 +43,6 @@ func setup_languages():
 	$LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Back.text = tr("BACK_BTN")
 	$LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Dungeon.text = tr("DUNGEON_BTN")
 	$LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Forest.text = tr("FOREST_BTN")
-	
 
 ## ----- Buttons setup ----- ##
 func setup_main_buttons():

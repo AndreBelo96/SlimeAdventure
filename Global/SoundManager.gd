@@ -8,6 +8,8 @@ var sfx_volume: float = 1.0
 var master_volume: float = 1.0
 var environment_volume: float = 1.0
 
+var current_music_path: String = ""
+
 var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
 var environment_players: Array[AudioStreamPlayer] = []
@@ -29,19 +31,37 @@ func _ready():
 		add_child(p)
 		environment_players.append(p)
 
-func play_music(path: String, loop := true):
+func play_music(path: String, fade_time := 0.5):
+	
+	if path == current_music_path:
+		return
+	
 	var stream = load(path)
 	if not stream:
 		push_warning("Music file not found: %s" % path)
 		return
-
-	if music_player.stream != stream:
-		music_player.stop()
-		music_player.stream = stream
-		music_player.play()
+	
+	current_music_path = path
+	
+	# fade out
+	if music_player.playing:
+		var tween = create_tween()
+		tween.tween_property(music_player, "volume_db", -40, fade_time)
+		await tween.finished
+	
+	music_player.stop()
+	music_player.stream = stream
+	music_player.volume_db = linear_to_db(music_volume)
+	music_player.play()
+	
+	# fade in
+	var tween = create_tween()
+	music_player.volume_db = -40
+	tween.tween_property(music_player, "volume_db", linear_to_db(music_volume), fade_time)
 
 func stop_music():
 	music_player.stop()
+	current_music_path = ""
 
 func play_sfx(path: String):
 	var stream = load(path)

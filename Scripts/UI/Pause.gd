@@ -58,6 +58,7 @@ func handle_selection(_index):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	elif (_index == 2):
 		get_tree().paused = false
+		SoundManager.stop_music();
 		GameManager.return_to_menu()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

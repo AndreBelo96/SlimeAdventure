@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7rgr1o061kb7"]
+[gd_scene format=3 uid="uid://b7rgr1o061kb7"]
 
 [ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/LevelMenu.gd" id="1_so21l"]
 [ext_resource type="PackedScene" uid="uid://de3pdo6kx35dv" path="res://Scenes/UI/MainMenu/BackgroundMenu.tscn" id="2_8ewjc"]
@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_kwl2h"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="5_kwl2h"]
 
-[node name="LevelMenu" type="Control"]
+[node name="LevelMenu" type="Control" unique_id=344527967]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,9 +16,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_so21l")
 
-[node name="BackgroundMenu" parent="." instance=ExtResource("2_8ewjc")]
+[node name="BackgroundMenu" parent="." unique_id=2115645484 instance=ExtResource("2_8ewjc")]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1345870514]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,45 +30,45 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=321563397]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=902872242]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=589679699]
 layout_mode = 2
 theme = ExtResource("2_d7vnq")
 text = "Level Selection"
 
-[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=2005325546]
 layout_mode = 2
 
-[node name="Location" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer4"]
+[node name="Location" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer4" unique_id=1842993527]
 layout_mode = 2
 theme = ExtResource("2_d7vnq")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=2095399070]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LevelButtonContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer2"]
+[node name="LevelButtonContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=301699762]
 layout_mode = 2
 theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 25
 columns = 5
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=522813449]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer3" unique_id=75292706]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1134615123]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -79,7 +79,7 @@ theme_override_font_sizes/font_size = 20
 text = ">"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=2131516590]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -87,7 +87,7 @@ theme_override_fonts/font = ExtResource("2_lf38f")
 theme_override_font_sizes/font_size = 20
 flat = true
 
-[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button"]
+[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=1896126034]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -103,7 +103,7 @@ theme_override_font_sizes/font_size = 25
 text = "Back"
 horizontal_alignment = 1
 
-[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Back"]
+[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button/Back" unique_id=1504452877]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -114,7 +114,7 @@ grow_vertical = 2
 theme = ExtResource("5_kwl2h")
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=49752706]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

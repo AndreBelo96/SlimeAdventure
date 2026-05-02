@@ -17,7 +17,10 @@ var selectors_save_data_full = []
 var selectors_save_data_empty = []
 var slot_selected = 0
 
-
+func _ready():
+	super._ready()
+	if SoundManager.current_music_path == "" || SoundManager.current_music_path != AudioPresets.MAIN_MENU_MUSIC:
+		SoundManager.play_music(AudioPresets.MAIN_MENU_MUSIC)
 
 func setup_languages():
 	$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Button/Start.text = tr("START_BTN")

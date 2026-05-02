@@ -143,8 +143,10 @@ func handle_selection(_index):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		GameManager.restart_level(GameManager.current_level - 1)
 	elif (_index == 2):
+		SoundManager.stop_music();
 		GameManager.return_to_location_menu()
 	elif (_index == 3):
+		SoundManager.stop_music();
 		GameManager.return_to_menu()
 
 ### --- Animazioni entrata e uscita della schermata --- ###

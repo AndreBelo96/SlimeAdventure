@@ -106,7 +106,7 @@ func _on_level_button_pressed(path: String, _sound: String):
 
 	var is_first_level_of_location = level_num == GameManager.get_level_range_for_location(GameManager.location_selected)[0]
 	
-	#SoundManager.play_sfx(sound);
+	SoundManager.stop_music();
 	
 	if is_first_level_of_location:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

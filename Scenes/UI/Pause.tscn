@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfj77cmvhy0xn"]
+[gd_scene format=3 uid="uid://bfj77cmvhy0xn"]
 
 [ext_resource type="Script" uid="uid://b616obqbs4nh1" path="res://Scripts/UI/Pause.gd" id="1_csiw2"]
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_fny3v"]
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_lw4m2"]
 
-[node name="Pause" type="Control"]
+[node name="Pause" type="Control" unique_id=1984637042]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_csiw2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=361508024]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.729412)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=271621991]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,24 +34,24 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1004369709]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Pausa" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Pausa" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1879397477]
 layout_mode = 2
 theme = ExtResource("2_fny3v")
 text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1280169843]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=475754923]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=910988314]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -62,13 +62,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=725492986]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="Continue" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue"]
+[node name="Continue" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue" unique_id=146783337]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -84,7 +84,7 @@ theme_override_font_sizes/font_size = 20
 text = "Continue"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=2066478453]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -95,13 +95,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1741050429]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=2028369944]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1181001939]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -112,13 +112,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="Retry" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Retry" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=666745134]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="Retry" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry"]
+[node name="Retry" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry" unique_id=640921094]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -134,7 +134,7 @@ theme_override_font_sizes/font_size = 20
 text = "Retry"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1905086536]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -145,13 +145,13 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=2034187784]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer3" unique_id=1164382155]
 layout_mode = 2
 
-[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorL" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1885128680]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -162,13 +162,13 @@ theme_override_font_sizes/font_size = 15
 text = ">"
 horizontal_alignment = 1
 
-[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=589736252]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="MainMenu" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu"]
+[node name="MainMenu" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu" unique_id=1660014899]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -184,7 +184,7 @@ theme_override_font_sizes/font_size = 20
 text = "Back To Main Menù"
 horizontal_alignment = 1
 
-[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer"]
+[node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1351126970]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

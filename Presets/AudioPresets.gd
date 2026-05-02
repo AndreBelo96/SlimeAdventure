@@ -19,4 +19,6 @@ const DUNGEON_AMBIENT: Array[Dictionary] = [
 	}
 ]
 
+
+const MAIN_MENU_MUSIC: String = "res://Assets/Audio/Music/Levels/menu_song.wav"
 const DUNGEON_MUSIC: String = "res://Assets/Audio/Music/Levels/dungeon_song.wav"

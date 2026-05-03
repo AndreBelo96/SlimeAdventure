@@ -5,12 +5,14 @@ extends Control
 @onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
 @onready var difficult_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
 @onready var langauge_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
+@onready var fullscreen_checkbox: CheckBox = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox
 
 @onready var back_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/Back
 
-## --- Labels --- ## #TODO titoli
+## --- Labels --- ##
 @onready var difficult_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/Label
 @onready var languagge_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/Label
+@onready var full_screen_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/Label
 
 @onready var master_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/Label
 @onready var music_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer2/Label
@@ -33,10 +35,13 @@ func populate_option_menu() -> void:
 	master_slider.value = SettingsManager.master_volume
 	music_slider.value = SettingsManager.music_volume
 	sound_slider.value = SettingsManager.sfx_volume
+	
+	fullscreen_checkbox.button_pressed  = SettingsManager.fullscreen
 
 func setup_language() -> void:
 	difficult_label.text = tr("DIFFICULT_LABEL")
 	languagge_label.text = tr("LANGUAGE_LABEL")
+	full_screen_label.text = tr("FULLSCREEN_CHK")
 	
 	master_label.text = tr("VOLUME_1")
 	music_label.text = tr("VOLUME_2")
@@ -55,6 +60,21 @@ func _on_langauge_option_item_selected(index: int) -> void:
 	TranslationServer.set_locale(lang)
 	setup_language()
 	SettingsManager.save_settings()
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		do_fullscreen()
+	else:
+		do_windowed()
+	SettingsManager.save_settings()
+
+func do_fullscreen() -> void:
+	SettingsManager.fullscreen = true
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+func do_windowed() -> void:
+	SettingsManager.fullscreen = false
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 # -- Sound -- #
 func _on_master_slider_value_changed(value: float) -> void:

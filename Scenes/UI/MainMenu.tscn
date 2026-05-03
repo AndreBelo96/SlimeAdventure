@@ -51,7 +51,6 @@ script = ExtResource("1_wrbul")
 [node name="BackgroundMenu" parent="." unique_id=621712294 instance=ExtResource("2_kl3t2")]
 
 [node name="MenuContainer" type="MarginContainer" parent="." unique_id=633130489]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -832,6 +831,7 @@ text = " <"
 horizontal_alignment = 1
 
 [node name="LocationContainer" type="MarginContainer" parent="." unique_id=1108842714]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

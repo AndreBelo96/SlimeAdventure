@@ -33,7 +33,7 @@ func _ready():
 	_setup_languages()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-
+	
 	match location_id:
 		GameManager.Location.TUTORIAL:
 			pass
@@ -63,7 +63,7 @@ func _ready():
 
 func _setup_languages():
 	enter_label.text = tr("TRANSATION_ENTER")
-	title_label.text = tr(GameManager.location_translation_keys[GameManager.location_selected])
+	title_label.text = tr(GameManager.location_translation_keys[GameManager.get_location_for_level(GameManager.current_level)])
 	loading_label.text = tr("LOADING_LABEL")
 
 func _input(_event: InputEvent) -> void:

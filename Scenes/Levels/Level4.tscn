@@ -1,37 +1,37 @@
-[gd_scene load_steps=3 format=4 uid="uid://cyl4nnu75gpoj"]
+[gd_scene format=4 uid="uid://cyl4nnu75gpoj"]
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_ggltg"]
 [ext_resource type="Script" uid="uid://dfeypehk86pmc" path="res://Scripts/Levels/level4.gd" id="2_sgaj2"]
 
-[node name="Level" instance=ExtResource("1_ggltg")]
+[node name="Level" unique_id=1775878213 instance=ExtResource("1_ggltg")]
 script = ExtResource("2_sgaj2")
 
-[node name="LogicMapLayer" parent="." index="2"]
+[node name="LogicMapLayer" parent="." index="2" unique_id=40547736]
 tile_map_data = PackedByteArray("AAAEAP3/AgAJAAAAAAA=")
 
-[node name="MovementLogicMapLayer" parent="." index="3"]
+[node name="MovementLogicMapLayer" parent="." index="3" unique_id=2011242274]
 tile_map_data = PackedByteArray("AAD+////AAABAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAADAAAAAAACAP//AAADAAAAAAACAP3/AAABAAAAAAABAP3/AAABAAAAAAAAAP3/AAABAAAAAAD+//3/AAABAAAAAAD///3/AAADAAEAAAAAAP7/AAADAAMAAAACAAAAAAACAAMAAAABAAAAAAACAAAAAAAAAAAAAAACAAAAAAD//wAAAAACAAAAAAD+/wAAAAACAAAAAAD9////AAACAAEAAAD9//7/AAAAAAIAAAADAP3/AAADAAEAAAAEAP3/AAACAAIAAAD/////AAABAAAAAAD+//7/AAACAAMAAAD9/wAAAAAAAAIAAAD9//3/AAACAAEAAAA=")
 
-[node name="TileMapLayer" parent="." index="5"]
+[node name="TileMapLayer" parent="." index="5" unique_id=1578614900]
 tile_map_data = PackedByteArray("AAD9/wAAAQAAAAAAAQD+/wAAAQAAAAAAAgD//wAAAQAAAAAAAgAAAAAAAQAAAAAAAgABAAAAAQAAAAAAAQD9////AQAAAAAAAgD9//7/AQAAAAAAAgD9//3/AQAAAAAAAQD+//3/AQAAAAAAAgD+//7/AQAAAAAAAgD+////AQAAAAAAAgD/////AQAAAAAAAgD///7/AQAAAAAAAgD///3/AQAAAAAAAgAAAP3/AQAAAAAAAQAAAP7/AQAAAAAAAgAAAP//AQAAAAAAAgABAP//AQAAAAAAAgABAP7/AQAAAAAAAgABAP3/AQAAAAAAAgACAP3/AQAAAAAAAgADAP3/AQAAAAAAAQACAP7/AQAAAAAAAgACAP//AQAAAAAAAgACAAAAAQAAAAAAAgAEAP3/AQAAAAAAAgA=")
 
-[node name="TerrainMapLayer" parent="YSort" index="0"]
+[node name="TerrainMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="0" unique_id=1113098733]
 tile_map_data = PackedByteArray("AAD9/wAAAwAAAAEAAAD+/wAAAwAAAAEAAAD//wAAAwAGAAEAAAAAAAAAAwAAAAEAAAABAAAAAwAAAAEAAAACAAAAAwAHAAEAAAACAP//AwAGAAEAAAACAP7/AwAGAAEAAAACAP3/AwAGAAEAAAABAP3/AwAAAAEAAAABAP7/AwAAAAEAAAABAP//AwAIAAEAAAAAAP//AwAGAAEAAAAAAP7/AwAAAAEAAAAAAP3/AwAHAAEAAAD///7/AwAAAAEAAAD/////AwAGAAEAAAD+////AwAAAAEAAAD+//7/AwAAAAEAAAD///3/AwAAAAEAAAD9////AwAHAAEAAAD9//7/AwAAAAEAAAD+//3/AwAGAAEAAAD9//3/AwAAAAEAAAADAP3/AwAJAAEAAAAEAP3/AwAAAAEAAAADAP7/AwAFAAEAAAD9/wEAAwACAAEAAAD+/wEAAwACAAEAAAD//wEAAwACAAEAAAAAAAEAAwACAAEAAAABAAEAAwACAAEAAAACAAEAAwACAAEAAAAEAP7/AwACAAEAAAADAP//AwACAAEAAgADAAAAAwACAAEAAgADAAEAAwADAAEAAAA=")
 
-[node name="WallMapLayer" parent="YSort" index="1"]
+[node name="WallMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="1" unique_id=1074901650]
 tile_map_data = PackedByteArray("AAD///7/AAAEAAAAAAAEAPz/AAABAAAAAAADAPz/AAABAAAAAAACAPz/AAABAAAAAAABAPz/AAABAAAAAAAAAPz/AAABAAAAAAD///z/AAABAAAAAAD+//z/AAABAAAAAAD9//z/AAABAAAAAAD8//3/AAABAAAAAQD8//7/AAABAAAAAQD8////AAABAAAAAQD8//z/AAAFAAAAAAD8/wAAAAACAAAAAQA=")
 
-[node name="DecorationWallMapLayer" parent="YSort" index="2"]
+[node name="DecorationWallMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="2" unique_id=1475528400]
 tile_map_data = PackedByteArray("AAD8////AAADAAAAAQAAAPz/AAAEAAAAAAAEAPz/AAAEAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAA=")
 
-[node name="DoorsMapLayer" parent="YSort" index="3"]
+[node name="DoorsMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="3" unique_id=1148768136]
 tile_map_data = PackedByteArray("AAAEAP3/AAAAAAAACAA=")
 
-[node name="PickupMapLayer" parent="YSort" index="4"]
+[node name="PickupMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="4" unique_id=98613881]
 tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAgA=")
 
-[node name="NPCMapLayer" parent="YSort" index="6"]
+[node name="NPCMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="6" unique_id=1537239280]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAQA=")
 
-[node name="TorchMapLayer" parent="YSort" index="8"]
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAQADAP3/AAAAAAAAAQD9//7/AAAAAAAAAgACAP//AAAAAAAAAwA=")
+[node name="TorchMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="8" unique_id=680211866]
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAQADAP3/AAAAAAAAAQD9//7/AAAAAAAAAgACAP//AAAAAAAAAwD9/wAAAAAAAAAAAgA=")

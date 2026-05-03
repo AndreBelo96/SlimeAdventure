@@ -47,7 +47,7 @@ tile_map_data = PackedByteArray("AAAdAPT/AAAAAAAAAwAXAPL/AAAAAAAAAwAEAO3/AAAAAAA
 tilemap = NodePath("../../TileMapLayer")
 
 [node name="TorchMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="10" unique_id=680211866]
-tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgAAAOr/AAAAAAAABgD///L/AAAAAAAAAgAAAPL/AAAAAAAAAwAaAO//AAAAAAAABgAHAOz/AAAAAAAAAQAcAOv/AAAAAAAAAgAeAOn/AAAAAAAAAwA=")
+tile_map_data = PackedByteArray("AAABAPn/AAAAAAAABgD9//n/AAAAAAAABgAAAOr/AAAAAAAABgD///L/AAAAAAAAAgAAAPL/AAAAAAAAAwAaAO//AAAAAAAABgAHAOz/AAAAAAAAAQAcAOv/AAAAAAAAAgAeAOn/AAAAAAAAAwD///T/AAAAAAAAAgD9/+z/AAAAAAAABgA=")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="12" unique_id=2127163983]
 position = Vector2(1891.3835, -26.382729)

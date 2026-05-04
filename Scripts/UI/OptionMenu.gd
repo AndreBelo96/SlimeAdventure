@@ -1,8 +1,9 @@
 extends Control
 
-@onready var master_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/MasterSlider
-@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer2/MusicSlider
-@onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer3/SoundSlider
+@onready var master_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/MasterSlider
+@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MusicSlider
+@onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/SoundSlider
+@onready var env_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer4/EnvSlider
 @onready var difficult_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
 @onready var langauge_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
 @onready var fullscreen_checkbox: CheckBox = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox
@@ -14,9 +15,10 @@ extends Control
 @onready var languagge_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/Label
 @onready var full_screen_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/Label
 
-@onready var master_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/Label
-@onready var music_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer2/Label
-@onready var sound_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer3/Label
+@onready var master_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Label
+@onready var music_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Label
+@onready var sound_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/Label
+@onready var env_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer4/Label
 
 func _ready():	
 	populate_option_menu()
@@ -35,6 +37,7 @@ func populate_option_menu() -> void:
 	master_slider.value = SettingsManager.master_volume
 	music_slider.value = SettingsManager.music_volume
 	sound_slider.value = SettingsManager.sfx_volume
+	env_slider.value = SettingsManager.environment_volume
 	
 	fullscreen_checkbox.button_pressed  = SettingsManager.fullscreen
 
@@ -46,6 +49,7 @@ func setup_language() -> void:
 	master_label.text = tr("VOLUME_1")
 	music_label.text = tr("VOLUME_2")
 	sound_label.text = tr("VOLUME_3")
+	env_label.text = tr("VOLUME_4")
 	
 	back_button.text = tr("BACK_BTN")
 
@@ -90,6 +94,11 @@ func _on_music_slider_value_changed(value: float) -> void:
 func _on_sound_slider_value_changed(value: float) -> void:
 	SettingsManager.sfx_volume = value
 	SoundManager.set_sfx_volume(value / 100.0)
+	SettingsManager.save_settings()
+
+func _on_env_slider_value_changed(value: float) -> void:
+	SettingsManager.environment_volume = value
+	SoundManager.set_environment_volume(value / 100.0)
 	SettingsManager.save_settings()
 
 # -- Back -- #

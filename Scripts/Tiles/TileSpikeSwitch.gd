@@ -27,14 +27,14 @@ func disattiva():
 	print("TILE: CHANGE STATE DIS")
 	attivo = false
 	$AnimatedTile.play("OFF")
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav", -20)
 	peso = 1
 
 func attiva():
 	print("TILE: CHANGE STATE ACT")
 	attivo = true
 	$AnimatedTile.play("ON")
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav", -20)
 	peso = 8
 	emit_signal("state_changed", self, "ON")
 

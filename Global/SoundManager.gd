@@ -63,7 +63,7 @@ func stop_music():
 	music_player.stop()
 	current_music_path = ""
 
-func play_sfx(path: String):
+func play_sfx(path: String, volume_db: float = 0.0):
 	var stream = load(path)
 	if not stream:
 		push_warning("SFX file not found: %s" % path)
@@ -72,10 +72,16 @@ func play_sfx(path: String):
 	for p in sfx_players:
 		if not p.playing:
 			p.stream = stream
+			p.volume_db = volume_db
+			#p.pitch_scale = randf_range(0.95, 1.05)
 			p.play()
 			return
 	
+	#pitch da metteree, ma -> servono preset dei suoni - fai la firma del metodo
+	
 	sfx_players[0].stream = stream
+	sfx_players[0].volume_db = volume_db
+	#sfx_players[0].pitch_scale = randf_range(0.95, 1.05)
 	sfx_players[0].play()
 
 func play_environment(path: String):

@@ -31,7 +31,7 @@ func populate_option_menu() -> void:
 	difficult_option.select(SettingsManager.difficulty)
 	
 	langauge_option.add_item(tr("LANGUAGE_1"))
-	langauge_option.add_item("LANGUAGE_2")
+	langauge_option.add_item(tr("LANGUAGE_2"))
 	langauge_option.select(SettingsManager.language)
 	
 	master_slider.value = SettingsManager.master_volume

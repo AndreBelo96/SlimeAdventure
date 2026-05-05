@@ -9,7 +9,7 @@ var fullscreen: bool = true
 var resolution: int = 0
 
 var difficulty: int = 0
-var language: int = 0
+var language: int = 1
 
 func load_settings():
 	var config = ConfigFile.new()
@@ -22,7 +22,7 @@ func load_settings():
 		fullscreen = config.get_value("video", "fullscreen", true)
 		resolution = config.get_value("video", "resolution", 0)
 		difficulty = config.get_value("gameplay", "difficulty", 0)
-		language = config.get_value("gameplay", "language", 0)
+		language = config.get_value("gameplay", "language", 1)
 
 func save_settings():
 	var config = ConfigFile.new()

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dxlqe485gkg46"]
+
+[ext_resource type="Texture2D" uid="uid://1rda4b15151s" path="res://Assets/Sprites/WIP.png" id="1_ccb3g"]
+[ext_resource type="Script" uid="uid://bl52gwscyecud" path="res://Scripts/Wip.gd" id="1_n8qdv"]
+
+[node name="WIP" type="Node2D" unique_id=1514385102]
+script = ExtResource("1_n8qdv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2129607234]
+texture = ExtResource("1_ccb3g")
+offset = Vector2(0, -15)
+
+[node name="Center" type="Marker2D" parent="." unique_id=84116182]

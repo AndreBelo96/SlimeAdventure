@@ -37,6 +37,7 @@ func _ready():
 	
 	if level_logic:
 		level_logic.connect("global_step", Callable(self, "_on_global_step"))
+		connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
 
 func _process(delta: float) -> void:
 	match state:

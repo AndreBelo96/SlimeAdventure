@@ -9,9 +9,6 @@ signal global_step(step_count: int)
 signal boss_damaged(hit_count: int)
 
 var boss_hit_count := 0
-var boss_hit_by_switch := false
-var switch_waiting_reset := false
-var last_switch_pressed = null
 var _current_enemy = null
 
 # -- Enemies --
@@ -36,11 +33,10 @@ func _ready():
 	enemy_turn_handler.enemy_turn_done.connect(_on_enemy_turn_done)
 	
 	if boss:
-		boss.connect("finished_turn", Callable(self, "_on_enemy_finished_turn"))
+		boss.connect("finished_turn", Callable(enemy_turn_handler, "on_enemy_finished_turn"))
 		boss.connect("damaged", Callable(self, "_on_boss_damaged"))
 	
 	call_deferred("_connect_all_tiles")
-	call_deferred("_connect_player_signal")
 
 # ------ Enemy ------ #
 func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
@@ -76,36 +72,12 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			var chiave = data.get("chiave", "")
 			var azione = data.get("azione", "")
 			
-			if azione == "attiva":
-				last_switch_pressed = sender
-			
 			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
-			_handle_switch(chiave, azione)
-			_tiles_phase_done = true
-			_try_resolve_enemy_damage(boss)
+			switch_spike_handler.handle_switch(chiave, azione, sender)
 		"enemy_hit":
 			switch_spike_handler.notify_boss_hit()
-			#boss_hit_by_switch = true
 		_:
 			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
-
-func _handle_switch(chiave: String, azione: String):
-	
-	print("Gestione dell'azione: ", azione)
-	
-	if azione == "attiva":
-		boss_hit_by_switch = false
-		switch_waiting_reset = true
-	
-	for child in tile_layer.get_children():
-		if child.is_in_group("spine") and child.chiave == chiave:
-			match azione:
-				"attiva":
-					child.attiva()
-					GameLogger.info("Spine attivate chiave = %s" % chiave)
-				"disattiva":
-					child.disattiva()
-					GameLogger.info("Spine disattivate chiave = %s" % chiave)
 
 func on_player_step(step_count: int):
 	print(" --------- PLAYER STEP TURN --------- ")
@@ -133,27 +105,6 @@ func on_player_step(step_count: int):
 		#else:
 			#print(" -- POSIZIONE FISSA -- ")
 			#_on_enemy_finished_turn(enemy)
-
-func _on_enemy_finished_turn(enemy):
-	print("POSIZIONE POST: " + str(enemy.posizione_tile))
-	_enemy_phase_done = true
-	_try_resolve_enemy_damage(enemy)
-
-func _try_resolve_enemy_damage(enemy):
-	if not _enemy_phase_done:
-		return
-	if not _tiles_phase_done:
-		return
-
-	apply_tile_effect_to_enemy(enemy, enemy.posizione_tile)
-
-	_enemy_phase_done = false
-	_tiles_phase_done = false
-
-func _reset_switch_and_spikes():
-	if last_switch_pressed and last_switch_pressed.is_in_group("interruttori"):
-		last_switch_pressed.reset_switch()
-	last_switch_pressed = null
 
 func _on_switch_action_done() -> void:
 	_tiles_phase_done = true

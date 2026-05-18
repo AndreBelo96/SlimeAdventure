@@ -28,12 +28,7 @@ func _ready():
 	add_to_group("enemy")
 	active = false
 	set_process(false)
-	
 	set_physics_process(false)
-	if level_logic:
-		if not is_connected("tile_triggered", Callable(level_logic, "_on_tile_triggered")):
-			connect("tile_triggered", Callable(level_logic, "_on_tile_triggered"))
-	print("Boss ready - level_logic:", level_logic)
 
 func snap_to_tile_center(coords: Vector2i):
 	var tile_pos = tilemap.map_to_local(coords)

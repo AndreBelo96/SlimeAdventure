@@ -15,6 +15,7 @@ var _enemy_phase_done := false
 var _tiles_phase_done := false
 
 signal global_step(step_count: int)
+signal boss_damaged(hit_count: int)
 
 func _ready():
 	add_to_group("level_logic")
@@ -143,12 +144,9 @@ func disable_all_spikes():
 
 func _on_boss_damaged(_boss):
 	boss_hit_count += 1
-	
-	if boss_hit_count == 1:
-		for child in tile_layer.get_children():
-			if child.is_in_group("spine") and child.chiave == "A":
-				child.disattiva()
-	elif boss_hit_count == 2:
-		for child in tile_layer.get_children():
-			if child.is_in_group("spine") and child.chiave == "B":
-				child.disattiva()
+	emit_signal("boss_damaged", boss_hit_count)
+
+func disable_spikes_with_key(key: String) -> void:
+	for child in tile_layer.get_children():
+		if child.is_in_group("spine") and child.chiave == key:
+			child.disattiva()

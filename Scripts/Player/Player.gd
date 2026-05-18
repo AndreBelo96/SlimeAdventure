@@ -190,10 +190,7 @@ func _check_boss_collision():
 			return
 
 func _on_player_touch_boss():
-	print("PLAYER TOCCA BOSS → MORTE")
-	var level_logic = get_tree().get_first_node_in_group("level_logic")
-	if level_logic:
-		level_logic._on_tile_triggered(self, "death", {"death_type": GameManager.Death.ENEMY})
+	on_player_died(DeathType.Type.ENEMY)
 
 func on_finish_level():
 	print("FINISH LEVEL PLAYER ANIMATION")

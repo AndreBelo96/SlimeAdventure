@@ -91,6 +91,7 @@ locale/translations=PackedStringArray("res://Localization/translation_file.en.tr
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 textures/webp_compression/compression_method=0
 textures/webp_compression/lossless_compression_factor=0.0
 textures/default_filters/anisotropic_filtering_level=0

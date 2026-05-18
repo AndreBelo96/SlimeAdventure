@@ -12,6 +12,8 @@ func _ready():
 	set_current_level_number(13)
 	victory_mode = VictoryMode.BOSS
 	
+	level_logic.boss_damaged.connect(_on_boss_damaged_phase)
+	
 	await get_tree().process_frame
 	await play_boss_intro()
 
@@ -104,7 +106,7 @@ func _on_boss_died():
 func _on_boss_defeated_custom():
 	disable_all_spikes()
 	drop_pickaxe_pickup()
-	
+
 func disable_all_spikes():
 	if level_logic.has_method("disable_all_spikes"):
 		level_logic.disable_all_spikes()
@@ -123,3 +125,10 @@ func drop_pickaxe_pickup():
 	pickup_layer.add_child(pickup)
 	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile), boss.posizione_tile)
 	pickup.is_active = true
+
+func _on_boss_damaged_phase(hit_count: int) -> void:
+	match hit_count:
+		1:
+			level_logic.disable_spikes_with_key("A")
+		2:
+			level_logic.disable_spikes_with_key("B")

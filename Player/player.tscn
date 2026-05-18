@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://co1o3jnm2k22u"]
+[gd_scene format=3 uid="uid://co1o3jnm2k22u"]
 
 [ext_resource type="Script" uid="uid://c1fjb5sv2xie8" path="res://Scripts/Player/Player.gd" id="1_63ylr"]
 [ext_resource type="Shader" uid="uid://boy2syminp1lv" path="res://Shader/player_victory.gdshader" id="2_gwnis"]
@@ -286,14 +286,14 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" unique_id=1307353967]
 y_sort_enabled = true
 script = ExtResource("1_63ylr")
 point_light_path = NodePath("PointLight2D")
 
-[node name="Center" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="." unique_id=1163309868]
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1782981388]
 emitting = false
 emission_shape = 3
 emission_rect_extents = Vector2(6, 1)
@@ -301,7 +301,7 @@ gravity = Vector2(0, -50)
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_btcbx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=247153935]
 material = SubResource("ShaderMaterial_k53q1")
 sprite_frames = SubResource("SpriteFrames_h402l")
 animation = &"Move"
@@ -309,11 +309,11 @@ frame = 16
 frame_progress = 1.0
 offset = Vector2(0, -1)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1804101969]
 visible = false
 position = Vector2(0, -1)
 color = Color(1, 1, 0.705882, 1)
 energy = 0.0
 texture = ExtResource("3_ghh27")
 
-[node name="LightTimer" type="Timer" parent="."]
+[node name="LightTimer" type="Timer" parent="." unique_id=1005482052]

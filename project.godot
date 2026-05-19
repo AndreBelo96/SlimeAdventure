@@ -31,6 +31,7 @@ GameLogger="*res://Global/GameLogger.gd"
 SettingsManager="*res://Global/SettingsManager.gd"
 DisplayManager="*res://Global/DisplayManager.gd"
 AudioPresets="*uid://bgtaj0l76q6rb"
+GridUtils="*uid://l7iy4d401rqt"
 
 [debug]
 

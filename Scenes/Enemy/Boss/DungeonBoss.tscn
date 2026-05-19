@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bkdy28olfk76v"]
+[gd_scene format=3 uid="uid://bkdy28olfk76v"]
 
 [ext_resource type="PackedScene" uid="uid://qfo2dhin8psy" path="res://Scenes/Enemy/Boss/BaseBoss.tscn" id="1_nqbnp"]
 [ext_resource type="Script" uid="uid://cy6nw7n08444j" path="res://Scripts/Enemy/Boss/DungeonBoss.gd" id="2_5gm8k"]
@@ -280,7 +280,7 @@ point_count = 2
 offsets = PackedFloat32Array(0.19467214, 0.79303277)
 colors = PackedColorArray(0.18717614, 0.18717614, 0.18717614, 1, 0.556953, 0.556953, 0.556953, 1)
 
-[node name="DungeonBoss" instance=ExtResource("1_nqbnp")]
+[node name="DungeonBoss" unique_id=1030260461 instance=ExtResource("1_nqbnp")]
 script = ExtResource("2_5gm8k")
 ceiling_debris_scene = ExtResource("3_2rtmt")
 warning_tile_scene = ExtResource("4_m38fo")
@@ -292,7 +292,7 @@ animation = &"IDLE"
 autoplay = "IDLE"
 offset = Vector2(-7, -35)
 
-[node name="HitParticles" type="CPUParticles2D" parent="." index="2"]
+[node name="HitParticles" type="CPUParticles2D" parent="." index="2" unique_id=454759654]
 position = Vector2(-23, 6)
 emitting = false
 amount = 15

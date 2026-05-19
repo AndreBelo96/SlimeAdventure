@@ -43,7 +43,7 @@ func hide_temporarily(duration: float = 5.0) -> void:
 	await get_tree().create_timer(duration).timeout
 	set_active(true)
 
-func snap_to_tile_center(tile_pos, tile_coord):
-	global_position = tile_pos - center.position
-	posizione_tile = tile_coord
+func snap_to_tile_center(tilemap: TileMapLayer, coords: Vector2i) -> void:
+	GridUtils.snap_to_tile_center(self, tilemap, coords, center.position)
+	posizione_tile = coords
 	start_y = global_position.y

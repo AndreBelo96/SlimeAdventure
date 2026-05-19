@@ -11,7 +11,6 @@ signal tile_progress_changed(activated: int, total: int)
 func _ready():
 	connect_tiles()
 	assign_keys()
-	#update_progress()
 
 func initialize():
 	update_progress()

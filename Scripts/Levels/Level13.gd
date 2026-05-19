@@ -123,7 +123,7 @@ func drop_pickaxe_pickup():
 	
 	var pickup := pickaxe_pickup_scene.instantiate() as PickupBase
 	pickup_layer.add_child(pickup)
-	pickup.snap_to_tile_center(pickup_layer.map_to_local(boss.posizione_tile), boss.posizione_tile)
+	pickup.snap_to_tile_center(pickup_layer, boss.posizione_tile)
 	pickup.is_active = true
 
 func _on_boss_damaged_phase(hit_count: int) -> void:

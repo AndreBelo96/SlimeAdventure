@@ -12,7 +12,7 @@ func _ready():
 		posizione_tile = Vector2i(-1, -6)
 	else:
 		posizione_tile = Vector2i(-2, -9)
-	snap_to_tile_center(posizione_tile)
+	GridUtils.snap_to_tile_center(self, tilemap, posizione_tile, $Center.position)
 
 
 func _process(_delta):
@@ -35,14 +35,4 @@ func show_dialogue():
 	await dialog_interface.dialogue_finished
 
 func is_adjacent_to_slime() -> bool:
-	if not slime:
-		return false
-	
-	var dx = abs(slime.movement_handler.grid_position.x - posizione_tile.x)
-	var dy = abs(slime.movement_handler.grid_position.y - posizione_tile.y)
-	
-	return dx + dy == 1
-
-func snap_to_tile_center(coords: Vector2i):
-	var tile_pos = tilemap.map_to_local(coords)
-	global_position = tile_pos - $Center.position
+	return GridUtils.is_adjacent_4(posizione_tile, slime.movement_handler.grid_position)

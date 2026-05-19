@@ -1,15 +1,6 @@
 extends RefCounted
 class_name Pathfinder
 
-# Direzioni valide (4-way grid)
-# Devono corrispondere ai tuoi DIRECTION_BITS del player
-const DIRS := [
-	Vector2i(1, 0),
-	Vector2i(-1, 0),
-	Vector2i(0, 1),
-	Vector2i(0, -1)
-]
-
 var movement_map: TileMapLayer
 var visual_map: TileMapLayer
 var DIRECTION_BITS: Dictionary
@@ -54,7 +45,7 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 		closed[current] = true
 		open.erase(current)
 
-		for dir in DIRS:
+		for dir in GridUtils.DIRECTION_BITS:
 			var neighbor = current + dir
 
 			if closed.has(neighbor):

@@ -11,13 +11,6 @@ var move_duration
 var grid_position := Vector2i.ZERO
 var is_moving := false
 
-const DIRECTION_BITS = {
-	Vector2i(0, -1): 1, # Nord
-	Vector2i(1, 0): 2,  # Est
-	Vector2i(0, 1): 4,  # Sud
-	Vector2i(-1, 0): 8, # Ovest
-}
-
 func setup(player_ref, tile_layer, movement_logic_layer, doors_layer, npc_layer, duration):
 	player = player_ref
 	tile_map_layer = tile_layer
@@ -72,7 +65,7 @@ func can_move_by_tilemask(coords: Vector2i) -> bool:
 		return true
 	
 	var dir = coords - grid_position
-	var dir_bit = DIRECTION_BITS.get(dir, 0)
+	var dir_bit = GridUtils.DIRECTION_BITS.get(dir, 0)
 	return (mask & dir_bit) == 0
 
 func can_enter_into_tile(coords: Vector2i) -> bool:

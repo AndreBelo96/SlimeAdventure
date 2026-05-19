@@ -30,10 +30,6 @@ func _ready():
 	set_process(false)
 	set_physics_process(false)
 
-func snap_to_tile_center(coords: Vector2i):
-	var tile_pos = tilemap.map_to_local(coords)
-	global_position = tile_pos - $Center.position
-
 func should_move(_step_count: int) -> bool:
 	return true
 

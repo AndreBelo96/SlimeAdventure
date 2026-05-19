@@ -8,12 +8,12 @@ func _ready():
 	add_to_group("porte")
 	update_visual()
 	
-	print("---- DEBUG YSORT PORTA: ----")
-	print("PORTA  global Y:", global_position.y)
-	print("PORTA  z_index:", z_index)
-	print("PORTA  y_sort:", y_sort_enabled)
-	print("PORTA  parent:", get_parent().name)
-	print("---------------------")
+	#print("---- DEBUG YSORT PORTA: ----")
+	#print("PORTA  global Y:", global_position.y)
+	#print("PORTA  z_index:", z_index)
+	#print("PORTA  y_sort:", y_sort_enabled)
+	#print("PORTA  parent:", get_parent().name)
+	#print("---------------------")
 	
 
 func setup(dir: String):

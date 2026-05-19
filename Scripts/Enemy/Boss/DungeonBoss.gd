@@ -32,7 +32,7 @@ func _ready():
 	super._ready()
 	vita = 3
 	posizione_tile = Vector2i(-1, -8)
-	snap_to_tile_center(posizione_tile)
+	GridUtils.snap_to_tile_center(self, tilemap, posizione_tile, $Center.position)
 	_reset_breath_timer()
 	
 	if level_logic:
@@ -101,7 +101,7 @@ func _ensure_pathfinder() -> bool:
 		push_error("Boss: movement_map or visual_map is not set!")
 		return false
 
-	pathfinder = Pathfinder.new(movement_map, visual_map, GameManager.DIRECTION_BITS)
+	pathfinder = Pathfinder.new(movement_map, visual_map, GridUtils.DIRECTION_BITS)
 	return true
 
 func should_move(_step_count: int) -> bool:
@@ -116,19 +116,13 @@ func find_next_tile() -> Vector2i:
 	return pathfinder.get_next_step(posizione_tile, slime.movement_handler.grid_position)
 
 func is_adjacent_to_slime() -> bool:
-	if not slime:
-		return false
-	
-	var dx = abs(slime.movement_handler.grid_position.x - posizione_tile.x)
-	var dy = abs(slime.movement_handler.grid_position.y - posizione_tile.y)
-	
-	return dx <= 1 and dy <= 1 and not (dx == 0 and dy == 0)
+	return GridUtils.is_adjacent_8(posizione_tile, slime.movement_handler.grid_position)
 
 func move_to(next_tile: Vector2i):
 	animation.play("WALK")
 	await _animate_move_to(next_tile)
 	posizione_tile = next_tile
-	snap_to_tile_center(next_tile)
+	GridUtils.snap_to_tile_center(self, tilemap, next_tile, $Center.position)
 
 func _animate_move_to(tile: Vector2i) -> void:
 	var target_pos = tilemap.map_to_local(tile) - $Center.position

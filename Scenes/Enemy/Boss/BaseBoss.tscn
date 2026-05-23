@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://qfo2dhin8psy"]
+[gd_scene format=3 uid="uid://qfo2dhin8psy"]
 
 [ext_resource type="Script" uid="uid://b74hmnfqtmkqu" path="res://Scripts/Enemy/Boss/BaseBoss.gd" id="1_qh0r3"]
 
@@ -15,12 +15,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BaseBoss" type="Node2D"]
+[node name="BaseBoss" type="Node2D" unique_id=319300526]
 y_sort_enabled = true
 script = ExtResource("1_qh0r3")
 
-[node name="Center" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="." unique_id=962466829]
 
-[node name="Animation" type="AnimatedSprite2D" parent="."]
+[node name="Animation" type="AnimatedSprite2D" parent="." unique_id=603321364]
 sprite_frames = SubResource("SpriteFrames_evbvj")
 animation = &"BREATH"

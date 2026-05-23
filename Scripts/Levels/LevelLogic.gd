@@ -65,9 +65,6 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 		"death":
 			GameLogger.warn("Morte: tipo=%s sender=%s pos=%s" % [str(data.get("death_type", 0)), sender.name, str(sender.global_position)])
 			player.on_player_died(data.get("death_type", 0))
-		"activate":
-			sender.is_active = data.get("is_active", true)
-			GameLogger.info("Tile attivata: %s stato=%s pos=%s" % [sender.name, str(sender.is_active), str(sender.global_position)])
 		"switch":
 			var chiave = data.get("chiave", "")
 			var azione = data.get("azione", "")

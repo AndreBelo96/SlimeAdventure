@@ -23,6 +23,7 @@ var posizione_tile: Vector2i
 
 signal defeated
 signal damaged(boss)
+signal life_changed(dmg: int)
 
 func _ready():
 	add_to_group("enemy")
@@ -55,17 +56,11 @@ func receive_hit(event_type: String, data := {}):
 func take_damage(dmg: int):
 	if state == BossState.DEAD:
 		return
-	
 	damage_animation()
-	
 	vita -= dmg
-	
 	change_steps()
-	
-	update_HUD_life(dmg)
-	
+	emit_signal("life_changed", dmg)
 	emit_signal("damaged", self)
-	
 	if vita <= 0:
 		die()
 
@@ -82,11 +77,6 @@ func die():
 
 func change_steps():
 	pass
-
-func update_HUD_life(dmg: int):
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud:
-		hud.update_progress_bar(dmg)
 
 func activate():
 	active = true

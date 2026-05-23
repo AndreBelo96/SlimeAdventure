@@ -54,7 +54,6 @@ func on_player_enter():
 		animation_player.play("Deactivate")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/SpegneTile.wav")
 	
-	emit_signal("tile_triggered", self, "activate", {"is_active": is_active})
 	emit_signal("tile_state_changed")
 
 func is_activated() -> bool:

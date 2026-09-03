@@ -87,6 +87,7 @@ func play_boss_intro() -> void:
 	time_running = true
 	player.exit_cutscene()
 	$YSort/DungeonBoss.activate()
+	hud_manager.show_boss_hp_bar()
 	
 	SoundManager.play_music(music_track)
 

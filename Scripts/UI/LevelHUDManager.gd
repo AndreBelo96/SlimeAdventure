@@ -7,7 +7,7 @@ class_name LevelHUDManager
 @onready var time_label = $MarginContainer/VBoxContainer/TimeLabel
 @onready var tile_label = $MarginContainer/TileToActive
 @onready var round_progressbar = $MarginContainer/VBoxContainer/RoundProgressBar
-@onready var boss_life_bar = $MarginContainer/ProgressBar
+@onready var hp_display_bar = $HpBarDisplay
 
 func _ready():
 	add_to_group("hud")
@@ -21,20 +21,25 @@ func update_time(time: float):
 func update_tile_label(activated: int, total: int):
 	tile_label.text = "%d / %d" % [activated, total]
 
-func update_progress_bar(dmg: int):
-	boss_life_bar.value -= dmg
+func update_progress_bar(boss_hp: int):
+	hp_display_bar.set_hp(boss_hp)
 
 func setup_boss_level(boss_max_hp: int):
 	tile_label.visible = false
 	$MarginContainer/Sprite2D.visible = false
-	boss_life_bar.visible = true
-	boss_life_bar.max_value = boss_max_hp
-	boss_life_bar.value = boss_max_hp
+	hp_display_bar.setup(boss_max_hp)
+	hp_display_bar.visible = false
 
 func setup_base_level():
 	tile_label.visible = true
 	$MarginContainer/Sprite2D.visible = true
-	boss_life_bar.visible = false
+	hp_display_bar.visible = false
+
+func show_boss_hp_bar():
+	hp_display_bar.visible = true
+
+func hide_boss_hp_bar():
+	hp_display_bar.visible = false
 
 func setup_progressbar(current: float, _max: float):
 	round_progressbar.activate(current, _max)

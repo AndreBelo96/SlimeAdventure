@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cx2mdd7seooq1"]
+
+[ext_resource type="Script" uid="uid://bpdx3ec7uokxg" path="res://Scripts/UI/Utils/HPBarDisplay.gd" id="1_o1n7k"]
+
+[node name="HpBarDisplay" type="Control" unique_id=1900410590]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_o1n7k")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=339613584]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1327557133]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8

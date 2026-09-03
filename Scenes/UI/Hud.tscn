@@ -4,25 +4,7 @@
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_ks3ap"]
 [ext_resource type="PackedScene" uid="uid://d1x3f5w6lmqxr" path="res://Scenes/UI/Utils/RoundProgressBar.tscn" id="3_b2arx"]
 [ext_resource type="Texture2D" uid="uid://bn67ndh2epby6" path="res://Assets/Sprites/HUD_tile.png" id="4_3ov73"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2arx"]
-bg_color = Color(0, 0, 0, 0.2784314)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ov73"]
-bg_color = Color(0.6901961, 0.08235294, 0.09411765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.56286263, 0.11260132, 0.3427236, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[ext_resource type="PackedScene" uid="uid://cx2mdd7seooq1" path="res://Scenes/UI/Utils/HPBarDisplay.tscn" id="5_duido"]
 
 [node name="HUD" type="Control" unique_id=1171935138]
 layout_mode = 3
@@ -71,19 +53,6 @@ theme = ExtResource("1_ks3ap")
 text = "Passi: 0"
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer" unique_id=1061651778]
-custom_minimum_size = Vector2(200, 10)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_b2arx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3ov73")
-max_value = 3.0
-step = 1.0
-value = 3.0
-rounded = true
-show_percentage = false
-
 [node name="TileToActive" type="Label" parent="MarginContainer" unique_id=570950715]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -98,3 +67,6 @@ position = Vector2(413.25, 316.125)
 scale = Vector2(0.851566, 1.11979)
 texture = ExtResource("4_3ov73")
 region_rect = Rect2(397, 1, 64, 48)
+
+[node name="HpBarDisplay" parent="." unique_id=890279840 instance=ExtResource("5_duido")]
+layout_mode = 1

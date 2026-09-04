@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://bwcqvf0cor4f5"]
+
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="1_8fs41"]
+[ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="2_r6d3g"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_vnt3w"]
+[ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="4_661d4"]
+[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="5_8umsp"]
+
+[node name="LocationMenuPanel" type="Control" unique_id=385242201]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LocationContainer" type="MarginContainer" parent="." unique_id=1915477931]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer" unique_id=1923642604]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=59104568]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer" unique_id=1296158301]
+layout_mode = 2
+theme = ExtResource("1_8fs41")
+text = "Location Selection"
+
+[node name="CenterContainer2" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=706071271]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LocationContainer" type="GridContainer" parent="LocationContainer/VBoxContainer/CenterContainer2" unique_id=685715358]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=976520560]
+layout_mode = 2
+
+[node name="Tutorial" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer" unique_id=1235933817]
+custom_minimum_size = Vector2(124, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_r6d3g")
+text = "Tutorial"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer" unique_id=1230237146]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer/Control" unique_id=824849232]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=1374960344]
+layout_mode = 2
+
+[node name="Dungeon" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2" unique_id=1422048063]
+custom_minimum_size = Vector2(124, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_661d4")
+theme_override_constants/h_separation = 4
+text = "Dungeon"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2" unique_id=1898811485]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer2/Control" unique_id=577915550]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer" unique_id=2122485960]
+layout_mode = 2
+
+[node name="Forest" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3" unique_id=674279417]
+custom_minimum_size = Vector2(124, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_r6d3g")
+text = "Forest"
+
+[node name="Control" type="Control" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3" unique_id=145436830]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer2/LocationContainer/VBoxContainer3/Control" unique_id=767811227]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 60.0
+rotation = -1.5708
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="CenterContainer3" type="CenterContainer" parent="LocationContainer/VBoxContainer" unique_id=1217363069]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer3" unique_id=226657664]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1930547921]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 20
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=709497307]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("5_8umsp")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=342365563]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1184562266]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_vnt3w")
+theme_override_font_sizes/font_size = 20
+text = " <"
+horizontal_alignment = 1

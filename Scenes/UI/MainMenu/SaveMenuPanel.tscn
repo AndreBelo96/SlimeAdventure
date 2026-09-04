@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ewvh78rsx1v0"]
 
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="1_dc5ke"]
+[ext_resource type="Script" uid="uid://dsfj6l5bbt0ja" path="res://Scripts/UI/MainMenu/SaveMenuPanel.gd" id="1_wlnai"]
 [ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_wlnai"]
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_og61f"]
 [ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="4_5av1n"]
@@ -31,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wlnai")
 
 [node name="SaveSelectContainer" type="MarginContainer" parent="." unique_id=161405868]
 layout_mode = 1

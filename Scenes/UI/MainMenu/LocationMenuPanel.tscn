@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bwcqvf0cor4f5"]
 
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="1_8fs41"]
+[ext_resource type="Script" uid="uid://hdifwytskt78" path="res://Scripts/UI/MainMenu/LocationMenuPanel.gd" id="1_r6d3g"]
 [ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="2_r6d3g"]
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_vnt3w"]
 [ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="4_661d4"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_r6d3g")
 
 [node name="LocationContainer" type="MarginContainer" parent="." unique_id=1915477931]
 layout_mode = 1

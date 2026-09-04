@@ -15,13 +15,12 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Slime Adventure"
-run/main_scene="res://Scenes/UI/MainMenu/MainMenu.tscn"
+run/main_scene="res://Scenes/UI/MainMenu/MenuRoot.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 
 [autoload]
 
-GameManager="*res://Global/GameManager.gd"
 ThemeManager="*res://Global/ThemeManager.gd"
 SoundManager="*res://Global/SoundManager.gd"
 SaveManager="*res://Global/SaveManager.gd"

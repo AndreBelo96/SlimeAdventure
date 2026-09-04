@@ -1,6 +1,6 @@
 extends Node
 
-var menu_state := BaseMenu.MenuState.MAIN_MENU
+var menu_state := MenuRoot.PanelState.MAIN
 
 func _ready():
 	SettingsManager.load_settings()
@@ -38,14 +38,14 @@ func restart_level(level: int):
 	get_tree().change_scene_to_file("res://Scenes/Levels/Level%d.tscn" % level)
 
 func return_to_menu():
-	menu_state = BaseMenu.MenuState.MAIN_MENU
-	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+	menu_state = MenuRoot.PanelState.MAIN
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu/MenuRoot.tscn")
 
 func return_to_location_menu():
-	menu_state = BaseMenu.MenuState.LOCATION_SELECT
+	menu_state = MenuRoot.PanelState.LOCATION
 	SaveManager.load_progress()
 	LevelStateManager.reload_save_data()
-	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu/MenuRoot.tscn")
 
 func reset_game():
 	LevelStateManager.current_level = 1

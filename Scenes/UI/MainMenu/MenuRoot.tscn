@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://53bn22cjs3s7"]
 
-[ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu/MainMenu.gd" id="1_wrbul"]
+[ext_resource type="Script" uid="uid://bsqf2i6mjf6xo" path="res://Scripts/UI/MainMenu/MenuRoot.gd" id="1_wrbul"]
 [ext_resource type="PackedScene" uid="uid://de3pdo6kx35dv" path="res://Scenes/UI/MainMenu/BackgroundMenu.tscn" id="2_kl3t2"]
 [ext_resource type="PackedScene" uid="uid://bsw22ugqs5tw0" path="res://Scenes/UI/MainMenu/MainMenuPanel.tscn" id="3_tc2ed"]
 [ext_resource type="PackedScene" uid="uid://ewvh78rsx1v0" path="res://Scenes/UI/MainMenu/SaveMenuPanel.tscn" id="4_67d64"]
 [ext_resource type="PackedScene" uid="uid://bwcqvf0cor4f5" path="res://Scenes/UI/MainMenu/LocationMenuPanel.tscn" id="5_6swpd"]
 [ext_resource type="PackedScene" uid="uid://8ie6gpqhyi75" path="res://Scenes/UI/MainMenu/OptionMenu.tscn" id="13_hys1s"]
 
-[node name="MainMenu" type="Control" unique_id=741361820]
+[node name="MenuRoot" type="Control" unique_id=741361820]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

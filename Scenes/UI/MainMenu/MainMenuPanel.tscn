@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bsw22ugqs5tw0"]
 
+[ext_resource type="Script" uid="uid://bn0imoikq0d5o" path="res://Scripts/UI/MainMenu/MainMenuPanel.gd" id="1_aybib"]
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="1_ji4kp"]
 [ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_aybib"]
 [ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_xuh55"]
@@ -25,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_aybib")
 
 [node name="MenuContainer" type="MarginContainer" parent="." unique_id=2107458008]
 layout_mode = 1

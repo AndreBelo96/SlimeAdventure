@@ -37,7 +37,7 @@ var music_autoplay := true
 
 func _ready():
 	time_running = false
-	GameLogger.info("Inizio livello %d" % GameManager.current_level)
+	GameLogger.info("Inizio livello %d" % LevelStateManager.current_level)
 	$MovementLogicMapLayer.visible = false
 	$MovementLogicMapLayer.add_to_group("movement_logic")
 	pause_menu.visible = false
@@ -45,7 +45,7 @@ func _ready():
 	
 	spawn_effect_for_theme()
 	
-	dark_overlay.visible = GameManager.get_level_range_for_location(GameManager.Location.DUNGEON).has(GameManager.current_level)
+	dark_overlay.visible = LocationManager.get_level_range_for_location(LocationManager.Location.DUNGEON).has(LevelStateManager.current_level)
 	
 	setup_background()
 	setup_hud()
@@ -95,10 +95,10 @@ func _unhandled_input(event):
 
 func setup_background(): 
 	var generator_instance: IBackgroundGenerator = null 
-	match GameManager.get_location_for_level(GameManager.current_level): 
-		GameManager.Location.TUTORIAL: 
+	match LocationManager.get_location_for_level(LevelStateManager.current_level): 
+		LocationManager.Location.TUTORIAL: 
 			generator_instance = PanelBackgroundGenerator.new() 
-		GameManager.Location.DUNGEON: 
+		LocationManager.Location.DUNGEON: 
 			generator_instance = SkullBackgroundGenerator.new() 
 		_: 
 			generator_instance = PanelBackgroundGenerator.new()
@@ -146,11 +146,11 @@ func _on_steps_changed(new_count: int) -> void:
 
 func _on_player_died():
 	await get_tree().create_timer(1.5, true).timeout
-	GameManager.current_steps = steps
-	GameManager.current_time = level_time
-	GameManager.end_level(false)
+	LevelStateManager.current_steps = steps
+	LevelStateManager.current_time = level_time
+	LevelStateManager.end_level(false)
 	SoundManager.stop_music()
-	GameManager.change_scene_to_defeat()
+	SceneNavigator.change_scene_to_defeat()
 
 # ================================================================
 # ========= Funzione di controllo condizione di vittoria =========
@@ -204,35 +204,35 @@ func check_victory():
 		player.on_player_won()
 
 func _on_player_won():
-	GameManager.current_steps = steps
-	GameManager.current_time = level_time
-	GameManager.total_steps += steps
-	GameManager.total_time += level_time
+	LevelStateManager.current_steps = steps
+	LevelStateManager.current_time = level_time
+	LevelStateManager.total_steps += steps
+	LevelStateManager.total_time += level_time
 	
 	await player.on_finish_level()
 	
-	GameLogger.info("Completato livello %d in %d secondi con %d passi" % [GameManager.current_level, level_time, steps])
-	GameManager.end_level(true)
+	GameLogger.info("Completato livello %d in %d secondi con %d passi" % [LevelStateManager.current_level, level_time, steps])
+	LevelStateManager.end_level(true)
 	#await get_tree().create_timer(1).timeout
 	SoundManager.stop_music()
-	GameManager.change_scene_to_victory()
+	SceneNavigator.change_scene_to_victory()
 
 # -- UTILS -- #
 func set_current_level_number(current_level: int):
-	GameManager.current_level = current_level
+	LevelStateManager.current_level = current_level
 
 func spawn_effect_for_theme():
-	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
 	var particles_istance: PackedScene = null
 	var fog_istance: PackedScene = null
 
 	match location :
-		GameManager.Location.DUNGEON:
+		LocationManager.Location.DUNGEON:
 			particles_istance = DUNGEON_EFFECT
 			fog_istance = FOG_EFFECT
-		GameManager.Location.FOREST:
+		LocationManager.Location.FOREST:
 			return
-		GameManager.Location.TUTORIAL:
+		LocationManager.Location.TUTORIAL:
 			return
 
 	if particles_istance:

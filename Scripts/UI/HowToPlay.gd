@@ -8,8 +8,8 @@ extends Control
 func _ready():
 	animation.sprite_frames.set_animation_loop("UP", false)
 	animation.sprite_frames.set_animation_loop("DOWN", false)
-	print("GameManager valid:", is_instance_valid(GameManager))
-	print("GameManager type:", typeof(GameManager))
+	print("LocationManager valid:", is_instance_valid(LocationManager))
+	print("LocationManager type:", typeof(LocationManager))
 	# Avvia la sequenza in loop
 	play_sequence()
 

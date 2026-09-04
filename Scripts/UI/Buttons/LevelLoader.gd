@@ -33,7 +33,7 @@ func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 		levels_info.append({
 			"number": num,
 			"path": "res://Scenes/Levels/" + file,
-			"disabled": num > GameManager.max_level_reach,
+			"disabled": num > LevelStateManager.max_level_reach,
 			"theme": get_theme_for_location(loc),
 			"sound": get_sound_for_location(loc)
 		})
@@ -41,18 +41,18 @@ func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 
 func get_sound_for_location(loc: int) -> String:
 	match loc:
-		GameManager.Location.TUTORIAL:
+		LocationManager.Location.TUTORIAL:
 			return SOUND_TUTORIAL
-		GameManager.Location.DUNGEON:
+		LocationManager.Location.DUNGEON:
 			return SOUND_DUNGEON
 		_:
 			return SOUND_DEFAULT
 
 func get_theme_for_location(loc: int) -> Theme:
 	match loc:
-		GameManager.Location.TUTORIAL:
+		LocationManager.Location.TUTORIAL:
 			return THEME_TUTORIAL
-		GameManager.Location.DUNGEON:
+		LocationManager.Location.DUNGEON:
 			return THEME_DUNGEON
 		_:
 			return THEME_DEFAULT
@@ -64,7 +64,7 @@ func get_levels_for_location(loc: int) -> Array[String]:
 	for file_name in ALL_LEVELS:
 		if file_name.ends_with(".tscn") and file_name.begins_with("Level"):
 			var level_num = extract_level_number(file_name)
-			if GameManager.get_location_for_level(level_num) == loc:
+			if LocationManager.get_location_for_level(level_num) == loc:
 				level_files.append(file_name)
 
 	# Ordina per numero di livello

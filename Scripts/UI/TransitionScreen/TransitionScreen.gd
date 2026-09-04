@@ -13,13 +13,13 @@ extends Control
 @onready var loading_label = $MarginContainer/VBoxContainer/Caricamento
 
 var location_colors := {
-	GameManager.Location.TUTORIAL: {
+	LocationManager.Location.TUTORIAL: {
 		"name": Color("#959595")
 	},
-	GameManager.Location.DUNGEON: {
+	LocationManager.Location.DUNGEON: {
 		"name": Color("#38477a")
 	},
-	GameManager.Location.FOREST: {
+	LocationManager.Location.FOREST: {
 		"name": Color("#1b5e20"),
 	}
 }
@@ -35,15 +35,15 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 	match location_id:
-		GameManager.Location.TUTORIAL:
+		LocationManager.Location.TUTORIAL:
 			pass
-		GameManager.Location.DUNGEON:
+		LocationManager.Location.DUNGEON:
 			var chain_manager = DungeonManager.new()
 			chain_manager.chain_frames = dungeon_frames
 			$MarginContainer.add_child(chain_manager)
 			chain_manager.spawn_chains($MarginContainer)
 			chain_manager.spawn_sprites($MarginContainer)
-		GameManager.Location.FOREST:
+		LocationManager.Location.FOREST:
 			pass
 	
 	animation_player.play("FadeIn")
@@ -63,7 +63,7 @@ func _ready():
 
 func _setup_languages():
 	enter_label.text = tr("TRANSATION_ENTER")
-	title_label.text = tr(GameManager.location_translation_keys[GameManager.get_location_for_level(GameManager.current_level)])
+	title_label.text = tr(LocationManager.location_translation_keys[LocationManager.get_location_for_level(LevelStateManager.current_level)])
 	loading_label.text = tr("LOADING_LABEL")
 
 func _input(_event: InputEvent) -> void:
@@ -73,7 +73,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _apply_location_theme():
-	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
 	var theme_data = location_colors.get(location, null)
 	
 	if theme_data == null:

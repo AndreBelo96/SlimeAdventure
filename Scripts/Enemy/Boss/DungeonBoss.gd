@@ -123,7 +123,7 @@ func _start_attack():
 	state = BossState.IDLE
 
 func do_attack():
-	emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.ENEMY})
+	emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.ENEMY})
 
 func _on_attack_impact():
 	if camera:

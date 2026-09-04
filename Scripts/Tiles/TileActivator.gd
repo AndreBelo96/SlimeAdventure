@@ -11,9 +11,9 @@ var locked := false
 func _ready():
 	super._ready()
 	add_to_group("activatables")
-	set_region_from_coords(0, GameManager.get_tileset_row_for_level())
+	set_region_from_coords(0, LocationManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
-	var animation_row = GameManager.get_tileset_row_for_level()
+	var animation_row = LocationManager.get_tileset_row_for_level()
 	var frames = _create_animations(animation_row)
 	animation_player.frames = frames
 

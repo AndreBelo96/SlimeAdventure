@@ -32,6 +32,9 @@ SettingsManager="*res://Global/SettingsManager.gd"
 DisplayManager="*res://Global/DisplayManager.gd"
 AudioPresets="*uid://bgtaj0l76q6rb"
 GridUtils="*uid://l7iy4d401rqt"
+LevelStateManager="*uid://bva1hrtycl5wd"
+LocationManager="*uid://ddw6mcc26jch4"
+SceneNavigator="*uid://cg7mtrfv8pdp1"
 
 [debug]
 
@@ -56,6 +59,7 @@ naming/script_name_casing=1
 
 folder_colors={
 "res://Assets/": "green",
+"res://Global/": "purple",
 "res://Scenes/": "orange",
 "res://Scripts/": "red"
 }

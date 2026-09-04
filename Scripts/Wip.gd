@@ -8,7 +8,7 @@ var shown: bool = false
 @export var tilemap: TileMapLayer
 
 func _ready():
-	if GameManager.current_level == 6:
+	if LevelStateManager.current_level == 6:
 		posizione_tile = Vector2i(-1, -6)
 	else:
 		posizione_tile = Vector2i(-2, -9)

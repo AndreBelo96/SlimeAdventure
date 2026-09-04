@@ -222,10 +222,10 @@ func handle_save_menu_selection(index):
 	if index == 4:
 		fade_in_main_menu()
 		return
-	GameManager.current_save_slot = index + 1
+	LevelStateManager.current_save_slot = index + 1
 	SaveManager.current_slot = index + 1
 	SaveManager.load_progress()
-	GameManager.reload_save_data()
+	LevelStateManager.reload_save_data()
 	slot_selected = index
 	current_state = MenuState.SAVE_SLOT_ACTIONS
 	update_save_data_panel(index+1)
@@ -269,22 +269,16 @@ func handle_save_data_menu_selection(index):
 	input_enabled = true
 
 func handle_location_selection(index):
-
 	if index == 3:
 		SoundManager.play_sfx(SFX_CONFIRM)
 		fade_in_save_menu()
 		return
-
-	var location_name = GameManager.Location.keys()[index]
-
-	if GameManager.is_location_locked(location_name): #TODO far capire sono bloccate
+	var location_name = LocationManager.Location.keys()[index]
+	if LocationManager.is_location_locked(location_name): #TODO far capire sono bloccate
 		print("Location bloccata:", location_name)
 		return
-
 	SoundManager.play_sfx(SFX_CONFIRM)
-
-	GameManager.location_selected = GameManager.Location.values()[index]
-
+	LocationManager.location_selected = LocationManager.Location.values()[index]
 	get_tree().change_scene_to_file("res://Scenes/UI/LevelMenu.tscn")
 
 ## ----- Fade in/out btn ----- ##
@@ -335,7 +329,7 @@ func fade_to(target: Control):
 	input_enabled = true
 
 func update_location_buttons():
-	var locations = GameManager.Location.keys()
+	var locations = LocationManager.Location.keys()
 	
 	for i in range(buttons_location.size()):
 		var btn = buttons_location[i]
@@ -346,7 +340,7 @@ func update_location_buttons():
 		
 		var location_name = locations[i]
 
-		if GameManager.is_location_locked(location_name):
+		if LocationManager.is_location_locked(location_name):
 			btn.disabled = true
 		else:
 			btn.disabled = false
@@ -427,7 +421,7 @@ func format_date_smart(unix_time:int) -> String:
 
 func get_completion_percent(data: Dictionary) -> int:
 	var completed = data.get("levels", {}).size()
-	var total_levels = GameManager.NUMBER_OF_LEVELS
+	var total_levels = LocationManager.NUMBER_OF_LEVELS
 	
 	return int((completed / float(total_levels)) * 100)
 
@@ -444,11 +438,11 @@ func confirm_delete():
 
 
 func _on_delete_confirmed():
-	SaveManager.delete_slot(GameManager.current_save_slot)
+	SaveManager.delete_slot(LevelStateManager.current_save_slot)
 	SaveManager.load_progress()
-	GameManager.reload_save_data()
+	LevelStateManager.reload_save_data()
 	input_enabled = true
-	update_save_data_panel(GameManager.current_save_slot)
+	update_save_data_panel(LevelStateManager.current_save_slot)
 
 func _on_delete_canceled():
 	input_enabled = true

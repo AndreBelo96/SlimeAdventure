@@ -26,13 +26,13 @@ extends BaseMenu
 var isRecordBool := false
 
 var location_bg_colors := {
-	GameManager.Location.TUTORIAL: {
+	LocationManager.Location.TUTORIAL: {
 		"name": Color("4a4a4aff")
 	},
-	GameManager.Location.DUNGEON: {
+	LocationManager.Location.DUNGEON: {
 		"name": Color("#0f121a")
 	},
-	GameManager.Location.FOREST: {
+	LocationManager.Location.FOREST: {
 		"name": Color("124616ff")
 	}
 }
@@ -52,9 +52,7 @@ func _ready():
 
 func setup_results():
 	var sprite = $MarginContainer/VBoxContainer/HBoxContainer/Control/Victory
-
-	# Dati dell’ultima run, salvati in GameManager.end_level()
-	var last = GameManager.last_attempt
+	var last = LevelStateManager.last_attempt
 	var completed_level: int = int(last["level"])
 	var run_steps: int = int(last["steps"])
 	var run_time: float = float(last["time"])
@@ -84,7 +82,7 @@ func setup_results():
 		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))
 		sprite.texture = atlas
 
-	GameManager.isRecord = false
+	LevelStateManager.isRecord = false
 
 func setup_languages():
 	title.text = tr("VICTORY_LBL")
@@ -138,16 +136,16 @@ func handle_selection(_index):
 
 	if (_index == 0):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		GameManager.next_level()
+		SceneNavigator.next_level()
 	elif (_index == 1):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		GameManager.restart_level(GameManager.current_level - 1)
+		SceneNavigator.restart_level(LevelStateManager.current_level - 1)
 	elif (_index == 2):
 		SoundManager.stop_music();
-		GameManager.return_to_location_menu()
+		SceneNavigator.return_to_location_menu()
 	elif (_index == 3):
 		SoundManager.stop_music();
-		GameManager.return_to_menu()
+		SceneNavigator.return_to_menu()
 
 ### --- Animazioni entrata e uscita della schermata --- ###
 func animate_screen_enter():
@@ -234,7 +232,7 @@ func animate_record(tween):
 		tween.tween_property(record_container, "scale", Vector2(1,1), 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func _apply_location_theme():  #TODO se sono nell'ultimo livello, mi carica il colore del prossimo livello
-	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
 	var theme_data = location_bg_colors.get(location, null)
 
 	if theme_data == null:

@@ -15,17 +15,17 @@ signal dialogue_finished
 const DIALOG_PANEL_STYLE = preload("res://Theme/DialogueInterface/dialogue_panel.tres")
 
 var location_colors := {
-	GameManager.Location.TUTORIAL: {
+	LocationManager.Location.TUTORIAL: {
 		"border": Color("#dcdcdc"),
 		"name": Color("#959595"),
 		"text": Color("#dcdcdc")
 	},
-	GameManager.Location.DUNGEON: {
+	LocationManager.Location.DUNGEON: {
 		"border": Color("#adb4cb"),
 		"name": Color("#38477a"),
 		"text": Color("#adb4cb")
 	},
-	GameManager.Location.FOREST: {
+	LocationManager.Location.FOREST: {
 		"border": Color("#43a047"),
 		"name": Color("#1b5e20"),
 		"text": Color("#2e7d32")
@@ -205,7 +205,7 @@ func _scale_out():
 
 ### --- Location color --- ###
 func _apply_location_theme():
-	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
 	var theme_data = location_colors.get(location, null)
 	
 	if theme_data == null:

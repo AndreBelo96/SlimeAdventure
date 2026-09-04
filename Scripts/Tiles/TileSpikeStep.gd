@@ -8,7 +8,7 @@ const STEPS_TO_TRIGGER = 3
 
 func _ready():
 	super._ready()
-	set_region_from_coords(GameManager.SPIKE_STEP_TILE_POSITION, GameManager.get_tileset_row_for_level())
+	set_region_from_coords(LocationManager.SPIKE_STEP_TILE_POSITION, LocationManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
 	# Connetti questa tile al segnale globale dei passi
 	var level_logic = get_tree().get_first_node_in_group("level_logic")
@@ -35,7 +35,7 @@ func _lower_spikes():
 
 func on_player_enter():
 	if (isUp):
-		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES})
+		emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES})
 
 func on_enemy_enter(_enemy: EnemyBase):
 	if (isUp):

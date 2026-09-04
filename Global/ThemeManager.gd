@@ -2,13 +2,13 @@
 extends Node
 
 const BUTTON_THEMES := {
-	GameManager.Location.TUTORIAL: preload("res://Theme/Button/TutorialButton.tres"),
-	GameManager.Location.DUNGEON: preload("res://Theme/Button/DungeonButton.tres")
+	LocationManager.Location.TUTORIAL: preload("res://Theme/Button/TutorialButton.tres"),
+	LocationManager.Location.DUNGEON: preload("res://Theme/Button/DungeonButton.tres")
 }
 
 const BUTTON_SOUNDS := {
-	GameManager.Location.TUTORIAL: "res://Assets/Audio/Sound/TutorialBtnClick.wav",
-	GameManager.Location.DUNGEON: "res://Assets/Audio/Sound/TutorialBtnClick.wav"
+	LocationManager.Location.TUTORIAL: "res://Assets/Audio/Sound/TutorialBtnClick.wav",
+	LocationManager.Location.DUNGEON: "res://Assets/Audio/Sound/TutorialBtnClick.wav"
 }
 
 const DEFAULT_SOUND = "res://Assets/Audio/Sound/DefaultBtnClick.wav"

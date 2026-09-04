@@ -143,7 +143,7 @@ func on_player_died(death_type: int):
 		_play_void_death()
 	else:
 		animation_handler.play_death(death_type)
-	GameManager.register_death(death_type)
+	LevelStateManager.register_death(death_type)
 	emit_signal("player_died")
 
 func _play_void_death():

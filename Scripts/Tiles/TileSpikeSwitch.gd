@@ -40,7 +40,7 @@ func attiva():
 
 func on_player_enter():
 	if attivo:
-		emit_signal("tile_triggered", self, "death", {"death_type": GameManager.Death.SPIKES, "chiave": chiave})
+		emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES, "chiave": chiave})
 
 func on_enemy_enter(_enemy: EnemyBase):
 	print("TILE: ENEMY ENTER")

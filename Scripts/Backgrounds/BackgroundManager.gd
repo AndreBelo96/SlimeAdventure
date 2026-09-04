@@ -53,7 +53,7 @@ func initialize(generator: IBackgroundGenerator):
 # Setup helpers
 # -------------------------------
 func _apply_level_colors() -> void:
-	dark_overlay.color = GameManager.get_dark_overlay_for_level()
+	dark_overlay.color = LocationManager.get_dark_overlay_for_level()
 	bg_color_rect.color = panel_generator.get_bg_color()
 
 func _setup_vignette_overlay() -> void:

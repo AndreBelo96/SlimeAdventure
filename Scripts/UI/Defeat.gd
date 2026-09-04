@@ -14,13 +14,13 @@ extends BaseMenu
 @onready var image = $MarginContainer/VBoxContainer/HBoxContainer/Control/AnimatedSprite2D
 
 var location_bg_colors := {
-	GameManager.Location.TUTORIAL: {
+	LocationManager.Location.TUTORIAL: {
 		"name": Color("4a4a4aff")
 	},
-	GameManager.Location.DUNGEON: {
+	LocationManager.Location.DUNGEON: {
 		"name": Color("#0f121a")
 	},
-	GameManager.Location.FOREST: {
+	LocationManager.Location.FOREST: {
 		"name": Color("124616ff")
 	}
 }
@@ -76,13 +76,13 @@ func handle_selection(_index):
 	SoundManager.play_sfx(SFX_CONFIRM)
 	if (_index == 0):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		GameManager.restart_level(GameManager.current_level)
+		SceneNavigator.restart_level(LevelStateManager.current_level)
 	elif (_index == 1):
 		SoundManager.stop_music();
-		GameManager.return_to_location_menu()
+		SceneNavigator.return_to_location_menu()
 	elif (_index == 2):
 		SoundManager.stop_music();
-		GameManager.return_to_menu()
+		SceneNavigator.return_to_menu()
 
 ### --- Animazioni entrata e uscita della schermata --- ###
 
@@ -150,7 +150,7 @@ func animate_image():
 	image.play("Death")
 
 func _apply_location_theme():
-	var location = GameManager.get_location_for_level(GameManager.current_level)
+	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
 	var theme_data = location_bg_colors.get(location, null)
 	
 	if theme_data == null:

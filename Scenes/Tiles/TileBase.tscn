@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcyrvic42ifeu"]
+[gd_scene format=3 uid="uid://bcyrvic42ifeu"]
 
 [ext_resource type="Script" uid="uid://b5u5f6um65tvu" path="res://Scripts/Tiles/TileBase.gd" id="1_c5erh"]
 
@@ -10,17 +10,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Tile" type="Node2D"]
+[node name="Tile" type="Node2D" unique_id=562900622]
 script = ExtResource("1_c5erh")
 
-[node name="Center" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="." unique_id=593780479]
 
-[node name="Tile" type="Sprite2D" parent="."]
+[node name="Tile" type="Sprite2D" parent="." unique_id=457203740]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, 12)
 
-[node name="AnimatedTile" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedTile" type="AnimatedSprite2D" parent="." unique_id=453386304]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, 12)

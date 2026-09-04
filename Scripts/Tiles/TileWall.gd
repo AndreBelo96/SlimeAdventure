@@ -4,12 +4,12 @@ var isBreak := false
 
 func _ready():
 	super._ready()
-	set_region_from_coords(GameManager.WALL_TILE_POSITION, GameManager.get_tileset_row_for_level())
+	set_region_from_coords(LocationManager.WALL_TILE_POSITION, LocationManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
 	peso = 999
 
 func can_enter() -> bool:
-	return GameManager.has_pickaxe
+	return LevelStateManager.has_pickaxe
 
 func on_player_enter():
 	if !isBreak:

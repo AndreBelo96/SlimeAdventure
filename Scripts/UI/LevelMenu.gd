@@ -13,7 +13,7 @@ var factory = preload("res://Scripts/UI/Buttons/LevelButtonFactory.gd")
 func _ready():
 	loader = LevelLoader.new()
 	factory = LevelButtonFactory.new()
-	location.text = tr(GameManager.location_translation_keys[GameManager.location_selected]) #TODO meglio un metodo
+	location.text = tr(LocationManager.location_translation_keys[LocationManager.location_selected]) #TODO meglio un metodo
 	_title.text = tr("LVL_SELECTION_LBL")
 	load_level_buttons()
 
@@ -25,13 +25,13 @@ func load_level_buttons():
 	selectors_main.clear()
 	base_positions.clear()
 
-	var levels_info = loader.get_level_data_for_location(GameManager.location_selected)
-	var levels_range = GameManager.get_level_range_for_location(GameManager.location_selected)
+	var levels_info = loader.get_level_data_for_location(LocationManager.location_selected)
+	var levels_range = LocationManager.get_level_range_for_location(LocationManager.location_selected)
 
 	for i in range(levels_info.size()):
 		var info = levels_info[i]
 		var relative_index = levels_range.find(loader.extract_level_number(info.path)) + 1
-		var location_id = int(GameManager.location_selected)
+		var location_id = int(LocationManager.location_selected)
 		var display_number = "%d.%d" % [location_id, relative_index]
 
 		var container = factory.create_level_button(display_number, info.disabled, info.theme)
@@ -68,7 +68,7 @@ func load_level_buttons():
 	setup_mouse()
 
 func is_level_disabled() -> bool:
-	return current_selection + 1 > GameManager.max_level_reach
+	return current_selection + 1 > LevelStateManager.max_level_reach
 
 func handle_navigation(_event):
 	var max_index = buttons.size() - 1  # include anche il back button
@@ -91,20 +91,20 @@ func handle_navigation(_event):
 func handle_selection(_index):
 	if _index == buttons.size() - 1:
 		SoundManager.play_sfx(SFX_CONFIRM)
-		GameManager.return_to_location_menu()
+		SceneNavigator.return_to_location_menu()
 		return
 	
 	if(is_level_disabled()):
 		return
 	
-	var info = loader.get_level_data_for_location(GameManager.location_selected)[_index]
+	var info = loader.get_level_data_for_location(LocationManager.location_selected)[_index]
 	_on_level_button_pressed(info.path, info.sound)
 
 func _on_level_button_pressed(path: String, _sound: String):
 	var level_num = loader.extract_level_number(path)
-	GameManager.current_level = level_num
+	LevelStateManager.current_level = level_num
 
-	var is_first_level_of_location = level_num == GameManager.get_level_range_for_location(GameManager.location_selected)[0]
+	var is_first_level_of_location = level_num == LocationManager.get_level_range_for_location(LocationManager.location_selected)[0]
 	
 	SoundManager.stop_music();
 	
@@ -113,8 +113,8 @@ func _on_level_button_pressed(path: String, _sound: String):
 		set_all_lights_active($BackgroundMenu, false)
 		var loader_scene = preload("res://Scenes/UI/TransitionScreen.tscn").instantiate()
 		loader_scene.scene_to_load = path
-		loader_scene.transition_text = GameManager.Location.keys()[GameManager.get_location_for_level(level_num)]
-		loader_scene.location_id = int(GameManager.get_location_for_level(level_num))
+		loader_scene.transition_text = LocationManager.Location.keys()[LocationManager.get_location_for_level(level_num)]
+		loader_scene.location_id = int(LocationManager.get_location_for_level(level_num))
 		
 		get_tree().root.add_child(loader_scene)
 	else:

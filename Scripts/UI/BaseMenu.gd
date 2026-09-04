@@ -52,7 +52,7 @@ func _ready() -> void:
 	setup_save_data_selectors()
 	setup_location_selectors()
 	
-	current_state = GameManager.menu_state
+	current_state = SceneNavigator.menu_state
 	update_active_menu()
 	set_current_selection(0)
 	

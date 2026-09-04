@@ -5,5 +5,5 @@ func on_ready_custom() -> void:
 	item_type = ItemType.PICKAXE
 
 func on_player_enter_custom(_player: Node) -> void:
-	GameManager.has_pickaxe = true
+	LevelStateManager.has_pickaxe = true
 	queue_free()

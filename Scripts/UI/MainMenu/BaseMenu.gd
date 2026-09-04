@@ -12,7 +12,6 @@ class_name BaseMenu
 # --- VARIABILI COMUNI  ---
 # --------------------------
 enum MenuState { MAIN_MENU, SAVE_MENU, OPTION_MENU, SAVE_SLOT_ACTIONS, LOCATION_SELECT }
-var current_state : MenuState = MenuState.MAIN_MENU
 
 # --- Bottoni e selettori separati ---
 var buttons_main : Array[Button] = []
@@ -51,28 +50,6 @@ func _ready() -> void:
 	setup_save_selectors()
 	setup_save_data_selectors()
 	setup_location_selectors()
-	
-	current_state = SceneNavigator.menu_state
-	update_active_menu()
-	set_current_selection(0)
-	
-	var main_container = $MenuContainer
-	var save_container = $SaveSelectContainer
-	var location_container = $LocationContainer
-
-	if current_state == MenuState.MAIN_MENU:
-		main_container.visible = true
-		save_container.visible = false
-		location_container.visible = false
-	elif current_state == MenuState.SAVE_MENU:
-		main_container.visible = false
-		save_container.visible = true
-		location_container.visible = false
-	elif current_state == MenuState.LOCATION_SELECT:
-		main_container.visible = false
-		save_container.visible = false
-		location_container.visible = true
-		update_location_buttons()
 
 # --------------------------
 # --- INPUT MANAGEMENT ---
@@ -217,40 +194,12 @@ func handle_selection(_index: int):
 # --- UTILITY --------------
 # --------------------------
 func get_current_buttons() -> Array:
-	if current_state == MenuState.MAIN_MENU:
-		return buttons_main
-	elif current_state == MenuState.SAVE_MENU:
-		return buttons_save
-	elif current_state == MenuState.SAVE_SLOT_ACTIONS:
-		return buttons_save
-	else:
 		return buttons_location
 
 func get_current_selectors() -> Array:
-	if current_state == MenuState.MAIN_MENU:
-		return selectors_main
-	elif current_state == MenuState.SAVE_MENU:
-		return selectors_save
-	elif current_state == MenuState.SAVE_SLOT_ACTIONS:
-		return selectors_save_data
-	else:
 		return selectors_location
 
 func update_active_menu():
-# Aggiorna array attivi in base allo stato
-	if current_state == MenuState.MAIN_MENU:
-		buttons = buttons_main
-		selectors = selectors_main
-	elif current_state == MenuState.SAVE_MENU:
-		buttons = buttons_save
-		selectors = selectors_save
-	elif current_state == MenuState.SAVE_SLOT_ACTIONS:
-		buttons = buttons_save_data
-		selectors = selectors_save_data
-	elif current_state == MenuState.LOCATION_SELECT:
-		buttons = buttons_location
-		selectors = selectors_location
-
 	# Nascondi tutti i selectors dei menu
 	for group in selectors_main + selectors_save + selectors_location:
 		for sel in group:

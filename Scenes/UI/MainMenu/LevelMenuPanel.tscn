@@ -1,22 +1,19 @@
 [gd_scene format=3 uid="uid://b7rgr1o061kb7"]
 
-[ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/MainMenu/LevelMenu.gd" id="1_so21l"]
-[ext_resource type="PackedScene" uid="uid://de3pdo6kx35dv" path="res://Scenes/UI/MainMenu/BackgroundMenu.tscn" id="2_8ewjc"]
-[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_d7vnq"]
-[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_lf38f"]
-[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_kwl2h"]
-[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="5_kwl2h"]
+[ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/MainMenu/LevelMenuPanel.gd" id="1_76ciu"]
+[ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_r2cwj"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_4swln"]
+[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="4_ytj5h"]
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="5_t6krh"]
 
-[node name="LevelMenu" type="Control" unique_id=344527967]
+[node name="LevelMenuPanel" type="Control" unique_id=344527967]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_so21l")
-
-[node name="BackgroundMenu" parent="." unique_id=2115645484 instance=ExtResource("2_8ewjc")]
+script = ExtResource("1_76ciu")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1345870514]
 layout_mode = 1
@@ -39,7 +36,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=589679699]
 layout_mode = 2
-theme = ExtResource("2_d7vnq")
+theme = ExtResource("2_r2cwj")
 text = "Level Selection"
 
 [node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=2005325546]
@@ -47,7 +44,7 @@ layout_mode = 2
 
 [node name="Location" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer4" unique_id=1842993527]
 layout_mode = 2
-theme = ExtResource("2_d7vnq")
+theme = ExtResource("2_r2cwj")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -74,7 +71,7 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_fonts/font = ExtResource("3_4swln")
 theme_override_font_sizes/font_size = 20
 text = ">"
 horizontal_alignment = 1
@@ -83,7 +80,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("2_lf38f")
+theme_override_fonts/font = ExtResource("4_ytj5h")
 theme_override_font_sizes/font_size = 20
 flat = true
 
@@ -98,7 +95,7 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_fonts/font = ExtResource("3_4swln")
 theme_override_font_sizes/font_size = 25
 text = "Back"
 horizontal_alignment = 1
@@ -111,7 +108,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("5_kwl2h")
+theme = ExtResource("5_t6krh")
 horizontal_alignment = 1
 
 [node name="SelectorR" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=49752706]
@@ -120,7 +117,7 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_kwl2h")
+theme_override_fonts/font = ExtResource("3_4swln")
 theme_override_font_sizes/font_size = 20
 text = " <"
 horizontal_alignment = 1

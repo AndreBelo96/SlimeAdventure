@@ -29,8 +29,6 @@ func setup_selectors() -> void:
 		[$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorL, $MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer4/HBoxContainer/SelectorR],
 		[$MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorL, $MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer5/HBoxContainer/SelectorR],
 	]
-	await get_tree().process_frame
-	store_base_positions()
 
 func handle_selection(index: int) -> void:
 	SoundManager.play_sfx(SFX_CONFIRM)

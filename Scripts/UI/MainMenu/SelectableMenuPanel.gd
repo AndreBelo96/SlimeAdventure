@@ -19,6 +19,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or not input_enabled:
 		return
+	
+	get_viewport().set_input_as_handled()
+	
 	if event.is_action_released("ui_accept"):
 		handle_selection(current_selection)
 	else:
@@ -57,7 +60,6 @@ func change_selection(delta: int) -> void:
 func activate(start_index: int = 0) -> void:
 	visible = true
 	input_enabled = true
-	call_deferred("rebuild_base_positions")
 	for group in selectors:
 		for sel in group:
 			sel.visible = true
@@ -65,6 +67,7 @@ func activate(start_index: int = 0) -> void:
 	set_current_selection(current_selection)
 
 func deactivate() -> void:
+	visible = false
 	input_enabled = false
 	for group in selectors:
 		for sel in group:
@@ -131,16 +134,7 @@ func _start_tween(group: Array) -> void:
 		tween.tween_property(sel, "position", base, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		sel.set_meta("tween", tween)
 
-func store_base_positions() -> void:
+func calibrate_positions() -> void:
 	for group in selectors:
 		for sel in group:
 			base_positions[sel] = sel.position
-
-func rebuild_base_positions() -> void:
-	base_positions.clear()
-	for group in selectors:
-		for sel in group:
-			call_deferred("_store_base_position", sel)
-
-func _store_base_position(sel: Node) -> void:
-	base_positions[sel] = sel.position

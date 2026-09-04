@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bsw22ugqs5tw0" path="res://Scenes/UI/MainMenu/MainMenuPanel.tscn" id="3_tc2ed"]
 [ext_resource type="PackedScene" uid="uid://ewvh78rsx1v0" path="res://Scenes/UI/MainMenu/SaveMenuPanel.tscn" id="4_67d64"]
 [ext_resource type="PackedScene" uid="uid://bwcqvf0cor4f5" path="res://Scenes/UI/MainMenu/LocationMenuPanel.tscn" id="5_6swpd"]
+[ext_resource type="PackedScene" uid="uid://b7rgr1o061kb7" path="res://Scenes/UI/MainMenu/LevelMenuPanel.tscn" id="6_brplp"]
 [ext_resource type="PackedScene" uid="uid://8ie6gpqhyi75" path="res://Scenes/UI/MainMenu/OptionMenu.tscn" id="13_hys1s"]
 
 [node name="MenuRoot" type="Control" unique_id=741361820]
@@ -24,13 +25,13 @@ script = ExtResource("1_wrbul")
 layout_mode = 1
 
 [node name="SaveMenuPanel" parent="." unique_id=1871663573 instance=ExtResource("4_67d64")]
-visible = false
 layout_mode = 1
 
 [node name="LocationMenuPanel" parent="." unique_id=385242201 instance=ExtResource("5_6swpd")]
-visible = false
+layout_mode = 1
+
+[node name="LevelMenuPanel" parent="." unique_id=344527967 instance=ExtResource("6_brplp")]
 layout_mode = 1
 
 [node name="OptionMenu" parent="." unique_id=1067255253 instance=ExtResource("13_hys1s")]
-visible = false
 layout_mode = 1

@@ -84,14 +84,7 @@ func setup_selectors() -> void:
 	selectors_actions_full = [sel_play, sel_delete, sel_back]
 	selectors_actions_empty = [sel_play, sel_back]
 	selectors_actions = selectors_actions_full
-
 	selectors = selectors_slots
-
-	await get_tree().process_frame
-	store_base_positions()
-	for group in selectors_actions:
-		for sel in group:
-			base_positions[sel] = sel.position
 
 func handle_selection(index: int) -> void:
 	if sub_state == SubState.SLOT_SELECT:
@@ -133,7 +126,6 @@ func _enter_slot_actions() -> void:
 
 	buttons = buttons_actions
 	selectors = selectors_actions
-	call_deferred("rebuild_base_positions")
 	for group in selectors:
 		for sel in group:
 			sel.visible = true
@@ -146,7 +138,6 @@ func _enter_slot_select() -> void:
 
 	buttons = buttons_slots
 	selectors = selectors_slots
-	call_deferred("rebuild_base_positions")
 	for group in selectors:
 		for sel in group:
 			sel.visible = true
@@ -159,7 +150,7 @@ func activate(start_index: int = 0) -> void:
 	buttons = buttons_slots
 	selectors = selectors_slots
 	super.activate(start_index)
-
+	
 ## ---- Dati salvataggio ---- ##
 func update_save_data_panel(slot: int) -> void:
 	var data = SaveManager.get_slot_preview(slot)
@@ -227,6 +218,18 @@ func _get_completion_percent(data: Dictionary) -> int:
 	var completed = data.get("levels", {}).size()
 	var total_levels = LocationManager.NUMBER_OF_LEVELS
 	return int((completed / float(total_levels)) * 100)
+
+func calibrate_positions() -> void:
+	for group in selectors_slots:
+		for sel in group:
+			base_positions[sel] = sel.position
+	var was_visible : bool = container_data.visible
+	container_data.visible = true
+	await get_tree().process_frame
+	for group in selectors_actions_full:
+		for sel in group:
+			base_positions[sel] = sel.position
+	container_data.visible = was_visible
 
 ## ---- Delete ---- ##
 func _confirm_delete() -> void:

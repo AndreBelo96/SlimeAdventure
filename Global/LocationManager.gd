@@ -30,6 +30,17 @@ var location_to_tileset_row := {
 	Location.FOREST: 2
 }
 
+var location_background_generator := {
+	Location.TUTORIAL: PanelBackgroundGenerator,
+	Location.DUNGEON: SkullBackgroundGenerator,
+	Location.FOREST: PanelBackgroundGenerator
+}
+
+func get_background_generator_for_level(level: int) -> IBackgroundGenerator:
+	var loc := get_location_for_level(level)
+	var generator_class = location_background_generator.get(loc, PanelBackgroundGenerator)
+	return generator_class.new()
+
 var dark_overlay_service := DarkOverlayService.new()
 
 func get_all_locations() -> Array:
@@ -75,7 +86,7 @@ func is_location_changing(next: int) -> bool:
 	return current_loc != next_loc
 
 func is_dark_level() -> bool:
-	return LevelStateManager.current_level in [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+	return dark_overlay_service.is_dark_level(LevelStateManager.current_level)
 
 func get_dark_overlay_for_level() -> Color:
 	return dark_overlay_service.get_for_level(LevelStateManager.current_level)

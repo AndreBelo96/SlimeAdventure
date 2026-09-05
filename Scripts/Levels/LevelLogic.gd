@@ -85,23 +85,6 @@ func on_player_step(step_count: int):
 	emit_signal("global_step", step_count)
 	switch_spike_handler.on_step_begin()
 	enemy_turn_handler.process_enemies(step_count, get_tree())
-	
-	## --- RESET POST SWITCH ---
-	#if switch_waiting_reset:
-		#if not boss_hit_by_switch:
-			#_reset_switch_and_spikes()
-		#switch_waiting_reset = false
-		#boss_hit_by_switch = false
-	#
-	## --- Movimento nemici ---
-	#for enemy in get_tree().get_nodes_in_group("enemy"):
-		#print("POSIZIONE INIZIALE: " + str(enemy.posizione_tile))
-		#if enemy.should_move(step_count):
-			#print(" -- MOVIMENTO -- ")
-			#enemy.take_turn()
-		#else:
-			#print(" -- POSIZIONE FISSA -- ")
-			#_on_enemy_finished_turn(enemy)
 
 func _on_switch_action_done() -> void:
 	_tiles_phase_done = true

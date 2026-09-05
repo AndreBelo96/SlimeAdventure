@@ -2,25 +2,45 @@
 extends Resource
 class_name DarkOverlayService
 
-
-# Mappa dei livelli -> colore overlay
-const DARK_OVERLAY_BY_LEVEL := {
-	1: Color.WHITE,
-	2: Color.WHITE,
-	3: Color.WHITE,
-	4: Color(0.3, 0.3, 0.3, 1),
-	5: Color(0.3, 0.3, 0.3, 1),
-	6: Color(0.3, 0.3, 0.3, 1),
-	7: Color(0.5, 0.5, 0.5, 1),
-	8: Color(0.5, 0.5, 0.5, 1),
-	9: Color(0.5, 0.5, 0.5, 1),
-	10: Color(0.8, 0.8, 0.8, 1),
-	11: Color(0.8, 0.8, 0.8, 1),
-	12: Color(0.8, 0.8, 0.8, 1),
-	13: Color.WHITE,
+const LEVEL_LIGHTING := {
+	1:  {"dark": false, "color": Color.WHITE,             "sun_toggle": false},
+	2:  {"dark": false, "color": Color.WHITE,             "sun_toggle": false},
+	3:  {"dark": false, "color": Color.WHITE,             "sun_toggle": false},
+	4:  {"dark": true,  "color": Color(0.3, 0.3, 0.3, 1), "sun_toggle": false},
+	5:  {"dark": true,  "color": Color(0.3, 0.3, 0.3, 1), "sun_toggle": false},
+	6:  {"dark": true,  "color": Color(0.3, 0.3, 0.3, 1), "sun_toggle": false},
+	7:  {"dark": true,  "color": Color(0.5, 0.5, 0.5, 1), "sun_toggle": false},
+	8:  {"dark": true,  "color": Color(0.5, 0.5, 0.5, 1), "sun_toggle": false},
+	9:  {"dark": true,  "color": Color(0.5, 0.5, 0.5, 1), "sun_toggle": false},
+	10: {"dark": true,  "color": Color(0.8, 0.8, 0.8, 1), "sun_toggle": false},
+	11: {"dark": true,  "color": Color(0.8, 0.8, 0.8, 1), "sun_toggle": false},
+	12: {"dark": true,  "color": Color(0.8, 0.8, 0.8, 1), "sun_toggle": false},
+	13: {"dark": true,  "color": Color.WHITE,             "sun_toggle": false},
 }
 
-const DEFAULT_COLOR: Color = Color.WHITE
+const DEFAULT_ENTRY := {"dark": false, "color": Color.WHITE, "sun_toggle": false}
+
+var _runtime_overrides: Dictionary = {}
+
+func _get_entry(level: int) -> Dictionary:
+	return LEVEL_LIGHTING.get(level, DEFAULT_ENTRY)
+
+func is_dark_level(level: int) -> bool:
+	if _runtime_overrides.has(level):
+		return _runtime_overrides[level]
+	return _get_entry(level)["dark"]
 
 func get_for_level(level: int) -> Color:
-	return DARK_OVERLAY_BY_LEVEL.get(level, DEFAULT_COLOR)
+	return _get_entry(level)["color"]
+
+func can_toggle_sun(level: int) -> bool:
+	return _get_entry(level)["sun_toggle"]
+
+func override_dark_state(level: int, is_dark: bool) -> void:
+	if not can_toggle_sun(level):
+		push_warning("override_dark_state chiamato su livello %d, che non supporta il toggle sole" % level)
+		return
+	_runtime_overrides[level] = is_dark
+
+func clear_override(level: int) -> void:
+	_runtime_overrides.erase(level)

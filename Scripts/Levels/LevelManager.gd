@@ -93,16 +93,8 @@ func _unhandled_input(event):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		toggle_pause()
 
-func setup_background(): 
-	var generator_instance: IBackgroundGenerator = null 
-	match LocationManager.get_location_for_level(LevelStateManager.current_level): 
-		LocationManager.Location.TUTORIAL: 
-			generator_instance = PanelBackgroundGenerator.new() 
-		LocationManager.Location.DUNGEON: 
-			generator_instance = SkullBackgroundGenerator.new() 
-		_: 
-			generator_instance = PanelBackgroundGenerator.new()
-	
+func setup_background():
+	var generator_instance := LocationManager.get_background_generator_for_level(LevelStateManager.current_level)
 	background_manager.initialize(generator_instance)
 
 func setup_hud():

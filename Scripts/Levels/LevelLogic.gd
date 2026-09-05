@@ -33,6 +33,7 @@ func _ready():
 	enemy_turn_handler.enemy_turn_done.connect(_on_enemy_turn_done)
 	
 	if boss:
+		boss.setup_level_logic(self)
 		boss.connect("finished_turn", Callable(enemy_turn_handler, "on_enemy_finished_turn"))
 		boss.connect("damaged", Callable(self, "_on_boss_damaged"))
 	
@@ -59,6 +60,8 @@ func _connect_all_tiles() -> void:
 		if child is TileBase:
 			if not child.is_connected("tile_triggered", Callable(self, "_on_tile_triggered")):
 				child.connect("tile_triggered", Callable(self, "_on_tile_triggered"))
+			if child.has_method("setup_level_logic"):
+				child.setup_level_logic(self)
 
 func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 	match action:

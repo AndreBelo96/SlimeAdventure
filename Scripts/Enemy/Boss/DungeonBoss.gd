@@ -6,6 +6,8 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @export var ceiling_debris_scene: PackedScene
 @export var warning_tile_scene: PackedScene
 @export var attack_impact_frame := 3
+@export var movement_map: TileMapLayer
+@export var visual_map: TileMapLayer
 
 var steps_to_trigger = 3
 var _warning_pending := false
@@ -16,8 +18,6 @@ var boss_breath := BossBreath.new()
 
 @onready var sprite := $Animation
 @onready var slime := get_tree().get_first_node_in_group("player")
-@onready var movement_map := $"../../MovementLogicMapLayer"
-@onready var visual_map := $"../../TileMapLayer"
 @onready var camera := get_viewport().get_camera_2d()
 
 func _ready():

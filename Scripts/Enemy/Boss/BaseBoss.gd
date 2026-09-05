@@ -28,7 +28,8 @@ var posizione_tile: Vector2i
 @onready var health := HealthComponent.new()
 @onready var grid_movement := GridMovement.new()
 @onready var animation: AnimatedSprite2D = $Animation
-@onready var level_logic = get_tree().get_first_node_in_group("level_logic")
+
+var level_logic = null
 
 func _ready():
 	add_to_group("enemy")
@@ -40,6 +41,9 @@ func _ready():
 func setup_health(starting_life: int) -> void:
 	health.setup(starting_life)
 	vita = health.life
+
+func setup_level_logic(_level_logic) -> void:
+	level_logic = _level_logic
 
 ## Da chiamare dalle classi figlie in _ready() per inizializzare la griglia.
 func setup_grid(_tilemap: TileMapLayer, center_offset: Vector2, start_pos: Vector2i, movement_map: TileMapLayer = null, visual_map: TileMapLayer = null) -> void:

@@ -43,7 +43,10 @@ tile_map_data = PackedByteArray("AAAaAOb/AAADAAAAAQAaAOP/AAADAAAAAQA=")
 [node name="PickupMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="5" unique_id=98613881]
 tile_map_data = PackedByteArray("AAAdAPT/AAAAAAAAAwAXAPL/AAAAAAAAAwAEAO3/AAAAAAAAAwALAO7/AAAAAAAAAwAQAO3/AAAAAAAAAwA=")
 
-[node name="DungeonBoss" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="9" unique_id=395184957 node_paths=PackedStringArray("tilemap") instance=ExtResource("3_4x05o")]
+[node name="DungeonBoss" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="9" unique_id=395184957 node_paths=PackedStringArray("movement_map", "visual_map", "tilemap") instance=ExtResource("3_4x05o")]
+attack_impact_frame = 3
+movement_map = NodePath("../../MovementLogicMapLayer")
+visual_map = NodePath("../../TileMapLayer")
 tilemap = NodePath("../../TileMapLayer")
 
 [node name="TorchMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="10" unique_id=680211866]

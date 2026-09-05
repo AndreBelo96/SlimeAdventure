@@ -14,24 +14,6 @@ signal dialogue_finished
 
 const DIALOG_PANEL_STYLE = preload("res://Theme/DialogueInterface/dialogue_panel.tres")
 
-var location_colors := {
-	LocationManager.Location.TUTORIAL: {
-		"border": Color("#dcdcdc"),
-		"name": Color("#959595"),
-		"text": Color("#dcdcdc")
-	},
-	LocationManager.Location.DUNGEON: {
-		"border": Color("#adb4cb"),
-		"name": Color("#38477a"),
-		"text": Color("#adb4cb")
-	},
-	LocationManager.Location.FOREST: {
-		"border": Color("#43a047"),
-		"name": Color("#1b5e20"),
-		"text": Color("#2e7d32")
-	}
-}
-
 # Velocità tween
 const TWEEN_TIME := 0.5
 
@@ -205,10 +187,8 @@ func _scale_out():
 
 ### --- Location color --- ###
 func _apply_location_theme():
-	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
-	var theme_data = location_colors.get(location, null)
-	
-	if theme_data == null:
+	var theme_data := ThemeManager.get_accent_colors_for_level(LevelStateManager.current_level)
+	if theme_data.is_empty():
 		return
 	
 	var border_potrait = $MarginContainer/PanelContainer/HBoxContainer/PanelPotrait

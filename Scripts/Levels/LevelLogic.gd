@@ -39,22 +39,6 @@ func _ready():
 	
 	call_deferred("_connect_all_tiles")
 
-# ------ Enemy ------ #
-func apply_tile_effect_to_enemy(enemy: EnemyBase, pos: Vector2i):
-	print(" - TILE EFFECT - ")
-	var tile = get_tile_under_enemy(pos)
-	if tile and tile.has_method("on_enemy_enter"):
-		print("TILE EXIST AT POS: " + str(pos))
-		tile.on_enemy_enter(enemy)
-
-func get_tile_under_enemy(pos: Vector2i) -> TileBase:
-	var target_world_pos = tile_layer.to_global(tile_layer.map_to_local(pos))
-	for child in tile_layer.get_children():
-		if child is TileBase:
-			if child.global_position.distance_to(target_world_pos) < 1.0:
-				return child
-	return null
-
 func _connect_all_tiles() -> void:
 	for child in tile_layer.get_children():
 		if child is TileBase:

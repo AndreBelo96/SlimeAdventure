@@ -13,18 +13,6 @@ extends BaseMenu
 @onready var image_container = $MarginContainer/VBoxContainer/HBoxContainer/Control
 @onready var image = $MarginContainer/VBoxContainer/HBoxContainer/Control/AnimatedSprite2D
 
-var location_bg_colors := {
-	LocationManager.Location.TUTORIAL: {
-		"name": Color("4a4a4aff")
-	},
-	LocationManager.Location.DUNGEON: {
-		"name": Color("#0f121a")
-	},
-	LocationManager.Location.FOREST: {
-		"name": Color("124616ff")
-	}
-}
-
 func _ready():
 	setup_languages()
 	setup_buttons()
@@ -150,10 +138,4 @@ func animate_image():
 	image.play("Death")
 
 func _apply_location_theme():
-	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
-	var theme_data = location_bg_colors.get(location, null)
-	
-	if theme_data == null:
-		return
-	
-	$ColorRect.color = theme_data["name"]
+	$ColorRect.color = ThemeManager.get_result_bg_color_for_level(LevelStateManager.current_level)

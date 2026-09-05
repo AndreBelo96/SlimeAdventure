@@ -25,18 +25,6 @@ extends BaseMenu
 
 var isRecordBool := false
 
-var location_bg_colors := {
-	LocationManager.Location.TUTORIAL: {
-		"name": Color("4a4a4aff")
-	},
-	LocationManager.Location.DUNGEON: {
-		"name": Color("#0f121a")
-	},
-	LocationManager.Location.FOREST: {
-		"name": Color("124616ff")
-	}
-}
-
 func _ready():
 	setup_languages()
 	setup_buttons()
@@ -231,11 +219,5 @@ func animate_record(tween):
 		tween.tween_property(record_container, "scale", Vector2(1.3, 1.3), 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tween.tween_property(record_container, "scale", Vector2(1,1), 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
-func _apply_location_theme():  #TODO se sono nell'ultimo livello, mi carica il colore del prossimo livello
-	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
-	var theme_data = location_bg_colors.get(location, null)
-
-	if theme_data == null:
-		return
-
-	$ColorRect.color = theme_data["name"]
+func _apply_location_theme():
+	$ColorRect.color = ThemeManager.get_result_bg_color_for_level(LevelStateManager.current_level)

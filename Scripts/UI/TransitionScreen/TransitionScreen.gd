@@ -12,18 +12,6 @@ extends Control
 @onready var title_label = $MarginContainer/VBoxContainer/Titolo
 @onready var loading_label = $MarginContainer/VBoxContainer/Caricamento
 
-var location_colors := {
-	LocationManager.Location.TUTORIAL: {
-		"name": Color("#959595")
-	},
-	LocationManager.Location.DUNGEON: {
-		"name": Color("#38477a")
-	},
-	LocationManager.Location.FOREST: {
-		"name": Color("#1b5e20"),
-	}
-}
-
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
@@ -60,7 +48,6 @@ func _ready():
 
 	queue_free()
 
-
 func _setup_languages():
 	enter_label.text = tr("TRANSATION_ENTER")
 	title_label.text = tr(LocationManager.location_translation_keys[LocationManager.get_location_for_level(LevelStateManager.current_level)])
@@ -73,12 +60,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _apply_location_theme():
-	var location = LocationManager.get_location_for_level(LevelStateManager.current_level)
-	var theme_data = location_colors.get(location, null)
-	
-	if theme_data == null:
+	var theme_data := ThemeManager.get_accent_colors_for_level(LevelStateManager.current_level)
+	if theme_data.is_empty():
 		return
-	# Cambiare background nome
 	enter_label.add_theme_color_override("font_color", theme_data["name"])
 	title_label.add_theme_color_override("font_color", theme_data["name"])
 	loading_label.add_theme_color_override("font_color", theme_data["name"])

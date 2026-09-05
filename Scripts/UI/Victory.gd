@@ -1,10 +1,5 @@
-extends BaseMenu
+extends BaseResultScreen
 
-@onready var root = $MarginContainer
-
-@onready var title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
-
-@onready var title = $MarginContainer/VBoxContainer/CenterContainer/Title
 @onready var next_level = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next/Next
 @onready var retry = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/Retry/Retry
 @onready var level_selection = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection/BackLevelSelection
@@ -18,7 +13,6 @@ extends BaseMenu
 @onready var best_steps = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestSteps
 @onready var best_time = $MarginContainer/VBoxContainer/HBoxContainer3/Points/Best/BestTime
 
-@onready var buttons_container  = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer
 @onready var results_container = $MarginContainer/VBoxContainer/HBoxContainer3/Points
 @onready var record = $MarginContainer/VBoxContainer/HBoxContainer/Record
 @onready var record_container = $MarginContainer/VBoxContainer/HBoxContainer
@@ -26,6 +20,11 @@ extends BaseMenu
 var isRecordBool := false
 
 func _ready():
+	root = $MarginContainer
+	title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
+	title = $MarginContainer/VBoxContainer/CenterContainer/Title
+	buttons_container = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer
+	
 	setup_languages()
 	setup_buttons()
 	setup_selectors()
@@ -157,15 +156,6 @@ func prepare_enter_animation():
 	for child in buttons_container.get_children():
 		child.modulate.a = 0.0
 
-func animate_title_slime(tween):
-	title.modulate.a = 1.0
-	tween.tween_property(title_wrapper, "scale", Vector2(1.25, 1.25), 0.35)\
-		.set_trans(Tween.TRANS_BACK)\
-		.set_ease(Tween.EASE_OUT)
-	tween.tween_property(title_wrapper, "scale", Vector2(1, 1), 0.4)\
-		.set_trans(Tween.TRANS_ELASTIC)\
-		.set_ease(Tween.EASE_OUT)
-
 func animate_results(tween):
 	for child in results_container.get_children():
 		tween.tween_property(child, "modulate:a", 1.0, 0.35)\
@@ -173,37 +163,10 @@ func animate_results(tween):
 			.set_ease(Tween.EASE_OUT)
 		tween.tween_interval(0.08)
 
-func animate_buttons(tween):
-	for child in buttons_container.get_children():
-		tween.parallel().tween_property(child, "modulate:a", 1.0, 0.3)
-		tween.parallel().tween_property(child, "position:y",
-			child.position.y - 20, 0.4)\
-			.set_trans(Tween.TRANS_BACK)\
-			.set_ease(Tween.EASE_OUT)
-		tween.tween_interval(0.1)
-
-func animate_screen_exit() -> void:
-	var tween = create_tween()
-	# --- titolo slime squash ---
-	tween.parallel().tween_property(title_wrapper, "scale", Vector2(1.2, 0.8), 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(title_wrapper, "scale", Vector2(0.0, 0.0), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(title, "modulate:a", 0.0, 0.2)
-
-	# --- risultati fade out ---
+func _animate_screen_exit_extra(tween: Tween) -> void:
 	for child in results_container.get_children():
 		tween.parallel().tween_property(child, "modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		tween.parallel().tween_property(child, "position:y", child.position.y + 10, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-
-	# --- bottoni scendono e spariscono ---
-	for child in buttons_container.get_children():
-		tween.parallel().tween_property(child, "modulate:a", 0.0, 0.25)
-		tween.parallel().tween_property(child, "position:y", child.position.y + 20, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-
-	# --- shrink globale leggero ---
-	tween.parallel().tween_property(root, "scale", Vector2(0.92, 0.92), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(root, "modulate:a", 0.0, 0.3)
-
-	await tween.finished
 
 func animate_record(tween):
 	record_container.modulate.a = 0.0

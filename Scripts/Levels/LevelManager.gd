@@ -94,7 +94,7 @@ func _unhandled_input(event):
 		toggle_pause()
 
 func setup_background():
-	var generator_instance := LocationManager.get_background_generator_for_level(LevelStateManager.current_level)
+	var generator_instance : IBackgroundGenerator = LocationManager.get_background_generator_for_level(LevelStateManager.current_level)
 	background_manager.initialize(generator_instance)
 
 func setup_hud():

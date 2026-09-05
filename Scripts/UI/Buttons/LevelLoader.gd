@@ -1,14 +1,6 @@
 class_name LevelLoader
 extends Object
 
-const THEME_TUTORIAL := preload("res://Theme/Button/TutorialButton.tres")
-const THEME_DUNGEON := preload("res://Theme/Button/DungeonButton.tres")
-const THEME_DEFAULT := preload("res://Theme/DefaultButton.tres")
-
-const SOUND_TUTORIAL := "res://Assets/Audio/Sound/TutorialBtnClick.wav"
-const SOUND_DUNGEON := "res://Assets/Audio/Sound/TutorialBtnClick.wav" #TODO da fare
-const SOUND_DEFAULT := "res://Assets/Audio/Sound/DefaultBtnClick.wav"
-
 const ALL_LEVELS := [
 	"Level1.tscn",
 	"Level2.tscn",
@@ -34,28 +26,10 @@ func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 			"number": num,
 			"path": "res://Scenes/Levels/" + file,
 			"disabled": num > LevelStateManager.max_level_reach,
-			"theme": get_theme_for_location(loc),
-			"sound": get_sound_for_location(loc)
+			"theme": ThemeManager.get_theme_for_location_type(loc),
+			"sound": ThemeManager.get_sound_for_location_type(loc)
 		})
 	return levels_info
-
-func get_sound_for_location(loc: int) -> String:
-	match loc:
-		LocationManager.Location.TUTORIAL:
-			return SOUND_TUTORIAL
-		LocationManager.Location.DUNGEON:
-			return SOUND_DUNGEON
-		_:
-			return SOUND_DEFAULT
-
-func get_theme_for_location(loc: int) -> Theme:
-	match loc:
-		LocationManager.Location.TUTORIAL:
-			return THEME_TUTORIAL
-		LocationManager.Location.DUNGEON:
-			return THEME_DUNGEON
-		_:
-			return THEME_DEFAULT
 
 func get_levels_for_location(loc: int) -> Array[String]:
 

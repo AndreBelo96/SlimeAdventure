@@ -1,19 +1,18 @@
-extends BaseMenu
+extends BaseResultScreen
 
-@onready var root = $MarginContainer
-
-@onready var title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
-
-@onready var title = $MarginContainer/VBoxContainer/CenterContainer/Title
 @onready var retry = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart/Restart
 @onready var level_selection = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection/BackLevelSelection
 @onready var back_menu = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu/BackMainMenu
 
-@onready var buttons_container  = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer
 @onready var image_container = $MarginContainer/VBoxContainer/HBoxContainer/Control
 @onready var image = $MarginContainer/VBoxContainer/HBoxContainer/Control/AnimatedSprite2D
 
 func _ready():
+	root = $MarginContainer
+	title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
+	title = $MarginContainer/VBoxContainer/CenterContainer/Title
+	buttons_container = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer
+	
 	setup_languages()
 	setup_buttons()
 	setup_selectors()
@@ -89,39 +88,6 @@ func prepare_enter_animation():
 	title.modulate.a = 0.0
 	for child in buttons_container.get_children():
 		child.modulate.a = 0.0
-
-func animate_title_slime(tween):
-	title.modulate.a = 1.0
-	tween.tween_property(title_wrapper, "scale", Vector2(1.25, 1.25), 0.35)\
-		.set_trans(Tween.TRANS_BACK)\
-		.set_ease(Tween.EASE_OUT)
-	tween.tween_property(title_wrapper, "scale", Vector2(1, 1), 0.4)\
-		.set_trans(Tween.TRANS_ELASTIC)\
-		.set_ease(Tween.EASE_OUT)
-
-func animate_buttons(tween):
-	for child in buttons_container.get_children():
-		tween.parallel().tween_property(child, "modulate:a", 1.0, 0.3)
-		tween.parallel().tween_property(child, "position:y", child.position.y - 20, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tween.tween_interval(0.1)
-
-func animate_screen_exit() -> void:
-	var tween = create_tween()
-	# --- titolo slime squash ---
-	tween.parallel().tween_property(title_wrapper, "scale", Vector2(1.2, 0.8), 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(title_wrapper, "scale", Vector2(0.0, 0.0), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(title, "modulate:a", 0.0, 0.2)
-
-	# --- bottoni scendono e spariscono ---
-	for child in buttons_container.get_children():
-		tween.parallel().tween_property(child, "modulate:a", 0.0, 0.25)
-		tween.parallel().tween_property(child, "position:y", child.position.y + 20, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-
-	# --- shrink globale leggero ---
-	tween.parallel().tween_property(root, "scale", Vector2(0.92, 0.92), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(root, "modulate:a", 0.0, 0.3)
-
-	await tween.finished
 
 func animate_image():
 	image_container.modulate.a = 0.0

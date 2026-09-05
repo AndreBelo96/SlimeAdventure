@@ -27,15 +27,13 @@ func _calibrate_all() -> void:
 	main_panel.visible = true
 	save_panel.visible = true
 	location_panel.visible = true
+	option_menu.visible = false
 	await get_tree().process_frame
 	main_panel.calibrate_positions()
-	await save_panel.calibrate_positions()
+	save_panel.calibrate_positions()
 	location_panel.calibrate_positions()
 	save_panel.visible = false
 	location_panel.visible = false
-	# level_panel NON si pre-calibra qui: non ha bottoni finché non viene
-	# scelta una location. Si autocalibra da solo dentro activate()
-	# (_reload_level_buttons), ogni volta che viene mostrato.
 
 func _show_initial_panel() -> void:
 	if SceneNavigator.menu_state == PanelState.LOCATION:

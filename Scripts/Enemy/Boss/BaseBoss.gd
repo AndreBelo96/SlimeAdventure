@@ -50,13 +50,10 @@ func should_move(_step_count: int) -> bool:
 	return true
 
 func take_turn():
-	pass
-
-func on_step(_step_count: int):
-	pass
+	push_error("EnemyBase.take_turn() non implementato in %s" % self)
 
 func breath():
-	pass
+	pass  # hook opzionale: non tutti i nemici hanno un'animazione di "respiro" idle
 
 ## Le classi figlie che usano ChaseBehavior devono implementarlo (es. posizione del player).
 func get_target_position() -> Vector2i:
@@ -88,7 +85,7 @@ func take_damage(dmg: int):
 		die()
 
 func damage_animation():
-	pass
+	pass  # hook opzionale: non tutti i nemici hanno un feedback visivo al danno
 
 func die():
 	if state == BossState.DEAD:
@@ -99,7 +96,7 @@ func die():
 	emit_signal("defeated")
 
 func change_steps():
-	pass
+	pass  # hook opzionale: non tutti i nemici modificano il proprio timing quando colpiti
 
 func activate():
 	active = true

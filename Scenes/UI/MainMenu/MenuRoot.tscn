@@ -25,13 +25,17 @@ script = ExtResource("1_wrbul")
 layout_mode = 1
 
 [node name="SaveMenuPanel" parent="." unique_id=1871663573 instance=ExtResource("4_67d64")]
+visible = false
 layout_mode = 1
 
 [node name="LocationMenuPanel" parent="." unique_id=385242201 instance=ExtResource("5_6swpd")]
+visible = false
 layout_mode = 1
 
 [node name="LevelMenuPanel" parent="." unique_id=344527967 instance=ExtResource("6_brplp")]
+visible = false
 layout_mode = 1
 
 [node name="OptionMenu" parent="." unique_id=1067255253 instance=ExtResource("13_hys1s")]
+visible = false
 layout_mode = 1

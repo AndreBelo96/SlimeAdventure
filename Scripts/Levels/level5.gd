@@ -4,25 +4,14 @@ func _ready():
 	ambient_preset = AudioPresets.DUNGEON_AMBIENT
 	music_track = AudioPresets.DUNGEON_MUSIC
 	music_autoplay = false
-	
+
 	super._ready()
 	set_current_level_number(5)
 	victory_mode = VictoryMode.TILES
+
+	await play_intro([
+		dlg("Slime", "SLIME_LVL_5_TXT_1", "Slime_Sunglasses", "res://Assets/Audio/Sound/Voice/SlimeVoice.wav", VoiceManager.SLIME)
+	], 0.2)
 	
-	await get_tree().create_timer(0.2).timeout
-	
-	var intro_dialogue = [
-		{
-			"name": "Slime", 
-			"text": tr("SLIME_LVL_5_TXT_1"),
-			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
-			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
-		}
-	]
-	
-	dialog_interface.show_dialogue(intro_dialogue)
-	await dialog_interface.dialogue_finished
 	time_running = true
-	
 	SoundManager.play_music(music_track)

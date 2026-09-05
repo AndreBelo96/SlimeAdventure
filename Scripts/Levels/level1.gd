@@ -4,17 +4,9 @@ func _ready():
 	super._ready()
 	set_current_level_number(1)
 	victory_mode = VictoryMode.TILES
+
+	await play_intro([
+		dlg("Nonno Slime", "GRANDPA_LVL_1_TXT_1", "Nonno", "res://Assets/Audio/Sound/Voice/GranpaVoice.wav", VoiceManager.NONNO)
+	])
 	
-	var intro_dialogue = [
-		{
-			"name": "Nonno Slime", 
-			"text": tr("GRANDPA_LVL_1_TXT_1"),
-			"portrait": PortraitManager.get_portrait("Nonno"),
-			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
-			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
-		}
-	]
-	
-	dialog_interface.show_dialogue(intro_dialogue)
-	await dialog_interface.dialogue_finished
 	time_running = true

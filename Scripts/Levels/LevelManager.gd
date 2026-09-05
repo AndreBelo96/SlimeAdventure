@@ -34,7 +34,6 @@ var ambient_preset: Array[Dictionary] = []
 var music_track: String = ""
 var music_autoplay := true
 
-
 func _ready():
 	time_running = false
 	GameLogger.info("Inizio livello %d" % LevelStateManager.current_level)
@@ -234,3 +233,21 @@ func spawn_effect_for_theme():
 	if fog_istance:
 		var effect = fog_istance.instantiate()
 		$Camera2D/Effects.add_child(effect)
+
+func dlg(character_name: String, text_key: String, portrait_key: String, voice_path: String, voice_character: String) -> Dictionary:
+	return {
+		"name": character_name,
+		"text": tr(text_key),
+		"portrait": PortraitManager.get_portrait(portrait_key),
+		"voice": voice_path,
+		"voice_speed": VoiceManager.get_speed(voice_character)
+	}
+
+func play_intro(lines: Array, delay_before: float = 0.0) -> void:
+	if delay_before > 0.0:
+		await get_tree().create_timer(delay_before).timeout
+	dialog_interface.show_dialogue(lines)
+	await dialog_interface.dialogue_finished
+	time_running = true
+	if not music_autoplay and music_track != "":
+		SoundManager.play_music(music_track)

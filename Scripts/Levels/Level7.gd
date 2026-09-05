@@ -9,33 +9,11 @@ func _ready():
 	set_current_level_number(7)
 	victory_mode = VictoryMode.TILES
 	
+	await play_intro([
+		dlg("Slime", "SLIME_LVL_7_TXT_1", "Slime_Sunglasses", "res://Assets/Audio/Sound/Voice/SlimeVoice.wav", VoiceManager.SLIME),
+		dlg("Slime", "SLIME_LVL_7_TXT_2", "Slime_Sunglasses", "res://Assets/Audio/Sound/Voice/GranpaVoice.wav", VoiceManager.NONNO),
+		dlg("Slime", "SLIME_LVL_7_TXT_3", "Slime_Sunglasses", "res://Assets/Audio/Sound/Voice/SlimeVoice.wav", VoiceManager.SLIME),
+	])
 	
-	var intro_dialogue = [
-		{
-			"name": "Slime", 
-			"text": tr("SLIME_LVL_7_TXT_1"),
-			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
-			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
-		},
-		{
-			"name": "Slime", 
-			"text": tr("SLIME_LVL_7_TXT_2"),
-			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Sound/Voice/GranpaVoice.wav",
-			"voice_speed":  VoiceManager.get_speed(VoiceManager.NONNO)
-		},
-		{
-			"name": "Slime", 
-			"text": tr("SLIME_LVL_7_TXT_3"),
-			"portrait": PortraitManager.get_portrait("Slime_Sunglasses"),
-			"voice": "res://Assets/Audio/Sound/Voice/SlimeVoice.wav",
-			"voice_speed": VoiceManager.get_speed(VoiceManager.SLIME)
-		},
-	]
-	
-	dialog_interface.show_dialogue(intro_dialogue)
-	await dialog_interface.dialogue_finished
 	time_running = true
-	
 	SoundManager.play_music(music_track)

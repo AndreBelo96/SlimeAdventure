@@ -1,0 +1,286 @@
+[gd_scene format=3 uid="uid://btr07cucc5rnv"]
+
+[ext_resource type="Script" uid="uid://32j4oc0owwxb" path="res://Scripts/UI/MainMenu/SlotSelectPanel.gd" id="1_php1t"]
+[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_s42ws"]
+[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_php1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_php1t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="SlotSelectPanel" type="PanelContainer" unique_id=1648413444]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -77.5
+offset_right = 84.0
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_php1t")
+script = ExtResource("1_php1t")
+
+[node name="SlotSelectPanel" type="VBoxContainer" parent="." unique_id=480098528]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="SlotSelectPanel" unique_id=1585789486]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotSelectPanel/CenterContainer" unique_id=1109394020]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotSelectPanel/CenterContainer/HBoxContainer" unique_id=1343433348]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotSelectPanel/CenterContainer/HBoxContainer" unique_id=148155706]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Save1" type="Label" parent="SlotSelectPanel/CenterContainer/HBoxContainer/Button" unique_id=1155791068]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 20
+text = "Save 1"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotSelectPanel/CenterContainer/HBoxContainer" unique_id=1513876299]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="SlotSelectPanel" unique_id=1415028425]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotSelectPanel/CenterContainer2" unique_id=258798693]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotSelectPanel/CenterContainer2/HBoxContainer" unique_id=762830872]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotSelectPanel/CenterContainer2/HBoxContainer" unique_id=1020550774]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_php1t")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Save2" type="Label" parent="SlotSelectPanel/CenterContainer2/HBoxContainer/Button" unique_id=1708905198]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 20
+text = "Save 2"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotSelectPanel/CenterContainer2/HBoxContainer" unique_id=492219890]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="SlotSelectPanel" unique_id=1901017990]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotSelectPanel/CenterContainer3" unique_id=1957242927]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotSelectPanel/CenterContainer3/HBoxContainer" unique_id=1750994098]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotSelectPanel/CenterContainer3/HBoxContainer" unique_id=1659823339]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_php1t")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Save3" type="Label" parent="SlotSelectPanel/CenterContainer3/HBoxContainer/Button" unique_id=1710784066]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 20
+text = "Save 3"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotSelectPanel/CenterContainer3/HBoxContainer" unique_id=597553317]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer4" type="CenterContainer" parent="SlotSelectPanel" unique_id=109569969]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotSelectPanel/CenterContainer4" unique_id=1847763142]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotSelectPanel/CenterContainer4/HBoxContainer" unique_id=1412710743]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotSelectPanel/CenterContainer4/HBoxContainer" unique_id=1039897639]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_php1t")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Save4" type="Label" parent="SlotSelectPanel/CenterContainer4/HBoxContainer/Button" unique_id=1507317401]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 20
+text = "Save 4"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotSelectPanel/CenterContainer4/HBoxContainer" unique_id=2094474757]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1
+
+[node name="CenterContainer5" type="CenterContainer" parent="SlotSelectPanel" unique_id=1332351018]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotSelectPanel/CenterContainer5" unique_id=799587911]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotSelectPanel/CenterContainer5/HBoxContainer" unique_id=692638185]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotSelectPanel/CenterContainer5/HBoxContainer" unique_id=1421750822]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_php1t")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="SlotSelectPanel/CenterContainer5/HBoxContainer/Button" unique_id=1543910606]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 20
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotSelectPanel/CenterContainer5/HBoxContainer" unique_id=645969664]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("1_s42ws")
+theme_override_font_sizes/font_size = 15
+text = " <"
+horizontal_alignment = 1

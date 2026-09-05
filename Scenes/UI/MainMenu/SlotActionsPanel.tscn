@@ -1,0 +1,198 @@
+[gd_scene format=3 uid="uid://ugvdwks7dkx8"]
+
+[ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_kqp4a"]
+[ext_resource type="Script" uid="uid://c53smkf10xfh3" path="res://Scripts/UI/MainMenu/SlotActionsPanel.gd" id="1_rh6q5"]
+[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_rh6q5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rh6q5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1v0x"]
+bg_color = Color(0, 0, 0, 0.45882353)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.8666667)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="SlotActionsPanel" type="PanelContainer" unique_id=1756911805]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rh6q5")
+script = ExtResource("1_rh6q5")
+
+[node name="SlotActionsPanel" type="MarginContainer" parent="." unique_id=830067551]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="PanelContainer" parent="SlotActionsPanel" unique_id=348801387]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_k1v0x")
+
+[node name="MarginContainer" type="MarginContainer" parent="SlotActionsPanel/Panel" unique_id=56633776]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer" unique_id=1467270304]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Title" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer" unique_id=403049537]
+layout_mode = 2
+theme = ExtResource("1_kqp4a")
+text = "Titolo"
+horizontal_alignment = 1
+
+[node name="DataContainer" type="VBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1542969297]
+layout_mode = 2
+
+[node name="LastPlayed" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=1353760559]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Last Played: 14/03/2026"
+
+[node name="PlayTime" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=1274272339]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play time: 13m 36s"
+
+[node name="LvlReach" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=651652135]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level reached: 14"
+
+[node name="BtnContainer" type="VBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1280153160]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer" unique_id=1617372248]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer" unique_id=296408862]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer" unique_id=953018886]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_rh6q5")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Play" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer/Button" unique_id=985968491]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer" unique_id=1484782724]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer" unique_id=1729175894]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=755329]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=988380636]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_rh6q5")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Delete" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2/Button" unique_id=543134385]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
+text = "Delete"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2" unique_id=558039906]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8156863, 0.050980393, 0.08627451, 1)
+theme_override_font_sizes/font_size = 17
+text = " <"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer" unique_id=220324491]
+layout_mode = 2
+
+[node name="SelectorL" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=384513419]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = ">"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=806846012]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_rh6q5")
+theme_override_font_sizes/font_size = 20
+flat = true
+
+[node name="Back" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer3/Button" unique_id=1080222963]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+horizontal_alignment = 1
+
+[node name="SelectorR" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer3" unique_id=1854820167]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = " <"
+horizontal_alignment = 1

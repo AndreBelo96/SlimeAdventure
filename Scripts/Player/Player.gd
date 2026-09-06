@@ -21,6 +21,8 @@ var steps: int = 0
 var input_enabled := true
 var is_cutscene := false 
 var grid_position: Vector2i
+var _input_lock_count : int = 0
+var _terminal_state := false
 
 @onready var tile_map_layer
 @onready var pickup_map_layer
@@ -133,10 +135,12 @@ func exit_cutscene() -> void:
 	unlock_input()
 
 func on_player_won():
+	_terminal_state = true
 	input_enabled = false
 	emit_signal("player_won")
 
 func on_player_died(death_type: int):
+	_terminal_state = true
 	input_enabled = false
 	
 	if death_type == DEATH.VOID:
@@ -165,12 +169,15 @@ func get_required_node(path: NodePath, description: String) -> Node:
 	return node
 
 func lock_input() -> void:
+	_input_lock_count += 1
 	input_enabled = false
 	can_move = false
 
 func unlock_input() -> void:
-	input_enabled = true
-	can_move = true
+	_input_lock_count = max(_input_lock_count - 1, 0)
+	if _input_lock_count == 0 and not _terminal_state:
+		input_enabled = true
+		can_move = true
 
 func force_move(dir: Vector2i) -> void:
 	if movement_handler.is_moving:

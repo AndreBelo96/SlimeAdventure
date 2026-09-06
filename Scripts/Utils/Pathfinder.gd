@@ -5,6 +5,9 @@ var movement_map: TileMapLayer
 var visual_map: TileMapLayer
 var DIRECTION_BITS: Dictionary
 
+var _tile_cache: Dictionary = {}
+var _tile_cache_built := false
+
 func _init(_movement_map: TileMapLayer, _visual_map: TileMapLayer, _direction_bits: Dictionary):
 	movement_map = _movement_map
 	visual_map = _visual_map
@@ -112,13 +115,21 @@ func get_tile_cost(pos: Vector2i) -> int:
 func get_tile_instance_at(pos: Vector2i) -> TileBase:
 	if visual_map == null:
 		return null
+	if not _tile_cache_built:
+		_build_tile_cache()
+	return _tile_cache.get(pos, null)
 
-	var world_pos = visual_map.map_to_local(pos) + visual_map.global_position
+func _build_tile_cache() -> void:
+	_tile_cache.clear()
 	for child in visual_map.get_children():
 		if child is TileBase:
-			if child.global_position.distance_to(world_pos) < 1.0:
-				return child
-	return null
+			var local_pos = child.global_position - visual_map.global_position
+			var grid_pos = visual_map.local_to_map(local_pos)
+			_tile_cache[grid_pos] = child
+	_tile_cache_built = true
+
+func invalidate_tile_cache() -> void:
+	_tile_cache_built = false
 
 func heuristic(a: Vector2i, b: Vector2i) -> int:
 	return abs(a.x - b.x) + abs(a.y - b.y)

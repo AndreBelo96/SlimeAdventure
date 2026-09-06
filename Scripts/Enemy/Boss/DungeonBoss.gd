@@ -90,6 +90,8 @@ func _start_move():
 ### ------- Take Dmg ------- ###
 
 func damage_animation():
+	slime.lock_input()
+	
 	animation.modulate = Color(2, 2, 2)
 	await get_tree().create_timer(0.2).timeout
 	animation.modulate = Color(1, 1, 1)
@@ -104,6 +106,9 @@ func damage_animation():
 	tween.tween_property(self, "position:y", position.y, 0.2)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN)
+	
+	await tween.finished
+	slime.unlock_input()
 
 func change_steps():
 	steps_to_trigger = max(1, steps_to_trigger - 1)

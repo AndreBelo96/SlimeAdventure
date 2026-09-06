@@ -63,41 +63,45 @@ func stop_music():
 	music_player.stop()
 	current_music_path = ""
 
-func play_sfx(path: String, volume_db: float = 0.0):
+func play_sfx(path: String, volume_db: float = 0.0, pitch_variation: float = 0.0) -> void:
 	var stream = load(path)
 	if not stream:
 		push_warning("SFX file not found: %s" % path)
 		return
 
+	var pitch := 1.0
+	if pitch_variation > 0.0:
+		pitch = randf_range(1.0 - pitch_variation, 1.0 + pitch_variation)
+
 	for p in sfx_players:
 		if not p.playing:
 			p.stream = stream
 			p.volume_db = volume_db
-			#p.pitch_scale = randf_range(0.95, 1.05)
+			p.pitch_scale = pitch
 			p.play()
 			return
-	
-	#pitch da metteree, ma -> servono preset dei suoni - fai la firma del metodo
-	
+
 	sfx_players[0].stream = stream
 	sfx_players[0].volume_db = volume_db
-	#sfx_players[0].pitch_scale = randf_range(0.95, 1.05)
+	sfx_players[0].pitch_scale = pitch
 	sfx_players[0].play()
 
-func play_environment(path: String):
+func play_environment(path: String, pitch_variation: float = 0.0) -> void:
 	var stream = load(path)
 	if not stream:
 		push_warning("ENV file not found: %s" % path)
 		return
-	
+
+	var pitch := 1.0
+	if pitch_variation > 0.0:
+		pitch = randf_range(1.0 - pitch_variation, 1.0 + pitch_variation)
+
 	for p in environment_players:
 		if not p.playing:
 			p.stream = stream
+			p.pitch_scale = pitch
 			p.play()
 			return
-	
-	environment_players[0].stream = stream
-	environment_players[0].play()
 
 func set_master_volume(value: float):
 	master_volume = clamp(value, 0.0, 1.0)

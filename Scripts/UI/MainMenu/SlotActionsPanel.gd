@@ -118,7 +118,7 @@ func _format_date_smart(unix_time: int) -> String:
 
 func _get_completion_percent(data: Dictionary) -> int:
 	var completed = data.get("levels", {}).size()
-	var total_levels = LocationManager.NUMBER_OF_LEVELS
+	var total_levels = LocationManager.get_number_of_levels()
 	return int((completed / float(total_levels)) * 100)
 
 ## calibra sempre sul layout "full": è il superset di posizioni necessarie

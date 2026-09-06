@@ -46,16 +46,11 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 	return is_record
 
 func load_progress() -> Dictionary:
-	print("Loading slot:", current_slot)
-	print("Path:", get_save_path())
-	
 	if not FileAccess.file_exists(get_save_path()):
-		print("Save NOT found")
+		push_warning("Save NOT found")
 		save_data = get_default_save_data()
 		_write_file()
 		return save_data
-	
-	print("Save FOUND")
 	
 	var file := FileAccess.open(get_save_path(), FileAccess.READ)
 	var content := file.get_as_text()
@@ -67,8 +62,6 @@ func load_progress() -> Dictionary:
 	
 	_migrate_save_data()
 	_write_file()
-	
-	print(content)
 	
 	return save_data
 

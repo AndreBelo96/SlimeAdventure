@@ -18,6 +18,7 @@ func _ready():
 func _process(_delta):
 	if is_adjacent_to_slime() and not shown:
 		shown = true
+		set_process(false)
 		#show_dialogue()
 
 func show_dialogue():

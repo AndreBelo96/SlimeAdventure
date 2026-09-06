@@ -64,8 +64,6 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
 
 func on_player_step(step_count: int):
-	print(" --------- PLAYER STEP TURN --------- ")
-	
 	_enemy_phase_done = false
 	_tiles_phase_done = false
 	

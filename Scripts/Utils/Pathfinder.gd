@@ -67,9 +67,8 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 					"f": tentative_g + heuristic(neighbor, goal)
 				}
 	
-	print("A*: nessun percorso da ", start, " a ", goal)
+	push_warning("A*: nessun percorso da ", start, " a ", goal)
 	return []  # Nessun percorso trovato
-
 
 # --------------------------------------------------
 # Movement mask check (identico al player)

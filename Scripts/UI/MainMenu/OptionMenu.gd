@@ -5,14 +5,14 @@ extends Control
 @onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/SoundSlider
 @onready var env_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer4/EnvSlider
 @onready var difficult_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption
-@onready var langauge_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption
+@onready var language_option: OptionButton = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LanguageOption
 @onready var fullscreen_checkbox: CheckBox = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox
 
 @onready var back_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/Back
 
 ## --- Labels --- ##
 @onready var difficult_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/Label
-@onready var languagge_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/Label
+@onready var language_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/Label
 @onready var full_screen_label: Label = $MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/Label
 
 @onready var master_label: Label = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Label
@@ -30,9 +30,9 @@ func populate_option_menu() -> void:
 	difficult_option.add_item(tr("DIFFICULT_3"))
 	difficult_option.select(SettingsManager.difficulty)
 	
-	langauge_option.add_item(tr("LANGUAGE_1"))
-	langauge_option.add_item(tr("LANGUAGE_2"))
-	langauge_option.select(SettingsManager.language)
+	language_option.add_item(tr("LANGUAGE_1"))
+	language_option.add_item(tr("LANGUAGE_2"))
+	language_option.select(SettingsManager.language)
 	
 	master_slider.value = SettingsManager.master_volume
 	music_slider.value = SettingsManager.music_volume
@@ -43,7 +43,7 @@ func populate_option_menu() -> void:
 
 func setup_language() -> void:
 	difficult_label.text = tr("DIFFICULT_LABEL")
-	languagge_label.text = tr("LANGUAGE_LABEL")
+	language_label.text = tr("LANGUAGE_LABEL")
 	full_screen_label.text = tr("FULLSCREEN_CHK")
 	
 	master_label.text = tr("VOLUME_1")
@@ -58,7 +58,7 @@ func _on_difficulty_option_item_selected(index: int) -> void:
 	SettingsManager.difficulty = index
 	SettingsManager.save_settings()
 
-func _on_langauge_option_item_selected(index: int) -> void:
+func _on_language_option_item_selected(index: int) -> void:
 	SettingsManager.language = index
 	var lang = SettingsManager.get_locale_from_index(index)
 	TranslationServer.set_locale(lang)

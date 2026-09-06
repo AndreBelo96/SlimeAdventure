@@ -156,7 +156,7 @@ theme = ExtResource("3_u6f48")
 text = "Language"
 horizontal_alignment = 1
 
-[node name="LangaugeOption" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1146787102]
+[node name="LanguageOption" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1146787102]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 size_flags_vertical = 4
@@ -283,7 +283,7 @@ text = "Back"
 [connection signal="item_selected" from="Video/MarginContainer/VBoxContainer/HBoxContainer/Fullscreen_option" to="." method="_on_fullscreen_option_item_selected"]
 [connection signal="item_selected" from="Video/MarginContainer/VBoxContainer/HBoxContainer2/Resolution_option" to="." method="_on_resolution_option_item_selected"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer/DifficultyOption" to="." method="_on_difficulty_option_item_selected"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LangaugeOption" to="." method="_on_langauge_option_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer2/LanguageOption" to="." method="_on_language_option_item_selected"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Generale/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]

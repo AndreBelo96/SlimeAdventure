@@ -6,7 +6,6 @@ const SPIKE_STEP_TILE_POSITION := 7
 const SPIKE_TILE_POSITION := 11
 const WALL_TILE_POSITION := 12
 const SWITCH_TILE_POSITION := 13
-const NUMBER_OF_LEVELS := 13
 
 var location_translation_keys = {
 	Location.TUTORIAL: "TUTORIAL_BTN",
@@ -45,6 +44,9 @@ var dark_overlay_service := DarkOverlayService.new()
 
 func get_all_locations() -> Array:
 	return Location.keys()
+
+func get_number_of_levels() -> int:
+	return level_locations.size()
 
 func is_location_locked(location_name: String) -> bool:
 	var location_type = Location[location_name]

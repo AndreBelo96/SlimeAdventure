@@ -31,7 +31,6 @@ func set_active(state: bool) -> void:
 	visible = state
 
 func on_player_enter(player: Node) -> void:
-	print("Posizione: ", str(global_position))
 	SoundManager.play_sfx("res://Assets/Audio/Sound/Pickup.wav")
 	on_player_enter_custom(player)
 
@@ -41,6 +40,8 @@ func on_player_enter_custom(_player: Node) -> void:
 func hide_temporarily(duration: float = 5.0) -> void:
 	set_active(false)
 	await get_tree().create_timer(duration).timeout
+	if not is_inside_tree():
+		return
 	set_active(true)
 
 func snap_to_tile_center(tilemap: TileMapLayer, coords: Vector2i) -> void:

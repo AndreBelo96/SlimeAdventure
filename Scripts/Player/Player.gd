@@ -52,12 +52,6 @@ func _ready():
 	doors_map_layer = get_required_node(doors_map_layer_path, "doors_map_layer")
 	npc_map_layer = get_required_node(npc_map_layer_path, "npc_map_layer")
 	point_light = get_required_node(point_light_path, "point_light") as PointLight2D
-
-	
-	print("Player z_as_relative:", self.z_as_relative)
-	for child in get_children():
-		if child is CanvasItem:
-			print(child.name, "z_as_relative:", child.z_as_relative)
 	
 	movement_handler.setup(self, tile_map_layer, movement_logic_map_layer, doors_map_layer, npc_map_layer, move_duration)
 	interaction_handler.setup(self, tile_map_layer, pickup_map_layer)
@@ -113,15 +107,7 @@ func on_movement_finished():
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
 	
-	_check_boss_collision() ## TODO Testa, magari esplode pure se il boss è morto
-	
-	print("---- DEBUG YSORT PLAYER: ----")
-	print("PLAYER  global Y:", global_position.y)
-	print("PLAYER marker Y:", $Center.global_position.y)
-	print("PLAYER  z_index:", z_index)
-	print("PLAYER  y_sort:", y_sort_enabled)
-	print("PLAYER  parent:", get_parent().name)
-	print("---------------------")
+	_check_boss_collision()
 	
 	can_move = true
 	emit_signal("move_finished")
@@ -158,7 +144,7 @@ func _play_void_death():
 	tween.parallel().tween_property(self, "scale", Vector2(0.3, 0.3), 1.5)
 	tween.parallel().tween_property(self, "modulate:a", 0.0, 1.5)
 	
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Fall.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Fall.wav", 0.0, 0.06)
 
 func should_ignore_input() -> bool:
 	return not input_enabled or not can_move or movement_handler.is_moving
@@ -200,7 +186,6 @@ func _on_player_touch_boss():
 	on_player_died(DeathType.Type.ENEMY)
 
 func on_finish_level():
-	print("FINISH LEVEL PLAYER ANIMATION")
 	var tween = self.create_tween()
 	tween.tween_property(shader_material, "shader_parameter/white_value", 0.0, 1)
 	end_level_particles.emitting = true

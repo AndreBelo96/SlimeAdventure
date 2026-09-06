@@ -22,8 +22,10 @@ func run_event_loop(event: Dictionary):
 	while true:
 		var delay = randf_range(event["min_time"], event["max_time"])
 		await get_tree().create_timer(delay).timeout
+		if not is_inside_tree():
+			return
 		play_event(event)
 
 func play_event(event: Dictionary):
 	var sound = event["sounds"].pick_random()
-	SoundManager.play_environment(sound)
+	SoundManager.play_environment(sound, 0.1)

@@ -1,7 +1,6 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
 @onready var animation = $AnimatedTile
-@onready var player := get_tree().get_first_node_in_group("player")
 
 var isUp = false
 var step_counter = 0
@@ -25,23 +24,13 @@ func _raise_spikes():
 	isUp = true
 	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav", -20)
 	peso = 8
-	_play_locked("UP")
+	animation.play("UP")
 
 func _lower_spikes():
 	isUp = false
 	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav", -20)
 	peso = 1
-	_play_locked("DOWN")
-
-func _play_locked(anim_name: String) -> void:
-	if player:
-		player.lock_input()
-
-	animation.play(anim_name)
-	await animation.animation_finished
-
-	if player:
-		player.unlock_input()
+	animation.play("DOWN")
 
 func on_player_enter():
 	if (isUp):

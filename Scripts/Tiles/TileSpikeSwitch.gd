@@ -4,8 +4,10 @@ var chiave := "A"
 var attivo := true
 var azione := "disattiva"
 
+@onready var animation = $AnimatedTile
+@onready var player := get_tree().get_first_node_in_group("player")
+
 func _ready():
-	print("TileSpikes ready:", name, "script:", get_script())
 	super._ready()
 	add_to_group("spine")
 
@@ -24,27 +26,33 @@ func set_initial_frame(anim_name: String):
 	$AnimatedTile.frame = 0
 
 func disattiva():
-	print("TILE: CHANGE STATE DIS")
 	attivo = false
-	$AnimatedTile.play("OFF")
 	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav", -20)
 	peso = 1
+	_play_locked("OFF")
 
 func attiva():
-	print("TILE: CHANGE STATE ACT")
 	attivo = true
-	$AnimatedTile.play("ON")
 	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav", -20)
 	peso = 8
 	emit_signal("state_changed", self, "ON")
+	_play_locked("ON")
+
+func _play_locked(anim_name: String) -> void:
+	if player:
+		player.lock_input()
+
+	animation.play(anim_name)
+	await animation.animation_finished
+
+	if player:
+		player.unlock_input()
 
 func on_player_enter():
 	if attivo:
 		emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES, "chiave": chiave})
 
 func on_enemy_enter(_enemy: EnemyBase):
-	print("TILE: ENEMY ENTER")
 	if attivo:
-		print("TILE: ACTIVE")
 		_enemy.receive_hit("damage")
 		emit_signal("tile_triggered", self, "enemy_hit", {"enemy": _enemy})

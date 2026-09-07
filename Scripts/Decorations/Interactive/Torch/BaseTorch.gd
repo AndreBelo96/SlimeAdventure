@@ -15,12 +15,17 @@ var start_on := true
 @export var scale_max: float = 1.1
 @export var flicker_time_min: float = 0.1
 @export var flicker_time_max: float = 0.5
+@export var pitch_variation: float = 0.2
 
 var is_on: bool = true
 var flicker_tween: Tween
 
 func _ready() -> void:
 	add_to_group("torches")
+	if pitch_variation > 0.0:
+		var pitch := randf_range(1.0 - pitch_variation, 1.0 + pitch_variation)
+		sound.pitch_scale = pitch
+		sound2.pitch_scale = pitch
 	set_state(start_on)
 
 func set_state(state: bool) -> void:

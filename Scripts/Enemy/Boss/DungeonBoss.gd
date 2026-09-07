@@ -139,7 +139,7 @@ func _on_attack_impact():
 	boss_attack.spawn_ceiling_debris()
 	$HitParticles.emitting = true
 
-	SoundManager.play_sfx("res://Assets/Audio/Sound/SmashStone.wav")
+	SoundManager.play_sfx("res://Assets/Audio/Sound/SmashStone.wav", 0.0, 0.08)
 
 func _on_global_step(step_count: int) -> void:
 	boss_attack.clear_attack_warning()

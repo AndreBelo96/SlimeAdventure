@@ -11,12 +11,14 @@ class_name LevelHUDManager
 
 func _ready():
 	add_to_group("hud")
+	update_steps(0)
+	update_time(0.0)
 
 func update_steps(count: int):
-	steps_label.text = "Passi: %d" % count
+	steps_label.text = tr("STEPS_LBL") + ": %d" % count
 
 func update_time(time: float):
-	time_label.text = "Tempo: %ds" % int(time)
+	time_label.text = tr("TIME_LBL") + ": %ds" % int(time)
 
 func update_tile_label(activated: int, total: int):
 	tile_label.text = "%d / %d" % [activated, total]

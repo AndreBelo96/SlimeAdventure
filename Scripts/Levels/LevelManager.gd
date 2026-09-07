@@ -127,13 +127,13 @@ func _on_all_tiles_activated():
 	for tile in get_tree().get_nodes_in_group("activatables"):
 		tile.locked = true
 	
-	check_victory_condition()
+	check_unlock_exit_condition()
 
 func _on_steps_changed(new_count: int) -> void:
 	steps = new_count
 	hud_manager.update_steps(steps)
 	level_logic.on_player_step(steps)
-	check_victory()
+	check_player_reached_exit()
 
 func _on_player_died():
 	await get_tree().create_timer(1.5, true).timeout
@@ -149,12 +149,12 @@ func _on_player_died():
 func on_boss_defeated():
 	boss_defeated = true
 	_on_boss_defeated_custom()
-	check_victory_condition()
+	check_unlock_exit_condition()
 
 func _on_boss_defeated_custom():
 	pass
 
-func check_victory_condition():
+func check_unlock_exit_condition():
 	match victory_mode:
 		VictoryMode.TILES:
 			if all_tiles_active:
@@ -178,7 +178,7 @@ func _open_exit():
 	var exit_particles = $YSort/ExitParticles
 	tile_manager.activate_exit_particles(exit_particles, exit_position)
 
-func check_victory():
+func check_player_reached_exit():
 	if exit_position == Vector2.ZERO:
 		return
 	

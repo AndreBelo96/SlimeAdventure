@@ -17,7 +17,7 @@ extends BaseResultScreen
 @onready var record = $MarginContainer/VBoxContainer/HBoxContainer/Record
 @onready var record_container = $MarginContainer/VBoxContainer/HBoxContainer
 
-var isRecordBool := false
+var is_record := false
 
 func _ready():
 	root = $MarginContainer
@@ -45,7 +45,7 @@ func setup_results():
 	var run_time: float = float(last["time"])
 	var is_record: bool = bool(last.get("is_record", false))
 
-	isRecordBool = is_record
+	is_record = is_record
 
 	# Mostra i risultati della run appena conclusa
 	actual_steps.text = actual_steps.text + " %d" % [run_steps]
@@ -173,7 +173,7 @@ func animate_record(tween):
 	record_container.scale = Vector2(0.5, 0.5)
 	record_container.visible = true
 
-	if isRecordBool:
+	if is_record:
 		tween.parallel().tween_property(record_container, "modulate:a", 1.0, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(record_container, "scale", Vector2(1.5, 1.5), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tween.tween_property(record_container, "scale", Vector2(1.0,1.0), 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)

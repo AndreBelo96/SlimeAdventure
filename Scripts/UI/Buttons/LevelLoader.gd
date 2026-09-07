@@ -1,21 +1,37 @@
 class_name LevelLoader
 extends Object
 
-const ALL_LEVELS := [
-	"Level1.tscn",
-	"Level2.tscn",
-	"Level3.tscn",
-	"Level4.tscn",
-	"Level5.tscn",
-	"Level6.tscn",
-	"Level7.tscn",
-	"Level8.tscn",
-	"Level9.tscn",
-	"Level10.tscn",
-	"Level11.tscn",
-	"Level12.tscn",
-	"Level13.tscn",
-]
+const LEVELS_PATH := "res://Scenes/Levels/"
+
+func get_all_levels() -> Array[String]:
+	var level_files: Array[String] = []
+	var dir := DirAccess.open(LEVELS_PATH)
+	if dir == null:
+		push_error("LevelLoader: impossibile aprire %s" % LEVELS_PATH)
+		return level_files
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.begins_with("Level") and file_name.ends_with(".tscn"):
+			level_files.append(file_name)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	return level_files
+
+func get_levels_for_location(loc: int) -> Array[String]:
+	var level_files: Array[String] = []
+
+	for file_name in get_all_levels():
+		var level_num = extract_level_number(file_name)
+		if LocationManager.get_location_for_level(level_num) == loc:
+			level_files.append(file_name)
+
+	level_files.sort_custom(func(a, b):
+		return extract_level_number(a) < extract_level_number(b)
+	)
+
+	return level_files
 
 func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 	var levels_info: Array[Dictionary] = []
@@ -30,23 +46,6 @@ func get_level_data_for_location(loc: int) -> Array[Dictionary]:
 			"sound": ThemeManager.get_sound_for_location_type(loc)
 		})
 	return levels_info
-
-func get_levels_for_location(loc: int) -> Array[String]:
-
-	var level_files: Array[String] = []
-	
-	for file_name in ALL_LEVELS:
-		if file_name.ends_with(".tscn") and file_name.begins_with("Level"):
-			var level_num = extract_level_number(file_name)
-			if LocationManager.get_location_for_level(level_num) == loc:
-				level_files.append(file_name)
-
-	# Ordina per numero di livello
-	level_files.sort_custom(func(a, b):
-		return extract_level_number(a) < extract_level_number(b)
-	)
-
-	return level_files
 
 func extract_level_number(filename: String) -> int:
 	var level_name = filename.get_basename()

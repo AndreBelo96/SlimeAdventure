@@ -109,11 +109,11 @@ func _format_date_smart(unix_time: int) -> String:
 	var now_dict = Time.get_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
 	var date_dict = Time.get_datetime_dict_from_unix_time(unix_time)
 	if now_dict.year == date_dict.year and now_dict.month == date_dict.month and now_dict.day == date_dict.day:
-		return "Today"
+		return "Today" #tr("TODAY")
 	var yesterday = Time.get_unix_time_from_system() - 86400
 	var y_dict = Time.get_datetime_dict_from_unix_time(yesterday)
 	if y_dict.year == date_dict.year and y_dict.month == date_dict.month and y_dict.day == date_dict.day:
-		return "Yesterday"
+		return "Yesterday" #tr("YESTERDAY")
 	return "%02d/%02d/%d" % [date_dict.day, date_dict.month, date_dict.year]
 
 func _get_completion_percent(data: Dictionary) -> int:

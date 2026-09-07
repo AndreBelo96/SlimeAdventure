@@ -4,12 +4,19 @@ extends Node
 var SAVE_PATH = "user://game_log.txt"
 
 func write_log(level: String, message: String) -> void:
+	if not FileAccess.file_exists(SAVE_PATH):
+		var creator = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+		if creator:
+			creator.close()
+	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ_WRITE)
 	if file:
 		file.seek_end()
 		var timestamp = _get_timestamp()
 		file.store_line("[%s] [%s] %s" % [timestamp, level, message])
 		file.close()
+	else:
+		push_error("GameLogger: impossibile aprire %s (errore %d)" % [SAVE_PATH, FileAccess.get_open_error()])
 
 
 func _get_timestamp() -> String:

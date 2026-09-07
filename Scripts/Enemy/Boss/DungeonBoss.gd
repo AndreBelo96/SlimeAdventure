@@ -8,6 +8,8 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @export var attack_impact_frame := 3
 @export var movement_map: TileMapLayer
 @export var visual_map: TileMapLayer
+@export var starting_health := 3
+@export var starting_grid_position := Vector2i(-1, -8)
 
 var steps_to_trigger = 3
 var _warning_pending := false
@@ -24,9 +26,9 @@ func _ready():
 	super._ready()
 
 	turn_behavior = ChaseBehavior.new()
-	setup_health(3)
-	setup_grid(tilemap, $Center.position, Vector2i(-1, -8), movement_map, visual_map)
-
+	setup_health(starting_health)
+	setup_grid(tilemap, $Center.position, starting_grid_position, movement_map, visual_map)
+	
 	boss_attack.setup(self, warning_tile_scene, ceiling_debris_scene, camera)
 	boss_breath.setup(animation)
 

@@ -8,6 +8,7 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @export var attack_impact_frame := 3
 @export var movement_map: TileMapLayer
 @export var visual_map: TileMapLayer
+@export var effects_layer: Node2D
 @export var starting_health := 3
 @export var starting_grid_position := Vector2i(-1, -8)
 
@@ -29,7 +30,7 @@ func _ready():
 	setup_health(starting_health)
 	setup_grid(tilemap, $Center.position, starting_grid_position, movement_map, visual_map)
 	
-	boss_attack.setup(self, warning_tile_scene, ceiling_debris_scene, camera)
+	boss_attack.setup(self, warning_tile_scene, ceiling_debris_scene, camera, effects_layer)
 	boss_breath.setup(animation)
 
 	if level_logic:

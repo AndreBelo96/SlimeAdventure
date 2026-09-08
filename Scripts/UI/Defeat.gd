@@ -12,11 +12,11 @@ func _ready():
 	title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
 	title = $MarginContainer/VBoxContainer/CenterContainer/Title
 	buttons_container = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer
-	
+
 	setup_languages()
 	setup_buttons()
 	setup_selectors()
-	setup_mouse()
+	_connect_mouse()
 	set_current_selection(0)
 	_apply_location_theme()
 	prepare_enter_animation()
@@ -24,30 +24,28 @@ func _ready():
 	await get_tree().process_frame
 	animate_screen_enter()
 
-func setup_languages():
-	title.text = tr("DEFEAT_LBL")
-	retry.text = tr("RETRY_BTN")
-	level_selection.text = tr("BACK_LVL_SELECTION")
-	back_menu.text = tr("BACK_MAIN_MENU_BTN")
-
 func setup_buttons():
-	buttons_main = [
+	buttons = [
 		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart,
 		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection,
 		$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu,
 	]
 
 func setup_selectors():
-	selectors_main = [
+	selectors = [
 		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/SelectorR],
 		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/SelectorR],
 		[$MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SelectorR],
 	]
-	
+
 	await get_tree().process_frame
-	for group in selectors_main:
-		for sel in group:
-			base_positions[sel] = sel.position
+	calibrate_positions()
+
+func setup_languages():
+	title.text = tr("DEFEAT_LBL")
+	retry.text = tr("RETRY_BTN")
+	level_selection.text = tr("BACK_LVL_SELECTION")
+	back_menu.text = tr("BACK_MAIN_MENU_BTN")
 
 func handle_navigation(_event):
 	if Input.is_action_just_pressed("move_down") and current_selection < 2:

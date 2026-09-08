@@ -24,11 +24,11 @@ func _ready():
 	title_wrapper = $MarginContainer/VBoxContainer/CenterContainer
 	title = $MarginContainer/VBoxContainer/CenterContainer/Title
 	buttons_container = $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer
-	
+
 	setup_languages()
 	setup_buttons()
 	setup_selectors()
-	setup_mouse()
+	_connect_mouse()
 	set_current_selection(0)
 	setup_results()
 	_apply_location_theme()
@@ -36,6 +36,24 @@ func _ready():
 	root.modulate.a = 0.0
 	await get_tree().process_frame
 	animate_screen_enter()
+
+func setup_buttons():
+	buttons = [
+		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next,
+		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/Retry,
+		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection,
+		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu
+	]
+
+func setup_selectors():
+	selectors = [
+		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorR],
+		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorR],
+	]
+	await get_tree().process_frame
+	calibrate_positions()
 
 func setup_results():
 	var sprite = $MarginContainer/VBoxContainer/HBoxContainer/Control/Victory
@@ -85,27 +103,6 @@ func setup_languages():
 	best.text = tr("BEST_LBL")
 	best_steps.text = tr("STEPS_LBL") + ": "
 	best_time.text = tr("TIME_LBL") + ": "
-
-func setup_buttons():
-	buttons_main = [
-		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/Next,
-		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/Retry,
-		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/BackLevelSelection,
-		$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/BackMainMenu
-	]
-
-func setup_selectors():
-	selectors_main = [
-		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer3/SelectorR],
-		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer4/SelectorR],
-		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer2/SelectorR],
-		[$MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorL, $MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/SelectorR],
-	]
-	await get_tree().process_frame
-
-	for group in selectors_main:
-		for sel in group:
-			base_positions[sel] = sel.position
 
 func handle_navigation(_event):
 	if Input.is_action_just_pressed("move_down") and current_selection < buttons.size()-1:

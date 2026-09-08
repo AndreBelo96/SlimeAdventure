@@ -1,4 +1,4 @@
-extends BaseMenu
+extends SelectableMenu
 class_name BaseResultScreen
 
 var root: Control

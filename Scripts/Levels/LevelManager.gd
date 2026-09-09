@@ -36,6 +36,7 @@ var music_autoplay := true
 
 func _ready():
 	time_running = false
+	
 	GameLogger.info("Inizio livello %d" % LevelStateManager.current_level)
 	$MovementLogicMapLayer.visible = false
 	$MovementLogicMapLayer.add_to_group("movement_logic")

@@ -19,6 +19,11 @@ const DUNGEON_AMBIENT: Array[Dictionary] = [
 	}
 ]
 
-
 const MAIN_MENU_MUSIC: String = "res://Assets/Audio/Music/Levels/menu_song.wav"
 const DUNGEON_MUSIC: String = "res://Assets/Audio/Music/Levels/dungeon_song.wav"
+
+# --- SFX ripetuti in più file ---
+const SMASH_STONE: String = "res://Assets/Audio/Sound/SmashStone.wav"
+const ACTIVATE_SPINE: String = "res://Assets/Audio/Sound/Spike/ActivateSpine.wav"
+const DEACTIVATE_SPINE: String = "res://Assets/Audio/Sound/Spike/DeactivateSpine.wav"
+const DEATH: String = "res://Assets/Audio/Sound/Death.wav"

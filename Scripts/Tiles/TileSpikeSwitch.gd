@@ -27,13 +27,13 @@ func set_initial_frame(anim_name: String):
 
 func disattiva():
 	attivo = false
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav", -20)
+	SoundManager.play_sfx(AudioPresets.DEACTIVATE_SPINE, -20)
 	peso = 1
 	_play_locked("OFF")
 
 func attiva():
 	attivo = true
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav", -20)
+	SoundManager.play_sfx(AudioPresets.ACTIVATE_SPINE, -20)
 	peso = 8
 	emit_signal("state_changed", self, "ON")
 	_play_locked("ON")

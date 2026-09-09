@@ -22,13 +22,13 @@ func _on_global_step(step_count: int):
 
 func _raise_spikes():
 	isUp = true
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/ActivateSpine.wav", -20)
+	SoundManager.play_sfx(AudioPresets.ACTIVATE_SPINE, -20)
 	peso = 8
 	animation.play("UP")
 
 func _lower_spikes():
 	isUp = false
-	SoundManager.play_sfx("res://Assets/Audio/Sound/Spike/DeactivateSpine.wav", -20)
+	SoundManager.play_sfx(AudioPresets.DEACTIVATE_SPINE, -20)
 	peso = 1
 	animation.play("DOWN")
 

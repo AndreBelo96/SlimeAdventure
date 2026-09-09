@@ -17,29 +17,21 @@ func _ready():
 	var frames = _create_animations(animation_row)
 	animation_player.frames = frames
 
-func _create_animations(row: int):
+func _create_animations(row: int) -> SpriteFrames:
 	var frames = SpriteFrames.new()
-
-	frames.add_animation("Activate")
-	frames.set_animation_speed("Activate", 30)
-	frames.set_animation_loop("Activate", false)
-	for col in range(0, 7):
-		var tex = AtlasTexture.new()
-		tex.atlas = TILESET
-		tex.region = Rect2(Vector2((col * 66) + 1, (row * 50) + 1), Vector2(64, 48))
-		frames.add_frame("Activate", tex)
-
-	# Deactivate animation (frames da colonna 7 a 0)
-	frames.add_animation("Deactivate")
-	frames.set_animation_speed("Deactivate", 30)
-	frames.set_animation_loop("Deactivate", false)
-	for col in range(6, -1, -1):
-		var tex = AtlasTexture.new()
-		tex.atlas = TILESET
-		tex.region = Rect2(Vector2((col * 66) + 1, (row * 50) + 1), Vector2(64, 48))
-		frames.add_frame("Deactivate", tex)
-
+	_add_frame_animation(frames, "Activate", row, range(0, 7))
+	_add_frame_animation(frames, "Deactivate", row, range(6, -1, -1))
 	return frames
+
+func _add_frame_animation(frames: SpriteFrames, anim_name: String, row: int, columns) -> void:
+	frames.add_animation(anim_name)
+	frames.set_animation_speed(anim_name, 30)
+	frames.set_animation_loop(anim_name, false)
+	for col in columns:
+		var tex := AtlasTexture.new()
+		tex.atlas = TILESET
+		tex.region = Rect2(Vector2((col * 66) + 1, (row * 50) + 1), Vector2(64, 48))
+		frames.add_frame(anim_name, tex)
 
 func on_player_enter():
 	

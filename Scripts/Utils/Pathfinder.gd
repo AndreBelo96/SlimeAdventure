@@ -4,14 +4,13 @@ class_name Pathfinder
 var movement_map: TileMapLayer
 var visual_map: TileMapLayer
 var DIRECTION_BITS: Dictionary
-
-var _tile_cache: Dictionary = {}
-var _tile_cache_built := false
+var _tile_index: TileSpatialIndex
 
 func _init(_movement_map: TileMapLayer, _visual_map: TileMapLayer, _direction_bits: Dictionary):
 	movement_map = _movement_map
 	visual_map = _visual_map
 	DIRECTION_BITS = _direction_bits
+	_tile_index = TileSpatialIndex.new(visual_map)
 
 # --------------------------------------------------
 # Punto di ingresso → restituisce LA PROSSIMA TILE
@@ -100,35 +99,22 @@ func can_move(from: Vector2i, to: Vector2i) -> bool:
 func get_tile_cost(pos: Vector2i) -> int:
 	if visual_map == null:
 		return 999
-	
+
 	var tile_instance = get_tile_instance_at(pos)
-	
+
 	if tile_instance == null:
 		return 999
-	
+
 	if "peso" in tile_instance:
 		return tile_instance.peso
 	else:
 		return 1
 
 func get_tile_instance_at(pos: Vector2i) -> TileBase:
-	if visual_map == null:
-		return null
-	if not _tile_cache_built:
-		_build_tile_cache()
-	return _tile_cache.get(pos, null)
-
-func _build_tile_cache() -> void:
-	_tile_cache.clear()
-	for child in visual_map.get_children():
-		if child is TileBase:
-			var local_pos = child.global_position - visual_map.global_position
-			var grid_pos = visual_map.local_to_map(local_pos)
-			_tile_cache[grid_pos] = child
-	_tile_cache_built = true
+	return _tile_index.get_tile_at(pos)
 
 func invalidate_tile_cache() -> void:
-	_tile_cache_built = false
+	_tile_index.invalidate()
 
 func heuristic(a: Vector2i, b: Vector2i) -> int:
 	return abs(a.x - b.x) + abs(a.y - b.y)

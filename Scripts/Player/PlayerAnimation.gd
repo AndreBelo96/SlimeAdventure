@@ -15,18 +15,11 @@ func play_death(death_type: int):
 	if not anim_sprite:
 		return
 	
-	match death_type:
-		DEATH.SPIKES:
-			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
-		DEATH.VOID:
-			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
-		DEATH.ENEMY:
-			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
-		DEATH.TIMEOUT:
-			anim_sprite.play("Death")
-			SoundManager.play_sfx("res://Assets/Audio/Sound/Death.wav")
+	if death_type != DEATH.VOID:
+		anim_sprite.play("Death")
+	
+	SoundManager.play_sfx(AudioPresets.DEATH)
+
 
 # --- PRIVATI ---
 func _play_sfx(path: String, pitch_variation: float = 0.0) -> void:

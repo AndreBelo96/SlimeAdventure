@@ -34,6 +34,7 @@ GridUtils="*uid://l7iy4d401rqt"
 LevelStateManager="*uid://bva1hrtycl5wd"
 LocationManager="*uid://ddw6mcc26jch4"
 SceneNavigator="*uid://cg7mtrfv8pdp1"
+PlayerRef="*uid://bag8iu1w6ltox"
 
 [debug]
 

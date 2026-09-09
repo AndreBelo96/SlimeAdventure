@@ -4,7 +4,6 @@ var chiave := "A"
 var attivato := false
 var azione := "disattiva"
 @onready var shader_material = $AnimatedTile.material
-@onready var player := get_tree().get_first_node_in_group("player")
 
 func _ready():
 	super._ready()
@@ -15,19 +14,14 @@ func _ready():
 func on_player_enter():
 	if not attivato:
 		attivato = true
-
-		if player:
-			player.lock_input()
-
+		if PlayerRef.player:
+			PlayerRef.player.lock_input()
 		$AnimatedTile.play("PRESSED")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/SwitchClick.wav")
-
 		await $AnimatedTile.animation_finished
 		await get_tree().create_timer(0.2).timeout
-
-		if player:
-			player.unlock_input()
-
+		if PlayerRef.player:
+			PlayerRef.player.unlock_input()
 		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
 		deactivate()
 

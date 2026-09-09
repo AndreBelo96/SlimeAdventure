@@ -46,6 +46,7 @@ var can_move := true
 
 func _ready():
 	add_to_group("player")
+	PlayerRef.register(self)
 	tile_map_layer = get_required_node(tile_map_layer_path, "tile_map_layer")
 	pickup_map_layer = get_required_node(pickup_map_layer_path, "pickup_map_layer")
 	movement_logic_map_layer = get_required_node(movement_logic_map_layer_path, "movement_logic_map_layer")
@@ -200,3 +201,6 @@ func reset_end_level_variables():
 	shader_material.set_shader_parameter("white_value", 1.0)
 	shader_material.set_shader_parameter("alpha_value", 1.0)
 	end_level_particles.emitting = false
+
+func _exit_tree():
+	PlayerRef.clear(self)

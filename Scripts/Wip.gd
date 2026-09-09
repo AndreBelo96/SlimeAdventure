@@ -3,7 +3,6 @@ extends Node2D
 var posizione_tile: Vector2i
 var shown: bool = false
 
-@onready var slime := get_tree().get_first_node_in_group("player")
 @export var dialog_interface: DialogueInterface
 @export var tilemap: TileMapLayer
 
@@ -36,4 +35,4 @@ func show_dialogue():
 	await dialog_interface.dialogue_finished
 
 func is_adjacent_to_slime() -> bool:
-	return GridUtils.is_adjacent_4(posizione_tile, slime.movement_handler.grid_position)
+	return PlayerRef.player != null and GridUtils.is_adjacent_4(posizione_tile, PlayerRef.player.movement_handler.grid_position)

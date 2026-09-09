@@ -5,7 +5,6 @@ var attivo := true
 var azione := "disattiva"
 
 @onready var animation = $AnimatedTile
-@onready var player := get_tree().get_first_node_in_group("player")
 
 func _ready():
 	super._ready()
@@ -39,14 +38,12 @@ func attiva():
 	_play_locked("ON")
 
 func _play_locked(anim_name: String) -> void:
-	if player:
-		player.lock_input()
-
+	if PlayerRef.player:
+		PlayerRef.player.lock_input()
 	animation.play(anim_name)
 	await animation.animation_finished
-
-	if player:
-		player.unlock_input()
+	if PlayerRef.player:
+		PlayerRef.player.unlock_input()
 
 func on_player_enter():
 	if attivo:

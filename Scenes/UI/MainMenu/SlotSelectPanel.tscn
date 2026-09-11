@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btr07cucc5rnv"]
 
 [ext_resource type="Script" uid="uid://32j4oc0owwxb" path="res://Scripts/UI/MainMenu/SlotSelectPanel.gd" id="1_php1t"]
-[ext_resource type="FontFile" uid="uid://c07asdy8c1i5d" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_s42ws"]
+[ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_s42ws"]
 [ext_resource type="FontFile" uid="uid://bqkb5e8at2lc" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_php1t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_php1t"]

@@ -32,14 +32,14 @@ func assign_keys():
 			var chiave = tile_data.get_custom_data("chiave")
 			var azione = tile_data.get_custom_data("azione")
 			
-			for nodo in tile_layer.get_children():
-				if tile_layer.local_to_map(nodo.position) == cell:
-					if nodo.is_in_group("spine") or nodo.is_in_group("interruttori"):
-						nodo.chiave = chiave
-						nodo.azione = azione
+			for node in tile_layer.get_children():
+				if tile_layer.local_to_map(node.position) == cell:
+					if node.is_in_group("spikes") or node.is_in_group("switches"):
+						node.chiave = chiave
+						node.azione = azione
 						
-						if nodo.has_method("set_initial_state"):
-							nodo.set_initial_state()
+						if node.has_method("set_initial_state"):
+							node.set_initial_state()
 
 func update_progress():
 	var total := 0

@@ -5,7 +5,7 @@ var direction: String = "N"
 var is_open: bool = false
 
 func _ready():
-	add_to_group("porte")
+	add_to_group("doors")
 	update_visual()
 
 func setup(dir: String):

@@ -8,7 +8,7 @@ var azione := "disattiva"
 
 func _ready():
 	super._ready()
-	add_to_group("spine")
+	add_to_group("spikes")
 
 func set_initial_state():
 	match azione:

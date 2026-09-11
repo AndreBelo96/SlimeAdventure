@@ -3,7 +3,7 @@
 class_name DeathType
 
 enum Type {
-	SPIKES,   # Morso dalle spine
+	SPIKES,   # Morso dalle spikes
 	VOID,     # Caduta nel vuoto
 	ENEMY,    # Contatto con nemico
 	TIMEOUT   # Scaduto il tempo

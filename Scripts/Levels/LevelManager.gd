@@ -120,10 +120,10 @@ func _on_all_tiles_activated():
 	
 	all_tiles_active = true
 	
-	var porte = get_tree().get_nodes_in_group("porte")
-	for porta in porte:
-		if porta.has_method("open"):
-			porta.open()
+	var doors = get_tree().get_nodes_in_group("doors")
+	for door in doors:
+		if door.has_method("open"):
+			door.open()
 	
 	for tile in get_tree().get_nodes_in_group("activatables"):
 		tile.locked = true

@@ -9,7 +9,7 @@ func _ready():
 	super._ready()
 	shader_material = shader_material.duplicate()
 	$AnimatedTile.material = shader_material
-	add_to_group("interruttori")
+	add_to_group("switches")
 
 func on_player_enter():
 	if not attivato:

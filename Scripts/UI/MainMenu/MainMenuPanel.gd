@@ -1,6 +1,7 @@
 extends SelectableMenuPanel
 class_name MainMenuPanel
 
+enum Btn { START, PROFILE, SCOREBOARD, OPTIONS, EXIT }
 signal start_pressed
 signal option_pressed
 signal exit_pressed
@@ -33,8 +34,8 @@ func setup_selectors() -> void:
 func handle_selection(index: int) -> void:
 	SoundManager.play_sfx(SFX_CONFIRM)
 	match index:
-		0: start_pressed.emit()
-		1: pass # Profile - TODO
-		2: pass # Scoreboard - TODO
-		3: option_pressed.emit()
-		4: exit_pressed.emit()
+		Btn.START: start_pressed.emit()
+		Btn.PROFILE: pass # TODO
+		Btn.SCOREBOARD: pass # TODO
+		Btn.OPTIONS: option_pressed.emit()
+		Btn.EXIT: exit_pressed.emit()

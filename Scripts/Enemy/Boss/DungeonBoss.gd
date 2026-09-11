@@ -94,12 +94,8 @@ func _start_move():
 
 func damage_animation():
 	slime.lock_input()
-	
-	animation.modulate = Color(2, 2, 2)
-	await get_tree().create_timer(0.2).timeout
-	animation.modulate = Color(1, 1, 1)
-
-	SoundManager.play_sfx("res://Assets/Audio/Sound/BossColpito.wav")
+	await VisualEffects.flash(animation)
+	SoundManager.play_sfx(AudioPresets.BOSS_HIT)
 
 	var tween := create_tween()
 	tween.tween_property(self, "position:y", position.y - 20, 0.15)\

@@ -55,14 +55,8 @@ func _on_animated_tile_animation_finished() -> void:
 	var current_anim = animation_player.animation
 
 	if current_anim == "Activate":
-		# Glow white
-		animation_player.modulate = Color(2, 2, 2)
-		particles.emitting = true;
-		await get_tree().create_timer(0.2).timeout
-		particles.emitting = false;
-		animation_player.modulate = Color(1, 1, 1)
+		particles.emitting = true
+		await VisualEffects.flash(animation_player)
+		particles.emitting = false
 	elif current_anim == "Deactivate":
-		# Glow rosso/arancione
-		animation_player.modulate = Color(2, 0.6, 0.3)
-		await get_tree().create_timer(0.3).timeout
-		animation_player.modulate = Color(1, 1, 1) 
+		await VisualEffects.flash(animation_player, 0.3, Color(2, 0.6, 0.3))

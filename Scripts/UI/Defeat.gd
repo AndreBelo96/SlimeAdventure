@@ -3,9 +3,10 @@ extends BaseResultScreen
 @onready var retry = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Restart/Restart
 @onready var level_selection = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/BackLevelSelection/BackLevelSelection
 @onready var back_menu = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BackMainMenu/BackMainMenu
-
 @onready var image_container = $MarginContainer/VBoxContainer/HBoxContainer/Control
 @onready var image = $MarginContainer/VBoxContainer/HBoxContainer/Control/AnimatedSprite2D
+
+enum Btn { RESTART, BACK_LEVEL_SELECT, BACK_MAIN_MENU }
 
 func _ready():
 	root = $MarginContainer
@@ -59,15 +60,16 @@ func handle_navigation(_event):
 
 func handle_selection(_index):
 	SoundManager.play_sfx(SFX_CONFIRM)
-	if (_index == 0):
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		SceneNavigator.restart_level(LevelStateManager.current_level)
-	elif (_index == 1):
-		SoundManager.stop_music();
-		SceneNavigator.return_to_location_menu()
-	elif (_index == 2):
-		SoundManager.stop_music();
-		SceneNavigator.return_to_menu()
+	match _index:
+		Btn.RESTART:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			SceneNavigator.restart_level(LevelStateManager.current_level)
+		Btn.BACK_LEVEL_SELECT:
+			SoundManager.stop_music()
+			SceneNavigator.return_to_location_menu()
+		Btn.BACK_MAIN_MENU:
+			SoundManager.stop_music()
+			SceneNavigator.return_to_menu()
 
 ### --- Animazioni entrata e uscita della schermata --- ###
 

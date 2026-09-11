@@ -5,6 +5,8 @@ extends SelectableMenu
 @onready var retry: Label = $MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer/Retry/Retry
 @onready var mainMenu: Label = $MarginContainer/VBoxContainer/CenterContainer3/HBoxContainer/MainMenu/MainMenu
 
+enum Btn { CONTINUE, RETRY, BACK_MAIN_MENU }
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	setup_languages()
@@ -34,20 +36,21 @@ func setup_selectors():
 
 func handle_selection(_index):
 	SoundManager.play_sfx(SFX_CONFIRM)
-	if (_index == 0):
-		get_tree().paused = false
-		visible = false
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	elif (_index == 1):
-		get_tree().paused = false
-		visible = false
-		SceneNavigator.restart_level(LevelStateManager.current_level)
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	elif (_index == 2):
-		get_tree().paused = false
-		SoundManager.stop_music();
-		SceneNavigator.return_to_menu()
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	match _index:
+		Btn.CONTINUE:
+			get_tree().paused = false
+			visible = false
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		Btn.RETRY:
+			get_tree().paused = false
+			visible = false
+			SceneNavigator.restart_level(LevelStateManager.current_level)
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		Btn.BACK_MAIN_MENU:
+			get_tree().paused = false
+			SoundManager.stop_music()
+			SceneNavigator.return_to_menu()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_pause_visible():
 	if !visible:

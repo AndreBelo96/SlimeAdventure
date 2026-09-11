@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=4 uid="uid://qsor61mp65au"]
+[gd_scene format=4 uid="uid://qsor61mp65au"]
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_0vq1g"]
 [ext_resource type="Script" uid="uid://dvwqat5uvkj1q" path="res://Scripts/Levels/level3.gd" id="2_4xmhp"]
 
-[node name="Level" instance=ExtResource("1_0vq1g")]
+[node name="Level" unique_id=1615673720 instance=ExtResource("1_0vq1g")]
 script = ExtResource("2_4xmhp")
 
-[node name="LogicMapLayer" parent="." index="2"]
+[node name="LogicMapLayer" parent="." index="2" unique_id=40547736]
 tile_map_data = PackedByteArray("AAACAAAAAgAJAAAAAAA=")
 
-[node name="MovementLogicMapLayer" parent="." index="3"]
+[node name="MovementLogicMapLayer" parent="." index="3" unique_id=2011242274]
 tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="5"]
+[node name="TileMapLayer" parent="." index="5" unique_id=1578614900]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP//AQAAAAAAAQABAP//AQAAAAAAAgACAAAAAQAAAAAAAgA=")
 
-[node name="TerrainMapLayer" parent="YSort" index="0"]
+[node name="TerrainMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="0" unique_id=1113098733]
 tile_map_data = PackedByteArray("AAD//wAAAwAAAAAAAAAAAAAAAwAAAAAAAAABAAAAAwAAAAAAAAACAAAAAwAAAAAAAAABAP//AwAAAAAAAAAAAP//AwAAAAAAAAD/////AwAAAAAAAAD///7/AwAAAAAAAAD///3/AwAAAAAAAAA=")
 
-[node name="NPCMapLayer" parent="YSort" index="6"]
+[node name="NPCMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="6" unique_id=1537239280]
 tile_map_data = PackedByteArray("AAABAP//AQAAAAAAAQA=")

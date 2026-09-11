@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cnet5sjhuwe5w" path="res://Scripts/UI/MainMenu/LevelMenuPanel.gd" id="1_76ciu"]
 [ext_resource type="Theme" uid="uid://dki0tv4cy7hx5" path="res://Theme/Title/title_theme.tres" id="2_r2cwj"]
-[ext_resource type="FontFile" uid="uid://bxkwkhh0vr55k" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_4swln"]
-[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="4_ytj5h"]
+[ext_resource type="FontFile" uid="uid://c07asdy8c1i5d" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_4swln"]
+[ext_resource type="FontFile" uid="uid://bqkb5e8at2lc" path="res://Assets/Fonts/Chewy-Regular.ttf" id="4_ytj5h"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="5_t6krh"]
 
 [node name="LevelMenuPanel" type="Control" unique_id=344527967]

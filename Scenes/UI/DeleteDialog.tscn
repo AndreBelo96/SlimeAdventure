@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d33bcbganf5jk"]
+[gd_scene format=3 uid="uid://d33bcbganf5jk"]
 
 [ext_resource type="Script" uid="uid://ceufqwgcluroy" path="res://Scripts/UI/DeleteDialog.gd" id="1_nh0ja"]
 
@@ -14,7 +14,7 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[node name="DeleteDialog" type="Control"]
+[node name="DeleteDialog" type="Control" unique_id=1593604677]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nh0ja")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2005097051]
 custom_minimum_size = Vector2(500, 150)
 layout_mode = 1
 anchors_preset = 8
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nh0ja")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1995874859]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -55,20 +55,20 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1499818629]
 layout_mode = 2
 text = "Sei sicuro di voler cancellare questo salvataggio?"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=393864528]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Delete" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="Delete" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=392249833]
 layout_mode = 2
 text = "Elimina"
 
-[node name="Cancel" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1183945289]
 layout_mode = 2
 text = "Annulla"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_kqp4a"]
 [ext_resource type="Script" uid="uid://c53smkf10xfh3" path="res://Scripts/UI/MainMenu/SlotActionsPanel.gd" id="1_rh6q5"]
-[ext_resource type="FontFile" uid="uid://b1ocgsksugb5k" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_rh6q5"]
+[ext_resource type="FontFile" uid="uid://bqkb5e8at2lc" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_rh6q5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rh6q5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

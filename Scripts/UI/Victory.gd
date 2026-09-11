@@ -61,10 +61,8 @@ func setup_results():
 	var completed_level: int = int(last["level"])
 	var run_steps: int = int(last["steps"])
 	var run_time: float = float(last["time"])
-	var is_record: bool = bool(last.get("is_record", false))
-
-	is_record = is_record
-
+	is_record = bool(last.get("is_record", false))
+	
 	# Mostra i risultati della run appena conclusa
 	actual_steps.text = actual_steps.text + " %d" % [run_steps]
 	actual_time.text = actual_time.text + " %.2f" % [run_time]

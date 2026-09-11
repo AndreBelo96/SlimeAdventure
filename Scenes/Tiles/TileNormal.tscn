@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://p2vhqquhlb37"]
+[gd_scene format=3 uid="uid://p2vhqquhlb37"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_n1yxv"]
 [ext_resource type="Script" uid="uid://byylwf8iajly7" path="res://Scripts/Tiles/TileNormal.gd" id="2_wulv7"]
 
-[node name="TileBase" instance=ExtResource("1_n1yxv")]
+[node name="TileBase" unique_id=1561096517 instance=ExtResource("1_n1yxv")]
 script = ExtResource("2_wulv7")
 
-[node name="Tile" parent="." index="1"]
+[node name="Tile" parent="." index="1" unique_id=457203740]
 region_enabled = true
 region_rect = Rect2(463, 51, 64, 48)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfpv6fhikmmav"]
+[gd_scene format=3 uid="uid://dfpv6fhikmmav"]
 
 [ext_resource type="Script" uid="uid://cdekipkcivo67" path="res://Scripts/UI/DialogInterface.gd" id="1_mog3c"]
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="2_chml1"]
@@ -21,7 +21,7 @@ content_margin_right = 3.0
 content_margin_bottom = 3.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="DialogInterface" type="Control"]
+[node name="DialogInterface" type="Control" unique_id=633061154]
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -34,7 +34,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 script = ExtResource("1_mog3c")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=745982155]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,49 +46,49 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=2070601380]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chml1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer" unique_id=382918046]
 layout_mode = 2
 
-[node name="PanelPotrait" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="PanelPotrait" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=1754681101]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_m0veh")
 
-[node name="Portrait" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/PanelPotrait"]
+[node name="Portrait" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/PanelPotrait" unique_id=1621810360]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer" unique_id=917488444]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelName" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelName" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1778469311]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("2_m0veh")
 
-[node name="NameLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelName"]
+[node name="NameLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelName" unique_id=1846411080]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("2_chml1")
 theme_override_font_sizes/font_size = 21
 theme_override_styles/normal = SubResource("StyleBoxFlat_4s6ce")
 
-[node name="PanelText" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelText" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer" unique_id=890949177]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_m0veh")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText" unique_id=1293163847]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer"]
+[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer" unique_id=1167156962]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -97,7 +97,7 @@ theme_override_font_sizes/normal_font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_1mm7k")
 scroll_active = false
 
-[node name="Skip" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer"]
+[node name="Skip" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelText/HBoxContainer" unique_id=21656717]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 1

@@ -1,7 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://b0cp5c2mgydcd"]
+[gd_scene format=3 uid="uid://b0cp5c2mgydcd"]
 
 [ext_resource type="Script" uid="uid://b4q1yh6hp0330" path="res://Scripts/Decorations/Interactive/Doors/PortaBase.gd" id="1_503en"]
-[ext_resource type="Texture2D" uid="uid://dypev18jrkm3l" path="res://Assets/Sprites/Decorations/set_decorazioni.png" id="2_8agp5"]
+[ext_resource type="Texture2D" uid="uid://c1jr3jloy6851" path="res://Assets/Sprites/Decorations/set_decorazioni.png" id="2_8agp5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3g3me"]
 atlas = ExtResource("2_8agp5")
@@ -214,13 +214,13 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="PortaBase" type="Node2D"]
+[node name="PortaBase" type="Node2D" unique_id=1488148402]
 y_sort_enabled = true
 script = ExtResource("1_503en")
 
-[node name="Center" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="." unique_id=2136994411]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=427489756]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_tkm07")
 animation = &"Open_W"

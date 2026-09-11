@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=4 uid="uid://dfiffid7tm682"]
+[gd_scene format=4 uid="uid://dfiffid7tm682"]
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_y2414"]
 [ext_resource type="Script" uid="uid://cwsy8h4f2k6r4" path="res://Scripts/Levels/level2.gd" id="2_pcnfu"]
 
-[node name="Level" instance=ExtResource("1_y2414")]
+[node name="Level" unique_id=1880741426 instance=ExtResource("1_y2414")]
 script = ExtResource("2_pcnfu")
 
-[node name="MovementLogicMapLayer" parent="." index="3"]
+[node name="MovementLogicMapLayer" parent="." index="3" unique_id=2011242274]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAADAP3/AAAAAAAAAAACAP3/AAAAAAAAAAABAP3/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAA=")
 
-[node name="TileMapLayer" parent="." index="5"]
+[node name="TileMapLayer" parent="." index="5" unique_id=1578614900]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQACAAAAAQAAAAAAAQADAAAAAQAAAAAAAQAEAAAAAQAAAAAAAQD/////AQAAAAAAAQD///7/AQAAAAAAAQD///3/AQAAAAAAAQAAAP3/AQAAAAAAAQABAP3/AQAAAAAAAQABAP//AQAAAAAAAQAAAP//AQAAAAAAAQACAP3/AQAAAAAAAQADAP3/AQAAAAAAAQAEAP//AQAAAAAAAQAEAP7/AQAAAAAAAQAEAP3/AQAAAAAAAQABAP7/AQAAAAAAAQAAAP7/AQAAAAAAAgA=")
 
-[node name="TerrainMapLayer" parent="YSort" index="0"]
+[node name="TerrainMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="0" unique_id=1113098733]
 tile_map_data = PackedByteArray("AAD//wAAAwAAAAAAAAAAAAAAAwAAAAAAAAABAAAAAwAAAAAAAAACAAAAAwAAAAAAAAADAAAAAwAAAAAAAAAEAAAAAwAAAAAAAAAEAP//AwAAAAAAAAAEAP7/AwAAAAAAAAAEAP3/AwAAAAAAAAADAP3/AwAAAAAAAAACAP3/AwAAAAAAAAABAP3/AwAAAAAAAAABAP7/AwAAAAAAAAABAP//AwAAAAAAAAAAAP//AwAAAAAAAAAAAP7/AwAAAAAAAAD/////AwAAAAAAAAD///7/AwAAAAAAAAD///3/AwAAAAAAAAAAAP3/AwAAAAAAAAA=")
 
-[node name="NPCMapLayer" parent="YSort" index="6"]
+[node name="NPCMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="6" unique_id=1537239280]
 tile_map_data = PackedByteArray("AAAAAP7/AQAAAAAAAQA=")

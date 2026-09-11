@@ -6,7 +6,6 @@ signal player_died(death_type: int)
 signal player_won
 signal steps_changed(new_count: int)
 signal move_finished
-signal light_time_changed(current: float, max: float)
 
 @export var tile_map_layer_path: NodePath
 @export var terrain_map_layer_path: NodePath

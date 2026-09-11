@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cdlw61vwbucp"]
 
 [ext_resource type="Script" uid="uid://bikpj2rd5ldl0" path="res://Scripts/Decorations/Interactive/Torch/BaseTorch.gd" id="1_1oivh"]
-[ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="2_ehuel"]
-[ext_resource type="AudioStream" uid="uid://d4nh2g6mefeou" path="res://Assets/Audio/Sound/Fire/FireBase.wav" id="3_xa863"]
-[ext_resource type="AudioStream" uid="uid://dntpgkx54let3" path="res://Assets/Audio/Sound/Fire/Fire3.wav" id="4_67nek"]
+[ext_resource type="Texture2D" uid="uid://d2y15d41gdqn6" path="res://Assets/Sprites/UI/LightMask.png" id="2_ehuel"]
+[ext_resource type="AudioStream" uid="uid://q0ekfbuokrv0" path="res://Assets/Audio/Sound/Fire/FireBase.wav" id="3_xa863"]
+[ext_resource type="AudioStream" uid="uid://ha327ogcvt7u" path="res://Assets/Audio/Sound/Fire/Fire3.wav" id="4_67nek"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1oivh"]
 

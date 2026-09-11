@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://djcc7vwm14p6w"]
+[gd_scene format=3 uid="uid://djcc7vwm14p6w"]
 
 [ext_resource type="Script" uid="uid://b6ku4jld0dgbl" path="res://Scripts/UI/Effects/DungeonParticles.gd" id="1_5jk06"]
 
@@ -6,10 +6,10 @@
 _data = [Vector2(0.0026315823, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.9004086), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="DungeonParticles" type="Node2D"]
+[node name="DungeonParticles" type="Node2D" unique_id=1152944842]
 script = ExtResource("1_5jk06")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1079084098]
 position = Vector2(320, 0)
 amount = 2
 lifetime = 2.0

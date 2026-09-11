@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://p0s2ogqb3vcf"]
+[gd_resource type="Theme" format=3 uid="uid://p0s2ogqb3vcf"]
 
-[ext_resource type="FontFile" uid="uid://u11g2ivnimgf" path="res://Assets/Fonts/Skranji-Regular.ttf" id="1_c58h0"]
+[ext_resource type="FontFile" uid="uid://c3y0es46r308l" path="res://Assets/Fonts/Skranji-Regular.ttf" id="1_c58h0"]
 
 [resource]
 Label/colors/font_color = Color(1, 1, 1, 1)

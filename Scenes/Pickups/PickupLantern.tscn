@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxedfpqdibkul"]
+[gd_scene format=3 uid="uid://cxedfpqdibkul"]
 
 [ext_resource type="PackedScene" uid="uid://ba2esyl04ctby" path="res://Scenes/Pickups/Pickup.tscn" id="1_qcmiy"]
 [ext_resource type="Script" uid="uid://bruqx2ofclye6" path="res://Scripts/Pickups/PickupLantern.gd" id="2_018m3"]
-[ext_resource type="Texture2D" uid="uid://vjuul1et8xiy" path="res://Assets/Sprites/UI/LightMask.png" id="3_r2wwv"]
+[ext_resource type="Texture2D" uid="uid://d2y15d41gdqn6" path="res://Assets/Sprites/UI/LightMask.png" id="3_r2wwv"]
 
-[node name="Pickup" instance=ExtResource("1_qcmiy")]
+[node name="Pickup" unique_id=165560757 instance=ExtResource("1_qcmiy")]
 script = ExtResource("2_018m3")
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=969472673]
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 32)
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite" index="0"]
+[node name="PointLight2D" type="PointLight2D" parent="Sprite" index="0" unique_id=1392549305]
 position = Vector2(0, 1)
 scale = Vector2(0.5, 0.5)
 color = Color(1, 1, 0.705882, 1)

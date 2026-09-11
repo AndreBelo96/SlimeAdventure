@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1xgk7yp8d0f"]
+[gd_scene format=3 uid="uid://e1xgk7yp8d0f"]
 
 [ext_resource type="Script" uid="uid://cyntuw8so4dnj" path="res://Scripts/Backgrounds/BackgroundManager.gd" id="1_hjd5p"]
 
-[node name="BackgroundManager" type="Node2D"]
+[node name="BackgroundManager" type="Node2D" unique_id=956054333]
 script = ExtResource("1_hjd5p")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2036475359]
 layer = -1
 
-[node name="BgColor" type="ColorRect" parent="CanvasLayer"]
+[node name="BgColor" type="ColorRect" parent="CanvasLayer" unique_id=438604608]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,8 +16,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.117647, 0.117647, 0.184314, 1)
 
-[node name="Node" type="Node" parent="CanvasLayer"]
+[node name="Node" type="Node" parent="CanvasLayer" unique_id=1273985656]
 
-[node name="VignetteRect" type="TextureRect" parent="CanvasLayer"]
+[node name="VignetteRect" type="TextureRect" parent="CanvasLayer" unique_id=510705366]
 
-[node name="DarkOverlay" type="CanvasModulate" parent="CanvasLayer"]
+[node name="DarkOverlay" type="CanvasModulate" parent="CanvasLayer" unique_id=1429398430]

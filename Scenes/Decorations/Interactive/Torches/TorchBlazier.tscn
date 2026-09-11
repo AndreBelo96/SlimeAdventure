@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2k5qrvl24rpk"]
+[gd_scene format=3 uid="uid://d2k5qrvl24rpk"]
 
 [ext_resource type="PackedScene" uid="uid://cdlw61vwbucp" path="res://Scenes/Decorations/Interactive/Torches/TorchBase.tscn" id="1_m0a6g"]
-[ext_resource type="Texture2D" uid="uid://skqg5qrk2vh4" path="res://Assets/Sprites/Decorations/set_blazier.png" id="2_e8s5a"]
+[ext_resource type="Texture2D" uid="uid://b4132re1e4hr0" path="res://Assets/Sprites/Decorations/set_blazier.png" id="2_e8s5a"]
 [ext_resource type="Script" uid="uid://cpkfmx3lrvi5f" path="res://Scripts/Decorations/Interactive/Torch/Torch.gd" id="2_m3bx2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3bx2"]
@@ -61,13 +61,13 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Torch" instance=ExtResource("1_m0a6g")]
+[node name="Torch" unique_id=410779414 instance=ExtResource("1_m0a6g")]
 script = ExtResource("2_m3bx2")
 
-[node name="PointLight2D" parent="." index="0"]
+[node name="PointLight2D" parent="." index="0" unique_id=1902835106]
 texture_scale = 2.0
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1828455111]
 sprite_frames = SubResource("SpriteFrames_de8sq")
 autoplay = "default"
 offset = Vector2(0, -30)

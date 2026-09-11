@@ -12,6 +12,7 @@ enum BossState {
 signal defeated
 signal damaged(boss)
 signal life_changed(dmg: int)
+@warning_ignore("UNUSED_SIGNAL")
 signal finished_turn(enemy)
 
 @export var tilemap: TileMapLayer

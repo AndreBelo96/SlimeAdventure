@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://de3pdo6kx35dv"]
+[gd_scene format=3 uid="uid://de3pdo6kx35dv"]
 
-[ext_resource type="Texture2D" uid="uid://dttldyyqmevx8" path="res://Assets/Sprites/UI/MainMenu/bg_far.png" id="1_arbor"]
-[ext_resource type="Texture2D" uid="uid://dkfadm5tpgctv" path="res://Assets/Sprites/UI/MainMenu/bg_mid.png" id="2_06v3u"]
+[ext_resource type="Texture2D" uid="uid://eo37755agpgs" path="res://Assets/Sprites/UI/MainMenu/bg_far.png" id="1_arbor"]
+[ext_resource type="Texture2D" uid="uid://cl6yoodmsostw" path="res://Assets/Sprites/UI/MainMenu/bg_mid.png" id="2_06v3u"]
 [ext_resource type="PackedScene" uid="uid://bqd131solu8ks" path="res://Scenes/UI/MainMenu/TorchMenù.tscn" id="3_ceffg"]
-[ext_resource type="Texture2D" uid="uid://dwx14vysutofa" path="res://Assets/Sprites/UI/MainMenu/fg.png" id="4_06v3u"]
+[ext_resource type="Texture2D" uid="uid://bq7at0hh5oqpi" path="res://Assets/Sprites/UI/MainMenu/fg.png" id="4_06v3u"]
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="4_ho8kw"]
-[ext_resource type="Texture2D" uid="uid://ujtntmpg2em2" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
+[ext_resource type="Texture2D" uid="uid://diyapcnyj1dnu" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u1slq"]
 shader = ExtResource("4_ho8kw")
@@ -26,52 +26,52 @@ noise = SubResource("FastNoiseLite_dvisc")
 _data = [Vector2(0.0019455254, 0.9999999), 0.0, 0.0, 0, 0, Vector2(1, 0.20926863), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="BackgroundMenu" type="Node2D"]
+[node name="BackgroundMenu" type="Node2D" unique_id=151287779]
 
-[node name="Far" type="Parallax2D" parent="."]
+[node name="Far" type="Parallax2D" parent="." unique_id=1370939446]
 repeat_size = Vector2(960, 0)
 autoscroll = Vector2(-30, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Far"]
+[node name="Sprite2D" type="Sprite2D" parent="Far" unique_id=710686734]
 position = Vector2(481, 180)
 texture = ExtResource("1_arbor")
 
-[node name="Mid" type="Parallax2D" parent="."]
+[node name="Mid" type="Parallax2D" parent="." unique_id=516927492]
 scroll_offset = Vector2(0, 1)
 repeat_size = Vector2(960, 0)
 autoscroll = Vector2(-70, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Mid"]
+[node name="Sprite2D" type="Sprite2D" parent="Mid" unique_id=452561297]
 position = Vector2(481, 180)
 texture = ExtResource("2_06v3u")
 
-[node name="TorchMenù" parent="Mid" instance=ExtResource("3_ceffg")]
+[node name="TorchMenù" parent="Mid" unique_id=1000181767 instance=ExtResource("3_ceffg")]
 position = Vector2(161, 152)
 
-[node name="TorchMenù2" parent="Mid" instance=ExtResource("3_ceffg")]
+[node name="TorchMenù2" parent="Mid" unique_id=1638387182 instance=ExtResource("3_ceffg")]
 position = Vector2(801, 152)
 
-[node name="TorchMenù3" parent="Mid" instance=ExtResource("3_ceffg")]
+[node name="TorchMenù3" parent="Mid" unique_id=1686131552 instance=ExtResource("3_ceffg")]
 position = Vector2(1121, 152)
 
-[node name="TorchMenù4" parent="Mid" instance=ExtResource("3_ceffg")]
+[node name="TorchMenù4" parent="Mid" unique_id=1676154878 instance=ExtResource("3_ceffg")]
 position = Vector2(1761, 152)
 
-[node name="Fore" type="Parallax2D" parent="."]
+[node name="Fore" type="Parallax2D" parent="." unique_id=549029956]
 repeat_size = Vector2(960, 0)
 autoscroll = Vector2(-100, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Fore"]
+[node name="Sprite2D" type="Sprite2D" parent="Fore" unique_id=1027454110]
 position = Vector2(481, 180)
 texture = ExtResource("4_06v3u")
 
-[node name="Fog" type="Sprite2D" parent="."]
+[node name="Fog" type="Sprite2D" parent="." unique_id=1353580156]
 material = SubResource("ShaderMaterial_u1slq")
 position = Vector2(319, 177)
 scale = Vector2(1.4238281, 1)
 texture = SubResource("NoiseTexture2D_0gido")
 
-[node name="Dust" type="CPUParticles2D" parent="."]
+[node name="Dust" type="CPUParticles2D" parent="." unique_id=1393189767]
 position = Vector2(640, 180)
 amount = 50
 lifetime = 11.0
@@ -93,7 +93,7 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_0kdox")
 color = Color(0.4045111, 0.40451118, 0.40451103, 1)
 
-[node name="Vignettatura" type="Sprite2D" parent="."]
+[node name="Vignettatura" type="Sprite2D" parent="." unique_id=1026044580]
 position = Vector2(319, 180)
 scale = Vector2(0.5753389, 0.5205091)
 texture = ExtResource("5_o8273")

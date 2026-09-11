@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy3p1262vrlln"]
+[gd_scene format=3 uid="uid://dy3p1262vrlln"]
 
 [ext_resource type="Script" uid="uid://cweu8venhe35r" path="res://Scripts/NPCs/NonnoSlime.gd" id="1_wta4u"]
-[ext_resource type="Texture2D" uid="uid://bgmhyd5hhwau1" path="res://Assets/Sprites/NPCs/Granpa_Slime-Sheet.png" id="2_6t7mi"]
+[ext_resource type="Texture2D" uid="uid://drhgwi6i0hl10" path="res://Assets/Sprites/NPCs/Granpa_Slime-Sheet.png" id="2_6t7mi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgr0e"]
 atlas = ExtResource("2_6t7mi")
@@ -58,13 +58,13 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="NonnoSlime" type="Node2D"]
+[node name="NonnoSlime" type="Node2D" unique_id=875681371]
 script = ExtResource("1_wta4u")
 
-[node name="Center" type="Marker2D" parent="."]
+[node name="Center" type="Marker2D" parent="." unique_id=219417364]
 position = Vector2(0, 1)
 
-[node name="Animation" type="AnimatedSprite2D" parent="."]
+[node name="Animation" type="AnimatedSprite2D" parent="." unique_id=1090257570]
 position = Vector2(-16, -24)
 sprite_frames = SubResource("SpriteFrames_veu0t")
 animation = &"IDLE"

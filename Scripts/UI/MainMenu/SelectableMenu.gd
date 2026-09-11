@@ -55,7 +55,7 @@ func handle_navigation(_event: InputEvent) -> void:
 		change_selection(delta)
 
 func change_selection(delta: int) -> void:
-	var clamped : float = clamp(current_selection + delta, 0, buttons.size() - 1)
+	var clamped: int = clamp(current_selection + delta, 0, buttons.size() - 1)
 	if clamped == current_selection:
 		return
 	SoundManager.play_sfx(SFX_MOVE)
@@ -119,7 +119,7 @@ func _start_tween(group: Array) -> void:
 		else:
 			offset = Vector2(-5, 0) if sel == group[0] else Vector2(5, 0)
 
-		var tween := create_tween().set_loops()
+		var tween := create_tween().set_loops(100000)
 		tween.tween_property(sel, "position", base + offset, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(sel, "position", base, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		sel.set_meta("tween", tween)

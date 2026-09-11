@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbai1egjg2n1s"]
+[gd_scene format=3 uid="uid://cbai1egjg2n1s"]
 
 [ext_resource type="Script" uid="uid://cpn72y0rec4vu" path="res://Scripts/Decorations/Interactive/Doors/PortaW.gd" id="1_v1oet"]
 [ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="2_7k3r2"]
 
-[node name="PortaW" instance=ExtResource("2_7k3r2")]
+[node name="PortaW" unique_id=225099723 instance=ExtResource("2_7k3r2")]
 script = ExtResource("1_v1oet")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=427489756]
 animation = &"Closed_W"
 offset = Vector2(-47, -66)

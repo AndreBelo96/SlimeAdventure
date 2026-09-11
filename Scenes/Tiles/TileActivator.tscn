@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://3kbat82hiy2o"]
+[gd_scene format=3 uid="uid://3kbat82hiy2o"]
 
 [ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_r8d1m"]
 [ext_resource type="Script" uid="uid://bcedt0vll5uae" path="res://Scripts/Tiles/TileActivator.gd" id="2_87ril"]
-[ext_resource type="Texture2D" uid="uid://bejvl5h40jidu" path="res://Assets/Sprites/Tiles/Logic_Tileset.png" id="3_svkvp"]
+[ext_resource type="Texture2D" uid="uid://drjm6tkynbycp" path="res://Assets/Sprites/Tiles/Logic_Tileset.png" id="3_svkvp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_afemw"]
 animations = [{
@@ -30,19 +30,19 @@ gravity = Vector3(0, 0, 0)
 tangential_accel_min = -80.0
 tangential_accel_max = 80.0
 
-[node name="TileBase" instance=ExtResource("1_r8d1m")]
+[node name="TileBase" unique_id=1942168026 instance=ExtResource("1_r8d1m")]
 script = ExtResource("2_87ril")
 
-[node name="Tile" parent="." index="1"]
+[node name="Tile" parent="." index="1" unique_id=457203740]
 texture = ExtResource("3_svkvp")
 region_enabled = true
 region_rect = Rect2(1, 1, 64, 48)
 
-[node name="AnimatedTile" parent="." index="2"]
+[node name="AnimatedTile" parent="." index="2" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_afemw")
 animation = &"Activate"
 
-[node name="GlowParticles" type="GPUParticles2D" parent="." index="3"]
+[node name="GlowParticles" type="GPUParticles2D" parent="." index="3" unique_id=1305716908]
 modulate = Color(1, 0.607843, 0.301961, 1)
 emitting = false
 amount = 5

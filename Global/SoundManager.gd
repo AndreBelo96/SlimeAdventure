@@ -45,9 +45,9 @@ func play_music(path: String, fade_time := 0.5):
 	
 	# fade out
 	if music_player.playing:
-		var tween = create_tween()
-		tween.tween_property(music_player, "volume_db", -40, fade_time)
-		await tween.finished
+		var fade_out_tween  = create_tween()
+		fade_out_tween .tween_property(music_player, "volume_db", -40, fade_time)
+		await fade_out_tween .finished
 	
 	music_player.stop()
 	music_player.stream = stream
@@ -55,9 +55,9 @@ func play_music(path: String, fade_time := 0.5):
 	music_player.play()
 	
 	# fade in
-	var tween = create_tween()
+	var fade_in_tween  = create_tween()
 	music_player.volume_db = -40
-	tween.tween_property(music_player, "volume_db", linear_to_db(music_volume), fade_time)
+	fade_in_tween .tween_property(music_player, "volume_db", linear_to_db(music_volume), fade_time)
 
 func stop_music():
 	music_player.stop()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://q4t8gcatg35g" path="res://Shader/title_shader.gdshader" id="1_dc5ke"]
 [ext_resource type="Script" uid="uid://dsfj6l5bbt0ja" path="res://Scripts/UI/MainMenu/SaveMenuPanel.gd" id="1_wlnai"]
-[ext_resource type="Texture2D" uid="uid://bp2q2kcq6fp18" path="res://Assets/Sprites/Title.png" id="2_wlnai"]
+[ext_resource type="Texture2D" uid="uid://dmqmvu3xms8ce" path="res://Assets/Sprites/Title.png" id="2_wlnai"]
 [ext_resource type="PackedScene" uid="uid://btr07cucc5rnv" path="res://Scenes/UI/MainMenu/SlotSelectPanel.tscn" id="4_dc5ke"]
 [ext_resource type="PackedScene" uid="uid://ugvdwks7dkx8" path="res://Scenes/UI/MainMenu/SlotActionsPanel.tscn" id="5_wlnai"]
 

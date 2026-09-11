@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcbsgkh0t0fnu"]
+[gd_scene format=3 uid="uid://dcbsgkh0t0fnu"]
 
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="1_c0ao1"]
 
@@ -17,9 +17,9 @@ width = 480
 height = 400
 noise = SubResource("FastNoiseLite_0qx6t")
 
-[node name="FogEffect" type="Node2D"]
+[node name="FogEffect" type="Node2D" unique_id=909098815]
 
-[node name="Fog" type="Sprite2D" parent="."]
+[node name="Fog" type="Sprite2D" parent="." unique_id=156901641]
 material = SubResource("ShaderMaterial_hx2aq")
 position = Vector2(0.9999989, 1.0000043)
 scale = Vector2(0.70000005, 0.485)

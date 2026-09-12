@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://0x63sxigcn8w"]
 
 [ext_resource type="Script" uid="uid://dx520v8051l58" path="res://Scripts/Decorations/Interactive/Doors/PortaE.gd" id="1_bosl7"]
-[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="2_u1ww0"]
+[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/DoorBase.tscn" id="2_u1ww0"]
 
 [node name="PortaE" unique_id=258423877 instance=ExtResource("2_u1ww0")]
 script = ExtResource("1_bosl7")

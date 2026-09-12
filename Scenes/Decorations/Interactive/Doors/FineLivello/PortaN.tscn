@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckr2xduwmue4o"]
 
-[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaBase.tscn" id="1_1ttjg"]
+[ext_resource type="PackedScene" uid="uid://b0cp5c2mgydcd" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/DoorBase.tscn" id="1_1ttjg"]
 [ext_resource type="Script" uid="uid://dxdellwu25cy1" path="res://Scripts/Decorations/Interactive/Doors/PortaN.gd" id="1_lveiy"]
 
 [node name="PortaN" unique_id=1574965328 instance=ExtResource("1_1ttjg")]

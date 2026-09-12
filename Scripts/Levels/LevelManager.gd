@@ -105,8 +105,8 @@ func setup_hud():
 		if boss:
 			boss.defeated.connect(on_boss_defeated)
 			boss.defeated.connect(hud_manager.hide_boss_hp_bar)
-			boss.life_changed.connect(func(_dmg): hud_manager.update_progress_bar(boss.vita))
-			hud_manager.setup_boss_level(boss.vita)
+			boss.life_changed.connect(func(_dmg): hud_manager.update_progress_bar(boss.health_points))
+			hud_manager.setup_boss_level(boss.health_points)
 
 func toggle_pause():
 	get_tree().paused = not get_tree().paused

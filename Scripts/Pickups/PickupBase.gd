@@ -13,7 +13,7 @@ const float_speed := 2.0
 var start_y: float = 0.0
 var elapsed: float = 0.0
 var is_active: bool = true
-var posizione_tile: Vector2i
+var grid_position: Vector2i
 
 func _ready():
 	add_to_group("pickups")
@@ -46,5 +46,5 @@ func hide_temporarily(duration: float = 5.0) -> void:
 
 func snap_to_tile_center(tilemap: TileMapLayer, coords: Vector2i) -> void:
 	GridUtils.snap_to_tile_center(self, tilemap, coords, center.position)
-	posizione_tile = coords
+	grid_position = coords
 	start_y = global_position.y

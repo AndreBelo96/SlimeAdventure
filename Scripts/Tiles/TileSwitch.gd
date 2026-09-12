@@ -1,8 +1,8 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
-var chiave := "A"
-var attivato := false
-var azione := "disattiva"
+var key := "A"
+var activated := false
+var action := "deactivate"
 @onready var shader_material = $AnimatedTile.material
 
 func _ready():
@@ -12,8 +12,8 @@ func _ready():
 	add_to_group("switches")
 
 func on_player_enter():
-	if not attivato:
-		attivato = true
+	if not activated:
+		activated = true
 		if PlayerRef.player:
 			PlayerRef.player.lock_input()
 		$AnimatedTile.play("PRESSED")
@@ -22,15 +22,15 @@ func on_player_enter():
 		await get_tree().create_timer(0.2).timeout
 		if PlayerRef.player:
 			PlayerRef.player.unlock_input()
-		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": azione})
+		emit_signal("tile_triggered", self, "switch", {"key": key, "action": action})
 		deactivate()
 
 func reset_switch():
-	if attivato:
-		attivato = false
+	if activated:
+		activated = false
 		$AnimatedTile.play("UNPRESSED")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/ReverseSwitchClick.wav")
-		emit_signal("tile_triggered", self, "switch", {"chiave": chiave, "azione": "disattiva"})
+		emit_signal("tile_triggered", self, "switch", {"key": key, "action": "deactivate"})
 		activate()
 
 func deactivate():

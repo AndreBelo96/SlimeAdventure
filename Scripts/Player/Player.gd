@@ -178,7 +178,7 @@ func _check_boss_collision():
 	
 	var bosses = get_tree().get_nodes_in_group("enemy")
 	for boss in bosses:
-		if not boss.is_dead() and boss.posizione_tile == grid_position:
+		if not boss.is_dead() and boss.grid_position == grid_position:
 			_on_player_touch_boss()
 			return
 

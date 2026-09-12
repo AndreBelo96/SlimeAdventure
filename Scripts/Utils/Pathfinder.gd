@@ -105,8 +105,8 @@ func get_tile_cost(pos: Vector2i) -> int:
 	if tile_instance == null:
 		return 999
 
-	if "peso" in tile_instance:
-		return tile_instance.peso
+	if "weight" in tile_instance:
+		return tile_instance.weight
 	else:
 		return 1
 

@@ -1,4 +1,4 @@
-extends PortaBase
+extends DoorBase
 
 func _ready():
 	super._ready()

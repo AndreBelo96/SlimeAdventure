@@ -29,14 +29,14 @@ func assign_keys():
 			if tile_data == null:
 				continue
 			
-			var chiave = tile_data.get_custom_data("chiave")
-			var azione = tile_data.get_custom_data("azione")
+			var key = tile_data.get_custom_data("key")
+			var action = tile_data.get_custom_data("action")
 			
 			for node in tile_layer.get_children():
 				if tile_layer.local_to_map(node.position) == cell:
 					if node.is_in_group("spikes") or node.is_in_group("switches"):
-						node.chiave = chiave
-						node.azione = azione
+						node.key = key
+						node.action = action
 						
 						if node.has_method("set_initial_state"):
 							node.set_initial_state()
@@ -61,7 +61,7 @@ func get_exit_position() -> Vector2:
 			var tile_data = logic_map.get_cell_tile_data(cell)
 			if tile_data == null:
 				continue
-			if tile_data.get_custom_data("chiave") == "EXIT":
+			if tile_data.get_custom_data("key") == "EXIT":
 				return cell
 	return Vector2.ZERO
 

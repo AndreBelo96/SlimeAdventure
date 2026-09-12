@@ -53,15 +53,15 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			GameLogger.warn("Morte: tipo=%s sender=%s pos=%s" % [str(data.get("death_type", 0)), sender.name, str(sender.global_position)])
 			player.on_player_died(data.get("death_type", 0))
 		"switch":
-			var chiave = data.get("chiave", "")
-			var azione = data.get("azione", "")
-			
-			GameLogger.info("Switch sender=%s chiave=%s azione=%s" % [sender.name, chiave, azione])
-			switch_spike_handler.handle_switch(chiave, azione, sender)
+			var key = data.get("key", "")
+			var switch_action = data.get("action", "")
+
+			GameLogger.info("Switch sender=%s key=%s action=%s" % [sender.name, key, switch_action])
+			switch_spike_handler.handle_switch(key, switch_action, sender)
 		"enemy_hit":
 			switch_spike_handler.notify_boss_hit()
 		_:
-			GameLogger.info("Sender %s azione=%s dati=%s" % [sender.name, action, str(data)])
+			GameLogger.info("Sender %s action=%s data=%s" % [sender.name, action, str(data)])
 
 func on_player_step(step_count: int):
 	_enemy_phase_done = false

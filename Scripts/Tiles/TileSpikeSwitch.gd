@@ -1,8 +1,8 @@
 extends "res://Scripts/Tiles/TileBase.gd"
 
-var chiave := "A"
-var attivo := true
-var azione := "disattiva"
+var key := "A"
+var active := true
+var action := "deactivate"
 
 @onready var animation = $AnimatedTile
 
@@ -11,12 +11,12 @@ func _ready():
 	add_to_group("spikes")
 
 func set_initial_state():
-	match azione:
-		"attiva":
-			attivo = false
+	match action:
+		"activate":
+			active = false
 			set_initial_frame("ON")
-		"disattiva":
-			attivo = true
+		"deactivate":
+			active = true
 			set_initial_frame("OFF")
 
 func set_initial_frame(anim_name: String):
@@ -24,16 +24,16 @@ func set_initial_frame(anim_name: String):
 	$AnimatedTile.stop()
 	$AnimatedTile.frame = 0
 
-func disattiva():
-	attivo = false
+func deactivate():
+	active = false
 	SoundManager.play_sfx(AudioPresets.DEACTIVATE_SPINE, -20)
-	peso = 1
+	weight = 1
 	_play_locked("OFF")
 
-func attiva():
-	attivo = true
+func activate():
+	active = true
 	SoundManager.play_sfx(AudioPresets.ACTIVATE_SPINE, -20)
-	peso = 8
+	weight = 8
 	emit_signal("state_changed", self, "ON")
 	_play_locked("ON")
 
@@ -46,10 +46,10 @@ func _play_locked(anim_name: String) -> void:
 		PlayerRef.player.unlock_input()
 
 func on_player_enter():
-	if attivo:
-		emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES, "chiave": chiave})
+	if active:
+		emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES, "key": key})
 
 func on_enemy_enter(_enemy: EnemyBase):
-	if attivo:
+	if active:
 		_enemy.receive_hit("damage")
 		emit_signal("tile_triggered", self, "enemy_hit", {"enemy": _enemy})

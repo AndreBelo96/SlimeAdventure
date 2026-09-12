@@ -19,17 +19,17 @@ func on_step_begin() -> void:
 		switch_waiting_reset = false
 		boss_hit_by_switch = false
 
-func handle_switch(chiave: String, azione: String, sender) -> void:
-	if azione == "attiva":
+func handle_switch(key: String, action: String, sender) -> void:
+	if action == "activate":
 		last_switch_pressed = sender
 		boss_hit_by_switch = false
 		switch_waiting_reset = true
 
 	for child in tile_layer.get_children():
-		if child.is_in_group("spikes") and child.chiave == chiave:
-			match azione:
-				"attiva":   child.attiva()
-				"disattiva": child.disattiva()
+		if child.is_in_group("spikes") and child.key == key:
+			match action:
+				"activate":   child.activate()
+				"deactivate": child.deactivate()
 
 	emit_signal("switch_action_done")
 
@@ -39,12 +39,12 @@ func notify_boss_hit() -> void:
 func disable_all_spikes() -> void:
 	for child in tile_layer.get_children():
 		if child.is_in_group("spikes"):
-			child.disattiva()
+			child.deactivate()
 
 func disable_spikes_with_key(key: String) -> void:
 	for child in tile_layer.get_children():
-		if child.is_in_group("spikes") and child.chiave == key:
-			child.disattiva()
+		if child.is_in_group("spikes") and child.key == key:
+			child.deactivate()
 
 func _reset_switch_and_spikes() -> void:
 	if last_switch_pressed and last_switch_pressed.is_in_group("switches"):

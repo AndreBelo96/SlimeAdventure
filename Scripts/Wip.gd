@@ -1,6 +1,6 @@
 extends Node2D
 
-var posizione_tile: Vector2i
+var grid_position: Vector2i
 var shown: bool = false
 
 @export var dialog_interface: DialogueInterface
@@ -8,10 +8,10 @@ var shown: bool = false
 
 func _ready():
 	if LevelStateManager.current_level == 6:
-		posizione_tile = Vector2i(-1, -6)
+		grid_position = Vector2i(-1, -6)
 	else:
-		posizione_tile = Vector2i(-2, -9)
-	GridUtils.snap_to_tile_center(self, tilemap, posizione_tile, $Center.position)
+		grid_position = Vector2i(-2, -9)
+	GridUtils.snap_to_tile_center(self, tilemap, grid_position, $Center.position)
 
 
 func _process(_delta):
@@ -35,4 +35,4 @@ func show_dialogue():
 	await dialog_interface.dialogue_finished
 
 func is_adjacent_to_slime() -> bool:
-	return PlayerRef.player != null and GridUtils.is_adjacent_4(posizione_tile, PlayerRef.player.movement_handler.grid_position)
+	return PlayerRef.player != null and GridUtils.is_adjacent_4(grid_position, PlayerRef.player.movement_handler.grid_position)

@@ -1,5 +1,5 @@
 extends Node2D
-class_name PortaBase
+class_name DoorBase
 
 var direction: String = "N"
 var is_open: bool = false

@@ -23,8 +23,8 @@ var action_in_progress := false
 var idle_entered := false
 var active := false
 
-var vita: int
-var posizione_tile: Vector2i
+var health_points: int
+var grid_position: Vector2i
 
 @onready var health := HealthComponent.new()
 @onready var grid_movement := GridMovement.new()
@@ -38,10 +38,10 @@ func _ready():
 	set_process(false)
 	set_physics_process(false)
 
-## Da chiamare dalle classi figlie in _ready() per inizializzare la vita.
+## Da chiamare dalle classi figlie in _ready() per inizializzare la health_points.
 func setup_health(starting_life: int) -> void:
 	health.setup(starting_life)
-	vita = health.life
+	health_points = health.life
 
 func setup_level_logic(_level_logic) -> void:
 	level_logic = _level_logic
@@ -49,7 +49,7 @@ func setup_level_logic(_level_logic) -> void:
 ## Da chiamare dalle classi figlie in _ready() per inizializzare la griglia.
 func setup_grid(_tilemap: TileMapLayer, center_offset: Vector2, start_pos: Vector2i, movement_map: TileMapLayer = null, visual_map: TileMapLayer = null) -> void:
 	grid_movement.setup(self, _tilemap, center_offset, start_pos, movement_map, visual_map)
-	posizione_tile = grid_movement.grid_position
+	grid_position = grid_movement.grid_position
 
 func should_move(_step_count: int) -> bool:
 	return true
@@ -80,7 +80,7 @@ func take_damage(dmg: int):
 
 	damage_animation()
 	health.apply_damage(dmg)
-	vita = health.life
+	health_points = health.life
 	change_steps()
 
 	emit_signal("life_changed", dmg)

@@ -21,7 +21,7 @@ func on_enemy_finished_turn(enemy) -> void:
 	emit_signal("enemy_turn_done", enemy)
 
 func apply_tile_effect(enemy) -> void:
-	var tile = get_tile_under_enemy(enemy.posizione_tile)
+	var tile = get_tile_under_enemy(enemy.grid_position)
 	if tile and tile.has_method("on_enemy_enter"):
 		tile.on_enemy_enter(enemy)
 

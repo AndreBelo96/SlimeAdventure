@@ -78,7 +78,7 @@ func _start_move():
 	if next_tile != grid_movement.grid_position:
 		animation.play("WALK")
 		await grid_movement.move_to(next_tile)
-		posizione_tile = grid_movement.grid_position
+		grid_position = grid_movement.grid_position
 
 	if _warning_pending:
 		boss_attack.show_attack_warning(grid_movement.grid_position, tilemap)

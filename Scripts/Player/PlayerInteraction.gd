@@ -39,7 +39,7 @@ func _get_tile_under_player() -> TileBase:
 func _get_pickup_under_player() -> PickupBase:
 	for child in pickup_layer.get_children():
 		if child is PickupBase and child.is_active:
-			var tile_coord = child.posizione_tile
+			var tile_coord = child.grid_position
 			if have_same_coord(player.grid_position , tile_coord):
 				GameLogger.info("Pickup -> Player sopra= " + str(child.name))
 				return child

@@ -8,6 +8,10 @@ var movement_logic_map_layer
 var doors_map_layer
 var move_duration
 
+var _doors_index: GridSpatialIndex
+var _npc_index: GridSpatialIndex
+var _tile_index: GridSpatialIndex
+
 var grid_position := Vector2i.ZERO
 var is_moving := false
 
@@ -19,6 +23,10 @@ func setup(player_ref, tile_layer, movement_logic_layer, doors_layer, npc_layer,
 	npc_map_layer = npc_layer
 	move_duration = duration
 	grid_position = get_coords_from_global_position_in_layer(player.global_position, tile_map_layer)
+
+	_doors_index = GridSpatialIndex.new(doors_map_layer)
+	_npc_index = GridSpatialIndex.new(npc_map_layer)
+	_tile_index = GridSpatialIndex.new(tile_map_layer)
 
 func move_to(new_grid_position: Vector2i):
 	if is_moving:
@@ -121,9 +129,14 @@ func get_coords_from_global_position_in_layer(global_pos: Vector2, layer: TileMa
 	return layer.local_to_map(layer.to_local(global_pos))
 
 func find_child_at_coords(layer, coords: Vector2i) -> Node:
-	for child in layer.get_children():
-		if child.has_node("Center"):
-			var center = child.get_node("Center")
-			if get_coords_from_global_position_in_layer(center.global_position, layer) == coords:
-				return child
+	var index = _index_for_layer(layer)
+	return index.get_at(coords) if index else null
+
+func _index_for_layer(layer) -> GridSpatialIndex:
+	if layer == doors_map_layer:
+		return _doors_index
+	elif layer == npc_map_layer:
+		return _npc_index
+	elif layer == tile_map_layer:
+		return _tile_index
 	return null

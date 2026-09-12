@@ -59,11 +59,11 @@ func _ready():
 	light_handler.setup(point_light)
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position_in_layer(global_position, tile_map_layer))
 	await get_tree().process_frame
+	
+	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
-	
-	grid_position = movement_handler.grid_position
 
 func turn_on_lights(duration: float = 0.0) -> void:
 	if not light_handler.light:

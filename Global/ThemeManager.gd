@@ -17,7 +17,7 @@ var BUTTON_THEMES := {
 	LocationManager.Location.TUTORIAL: preload("res://Theme/Button/TutorialButton.tres"),
 	LocationManager.Location.DUNGEON: preload("res://Theme/Button/DungeonButton.tres")
 }
-const DEFAULT_THEME := preload("res://Theme/DefaultButton.tres")
+const DEFAULT_THEME := preload("res://Theme/Button/TutorialButton.tres")
 
 var BUTTON_SOUNDS := {
 	LocationManager.Location.TUTORIAL: "res://Assets/Audio/Sound/TutorialBtnClick.wav",

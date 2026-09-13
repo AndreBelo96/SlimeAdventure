@@ -11,31 +11,54 @@ func save_progress(level: int, steps: int, time: float) -> bool:
 	var is_record := false
 
 	if not save_data["levels"].has(level_key):
-		save_data["levels"][level_key] = {"steps": steps, "time": time}
+		save_data["levels"][level_key] = {}
+
+	var level_data = save_data["levels"][level_key]
+	var old_steps = level_data.get("steps", INF)
+	var old_time = level_data.get("time", INF)
+
+	if steps < old_steps or time < old_time:
 		is_record = true
-	else:
-		var old_data = save_data["levels"][level_key]
-		if steps < old_data["steps"] or time < old_data["time"]:
-			is_record = true
-		
-		save_data["levels"][level_key]["steps"] = min(old_data["steps"], steps)
-		save_data["levels"][level_key]["time"] = min(old_data["time"], time)
-	
+
+	level_data["steps"] = min(old_steps, steps)
+	level_data["time"] = min(old_time, time)
+
 	save_data["max_level_reach"] = max(save_data["max_level_reach"], level + 1)
 	_write_file()
 	return is_record
 
 func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, _has_pickaxe: bool) -> bool:
+	var level_key = str(level)
+
+	if not save_data["levels"].has(level_key):
+		save_data["levels"][level_key] = {}
+
+	var level_data = save_data["levels"][level_key]
+	level_data["attempts"] = level_data.get("attempts", 0) + 1
+
+	var level_deaths: Dictionary = level_data.get("deaths", {})
+	for death_type in deaths.keys():
+		var key = str(death_type)
+		level_deaths[key] = level_deaths.get(key, 0) + deaths[death_type]
+	level_data["deaths"] = level_deaths
+
+	save_data["total_attempts"] = save_data.get("total_attempts", 0) + 1
+
 	var is_record := false
-	
 	if victory:
 		is_record = save_progress(level, steps, time)
 		save_data["player"]["has_pickaxe"] = _has_pickaxe
-	
+
+		level_data["victories"] = level_data.get("victories", 0) + 1
+		if not level_data.has("first_completed_at"):
+			level_data["first_completed_at"] = Time.get_unix_time_from_system()
+
+		save_data["total_victories"] = save_data.get("total_victories", 0) + 1
+
 	save_data["total_steps"] += steps
 	save_data["total_time"] += time
 	save_data["last_played"] = Time.get_unix_time_from_system()
-	
+
 	for death_type in deaths.keys():
 		var key = str(death_type)
 		if not save_data["death_counts"].has(key):
@@ -93,13 +116,6 @@ func get_max_level_reach() -> int:
 func get_level_data(level: int) -> Dictionary:
 	return save_data["levels"].get(str(level), {})
 
-func get_totals() -> Dictionary:
-	return {
-		"steps": save_data.get("total_steps", 0),
-		"time": save_data.get("total_time", 0.0),
-		"deaths": save_data.get("death_counts", {})
-	}
-
 func has_pickaxe() -> bool:
 	return save_data.get("player", {}).get("has_pickaxe", false)
 
@@ -115,6 +131,8 @@ func get_default_save_data() -> Dictionary:
 		"max_level_reach": 1,        # livello massimo sbloccato
 		"total_steps": 0,            # passi totali
 		"total_time": 0.0,           # tempo totale giocato
+		"total_attempts": 0,         # tentativi totali (nuovo)
+		"total_victories": 0,        # vittorie totali (nuovo)
 		"death_counts": {            # morti globali divise per tipo
 			"0": 0,   # DeathType.SPIKES
 			"1": 0,   # DeathType.VOID
@@ -139,6 +157,26 @@ func get_slot_preview(slot:int) -> Dictionary:
 		return result
 	
 	return {}
+
+func get_levels_completed_count() -> int:
+	return save_data["levels"].size()
+
+func get_best_absolute_time() -> float:
+	var best := INF
+	for level_key in save_data["levels"]:
+		var t = save_data["levels"][level_key].get("time", INF)
+		if t < best:
+			best = t
+	return best
+
+func get_totals() -> Dictionary:
+	return {
+		"steps": save_data.get("total_steps", 0),
+		"time": save_data.get("total_time", 0.0),
+		"deaths": save_data.get("death_counts", {}),
+		"attempts": save_data.get("total_attempts", 0),
+		"victories": save_data.get("total_victories", 0),
+	}
 
 #C:\Users\Andrea\AppData\Roaming\Godot\app_userdata\Slime Adventure
 func get_save_path() -> String:

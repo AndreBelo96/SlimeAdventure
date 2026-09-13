@@ -56,12 +56,14 @@ folder_colors={
 "res://Assets/": "green",
 "res://Global/": "purple",
 "res://Scenes/": "orange",
-"res://Scripts/": "red"
+"res://Scripts/": "red",
+"res://Theme/": "teal"
 }
 
 [gui]
 
 theme/default_font_antialiasing=0
+theme/custom="uid://bi1hmuxx6wq18"
 theme/custom_font="uid://cqkt7xf43rk6e"
 
 [input]

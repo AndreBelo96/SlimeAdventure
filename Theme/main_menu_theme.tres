@@ -1,0 +1,34 @@
+[gd_resource type="Theme" format=3 uid="uid://bi1hmuxx6wq18"]
+
+[ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hipts"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq6bv"]
+bg_color = Color(1, 1, 1, 0.7647059)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hipts"]
+bg_color = Color(0.09803922, 0.101960786, 0.4862745, 0.25882354)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.7294118)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+shadow_offset = Vector2(10, 10)
+
+[resource]
+default_font = ExtResource("1_hipts")
+default_font_size = 13
+HSeparator/constants/separation = 6
+HSeparator/styles/separator = SubResource("StyleBoxFlat_hq6bv")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_hipts")

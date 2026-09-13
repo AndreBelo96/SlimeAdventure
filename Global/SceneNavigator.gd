@@ -6,6 +6,10 @@ func _ready():
 	SettingsManager.load_settings()
 	SoundManager.apply_from_settings(SettingsManager)
 	TranslationServer.set_locale(SettingsManager.get_locale_from_index(SettingsManager.language))
+	if SettingsManager.fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func change_scene_to_victory():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

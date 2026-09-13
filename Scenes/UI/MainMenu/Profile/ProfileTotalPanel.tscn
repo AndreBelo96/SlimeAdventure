@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b7xeey6df85r8" path="res://Scenes/UI/Utils/BtnTheme.tscn" id="1_yqeu7"]
 
-[node name="TotalProfile" type="Control" unique_id=251080434]
+[node name="ProfileTotalPanel" type="Control" unique_id=251080434]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,41 +10,73 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1100171754]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1247346805]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1991480405]
+[node name="ProfileContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1100171754]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ProfileContainer" unique_id=1991480405]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1702321627]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ProfileContainer/MarginContainer" unique_id=1702321627]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=10367740]
+[node name="Label" type="Label" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=10367740]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1375991810]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1375991810]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1092333159]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1092333159]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=630419533]
+[node name="GeneralInfoContainer" type="CenterContainer" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=630419533]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BtnTheme" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
+[node name="BtnTheme" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
 layout_mode = 2
+
+[node name="LocationContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1030418074]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LocationContainer" unique_id=109762328]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LocationContainer/MarginContainer" unique_id=1685818702]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=382971146]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Location"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=276112543]
+layout_mode = 2
+
+[node name="LocationNameContainer" type="VBoxContainer" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=908149059]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15

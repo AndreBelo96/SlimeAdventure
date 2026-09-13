@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://teveww2v2u2"]
+
+[node name="ProfileSaveSlotBtn" type="CenterContainer" unique_id=978823468]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504665548]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=494510184]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1139987385]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=994792026]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1514870604]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 25
+text = "Slot 1"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1567061166]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1337773834]
+layout_mode = 2
+text = "Ultima data: sda"
+
+[node name="Label3" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1687447582]
+layout_mode = 2
+text = "Livello raggiunto: sda"
+
+[node name="Label4" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=817689535]
+layout_mode = 2
+text = "Tempo di gioco: sda"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1720238845]
+layout_mode = 2
+
+[node name="Indicatore" type="Label" parent="VBoxContainer/CenterContainer" unique_id=2031137703]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 25
+text = ">"
+horizontal_alignment = 1

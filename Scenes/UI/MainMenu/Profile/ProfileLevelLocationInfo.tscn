@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://drfcycw3o8u28"]
+
+[node name="ProfileLevelLocationInfo" type="Control" unique_id=614995094]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1301607060]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 6.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=860800653]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=157696286]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=171205813]
+layout_mode = 2
+text = "Livello n"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=797965225]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=413351654]
+layout_mode = 2
+text = "Morti"
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=448177838]
+layout_mode = 2
+text = "Passi"

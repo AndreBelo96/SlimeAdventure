@@ -31,7 +31,7 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1883256307]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "Save Slot"
 horizontal_alignment = 1
 
@@ -41,6 +41,7 @@ layout_mode = 2
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1943337455]
 layout_mode = 2
 size_flags_vertical = 3
+columns = 2
 
 [node name="BtnTheme" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1257178264 instance=ExtResource("1_eg17j")]
 layout_mode = 2

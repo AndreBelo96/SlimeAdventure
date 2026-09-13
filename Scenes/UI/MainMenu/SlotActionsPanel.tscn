@@ -44,10 +44,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k1v0x")
 
 [node name="MarginContainer" type="MarginContainer" parent="SlotActionsPanel/Panel" unique_id=56633776]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer" unique_id=1467270304]
 layout_mode = 2
@@ -64,21 +64,24 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="LastPlayed" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=1353760559]
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
 text = "Last Played: 14/03/2026"
 
 [node name="PlayTime" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=1274272339]
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
 text = "Play time: 13m 36s"
 
 [node name="LvlReach" type="Label" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer/DataContainer" unique_id=651652135]
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
 text = "Level reached: 14"
 
 [node name="BtnContainer" type="VBoxContainer" parent="SlotActionsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1280153160]

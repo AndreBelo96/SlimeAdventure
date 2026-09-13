@@ -63,6 +63,20 @@ func stop_music():
 	music_player.stop()
 	current_music_path = ""
 
+func pause_all():
+	music_player.stream_paused = true
+	for p in sfx_players:
+		p.stream_paused = true
+	for p in environment_players:
+		p.stream_paused = true
+
+func resume_all():
+	music_player.stream_paused = false
+	for p in sfx_players:
+		p.stream_paused = false
+	for p in environment_players:
+		p.stream_paused = false
+
 func play_sfx(path: String, volume_db: float = 0.0, pitch_variation: float = 0.0) -> void:
 	var stream = load(path)
 	if not stream:

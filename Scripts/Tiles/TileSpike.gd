@@ -1,13 +1,8 @@
-extends "res://Scripts/Tiles/TileBase.gd"
+extends "res://Scripts/Tiles/TileSpikeBase.gd"
 
 func _ready():
 	super._ready()
 	set_region_from_coords(LocationManager.SPIKE_TILE_POSITION, LocationManager.get_tileset_row_for_level())
 	sprite.texture = atlas_texture
 	weight = 8
-
-func on_player_enter():
-	emit_signal("tile_triggered", self, "death", {"death_type": DeathType.Type.SPIKES})
-
-func on_enemy_enter(_enemy: EnemyBase):
-	_enemy.receive_hit("damage")
+	is_active = true

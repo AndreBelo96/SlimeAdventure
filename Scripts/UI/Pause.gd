@@ -39,15 +39,18 @@ func handle_selection(_index):
 	match _index:
 		Btn.CONTINUE:
 			get_tree().paused = false
+			SoundManager.resume_all()
 			visible = false
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		Btn.RETRY:
 			get_tree().paused = false
+			SoundManager.resume_all()
 			visible = false
 			SceneNavigator.restart_level(LevelStateManager.current_level)
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		Btn.BACK_MAIN_MENU:
 			get_tree().paused = false
+			SoundManager.resume_all()
 			SoundManager.stop_music()
 			SceneNavigator.return_to_menu()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

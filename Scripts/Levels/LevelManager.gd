@@ -111,7 +111,12 @@ func setup_hud():
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	pause_menu.visible = get_tree().paused
-	
+
+	if get_tree().paused:
+		SoundManager.pause_all()
+	else:
+		SoundManager.resume_all()
+
 	if pause_menu.visible:
 		pause_menu._on_pause_visible()
 

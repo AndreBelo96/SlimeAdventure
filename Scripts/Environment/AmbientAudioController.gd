@@ -21,7 +21,7 @@ func start_event(event: Dictionary) -> void:
 func run_event_loop(event: Dictionary):
 	while true:
 		var delay = randf_range(event["min_time"], event["max_time"])
-		await get_tree().create_timer(delay).timeout
+		await get_tree().create_timer(delay, false).timeout
 		if not is_inside_tree():
 			return
 		play_event(event)

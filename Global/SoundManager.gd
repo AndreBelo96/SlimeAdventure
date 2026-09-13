@@ -86,7 +86,7 @@ func play_sfx(path: String, volume_db: float = 0.0, pitch_variation: float = 0.0
 	sfx_players[0].pitch_scale = pitch
 	sfx_players[0].play()
 
-func play_environment(path: String, pitch_variation: float = 0.0) -> void:
+func play_environment(path: String, pitch_variation: float = 0.0, volume_db: float = 0.0) -> void:
 	var stream = load(path)
 	if not stream:
 		push_warning("ENV file not found: %s" % path)
@@ -99,6 +99,7 @@ func play_environment(path: String, pitch_variation: float = 0.0) -> void:
 	for p in environment_players:
 		if not p.playing:
 			p.stream = stream
+			p.volume_db = volume_db
 			p.pitch_scale = pitch
 			p.play()
 			return

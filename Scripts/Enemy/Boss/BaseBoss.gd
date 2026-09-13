@@ -77,15 +77,16 @@ func receive_hit(event_type: String, data := {}):
 func take_damage(dmg: int):
 	if state == BossState.DEAD:
 		return
-
-	damage_animation()
+	
 	health.apply_damage(dmg)
 	health_points = health.life
 	change_steps()
-
+	
 	emit_signal("life_changed", dmg)
 	emit_signal("damaged", self)
-
+	
+	await damage_animation()
+	
 	if health.is_dead():
 		die()
 

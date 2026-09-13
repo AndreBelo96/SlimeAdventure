@@ -112,6 +112,11 @@ func damage_animation():
 func change_steps():
 	steps_to_trigger = max(1, steps_to_trigger - 1)
 
+func die():
+	boss_attack.clear_attack_warning()
+	_warning_pending = false
+	super.die()
+
 ### ------- Attack ------- ###
 
 func _start_attack():

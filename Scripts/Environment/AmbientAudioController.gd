@@ -1,7 +1,7 @@
 extends Node
 
 var started := false
-@export var ambient_events: Array[Dictionary] = []
+var ambient_events: Array[Dictionary] = []
 
 func setup(events: Array[Dictionary]):
 	if started:
@@ -28,4 +28,5 @@ func run_event_loop(event: Dictionary):
 
 func play_event(event: Dictionary):
 	var sound = event["sounds"].pick_random()
-	SoundManager.play_environment(sound, 0.1)
+	var volume_db: float = event.get("volume_db", 0.0)
+	SoundManager.play_environment(sound, 0.1, volume_db)

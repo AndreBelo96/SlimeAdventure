@@ -1,4 +1,7 @@
 extends Control
+class_name OptionMenu
+
+signal back_pressed
 
 @onready var master_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/MasterSlider
 @onready var music_slider: HSlider = $MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MusicSlider
@@ -103,5 +106,5 @@ func _on_env_slider_value_changed(value: float) -> void:
 
 # -- Back -- #
 func _on_back_pressed() -> void:
-	SoundManager.play_sfx("res://Assets/Audio/Sound/TutorialBtnClick.wav")
-	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu/MenuRoot.tscn")
+	SoundManager.play_sfx(AudioPresets.BTN_CLICK)
+	back_pressed.emit()

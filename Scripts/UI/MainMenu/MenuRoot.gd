@@ -5,7 +5,8 @@ enum PanelState { MAIN, SAVE, LOCATION, LEVEL, OPTION }
 @onready var save_panel: SaveMenuPanel = $SaveMenuPanel
 @onready var location_panel: LocationMenuPanel = $LocationMenuPanel
 @onready var level_panel: LevelMenuPanel = $LevelMenuPanel
-@onready var option_menu: Control = $OptionMenu
+@onready var option_menu: OptionMenu = $OptionMenu
+
 var current_state: PanelState = PanelState.MAIN
 var _transition_tween: Tween
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 	location_panel.back_pressed.connect(_on_location_back_pressed)
 	location_panel.location_chosen.connect(_on_location_chosen)
 	level_panel.back_pressed.connect(_on_level_back_pressed)
+	option_menu.back_pressed.connect(_on_option_back_pressed)
 	await _calibrate_all()
 	_show_initial_panel()
 
@@ -57,6 +59,8 @@ func _on_location_chosen(_location) -> void:
 	_switch_to(PanelState.LEVEL, level_panel)
 func _on_level_back_pressed() -> void:
 	_switch_to(PanelState.LOCATION, location_panel)
+func _on_option_back_pressed() -> void:
+	_switch_to(PanelState.MAIN, main_panel)
 
 func _switch_to(state: PanelState, target: Control, animate: bool = true) -> void:
 	current_state = state

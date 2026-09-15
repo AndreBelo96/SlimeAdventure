@@ -3,6 +3,7 @@ class_name MainMenuPanel
 
 enum Btn { START, PROFILE, SCOREBOARD, OPTIONS, EXIT }
 signal start_pressed
+signal profile_pressed
 signal option_pressed
 signal exit_pressed
 
@@ -35,7 +36,7 @@ func handle_selection(index: int) -> void:
 	SoundManager.play_sfx(SFX_CONFIRM)
 	match index:
 		Btn.START: start_pressed.emit()
-		Btn.PROFILE: pass # TODO
+		Btn.PROFILE: profile_pressed.emit()
 		Btn.SCOREBOARD: pass # TODO
 		Btn.OPTIONS: option_pressed.emit()
 		Btn.EXIT: exit_pressed.emit()

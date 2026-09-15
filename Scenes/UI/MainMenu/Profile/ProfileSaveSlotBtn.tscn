@@ -1,11 +1,24 @@
 [gd_scene format=3 uid="uid://teveww2v2u2"]
 
-[node name="ProfileSaveSlotBtn" type="CenterContainer" unique_id=978823468]
+[ext_resource type="Script" uid="uid://bjsn4mlkkdloa" path="res://Scripts/UI/MainMenu/Profile/ProfileSaveSlotBtn.gd" id="1_lcns5"]
+[ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="2_6m8e2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slyx8"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="ProfileSaveSlotBtn" type="MarginContainer" unique_id=1703132788]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_lcns5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504665548]
 layout_mode = 2
@@ -25,12 +38,11 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1514870604]
-custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 15
 text = "Slot 1"
 horizontal_alignment = 1
 
@@ -39,25 +51,41 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1337773834]
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "Ultima data: sda"
 
 [node name="Label3" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1687447582]
 layout_mode = 2
-text = "Livello raggiunto: sda"
+theme_override_font_sizes/font_size = 8
+text = "Livello max: 12"
 
 [node name="Label4" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=817689535]
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "Tempo di gioco: sda"
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1720238845]
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer" unique_id=862380355]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_slyx8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_slyx8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_slyx8")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_slyx8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slyx8")
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1771955700]
 layout_mode = 2
 
-[node name="Indicatore" type="Label" parent="VBoxContainer/CenterContainer" unique_id=2031137703]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="Selector" type="Label" parent="VBoxContainer/Control" unique_id=2080367106]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 60.0
+rotation = -1.5708
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_x = -3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("2_6m8e2")
+theme_override_font_sizes/font_size = 30
 text = ">"
-horizontal_alignment = 1

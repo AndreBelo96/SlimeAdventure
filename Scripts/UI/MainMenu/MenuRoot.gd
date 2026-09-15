@@ -1,7 +1,8 @@
 extends Control
 class_name MenuRoot
-enum PanelState { MAIN, SAVE, LOCATION, LEVEL, OPTION }
+enum PanelState { MAIN, PROFILE, SAVE, LOCATION, LEVEL, OPTION }
 @onready var main_panel: MainMenuPanel = $MainMenuPanel
+@onready var profile_panel: ProfilePanel = $ProfilePanel
 @onready var save_panel: SaveMenuPanel = $SaveMenuPanel
 @onready var location_panel: LocationMenuPanel = $LocationMenuPanel
 @onready var level_panel: LevelMenuPanel = $LevelMenuPanel
@@ -15,6 +16,8 @@ func _ready() -> void:
 		SoundManager.play_music(AudioPresets.MAIN_MENU_MUSIC)
 	main_panel.start_pressed.connect(_on_start_pressed)
 	main_panel.option_pressed.connect(_on_option_pressed)
+	main_panel.profile_pressed.connect(_on_profile_pressed)
+	profile_panel.back_pressed.connect(_on_profile_back_pressed)
 	main_panel.exit_pressed.connect(_on_exit_pressed)
 	save_panel.back_pressed.connect(_on_save_back_pressed)
 	save_panel.play_pressed.connect(_on_save_play_pressed)
@@ -26,16 +29,22 @@ func _ready() -> void:
 	_show_initial_panel()
 
 func _calibrate_all() -> void:
-	main_panel.visible = true
-	save_panel.visible = true
-	location_panel.visible = true
+	var all_panels := [main_panel, save_panel, location_panel, level_panel, profile_panel]
+	for panel in all_panels:
+		panel.visible = true
+		panel.modulate.a = 0.0
 	option_menu.visible = false
+
 	await get_tree().process_frame
 	main_panel.calibrate_positions()
 	save_panel.calibrate_positions()
 	location_panel.calibrate_positions()
-	save_panel.visible = false
-	location_panel.visible = false
+	level_panel.calibrate_positions()
+	await profile_panel.calibrate_positions()
+
+	for panel in all_panels:
+		panel.visible = false
+		panel.modulate.a = 1.0
 
 func _show_initial_panel() -> void:
 	if SceneNavigator.menu_state == PanelState.LOCATION:
@@ -61,10 +70,15 @@ func _on_level_back_pressed() -> void:
 	_switch_to(PanelState.LOCATION, location_panel)
 func _on_option_back_pressed() -> void:
 	_switch_to(PanelState.MAIN, main_panel)
+func _on_profile_pressed() -> void:
+	_switch_to(PanelState.PROFILE, profile_panel)
+func _on_profile_back_pressed() -> void:
+	_switch_to(PanelState.MAIN, main_panel)
+
 
 func _switch_to(state: PanelState, target: Control, animate: bool = true) -> void:
 	current_state = state
-	for panel in [main_panel, save_panel, location_panel, level_panel]:
+	for panel in [main_panel, save_panel, location_panel, level_panel, profile_panel]:
 		if panel != target:
 			panel.deactivate()
 	if animate:
@@ -79,14 +93,14 @@ func _switch_to(state: PanelState, target: Control, animate: bool = true) -> voi
 	else:
 		if _transition_tween and _transition_tween.is_valid():
 			_transition_tween.kill()
-		for c in [main_panel, save_panel, location_panel, level_panel, option_menu]:
+		for c in [main_panel, save_panel, profile_panel, location_panel, level_panel, option_menu]:
 			c.visible = (c == target)
 			c.modulate.a = 1.0
 
 func _fade_to(target: Control) -> void:
 	if _transition_tween and _transition_tween.is_valid():
 		_transition_tween.kill()
-	var containers = [main_panel, save_panel, location_panel, level_panel, option_menu]
+	var containers = [main_panel, save_panel, location_panel, level_panel, option_menu, profile_panel]
 	_transition_tween = create_tween()
 	for c in containers:
 		if c == target:

@@ -1,17 +1,29 @@
 [gd_scene format=3 uid="uid://drfcycw3o8u28"]
 
-[node name="ProfileLevelLocationInfo" type="Control" unique_id=614995094]
-layout_mode = 3
+[ext_resource type="Script" uid="uid://c4kxpj6tvw3ls" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationInfo.gd" id="1_gkwie"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkwie"]
+bg_color = Color(0.827451, 0.41568628, 0, 0.3647059)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ProfileLevelLocationInfo" type="MarginContainer" unique_id=1974317893]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gkwie")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1301607060]
-layout_mode = 0
-offset_right = 6.0
-offset_bottom = 6.0
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gkwie")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=860800653]
 layout_mode = 2
@@ -26,14 +38,18 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=171205813]
 layout_mode = 2
 text = "Livello n"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=797965225]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=413351654]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=145248255]
 layout_mode = 2
-text = "Morti"
 
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=448177838]
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=413351654]
 layout_mode = 2
-text = "Passi"
+text = "☠️: 10"
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=448177838]
+layout_mode = 2
+text = "Passi:33"

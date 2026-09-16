@@ -43,7 +43,7 @@ layout_mode = 2
 [node name="LocationRecapContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1344627645]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 5
+columns = 3
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1899398415]
 layout_mode = 2

@@ -22,6 +22,8 @@ script = ExtResource("1_lcns5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504665548]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=494510184]
 layout_mode = 2
@@ -29,38 +31,41 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1139987385]
 layout_mode = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=994792026]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1514870604]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 15
 text = "Slot 1"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1567061166]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1337773834]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Ultima data: sda"
 
 [node name="Label3" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1687447582]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Livello max: 12"
 
 [node name="Label4" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=817689535]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Tempo di gioco: sda"
 

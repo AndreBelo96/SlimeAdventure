@@ -29,10 +29,11 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=815026828]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1883256307]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Save Slot"
 horizontal_alignment = 1
@@ -40,7 +41,11 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1507638962]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1943337455]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=195138781]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1943337455]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 4

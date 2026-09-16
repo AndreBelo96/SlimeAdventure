@@ -7,7 +7,7 @@ signal back_pressed
 const SLOT_BTN_SCENE := preload("res://Scenes/UI/MainMenu/Profile/ProfileSaveSlotBtn.tscn")
 const SLOT_COUNT := 4
 
-@onready var grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/GridContainer
+@onready var grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer
 @onready var btn_theme: BtnTheme = $PanelContainer/MarginContainer/VBoxContainer/BtnTheme
 
 var slot_cards: Array[ProfileSaveSlotBtn] = []

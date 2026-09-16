@@ -37,9 +37,23 @@ func handle_selection(index: int) -> void:
 		back_pressed.emit()
 		return
 	var location_name = LocationManager.Location.keys()[index]
-	if LocationManager.is_location_locked(location_name):
+	if _is_location_locked(location_name):
 		return
 	location_chosen.emit(LocationManager.Location.values()[index])
+
+func handle_navigation(event: InputEvent) -> void:
+	var back_index := location_buttons.size()
+	if Input.is_action_just_pressed("move_left") and current_selection != back_index:
+		SoundManager.play_sfx(SFX_MOVE)
+		current_selection = back_index
+		set_current_selection(current_selection)
+		return
+	if Input.is_action_just_pressed("move_right") and current_selection == back_index:
+		SoundManager.play_sfx(SFX_MOVE)
+		current_selection = 0
+		set_current_selection(current_selection)
+		return
+	super.handle_navigation(event)
 
 ## ---- Interno ---- ##
 func _create_location_buttons() -> void:
@@ -65,7 +79,7 @@ func _create_location_buttons() -> void:
 func _update_location_buttons() -> void:
 	var locations = LocationManager.Location.keys()
 	for i in range(location_buttons.size()):
-		location_buttons[i].disabled = LocationManager.is_location_locked(locations[i])
+		location_buttons[i].disabled = _is_location_locked(locations[i])
 
 func _populate_general_info() -> void:
 	for child in general_info_container.get_children():
@@ -115,3 +129,10 @@ func _format_time(seconds: float) -> String:
 	var minutes := (total % 3600) / 60
 	var secs := total % 60
 	return "%02d:%02d:%02d" % [hours, minutes, secs]
+
+func _is_location_locked(location_name: String) -> bool:
+	var location_type = LocationManager.Location[location_name]
+	var levels := LocationManager.get_level_range_for_location(location_type)
+	if levels.is_empty():
+		return true
+	return levels[0] > slot_data.get("max_level_reach", 1)

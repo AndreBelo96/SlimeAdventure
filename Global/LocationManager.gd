@@ -13,6 +13,12 @@ var location_translation_keys = {
 	Location.FOREST: "FOREST_BTN"
 }
 
+var location_boss_level := {
+	Location.TUTORIAL: null,
+	Location.DUNGEON: 13,
+	Location.FOREST: null
+}
+
 var location_selected = Location.TUTORIAL
 
 var level_locations := {
@@ -21,6 +27,23 @@ var level_locations := {
 	7: Location.DUNGEON, 8: Location.DUNGEON, 9: Location.DUNGEON,
 	10: Location.DUNGEON, 11: Location.DUNGEON, 12: Location.DUNGEON,
 	13: Location.DUNGEON, 14: Location.FOREST
+}
+
+var level_names := {
+	1: "Tutorial 1",
+	2: "Tutorial 2",
+	3: "Tutorial 3",
+	4: "Segrete",
+	5: "Cella",
+	6: "Cella",
+	7: "Cella",
+	8: "Corridoio",
+	9: "Cella",
+	10: "Cella",
+	11: "Cella",
+	12: "Cella",
+	13: "Sala del Boss",
+	14: "..." 
 }
 
 var location_to_tileset_row := {
@@ -81,6 +104,9 @@ func get_level_range_for_location(loc: Location) -> Array[int]:
 			result.append(level)
 	result.sort()
 	return result
+
+func get_level_name(level: int) -> String:
+	return level_names.get(level, "Livello %d" % level)
 
 func is_location_changing(next: int) -> bool:
 	var current_loc = get_location_for_level(LevelStateManager.current_level)

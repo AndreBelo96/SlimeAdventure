@@ -45,6 +45,9 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 
+[node name="BossContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=363071352]
+layout_mode = 2
+
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1899398415]
 layout_mode = 2
 

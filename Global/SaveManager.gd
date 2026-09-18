@@ -35,6 +35,8 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 
 	var level_data = save_data["levels"][level_key]
 	level_data["attempts"] = level_data.get("attempts", 0) + 1
+	level_data["total_steps"] = level_data.get("total_steps", 0) + steps
+	level_data["total_time"] = level_data.get("total_time", 0.0) + time
 
 	var level_deaths: Dictionary = level_data.get("deaths", {})
 	for death_type in deaths.keys():
@@ -90,11 +92,10 @@ func load_progress() -> Dictionary:
 
 func _migrate_save_data():
 	var version = save_data.get("version", 0)
-	
+
 	if version < 1:
 		if not save_data.has("player"):
 			save_data["player"] = {"has_pickaxe": false}
-		
 		if not save_data.has("death_counts"):
 			save_data["death_counts"] = {
 				"0": 0,
@@ -102,8 +103,16 @@ func _migrate_save_data():
 				"2": 0,
 				"3": 0
 			}
-		
 		save_data["version"] = 1
+
+	if version < 2:
+		for level_key in save_data.get("levels", {}):
+			var level_entry: Dictionary = save_data["levels"][level_key]
+			if not level_entry.has("total_steps"):
+				level_entry["total_steps"] = level_entry.get("steps", 0)
+			if not level_entry.has("total_time"):
+				level_entry["total_time"] = level_entry.get("time", 0.0)
+		save_data["version"] = 2
 
 func reset_save():
 	save_data = get_default_save_data()
@@ -121,7 +130,7 @@ func has_pickaxe() -> bool:
 
 func get_default_save_data() -> Dictionary:
 	return {
-		"version": 1,
+		"version": 2,
 		"created_at": Time.get_unix_time_from_system(),
 		"last_played": Time.get_unix_time_from_system(),
 		"player": {                  # dati giocatore

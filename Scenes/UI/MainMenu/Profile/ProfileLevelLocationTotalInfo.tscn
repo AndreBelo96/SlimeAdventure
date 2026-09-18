@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://drfcycw3o8u28"]
+[gd_scene format=3 uid="uid://b3altj4881np0"]
 
-[ext_resource type="Script" uid="uid://c4kxpj6tvw3ls" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationInfo.gd" id="1_gkwie"]
+[ext_resource type="Script" uid="uid://c4kxpj6tvw3ls" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationRecordInfo.gd" id="1_wr4si"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkwie"]
 bg_color = Color(0.827451, 0.41568628, 0, 0.3647059)
@@ -19,7 +19,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gkwie")
+size_flags_horizontal = 3
+script = ExtResource("1_wr4si")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1301607060]
 layout_mode = 2
@@ -54,5 +55,9 @@ layout_mode = 2
 text = "☠️: 10"
 
 [node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=448177838]
+layout_mode = 2
+text = "Passi:33"
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=641870552]
 layout_mode = 2
 text = "Passi:33"

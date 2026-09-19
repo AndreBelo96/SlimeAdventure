@@ -9,10 +9,10 @@ class_name ProfileLevelLocationRecordInfo
 func setup(level: int, data: Dictionary) -> void:
 	level_lbl.text = LocationManager.get_level_name(level)
 	if data.is_empty():
-		steps_lbl.text = "Passi: -"
+		steps_lbl.text = "👣: -"
 		time_lbl.text = "⌛: -"
 		return
-	steps_lbl.text = "Passi: %d" % data.get("steps", 0)
+	steps_lbl.text = "👣: %d" % data.get("steps", 0)
 	time_lbl.text = "⌛: %s" % _format_time(data.get("time", 0.0))
 
 func _sum_deaths(deaths: Dictionary) -> int:

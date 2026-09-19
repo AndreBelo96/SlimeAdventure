@@ -1,19 +1,9 @@
 [gd_scene format=3 uid="uid://b3altj4881np0"]
 
-[ext_resource type="Script" uid="uid://c4kxpj6tvw3ls" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationRecordInfo.gd" id="1_wr4si"]
+[ext_resource type="Script" uid="uid://ylxxfkhfwsh7" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationTotalInfo.gd" id="1_wr4si"]
+[ext_resource type="Theme" uid="uid://deggfm4021qym" path="res://Theme/Card/card_info_theme.tres" id="2_fkk57"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkwie"]
-bg_color = Color(0.827451, 0.41568628, 0, 0.3647059)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[node name="ProfileLevelLocationInfo" type="MarginContainer" unique_id=1974317893]
+[node name="ProfileLevelLocationTotalInfo" type="MarginContainer" unique_id=1974317893]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,7 +15,7 @@ script = ExtResource("1_wr4si")
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1301607060]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_gkwie")
+theme = ExtResource("2_fkk57")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=860800653]
 layout_mode = 2

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://teveww2v2u2"]
 
-[ext_resource type="Script" uid="uid://bjsn4mlkkdloa" path="res://Scripts/UI/MainMenu/Profile/ProfileSaveSlotBtn.gd" id="1_lcns5"]
-[ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="2_6m8e2"]
+[ext_resource type="Script" uid="uid://bjsn4mlkkdloa" path="res://Scripts/UI/MainMenu/Profile/ProfileSaveSlotCard.gd" id="1_6jmmy"]
+[ext_resource type="Theme" uid="uid://deggfm4021qym" path="res://Theme/Card/card_info_theme.tres" id="2_2adg5"]
+[ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="2_eo46l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slyx8"]
 bg_color = Color(0, 0, 0, 0)
@@ -10,15 +11,19 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[node name="ProfileSaveSlotBtn" type="MarginContainer" unique_id=1703132788]
+[node name="ProfileSaveSlotCard" type="MarginContainer" unique_id=1703132788]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -25.0
+offset_right = -8.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_lcns5")
+script = ExtResource("1_6jmmy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504665548]
 layout_mode = 2
@@ -27,6 +32,7 @@ size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=494510184]
 layout_mode = 2
+theme = ExtResource("2_2adg5")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1139987385]
 layout_mode = 2
@@ -91,6 +97,6 @@ rotation = -1.5708
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = -3
 theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("2_6m8e2")
+theme_override_fonts/font = ExtResource("2_eo46l")
 theme_override_font_sizes/font_size = 30
 text = ">"

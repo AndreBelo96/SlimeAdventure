@@ -4,7 +4,7 @@ class_name ProfileSaveSlotSelectionPanel
 signal slot_chosen(index: int)
 signal back_pressed
 
-const SLOT_BTN_SCENE := preload("res://Scenes/UI/MainMenu/Profile/ProfileSaveSlotBtn.tscn")
+const SLOT_BTN_SCENE := preload("res://Scenes/UI/MainMenu/Profile/ProfileSaveSlotCard.tscn")
 const SLOT_COUNT := 4
 
 @onready var grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer

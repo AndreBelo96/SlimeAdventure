@@ -21,29 +21,21 @@ var location_boss_level := {
 
 var location_selected = Location.TUTORIAL
 
-var level_locations := {
-	1: Location.TUTORIAL, 2: Location.TUTORIAL, 3: Location.TUTORIAL,
-	4: Location.DUNGEON, 5: Location.DUNGEON, 6: Location.DUNGEON,
-	7: Location.DUNGEON, 8: Location.DUNGEON, 9: Location.DUNGEON,
-	10: Location.DUNGEON, 11: Location.DUNGEON, 12: Location.DUNGEON,
-	13: Location.DUNGEON, 14: Location.FOREST
-}
-
-var level_names := {
-	1: "Tutorial 1",
-	2: "Tutorial 2",
-	3: "Tutorial 3",
-	4: "Segrete",
-	5: "Cella",
-	6: "Cella",
-	7: "Cella",
-	8: "Corridoio",
-	9: "Cella",
-	10: "Cella",
-	11: "Cella",
-	12: "Cella",
-	13: "Sala del Boss",
-	14: "..." 
+var level_data := {
+	1: {"location": Location.TUTORIAL, "name": "Tutorial 1"},
+	2: {"location": Location.TUTORIAL, "name": "Tutorial 2"},
+	3: {"location": Location.TUTORIAL, "name": "Tutorial 3"},
+	4: {"location": Location.DUNGEON, "name": "Segrete"},
+	5: {"location": Location.DUNGEON, "name": "Cella"},
+	6: {"location": Location.DUNGEON, "name": "Livello 6"},
+	7: {"location": Location.DUNGEON, "name": "Livello 7"},
+	8: {"location": Location.DUNGEON, "name": "Livello 8"},
+	9: {"location": Location.DUNGEON, "name": "Livello 9"},
+	10: {"location": Location.DUNGEON, "name": "Livello 10"},
+	11: {"location": Location.DUNGEON, "name": "Livello 11"},
+	12: {"location": Location.DUNGEON, "name": "Livello 12"},
+	13: {"location": Location.DUNGEON, "name": "Sala del Boss"},
+	14: {"location": Location.FOREST, "name": "Livello 14"}
 }
 
 var location_to_tileset_row := {
@@ -69,7 +61,7 @@ func get_all_locations() -> Array:
 	return Location.keys()
 
 func get_number_of_levels() -> int:
-	return level_locations.size()
+	return level_data.size()
 
 func is_location_locked(location_name: String) -> bool:
 	var location_type = Location[location_name]
@@ -78,14 +70,14 @@ func is_location_locked(location_name: String) -> bool:
 
 func _get_first_level_of_location(location_type) -> int:
 	var min_level = null
-	for level in level_locations.keys():
-		if level_locations[level] == location_type:
+	for level in level_data.keys():
+		if level_data[level]["location"] == location_type:
 			if min_level == null or level < min_level:
 				min_level = level
 	return min_level
 
 func get_location_for_level(level: int) -> Location:
-	return level_locations.get(level, Location.TUTORIAL)
+	return level_data.get(level, {}).get("location", Location.TUTORIAL)
 
 func get_location_type(location_name: String) -> Location:
 	if Location.has(location_name):
@@ -99,14 +91,14 @@ func get_tileset_row_for_level() -> int:
 
 func get_level_range_for_location(loc: Location) -> Array[int]:
 	var result: Array[int] = []
-	for level in level_locations:
-		if level_locations[level] == loc:
+	for level in level_data:
+		if level_data[level]["location"] == loc:
 			result.append(level)
 	result.sort()
 	return result
 
 func get_level_name(level: int) -> String:
-	return level_names.get(level, "Livello %d" % level)
+	return level_data.get(level, {}).get("name", "Livello %d" % level)
 
 func is_location_changing(next: int) -> bool:
 	var current_loc = get_location_for_level(LevelStateManager.current_level)

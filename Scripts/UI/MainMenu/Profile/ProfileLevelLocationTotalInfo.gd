@@ -11,11 +11,11 @@ func setup(level: int, data: Dictionary) -> void:
 	level_lbl.text = LocationManager.get_level_name(level)
 	if data.is_empty():
 		deaths_lbl.text = "☠️: -"
-		steps_lbl.text = "Passi: -"
+		steps_lbl.text = "👣: -"
 		time_lbl.text = "⌛: -"
 		return
 	deaths_lbl.text = "☠️: %d" % _sum_deaths(data.get("deaths", {}))
-	steps_lbl.text = "Passi: %d" % data.get("total_steps", 0)
+	steps_lbl.text = "👣: %d" % data.get("total_steps", 0)
 	time_lbl.text = "⌛: %s" % _format_time(data.get("total_time", 0.0))
 
 func _sum_deaths(deaths: Dictionary) -> int:

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b7xeey6df85r8" path="res://Scenes/UI/Utils/BtnTheme.tscn" id="1_eg17j"]
 [ext_resource type="Script" uid="uid://bswfliekcxmi5" path="res://Scripts/UI/MainMenu/Profile/ProfileSaveSlotSelectionPanel.gd" id="1_g1cne"]
+[ext_resource type="Theme" uid="uid://bdmwjknh8vol" path="res://Theme/Card/empty_panel_container.tres" id="2_ombrl"]
 
 [node name="ProfileSaveSlotSelectionPanel" type="Control" unique_id=172754403]
 layout_mode = 3
@@ -19,17 +20,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_ombrl")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1219251352]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=815026828]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1883256307]
 layout_mode = 2
@@ -48,7 +50,7 @@ size_flags_vertical = 3
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1943337455]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 4
+columns = 2
 
 [node name="BtnTheme" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1257178264 instance=ExtResource("1_eg17j")]
 layout_mode = 2

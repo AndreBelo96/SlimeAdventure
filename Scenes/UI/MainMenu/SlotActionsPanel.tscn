@@ -2,22 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://bxoj84vtba5hi" path="res://Theme/Title/normal_theme.tres" id="1_kqp4a"]
 [ext_resource type="Script" uid="uid://c53smkf10xfh3" path="res://Scripts/UI/MainMenu/SlotActionsPanel.gd" id="1_rh6q5"]
+[ext_resource type="Theme" uid="uid://deggfm4021qym" path="res://Theme/Card/card_info_theme.tres" id="2_k1v0x"]
 [ext_resource type="FontFile" uid="uid://bqkb5e8at2lc" path="res://Assets/Fonts/Chewy-Regular.ttf" id="2_rh6q5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rh6q5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1v0x"]
-bg_color = Color(0, 0, 0, 0.45882353)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 0.8666667)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
 
 [node name="SlotActionsPanel" type="PanelContainer" unique_id=1756911805]
 anchors_preset = 15
@@ -40,7 +29,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_k1v0x")
+theme = ExtResource("2_k1v0x")
 
 [node name="MarginContainer" type="MarginContainer" parent="SlotActionsPanel/Panel" unique_id=56633776]
 layout_mode = 2

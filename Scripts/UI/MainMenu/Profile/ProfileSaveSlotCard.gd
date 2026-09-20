@@ -1,12 +1,12 @@
 extends MarginContainer
-class_name ProfileSaveSlotBtn
+class_name ProfileSaveSlotCard
 
-@onready var title_lbl: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Title
-@onready var last_played_lbl: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label2
-@onready var level_reach_lbl: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label3
-@onready var playtime_lbl: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label4
-@onready var selector: Label = $VBoxContainer/Control/Selector
-@onready var button: Button = $VBoxContainer/PanelContainer/Button
+@onready var title_lbl: Label = $HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Title
+@onready var last_played_lbl: Label = $HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label2
+@onready var level_reach_lbl: Label = $HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label3
+@onready var playtime_lbl: Label = $HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label4
+@onready var selector: Label = $HBoxContainer/Selector
+@onready var button: Button = $HBoxContainer/VBoxContainer/PanelContainer/Button
 
 var slot: int = 1
 
@@ -14,6 +14,7 @@ func _ready() -> void:
 	button.flat = true
 	button.focus_mode = Control.FOCUS_NONE
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	selector.set_meta("bob_horizontal", true)
 
 func setup(slot_index: int, data: Dictionary) -> void:
 	slot = slot_index

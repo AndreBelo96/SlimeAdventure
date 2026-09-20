@@ -6,15 +6,17 @@ signal back_pressed
 
 const SLOT_BTN_SCENE := preload("res://Scenes/UI/MainMenu/Profile/ProfileSaveSlotCard.tscn")
 const SLOT_COUNT := 4
+const COLUMNS := 2
 
 @onready var grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer
 @onready var btn_theme: BtnTheme = $PanelContainer/MarginContainer/VBoxContainer/BtnTheme
 
-var slot_cards: Array[ProfileSaveSlotBtn] = []
+var slot_cards: Array[ProfileSaveSlotCard] = []
 
 func setup_languages() -> void:
 	$PanelContainer/MarginContainer/VBoxContainer/Label.text = tr("SAVE_SLOT_TITLE")
 	btn_theme.set_text(tr("BACK_BTN"))
+	btn_theme.set_font_size(22)
 
 func setup_buttons() -> void:
 	_create_slot_cards()
@@ -45,15 +47,24 @@ func handle_navigation(_event: InputEvent) -> void:
 	var new_selection := current_selection
 
 	if current_selection < back_index:
-		if Input.is_action_just_pressed("move_right") and current_selection < back_index - 1:
+		@warning_ignore("integer_division")
+		var row := current_selection / COLUMNS
+		var col := current_selection % COLUMNS
+
+		if Input.is_action_just_pressed("move_right") and col < COLUMNS - 1 and current_selection + 1 < back_index:
 			new_selection += 1
-		elif Input.is_action_just_pressed("move_left") and current_selection > 0:
+		elif Input.is_action_just_pressed("move_left") and col > 0:
 			new_selection -= 1
 		elif Input.is_action_just_pressed("move_down"):
-			new_selection = back_index
+			var below := current_selection + COLUMNS
+			new_selection = below if below < back_index else back_index
+		elif Input.is_action_just_pressed("move_up") and row > 0:
+			new_selection = current_selection - COLUMNS
 	else:
 		if Input.is_action_just_pressed("move_up"):
-			new_selection = 0
+			@warning_ignore("integer_division")
+			var last_row := (back_index - 1) / COLUMNS
+			new_selection = last_row * COLUMNS
 
 	if new_selection != current_selection:
 		SoundManager.play_sfx(SFX_MOVE)
@@ -66,7 +77,7 @@ func _create_slot_cards() -> void:
 		child.queue_free()
 	slot_cards.clear()
 	for i in range(SLOT_COUNT):
-		var card: ProfileSaveSlotBtn = SLOT_BTN_SCENE.instantiate()
+		var card: ProfileSaveSlotCard = SLOT_BTN_SCENE.instantiate()
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		grid.add_child(card)
 		slot_cards.append(card)

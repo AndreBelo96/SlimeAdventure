@@ -105,6 +105,8 @@ func set_current_selection(_current_selection: int) -> void:
 
 func _start_tween(group: Array) -> void:
 	var vertical = group.size() == 1
+	if group.size() == 1 and group[0].has_meta("bob_horizontal") and group[0].get_meta("bob_horizontal"):
+		vertical = false
 	for sel in group:
 		if sel.has_meta("tween"):
 			sel.get_meta("tween").kill()

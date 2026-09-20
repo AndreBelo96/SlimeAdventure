@@ -4,12 +4,15 @@ class_name ProfileTotalPanel
 signal back_pressed
 signal location_chosen(location)
 
+const BTN_THEME_SCENE := preload("res://Scenes/UI/Utils/BtnTheme.tscn")
+
 @onready var general_info_container: CenterContainer = $HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer/GeneralInfoContainer
 @onready var location_name_container: VBoxContainer = $HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/LocationNameContainer
-@onready var btn_theme: BtnTheme = $HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/BtnTheme
+@onready var btn_theme: BtnTheme = $HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/BtnTheme
 
 var location_buttons: Array[Button] = []
-var location_selectors: Array[Label] = []
+var location_selectors: Array = []
+var location_btn_themes: Array[BtnTheme] = []
 var slot_data: Dictionary = {}
 
 func setup_languages() -> void:
@@ -21,9 +24,7 @@ func setup_buttons() -> void:
 	buttons.append(btn_theme.button)
 
 func setup_selectors() -> void:
-	selectors = []
-	for sel in location_selectors:
-		selectors.append([sel])
+	selectors = location_selectors.duplicate()
 	selectors.append(btn_theme.get_selector_group())
 
 func show_data(data: Dictionary) -> void:
@@ -41,45 +42,26 @@ func handle_selection(index: int) -> void:
 		return
 	location_chosen.emit(LocationManager.Location.values()[index])
 
-func handle_navigation(event: InputEvent) -> void:
-	var back_index := location_buttons.size()
-	if Input.is_action_just_pressed("move_left") and current_selection != back_index:
-		SoundManager.play_sfx(SFX_MOVE)
-		current_selection = back_index
-		set_current_selection(current_selection)
-		return
-	if Input.is_action_just_pressed("move_right") and current_selection == back_index:
-		SoundManager.play_sfx(SFX_MOVE)
-		current_selection = 0
-		set_current_selection(current_selection)
-		return
-	super.handle_navigation(event)
-
 ## ---- Interno ---- ##
 func _create_location_buttons() -> void:
 	for child in location_name_container.get_children():
 		child.queue_free()
 	location_buttons.clear()
 	location_selectors.clear()
+	location_btn_themes.clear()
 
 	for location_name in LocationManager.Location.keys():
-		var row := HBoxContainer.new()
-		var selector := Label.new()
-		selector.custom_minimum_size = Vector2(20, 0)
-		var button := Button.new()
-		button.text = tr(LocationManager.location_translation_keys[LocationManager.Location[location_name]])
-		button.flat = true
-		button.focus_mode = Control.FOCUS_NONE
-		row.add_child(selector)
-		row.add_child(button)
-		location_name_container.add_child(row)
-		location_buttons.append(button)
-		location_selectors.append(selector)
+		var loc_btn: BtnTheme = BTN_THEME_SCENE.instantiate()
+		location_name_container.add_child(loc_btn)
+		loc_btn.set_text(tr(LocationManager.location_translation_keys[LocationManager.Location[location_name]]))
+		location_buttons.append(loc_btn.button)
+		location_selectors.append(loc_btn.get_selector_group())
+		location_btn_themes.append(loc_btn)
 
 func _update_location_buttons() -> void:
 	var locations = LocationManager.Location.keys()
-	for i in range(location_buttons.size()):
-		location_buttons[i].disabled = _is_location_locked(locations[i])
+	for i in range(location_btn_themes.size()):
+		location_btn_themes[i].set_locked(_is_location_locked(locations[i]))
 
 func _populate_general_info() -> void:
 	for child in general_info_container.get_children():

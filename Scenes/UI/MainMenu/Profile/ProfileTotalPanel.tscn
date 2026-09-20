@@ -55,9 +55,6 @@ theme_override_constants/separation = 15
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BtnTheme" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
-layout_mode = 2
-
 [node name="LocationContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1030418074]
 layout_mode = 2
 theme = ExtResource("2_ms3p7")
@@ -85,3 +82,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
+
+[node name="BtnTheme" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
+layout_mode = 2

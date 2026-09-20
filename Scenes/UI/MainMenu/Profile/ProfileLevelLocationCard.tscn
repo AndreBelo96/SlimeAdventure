@@ -3,18 +3,42 @@
 [ext_resource type="Script" uid="uid://bgy424c6015fk" path="res://Scripts/UI/MainMenu/Profile/ProfileLevelLocationCard.gd" id="1_uboa1"]
 [ext_resource type="PackedScene" uid="uid://drfcycw3o8u28" path="res://Scenes/UI/MainMenu/Profile/ProfileLevelLocationRecordInfo.tscn" id="2_t3kj2"]
 [ext_resource type="PackedScene" uid="uid://b3altj4881np0" path="res://Scenes/UI/MainMenu/Profile/ProfileLevelLocationTotalInfo.tscn" id="3_0j3qj"]
+[ext_resource type="Shader" uid="uid://d4csfhfmvksvw" path="res://Shader/tag_shine.gdshader" id="5_0j3qj"]
 
-[node name="ProfileLevelLocationCard" type="CenterContainer" unique_id=1346423657]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iktd"]
+shader = ExtResource("5_0j3qj")
+shader_parameter/period = 3.0
+shader_parameter/width = 0.18
+shader_parameter/strength = 0.6
+shader_parameter/shine_color = Color(1, 0.95, 0.75, 1)
+
+[node name="ProfileLevelLocationCard" type="MarginContainer" unique_id=1498161749]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_uboa1")
 
 [node name="ProfileLevelLocationRecordInfo" parent="." unique_id=1974317893 instance=ExtResource("2_t3kj2")]
 layout_mode = 2
 
 [node name="ProfileLevelLocationTotalInfo" parent="." unique_id=1575360930 instance=ExtResource("3_0j3qj")]
-visible = false
 layout_mode = 2
+
+[node name="TagLayer" type="Control" parent="." unique_id=1095022514]
+z_index = 1
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TagLayer" unique_id=1975926140]
+material = SubResource("ShaderMaterial_8iktd")
+layout_mode = 0
+offset_left = 576.0
+offset_right = 640.0
+offset_bottom = 16.0
+rotation = 0.7853982
+size_flags_vertical = 1
+text = "RECORD"
+horizontal_alignment = 1

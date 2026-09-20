@@ -50,7 +50,7 @@ func _ready():
 
 func _setup_languages():
 	enter_label.text = tr("TRANSATION_ENTER")
-	title_label.text = tr(LocationManager.location_translation_keys[LocationManager.get_location_for_level(LevelStateManager.current_level)])
+	title_label.text = tr(LocationManager.get_translation_key(LocationManager.get_location_for_level(LevelStateManager.current_level)))
 	loading_label.text = tr("LOADING_LABEL")
 
 func _input(_event: InputEvent) -> void:

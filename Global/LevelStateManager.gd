@@ -32,7 +32,7 @@ var last_attempt := {
 func reload_save_data():
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
-	has_pickaxe = SaveManager.has_pickaxe()
+	has_pickaxe = SaveManager.has_unlock("pickaxe")
 	total_steps = totals.steps
 	total_time = totals.time
 	total_deaths = totals.deaths

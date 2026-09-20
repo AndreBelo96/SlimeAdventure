@@ -26,6 +26,7 @@ func setup_languages() -> void:
 ## vengono creati da _reload_level_buttons() ad ogni activate().
 func setup_buttons() -> void:
 	pass
+
 func setup_selectors() -> void:
 	pass
 
@@ -46,9 +47,7 @@ func _reload_level_buttons() -> void:
 	buttons.clear()
 	selectors.clear()
 	base_positions.clear()
-
-	location_lbl.text = tr(LocationManager.location_translation_keys[LocationManager.location_selected])
-
+	location_lbl.text = tr(LocationManager.get_translation_key(LocationManager.location_selected))
 	var levels_info = loader.get_level_data_for_location(LocationManager.location_selected)
 	var levels_range = LocationManager.get_level_range_for_location(LocationManager.location_selected)
 

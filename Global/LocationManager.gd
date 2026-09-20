@@ -7,19 +7,10 @@ const SPIKE_TILE_POSITION := 11
 const WALL_TILE_POSITION := 12
 const SWITCH_TILE_POSITION := 13
 
-var location_translation_keys = {
-	Location.TUTORIAL: "TUTORIAL_BTN",
-	Location.DUNGEON: "DUNGEON_BTN",
-	Location.FOREST: "FOREST_BTN"
-}
-
-var location_boss_level := {
-	Location.TUTORIAL: null,
-	Location.DUNGEON: 13,
-	Location.FOREST: null
-}
+const PICKUP_SPRITESHEET := preload("res://Assets/Sprites/Pickups/pickups_set.png")
 
 var location_selected = Location.TUTORIAL
+var dark_overlay_service := DarkOverlayService.new()
 
 var level_data := {
 	1: {"location": Location.TUTORIAL, "name": "Tutorial 1"},
@@ -38,24 +29,42 @@ var level_data := {
 	14: {"location": Location.FOREST, "name": "Livello 14"}
 }
 
-var location_to_tileset_row := {
-	Location.TUTORIAL: 0,
-	Location.DUNGEON: 1,
-	Location.FOREST: 2
+var location_data := {
+	Location.TUTORIAL: {
+		"translation_key": "TUTORIAL_BTN",
+		"boss_level": null,
+		"boss_reward": null,
+		"boss_portrait": null,
+		"tileset_row": 0,
+		"background_generator": PanelBackgroundGenerator
+	},
+	Location.DUNGEON: {
+		"translation_key": "DUNGEON_BTN",
+		"boss_level": 13,
+		"boss_reward": "pickaxe",
+		"boss_portrait": "Ludovico",
+		"tileset_row": 1,
+		"background_generator": SkullBackgroundGenerator
+	},
+	Location.FOREST: {
+		"translation_key": "FOREST_BTN",
+		"boss_level": null,
+		"boss_reward": null,
+		"boss_portrait": null,
+		"tileset_row": 2,
+		"background_generator": PanelBackgroundGenerator
+	}
 }
 
-var location_background_generator := {
-	Location.TUTORIAL: PanelBackgroundGenerator,
-	Location.DUNGEON: SkullBackgroundGenerator,
-	Location.FOREST: PanelBackgroundGenerator
+var boss_reward_icons := {
+	"pickaxe": Rect2(64, 0, 32, 32)
+	# aggiungi qui la region del prossimo reward quando arriva
 }
 
 func get_background_generator_for_level(level: int) -> IBackgroundGenerator:
 	var loc := get_location_for_level(level)
-	var generator_class = location_background_generator.get(loc, PanelBackgroundGenerator)
+	var generator_class = location_data.get(loc, {}).get("background_generator", PanelBackgroundGenerator)
 	return generator_class.new()
-
-var dark_overlay_service := DarkOverlayService.new()
 
 func get_all_locations() -> Array:
 	return Location.keys()
@@ -85,9 +94,25 @@ func get_location_type(location_name: String) -> Location:
 	else:
 		return Location.TUTORIAL
 
-func get_tileset_row_for_level() -> int:
-	var loc := get_location_for_level(LevelStateManager.current_level)
-	return location_to_tileset_row.get(loc, 0)
+func get_translation_key(loc: Location) -> String:
+	return location_data.get(loc, {}).get("translation_key", "")
+
+func get_boss_level(loc: Location):
+	return location_data.get(loc, {}).get("boss_level", null)
+
+func get_boss_portrait(loc: Location):
+	return location_data.get(loc, {}).get("boss_portrait", null)
+
+func get_boss_reward(loc: Location):
+	return location_data.get(loc, {}).get("boss_reward", null)
+
+func get_tileset_row(loc: Location) -> int:
+	return location_data.get(loc, {}).get("tileset_row", 0)
+
+func get_tileset_row_for_level(level: int = -1) -> int:
+	if level < 0:
+		level = LevelStateManager.current_level
+	return get_tileset_row(get_location_for_level(level))
 
 func get_level_range_for_location(loc: Location) -> Array[int]:
 	var result: Array[int] = []

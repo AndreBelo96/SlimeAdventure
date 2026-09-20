@@ -49,7 +49,8 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 	var is_record := false
 	if victory:
 		is_record = save_progress(level, steps, time)
-		save_data["player"]["has_pickaxe"] = _has_pickaxe
+		if _has_pickaxe:
+			save_data["player"]["unlocks"]["pickaxe"] = true
 
 		level_data["victories"] = level_data.get("victories", 0) + 1
 		if not level_data.has("first_completed_at"):
@@ -114,6 +115,16 @@ func _migrate_save_data():
 				level_entry["total_time"] = level_entry.get("time", 0.0)
 		save_data["version"] = 2
 
+	if version < 3:
+		var player: Dictionary = save_data.get("player", {})
+		if not player.has("unlocks"):
+			player["unlocks"] = {}
+		if player.get("has_pickaxe", false):
+			player["unlocks"]["pickaxe"] = true
+		player.erase("has_pickaxe")
+		save_data["player"] = player
+		save_data["version"] = 3
+
 func reset_save():
 	save_data = get_default_save_data()
 	_write_file()
@@ -125,16 +136,16 @@ func get_max_level_reach() -> int:
 func get_level_data(level: int) -> Dictionary:
 	return save_data["levels"].get(str(level), {})
 
-func has_pickaxe() -> bool:
-	return save_data.get("player", {}).get("has_pickaxe", false)
+func has_unlock(id: String) -> bool:
+	return save_data.get("player", {}).get("unlocks", {}).get(id, false)
 
 func get_default_save_data() -> Dictionary:
 	return {
-		"version": 2,
+		"version": 3,
 		"created_at": Time.get_unix_time_from_system(),
 		"last_played": Time.get_unix_time_from_system(),
 		"player": {                  # dati giocatore
-			"has_pickaxe": false
+			"unlocks": {}   # es: {"pickaxe": true} quando sbloccato
 		},
 		"levels": {},                # dati per livello
 		"max_level_reach": 1,        # livello massimo sbloccato

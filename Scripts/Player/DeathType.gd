@@ -8,3 +8,10 @@ enum Type {
 	ENEMY,    # Contatto con nemico
 	TIMEOUT   # Scaduto il tempo
 }
+
+const type_names := {
+	Type.SPIKES: "Spuntoni",
+	Type.VOID: "Vuoto",
+	Type.ENEMY: "Nemici",
+	Type.TIMEOUT: "Tempo scaduto"
+}

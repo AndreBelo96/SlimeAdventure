@@ -6,9 +6,10 @@ signal location_chosen(location)
 
 const BTN_THEME_SCENE := preload("res://Scenes/UI/Utils/BtnTheme.tscn")
 
-@onready var general_info_container: CenterContainer = $HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer/GeneralInfoContainer
-@onready var location_name_container: VBoxContainer = $HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/LocationNameContainer
-@onready var btn_theme: BtnTheme = $HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/BtnTheme
+@onready var general_info_container: CenterContainer = $MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer/GeneralInfoContainer
+@onready var location_name_container: VBoxContainer = $MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/LocationNameContainer
+@onready var btn_theme: BtnTheme = $MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer/BtnTheme
+@onready var trophy_container: HBoxContainer = $MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer/TrophyContainer
 
 var location_buttons: Array[Button] = []
 var location_selectors: Array = []
@@ -30,6 +31,7 @@ func setup_selectors() -> void:
 func show_data(data: Dictionary) -> void:
 	slot_data = data
 	_populate_general_info()
+	_populate_trophies()
 	_update_location_buttons()
 
 func handle_selection(index: int) -> void:
@@ -53,7 +55,7 @@ func _create_location_buttons() -> void:
 	for location_name in LocationManager.Location.keys():
 		var loc_btn: BtnTheme = BTN_THEME_SCENE.instantiate()
 		location_name_container.add_child(loc_btn)
-		loc_btn.set_text(tr(LocationManager.location_translation_keys[LocationManager.Location[location_name]]))
+		loc_btn.set_text(tr(LocationManager.get_translation_key(LocationManager.Location[location_name])))
 		location_buttons.append(loc_btn.button)
 		location_selectors.append(loc_btn.get_selector_group())
 		location_btn_themes.append(loc_btn)
@@ -69,24 +71,91 @@ func _populate_general_info() -> void:
 
 	var completed: int = slot_data.get("levels", {}).size()
 	var total_levels := LocationManager.get_number_of_levels()
-	var deaths_total := _sum_deaths(slot_data.get("death_counts", {}))
+	var completion_pct := 0
+	if total_levels > 0:
+		completion_pct = int(round(100.0 * completed / total_levels))
+
+	var deaths: Dictionary = slot_data.get("death_counts", {})
+	var deaths_total := _sum_deaths(deaths)
 	var best_time := _best_absolute_time(slot_data)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 6)
-	_add_info_line(vbox, "Livelli completati: %d/%d" % [completed, total_levels])
+	vbox.add_theme_constant_override("separation", 4)
+
+	_add_section_title(vbox, "Progressi")
+	_add_info_line(vbox, "Livelli completati: %d/%d (%d%%)" % [completed, total_levels, completion_pct])
+	_add_info_line(vbox, "Vittorie totali: %d" % slot_data.get("total_victories", 0))
+
+	_add_separator(vbox)
+	_add_section_title(vbox, "Cumulativi")
 	_add_info_line(vbox, "Passi totali: %d" % slot_data.get("total_steps", 0))
 	_add_info_line(vbox, "Tempo totale: %s" % _format_time(slot_data.get("total_time", 0.0)))
 	_add_info_line(vbox, "Tentativi totali: %d" % slot_data.get("total_attempts", 0))
 	_add_info_line(vbox, "Morti totali: %d" % deaths_total)
+
+	_add_separator(vbox)
+	_add_section_title(vbox, "Record")
 	if best_time < INF:
 		_add_info_line(vbox, "Miglior tempo assoluto: %s" % _format_time(best_time))
+	var worst_death := _most_frequent_death(deaths)
+	if worst_death != "":
+		_add_info_line(vbox, "Causa di morte preferita: %s" % worst_death)
 
 	general_info_container.add_child(vbox)
+
+func _populate_trophies() -> void:
+	for child in trophy_container.get_children():
+		child.queue_free()
+
+	var unlocks: Dictionary = slot_data.get("player", {}).get("unlocks", {})
+
+	for location_type in LocationManager.location_data:
+		var reward_id = LocationManager.get_boss_reward(location_type)
+		if reward_id == null:
+			continue
+		var unlocked: bool = unlocks.get(reward_id, false)
+		var badge := _create_trophy_badge(reward_id, unlocked)
+		trophy_container.add_child(badge)
+		if unlocked:
+			UIFx.flick(badge)
+
+func _create_trophy_badge(reward_id: String, unlocked: bool) -> Control:
+	var icon := TextureRect.new()
+	icon.custom_minimum_size = Vector2(32, 32)
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+
+	var atlas := AtlasTexture.new()
+	atlas.atlas = LocationManager.PICKUP_SPRITESHEET
+	atlas.region = LocationManager.boss_reward_icons.get(reward_id, Rect2())
+	icon.texture = atlas
+
+	icon.modulate = Color.WHITE if unlocked else Color(0.25, 0.25, 0.25)
+	return icon
+
+func _add_separator(parent: VBoxContainer) -> void:
+	parent.add_child(HSeparator.new())
+
+func _most_frequent_death(deaths: Dictionary) -> String:
+	var best_key := ""
+	var best_count := 0
+	for key in deaths:
+		if deaths[key] > best_count:
+			best_count = deaths[key]
+			best_key = key
+	if best_key == "":
+		return ""
+	return DeathType.type_names.get(int(best_key), "Sconosciuto")
 
 func _add_info_line(parent: VBoxContainer, text: String) -> void:
 	var lbl := Label.new()
 	lbl.text = text
+	lbl.add_theme_font_size_override("font_size", 10)
+	parent.add_child(lbl)
+
+func _add_section_title(parent: VBoxContainer, text: String) -> void:
+	var lbl := Label.new()
+	lbl.text = text
+	lbl.add_theme_font_size_override("font_size", 15)
 	parent.add_child(lbl)
 
 func _sum_deaths(deaths: Dictionary) -> int:

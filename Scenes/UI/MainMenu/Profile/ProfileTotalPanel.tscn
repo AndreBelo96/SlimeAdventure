@@ -13,75 +13,87 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v4qbt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1247346805]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=760820962]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1247346805]
+layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="ProfileContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1100171754]
+[node name="ProfileContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1100171754]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_ms3p7")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ProfileContainer" unique_id=1991480405]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/ProfileContainer" unique_id=1991480405]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ProfileContainer/MarginContainer" unique_id=1702321627]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer" unique_id=1702321627]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=10367740]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=10367740]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1375991810]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1375991810]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1092333159]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer" unique_id=1092333159]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="GeneralInfoContainer" type="CenterContainer" parent="HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=630419533]
+[node name="GeneralInfoContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=630419533]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LocationContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1030418074]
+[node name="TrophyContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ProfileContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1812647189]
+layout_mode = 2
+alignment = 1
+
+[node name="LocationContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1030418074]
 layout_mode = 2
 theme = ExtResource("2_ms3p7")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LocationContainer" unique_id=109762328]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/LocationContainer" unique_id=109762328]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LocationContainer/MarginContainer" unique_id=1685818702]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LocationContainer/MarginContainer" unique_id=1685818702]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=382971146]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=382971146]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Location"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=276112543]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=276112543]
 layout_mode = 2
 
-[node name="LocationNameContainer" type="VBoxContainer" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=908149059]
+[node name="LocationNameContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=908149059]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="BtnTheme" parent="HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
+[node name="BtnTheme" parent="MarginContainer/HBoxContainer/LocationContainer/MarginContainer/VBoxContainer" unique_id=1335738470 instance=ExtResource("1_yqeu7")]
 layout_mode = 2

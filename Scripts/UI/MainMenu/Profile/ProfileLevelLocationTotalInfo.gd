@@ -14,19 +14,6 @@ func setup(level: int, data: Dictionary) -> void:
 		steps_lbl.text = "👣: -"
 		time_lbl.text = "⌛: -"
 		return
-	deaths_lbl.text = "☠️: %d" % _sum_deaths(data.get("deaths", {}))
+	deaths_lbl.text = "☠️: %d" % FormatUtils.sum_deaths(data.get("deaths", {}))
 	steps_lbl.text = "👣: %d" % data.get("total_steps", 0)
-	time_lbl.text = "⌛: %s" % _format_time(data.get("total_time", 0.0))
-
-func _sum_deaths(deaths: Dictionary) -> int:
-	var total := 0
-	for v in deaths.values():
-		total += v
-	return total
-
-func _format_time(seconds: float) -> String:
-	var total := int(seconds)
-	@warning_ignore("integer_division")
-	var minutes := int(total / 60)
-	var secs := total % 60
-	return "%02d:%02d" % [minutes, secs]
+	time_lbl.text = "⌛: %s" % FormatUtils.format_time_short(data.get("total_time", 0.0))

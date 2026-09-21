@@ -76,30 +76,30 @@ func _populate_general_info() -> void:
 		completion_pct = int(round(100.0 * completed / total_levels))
 
 	var deaths: Dictionary = slot_data.get("death_counts", {})
-	var deaths_total := _sum_deaths(deaths)
+	var deaths_total := FormatUtils.sum_deaths(deaths)
 	var best_time := _best_absolute_time(slot_data)
 
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 4)
 
-	_add_section_title(vbox, "Progressi")
-	_add_info_line(vbox, "Livelli completati: %d/%d (%d%%)" % [completed, total_levels, completion_pct])
-	_add_info_line(vbox, "Vittorie totali: %d" % slot_data.get("total_victories", 0))
+	_add_section_title(vbox, tr("PROFILE_SECTION_PROGRESS"))
+	_add_info_line(vbox, tr("PROFILE_LEVELS_COMPLETED") % [completed, total_levels, completion_pct])
+	_add_info_line(vbox, tr("PROFILE_TOTAL_TIME") % FormatUtils.format_time_long(slot_data.get("total_time", 0.0)))
 
 	_add_separator(vbox)
-	_add_section_title(vbox, "Cumulativi")
-	_add_info_line(vbox, "Passi totali: %d" % slot_data.get("total_steps", 0))
-	_add_info_line(vbox, "Tempo totale: %s" % _format_time(slot_data.get("total_time", 0.0)))
-	_add_info_line(vbox, "Tentativi totali: %d" % slot_data.get("total_attempts", 0))
-	_add_info_line(vbox, "Morti totali: %d" % deaths_total)
+	_add_section_title(vbox, tr("PROFILE_TOTAL_TIME"))
+	_add_info_line(vbox, tr("PROFILE_TOTAL_STEPS") % slot_data.get("total_steps", 0))
+	_add_info_line(vbox, tr("PROFILE_TOTAL_TIME") % FormatUtils.format_time_long(slot_data.get("total_time", 0.0)))
+	_add_info_line(vbox, tr("PROFILE_TOTAL_ATTEMPTS") % slot_data.get("total_attempts", 0))
+	_add_info_line(vbox, tr("PROFILE_TOTAL_DEATHS") % deaths_total)
 
 	_add_separator(vbox)
-	_add_section_title(vbox, "Record")
+	_add_section_title(vbox, tr("PROFILE_SECTION_RECORDS"))
 	if best_time < INF:
-		_add_info_line(vbox, "Miglior tempo assoluto: %s" % _format_time(best_time))
+		_add_info_line(vbox, tr("PROFILE_BEST_TIME") % FormatUtils.format_time_long(best_time))
 	var worst_death := _most_frequent_death(deaths)
 	if worst_death != "":
-		_add_info_line(vbox, "Causa di morte preferita: %s" % worst_death)
+		_add_info_line(vbox, tr("PROFILE_FAVORITE_DEATH") % worst_death)
 
 	general_info_container.add_child(vbox)
 
@@ -144,7 +144,7 @@ func _most_frequent_death(deaths: Dictionary) -> String:
 			best_key = key
 	if best_key == "":
 		return ""
-	return DeathType.type_names.get(int(best_key), "Sconosciuto")
+	return tr(DeathType.type_names.get(int(best_key), "DEATH_UNKNOWN"))
 
 func _add_info_line(parent: VBoxContainer, text: String) -> void:
 	var lbl := Label.new()
@@ -158,12 +158,6 @@ func _add_section_title(parent: VBoxContainer, text: String) -> void:
 	lbl.add_theme_font_size_override("font_size", 15)
 	parent.add_child(lbl)
 
-func _sum_deaths(deaths: Dictionary) -> int:
-	var total := 0
-	for v in deaths.values():
-		total += v
-	return total
-
 func _best_absolute_time(data: Dictionary) -> float:
 	var best := INF
 	for level_key in data.get("levels", {}):
@@ -171,15 +165,6 @@ func _best_absolute_time(data: Dictionary) -> float:
 		if t < best:
 			best = t
 	return best
-
-func _format_time(seconds: float) -> String:
-	var total := int(seconds)
-	@warning_ignore("integer_division")
-	var hours := int(total / 3600)
-	@warning_ignore("integer_division")
-	var minutes := (total % 3600) / 60
-	var secs := total % 60
-	return "%02d:%02d:%02d" % [hours, minutes, secs]
 
 func _is_location_locked(location_name: String) -> bool:
 	var location_type = LocationManager.Location[location_name]

@@ -115,58 +115,6 @@ theme_override_font_sizes/font_size = 15
 text = " <"
 horizontal_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=637552492]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2" unique_id=674739369]
-layout_mode = 2
-
-[node name="SelectorL" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1937522848]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_xuh55")
-theme_override_font_sizes/font_size = 15
-text = ">"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=398670703]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = ExtResource("4_p5pj7")
-theme_override_font_sizes/font_size = 20
-flat = true
-
-[node name="Profile" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Button" unique_id=1490217385]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_xuh55")
-theme_override_font_sizes/font_size = 20
-text = "Profile"
-horizontal_alignment = 1
-
-[node name="SelectorR" type="Label" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=1952152609]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_xuh55")
-theme_override_font_sizes/font_size = 15
-text = " <"
-horizontal_alignment = 1
-
 [node name="CenterContainer3" type="CenterContainer" parent="MenuContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=958088455]
 layout_mode = 2
 

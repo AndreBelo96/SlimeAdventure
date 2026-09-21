@@ -38,10 +38,10 @@ func setup(level: int, data: Dictionary, reward_id, unlocked: bool, portrait_key
 		return
 
 	record_steps_lbl.text = "👣: %d" % data.get("steps", 0)
-	record_time_lbl.text = "⌛: %s" % _format_time(data.get("time", 0.0))
-	total_deaths_lbl.text = "☠️: %d" % _sum_deaths(data.get("deaths", {}))
+	record_time_lbl.text = "⌛: %s" % FormatUtils.format_time_short(data.get("time", 0.0))
+	total_deaths_lbl.text = "☠️: %d" % FormatUtils.sum_deaths(data.get("deaths", {}))
 	total_steps_lbl.text = "👣: %d" % data.get("total_steps", 0)
-	total_time_lbl.text = "⌛: %s" % _format_time(data.get("total_time", 0.0))
+	total_time_lbl.text = "⌛: %s" % FormatUtils.format_time_short(data.get("total_time", 0.0))
 
 func _setup_reward(reward_id, unlocked: bool) -> void:
 	reward_icon.visible = reward_id != null
@@ -59,19 +59,6 @@ func _setup_boss(portrait_key, defeated: bool) -> void:
 		return
 	boss_icon.texture = PortraitManager.get_portrait(portrait_key)
 	boss_icon.modulate = Color.WHITE if defeated else Color(0.0, 0.0, 0.0, 0.7)
-
-
-func _sum_deaths(deaths: Dictionary) -> int:
-	var total := 0
-	for v in deaths.values():
-		total += v
-	return total
-
-func _format_time(seconds: float) -> String:
-	var total := int(seconds)
-	@warning_ignore("integer_division")
-	var minutes := int(total / 60)
-	return "%02d:%02d" % [minutes, total % 60]
 
 func play_intro(delay: float) -> void:
 	_pop_in(boss_icon, delay).finished.connect(func():

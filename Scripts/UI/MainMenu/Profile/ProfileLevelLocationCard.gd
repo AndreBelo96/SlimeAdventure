@@ -59,7 +59,7 @@ func _apply_faces() -> void:
 	total_info.modulate.a = 0.0 if showing_record else 1.0
 
 func _apply_tag() -> void:
-	tag.text = "Record!" if showing_record else "Total!"
+	tag.text = tr("RECORD_TAG") if showing_record else tr("TOTAL_TAG")
 	tag.add_theme_color_override("font_color", TAG_COLOR_RECORD if showing_record else TAG_COLOR_TOTAL)
 	tag.reset_size()
 

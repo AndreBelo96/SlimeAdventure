@@ -70,7 +70,7 @@ func update_save_data_panel(slot: int) -> void:
 
 	var max_level = data.get("max_level_reach", 1)
 	var last_played = _format_date_smart(data.get("last_played", 0))
-	var playtime = _format_time(data.get("total_time", 0.0))
+	var playtime = FormatUtils.format_time_long(data.get("total_time", 0.0))
 
 	title_lbl.text = tr("SAVE_LINE") + " %d" % slot + " - %d" % _get_completion_percent(data) + "%"
 	lastPlayedLbl.text = tr("LAST_PLAYED") + ": " + last_played
@@ -81,7 +81,7 @@ func update_save_data_panel(slot: int) -> void:
 	set_current_selection(current_selection)
 
 func _show_empty_slot() -> void:
-	title_lbl.text = "Empty Slot"
+	title_lbl.text = tr("EMPTY_SLOT")
 	lastPlayedLbl.text = tr("LAST_PLAYED") + ": - "
 	playTimeLbl.text = tr("PLAY_TIME") + ": - "
 	lvlReachLbl.text = tr("LEVEL_MAX") + ": - "
@@ -93,15 +93,6 @@ func _show_empty_slot() -> void:
 	current_selection = 0
 	set_current_selection(current_selection)
 
-func _format_time(seconds: float) -> String:
-	var total := int(seconds)
-	@warning_ignore("integer_division")
-	var hours := int(total / 3600)
-	@warning_ignore("integer_division")
-	var minutes := (total % 3600) / 60
-	var secs := total % 60
-	return "%02d:%02d:%02d" % [hours, minutes, secs]
-
 func _format_date_smart(unix_time: int) -> String:
 	if unix_time == 0:
 		return "-"
@@ -109,11 +100,11 @@ func _format_date_smart(unix_time: int) -> String:
 	var now_dict = Time.get_datetime_dict_from_unix_time(Time.get_unix_time_from_system())
 	var date_dict = Time.get_datetime_dict_from_unix_time(unix_time)
 	if now_dict.year == date_dict.year and now_dict.month == date_dict.month and now_dict.day == date_dict.day:
-		return "Today" #tr("TODAY")
+		return tr("TODAY")
 	var yesterday = Time.get_unix_time_from_system() - 86400
 	var y_dict = Time.get_datetime_dict_from_unix_time(yesterday)
 	if y_dict.year == date_dict.year and y_dict.month == date_dict.month and y_dict.day == date_dict.day:
-		return "Yesterday" #tr("YESTERDAY")
+		return tr("YESTERDAY")
 	return "%02d/%02d/%d" % [date_dict.day, date_dict.month, date_dict.year]
 
 func _get_completion_percent(data: Dictionary) -> int:

@@ -123,7 +123,10 @@ func get_level_range_for_location(loc: Location) -> Array[int]:
 	return result
 
 func get_level_name(level: int) -> String:
-	return level_data.get(level, {}).get("name", "Livello %d" % level)
+	var key: String = level_data.get(level, {}).get("name_key", "")
+	if key != "":
+		return tr(key)
+	return tr("LEVEL_N") % level
 
 func is_location_changing(next: int) -> bool:
 	var current_loc = get_location_for_level(LevelStateManager.current_level)

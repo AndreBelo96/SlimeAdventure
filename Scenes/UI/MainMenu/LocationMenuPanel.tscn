@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://bekimpr1d4j4a" path="res://Theme/Button/TutorialButton.tres" id="2_r6d3g"]
 [ext_resource type="FontFile" uid="uid://cqkt7xf43rk6e" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="3_vnt3w"]
 [ext_resource type="Theme" uid="uid://dhwt37qt37a0m" path="res://Theme/Button/DungeonButton.tres" id="4_661d4"]
-[ext_resource type="FontFile" uid="uid://bqkb5e8at2lc" path="res://Assets/Fonts/Chewy-Regular.ttf" id="5_8umsp"]
+[ext_resource type="PackedScene" uid="uid://b7xeey6df85r8" path="res://Scenes/UI/Utils/BtnTheme.tscn" id="6_r6d3g"]
 
 [node name="LocationMenuPanel" type="Control" unique_id=385242201]
 layout_mode = 3
@@ -139,49 +139,11 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LocationContainer/VBoxContainer/CenterContainer3" unique_id=226657664]
 layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
 
-[node name="SelectorL" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1930547921]
-custom_minimum_size = Vector2(20, 0)
+[node name="Profile" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1257178264 instance=ExtResource("6_r6d3g")]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_vnt3w")
-theme_override_font_sizes/font_size = 20
-text = ">"
-horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=709497307]
-custom_minimum_size = Vector2(120, 0)
+[node name="Back" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1820781220 instance=ExtResource("6_r6d3g")]
 layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = ExtResource("5_8umsp")
-theme_override_font_sizes/font_size = 20
-flat = true
-
-[node name="Back" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer/Button" unique_id=342365563]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_vnt3w")
-theme_override_font_sizes/font_size = 25
-text = "Back"
-horizontal_alignment = 1
-
-[node name="SelectorR" type="Label" parent="LocationContainer/VBoxContainer/CenterContainer3/HBoxContainer" unique_id=1184562266]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/font = ExtResource("3_vnt3w")
-theme_override_font_sizes/font_size = 20
-text = " <"
-horizontal_alignment = 1

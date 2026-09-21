@@ -81,3 +81,28 @@ LUDOVICO_LVL_13_TXT_1,"Oh, ecco uno slime, uno scontro facile, finalmente un po'
 SLIME_LVL_13_TXT_3,Non possiamo andare ognuno per la propria strada vero?,"We can't all go our separate ways, right?"
 LUDOVICO_LVL_13_TXT_2,Se non ho contato male è pure l'ultimo slime che mi serve per terminare l'incarico datomi dalla gilda. Soldi facili!,"If I counted correctly, this is also the last slime I need to complete the task the guild gave me. Easy money!"
 LUDOVICO_LVL_13_TXT_3,ARGH!,ARGH!
+PROFILE TEXT,,
+SAVE_SLOT_TITLE,Seleziona uno slot,Select a slot
+SLOT_EMPTY_LBL,Vuoto,Empty
+SWITCH_INFO_BTN,Cambia,Switch
+RECORD_TAG,Record!,Record!
+TOTAL_TAG,Totale!,Total!
+TODAY,Oggi,Today
+YESTERDAY,Ieri,Yesterday
+PROFILE_SECTION_PROGRESS,Progressi,Progress
+PROFILE_SECTION_CUMULATIVE,Cumulativi,Cumulative
+PROFILE_SECTION_RECORDS,Record!,Records!
+PROFILE_LEVELS_COMPLETED,Livelli completati: %d/%d (%d%%),Levels completed: %d/%d (%d%%)
+PROFILE_TOTAL_VICTORIES,Vittorie totali: %d,Total victories: %d
+PROFILE_TOTAL_STEPS,Passi totali: %d,Total steps: %d
+PROFILE_TOTAL_TIME,Tempo totale: %s,Total time: %s
+PROFILE_TOTAL_ATTEMPTS,Tentativi totali: %d,Total attempts: %d
+PROFILE_TOTAL_DEATHS,Morti totali: %d,Total deaths: %d
+PROFILE_BEST_TIME,Miglior tempo assoluto: %s,Best overall time: %s
+PROFILE_FAVORITE_DEATH,Causa di morte preferita: %s,Favorite cause of death: %s
+DEATH_SPIKES,Spuntoni,Spikes
+DEATH_VOID,Vuoto,Void
+DEATH_ENEMY,Nemici,Enemies
+DEATH_TIMEOUT,Tempo scaduto,Time out
+DEATH_UNKNOWN,Sconosciuto,Unknown
+LEVEL_N,Livello %d,Level %d

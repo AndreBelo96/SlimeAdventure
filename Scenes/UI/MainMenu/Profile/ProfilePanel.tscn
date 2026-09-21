@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://ocj4nadrd4w8"]
 
-[ext_resource type="PackedScene" uid="uid://bb52qxo1akcp4" path="res://Scenes/UI/MainMenu/Profile/ProfileSaveSlotSelectionPanel.tscn" id="1_1238b"]
 [ext_resource type="Script" uid="uid://bhlq3jni6hf1c" path="res://Scripts/UI/MainMenu/Profile/ProfilePanel.gd" id="1_bp5bm"]
 [ext_resource type="PackedScene" uid="uid://cjhepmldn7bh1" path="res://Scenes/UI/MainMenu/Profile/ProfileTotalPanel.tscn" id="2_lda0p"]
 [ext_resource type="PackedScene" uid="uid://dl1o8dyeha8y5" path="res://Scenes/UI/MainMenu/Profile/ProfileLocationPanel.tscn" id="3_6b88o"]
@@ -25,10 +24,6 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-
-[node name="ProfileSaveSlotSelectionPanel" parent="MarginContainer" unique_id=172754403 instance=ExtResource("1_1238b")]
-visible = false
-layout_mode = 2
 
 [node name="ProfileTotalPanel" parent="MarginContainer" unique_id=251080434 instance=ExtResource("2_lda0p")]
 visible = false

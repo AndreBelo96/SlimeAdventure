@@ -16,13 +16,13 @@ func _ready() -> void:
 		SoundManager.play_music(AudioPresets.MAIN_MENU_MUSIC)
 	main_panel.start_pressed.connect(_on_start_pressed)
 	main_panel.option_pressed.connect(_on_option_pressed)
-	main_panel.profile_pressed.connect(_on_profile_pressed)
 	profile_panel.back_pressed.connect(_on_profile_back_pressed)
 	main_panel.exit_pressed.connect(_on_exit_pressed)
 	save_panel.back_pressed.connect(_on_save_back_pressed)
 	save_panel.play_pressed.connect(_on_save_play_pressed)
 	location_panel.back_pressed.connect(_on_location_back_pressed)
 	location_panel.location_chosen.connect(_on_location_chosen)
+	location_panel.profile_pressed.connect(_on_location_profile_pressed)
 	level_panel.back_pressed.connect(_on_level_back_pressed)
 	option_menu.back_pressed.connect(_on_option_back_pressed)
 	await _calibrate_all()
@@ -70,11 +70,11 @@ func _on_level_back_pressed() -> void:
 	_switch_to(PanelState.LOCATION, location_panel)
 func _on_option_back_pressed() -> void:
 	_switch_to(PanelState.MAIN, main_panel)
-func _on_profile_pressed() -> void:
-	_switch_to(PanelState.PROFILE, profile_panel)
 func _on_profile_back_pressed() -> void:
-	_switch_to(PanelState.MAIN, main_panel)
-
+	_switch_to(PanelState.LOCATION, location_panel)
+func _on_location_profile_pressed() -> void:
+	profile_panel.open_slot(SaveManager.current_slot)
+	_switch_to(PanelState.PROFILE, profile_panel)
 
 func _switch_to(state: PanelState, target: Control, animate: bool = true) -> void:
 	current_state = state

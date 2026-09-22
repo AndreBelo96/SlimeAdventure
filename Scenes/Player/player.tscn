@@ -10,6 +10,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99805444, 0.12454742), 0.0, 0.
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k53q1"]
+resource_local_to_scene = true
 shader = ExtResource("2_gwnis")
 shader_parameter/white_value = 1.0
 shader_parameter/alpha_value = 1.0

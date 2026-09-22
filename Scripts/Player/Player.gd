@@ -42,6 +42,8 @@ var _terminal_state := false
 @onready var shader_material = $AnimatedSprite2D.material
 
 var can_move := true
+var confusion_steps_left := 0
+
 
 func _ready():
 	add_to_group("player")
@@ -60,6 +62,7 @@ func _ready():
 	movement_handler.snap_to_tile_center(movement_handler.get_coords_from_global_position_in_layer(global_position, tile_map_layer))
 	await get_tree().process_frame
 	
+	movement_handler.invalidate_indexes()
 	grid_position = movement_handler.grid_position
 	interaction_handler.check_tile()
 	
@@ -95,15 +98,19 @@ func _unhandled_input(event):
 	
 	var direction = input_handler.get_direction(event)
 	if direction != Vector2i.ZERO:
+		if confusion_steps_left > 0:
+			direction = -direction
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
+	grid_position = movement_handler.grid_position
 	
 	if not is_cutscene:
+		_consume_confusion_step()
 		steps += 1
 		emit_signal("steps_changed", steps)
 	
-	grid_position = movement_handler.grid_position
+	
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
 	
@@ -203,3 +210,17 @@ func reset_end_level_variables():
 
 func _exit_tree():
 	PlayerRef.clear(self)
+
+## Confusion ##
+func apply_confusion(steps: int) -> void:
+	confusion_steps_left = max(confusion_steps_left, steps)
+	_update_confusion_visual()
+
+func _consume_confusion_step() -> void:
+	if confusion_steps_left > 0:
+		confusion_steps_left -= 1
+		_update_confusion_visual()
+
+func _update_confusion_visual() -> void:
+	# TODO particelle + PLACEHOLDER visivo + schermo?
+	$AnimatedSprite2D.modulate = Color(0.8, 0.6, 1.0) if confusion_steps_left > 0 else Color.WHITE

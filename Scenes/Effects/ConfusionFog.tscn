@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://du2itxdtlg5ln"]
+
+[ext_resource type="Script" uid="uid://n2uhbc3jjwx4" path="res://Scripts/Effects/ConfusionFog.gd" id="1_i3nun"]
+
+[sub_resource type="Gradient" id="Gradient_i3nun"]
+offsets = PackedFloat32Array(0, 0.4053498, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9996872, 0.9992558, 0.99990195, 0.9906296, 0.983107, 0.9598109, 0.99470645, 0.49400002)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8autd"]
+gradient = SubResource("Gradient_i3nun")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Curve" id="Curve_nq3ls"]
+_data = [Vector2(0, 0.90462214), 0.0, 0.0, 0, 0, Vector2(0.49803144, 0.3466618), 0.0, 0.0, 0, 0, Vector2(1, 0.6232575), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8autd"]
+offsets = PackedFloat32Array(0, 0.3547718, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="ConfusionFog" type="CPUParticles2D" unique_id=1649153173]
+texture_filter = 2
+texture_repeat = 1
+texture = SubResource("GradientTexture2D_8autd")
+lifetime = 2.5
+preprocess = 3.5
+explosiveness = 0.3
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(10, 1)
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
+scale_amount_min = 0.15
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_nq3ls")
+color = Color(0.68731946, 0.2811838, 0.8460353, 0.4509804)
+color_ramp = SubResource("Gradient_8autd")
+script = ExtResource("1_i3nun")

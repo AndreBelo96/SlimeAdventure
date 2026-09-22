@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://p2vhqquhlb37" path="res://Scenes/Tiles/TileNormal.tscn" id="2_p32pu"]
 [ext_resource type="PackedScene" uid="uid://bohwi1rglg8c3" path="res://Scenes/Tiles/TileSpike.tscn" id="3_r8eo1"]
 [ext_resource type="PackedScene" uid="uid://c3rol7efmjcb2" path="res://Scenes/Tiles/TileWall.tscn" id="4_bbn20"]
+[ext_resource type="PackedScene" uid="uid://c0lr3uqk7bg4w" path="res://Scenes/Tiles/TileMushroom.tscn" id="5_a7b37"]
 [ext_resource type="PackedScene" uid="uid://sj0kk6hfxx1b" path="res://Scenes/Tiles/TileSpikeStep.tscn" id="7_xv534"]
 [ext_resource type="PackedScene" uid="uid://bsy3fwetdsap8" path="res://Scenes/Tiles/TileSpikeSwitch.tscn" id="8_rrq4q"]
 [ext_resource type="PackedScene" uid="uid://chb3jeju61dfw" path="res://Scenes/Tiles/TileSwitch.tscn" id="9_3bypr"]
@@ -13,6 +14,7 @@ scenes/1/scene = ExtResource("1_mltgd")
 scenes/2/scene = ExtResource("2_p32pu")
 scenes/3/scene = ExtResource("3_r8eo1")
 scenes/4/scene = ExtResource("4_bbn20")
+scenes/5/scene = ExtResource("5_a7b37")
 scenes/7/scene = ExtResource("7_xv534")
 scenes/8/scene = ExtResource("8_rrq4q")
 scenes/9/scene = ExtResource("9_3bypr")

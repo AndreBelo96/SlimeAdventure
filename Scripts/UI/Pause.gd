@@ -46,7 +46,7 @@ func handle_selection(_index):
 			get_tree().paused = false
 			SoundManager.resume_all()
 			visible = false
-			SceneNavigator.restart_level(LevelStateManager.current_level)
+			get_tree().reload_current_scene()
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		Btn.BACK_MAIN_MENU:
 			get_tree().paused = false

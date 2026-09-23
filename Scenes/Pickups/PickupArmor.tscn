@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cs2hydgslqu3t"]
+
+[ext_resource type="PackedScene" uid="uid://ba2esyl04ctby" path="res://Scenes/Pickups/Pickup.tscn" id="1_mnteo"]
+[ext_resource type="Script" uid="uid://d2die347ve62t" path="res://Scripts/Pickups/PickupArmor.gd" id="2_x24xv"]
+
+[node name="PickupArmor" unique_id=1889952731 instance=ExtResource("1_mnteo")]
+script = ExtResource("2_x24xv")
+
+[node name="Sprite" parent="." index="0" unique_id=969472673]
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 32)

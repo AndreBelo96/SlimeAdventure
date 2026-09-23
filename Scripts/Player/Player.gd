@@ -1,11 +1,13 @@
 extends Node2D
 
 const DEATH = DeathType.Type
+const ARMOR_ABSORBS := [DeathType.Type.SPIKES, DeathType.Type.ENEMY]
 
 signal player_died(death_type: int)
 signal player_won
 signal steps_changed(new_count: int)
 signal move_finished
+signal armor_changed(has_armor: bool)
 
 @export var tile_map_layer_path: NodePath
 @export var terrain_map_layer_path: NodePath
@@ -23,12 +25,17 @@ var grid_position: Vector2i
 var _input_lock_count : int = 0
 var _terminal_state := false
 
+## -- Armor -- ##
+var has_armor := false
+var _armor_broken_at_step := -1
+
 @onready var tile_map_layer
 @onready var pickup_map_layer
 @onready var movement_logic_map_layer
 @onready var doors_map_layer
 @onready var npc_map_layer
 @onready var point_light
+@onready var armor_icon = $ArmorIcon   # PLACEHOLDER
 
 
 @onready var input_handler = PlayerInput.new()
@@ -133,6 +140,8 @@ func on_player_won():
 	emit_signal("player_won")
 
 func on_player_died(death_type: int):
+	if _try_absorb(death_type):
+		return
 	_terminal_state = true
 	input_enabled = false
 	
@@ -224,3 +233,35 @@ func _consume_confusion_step() -> void:
 func _update_confusion_visual() -> void:
 	# TODO particelle + PLACEHOLDER visivo + schermo?
 	$AnimatedSprite2D.modulate = Color(0.8, 0.6, 1.0) if confusion_steps_left > 0 else Color.WHITE
+
+## Armor ##
+func give_armor() -> bool:
+	if has_armor:
+		return false
+	has_armor = true
+	armor_icon.visible = true
+	emit_signal("armor_changed", true)
+	return true
+
+func _try_absorb(death_type: int) -> bool:
+	if death_type not in ARMOR_ABSORBS:
+		return false
+	if _armor_broken_at_step == steps:
+		return true
+	if not has_armor:
+		return false
+
+	has_armor = false
+	_armor_broken_at_step = steps
+	armor_icon.visible = false
+	emit_signal("armor_changed", false)
+	_play_armor_break()
+	return true
+
+func _play_armor_break() -> void:
+	SoundManager.play_sfx("res://Assets/Audio/Sound/Bounce.wav")
+	var sprite := $AnimatedSprite2D
+	var tween := create_tween()
+	for i in 3:
+		tween.tween_property(sprite, "self_modulate:a", 0.3, 0.08)
+		tween.tween_property(sprite, "self_modulate:a", 1.0, 0.08)

@@ -4,7 +4,7 @@ class_name PickupBase
 
 @onready var center: Marker2D = $Center
 
-enum ItemType { NONE, SUNGLASSES, LANTERN, PICKAXE }
+enum ItemType { NONE, SUNGLASSES, LANTERN, PICKAXE, ARMOR }
 var item_type: ItemType = ItemType.NONE
 
 const float_amount := 1.0

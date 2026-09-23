@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://boy2syminp1lv" path="res://Shader/player_victory.gdshader" id="2_gwnis"]
 [ext_resource type="Texture2D" uid="uid://bsewmj8vwoi2i" path="res://Assets/Sprites/Player/SlimeSet.png" id="2_sw1bk"]
 [ext_resource type="Texture2D" uid="uid://d2y15d41gdqn6" path="res://Assets/Sprites/UI/LightMask.png" id="3_ghh27"]
+[ext_resource type="Texture2D" uid="uid://by3qqq1712pis" path="res://Assets/Sprites/Pickups/pickups_set.png" id="5_htcer"]
 
 [sub_resource type="Curve" id="Curve_btcbx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99805444, 0.12454742), 0.0, 0.0, 0, 0]
@@ -318,3 +319,11 @@ energy = 0.0
 texture = ExtResource("3_ghh27")
 
 [node name="LightTimer" type="Timer" parent="." unique_id=1005482052]
+
+[node name="ArmorIcon" type="Sprite2D" parent="." unique_id=1810459457]
+visible = false
+position = Vector2(9, -12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_htcer")
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 32)

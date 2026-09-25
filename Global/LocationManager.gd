@@ -124,7 +124,7 @@ func get_level_range_for_location(loc: Location) -> Array[int]:
 	return result
 
 func get_level_name(level: int) -> String:
-	var key: String = level_data.get(level, {}).get("name_key", "")
+	var key: String = level_data.get(level, {}).get("name", "")
 	if key != "":
 		return tr(key)
 	return tr("LEVEL_N") % level

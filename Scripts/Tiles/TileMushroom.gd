@@ -17,11 +17,9 @@ func _ready():
 	sprite.modulate = Color(0.75, 0.35, 0.95)   # PLACEHOLDER
 	weight = 999
 	_cell = get_parent().local_to_map(position)
-	print("Fungo cella=", _cell, " Center=", has_node("Center"), " layer=", get_parent().name)
 	_spawn_fog()
 
 func can_enter() -> bool:
-	print("can_enter chiamato sul fungo ", _cell)
 	return false
 
 func setup_level_logic(level_logic) -> void:

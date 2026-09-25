@@ -86,7 +86,7 @@ func _show_empty_slot() -> void:
 	playTimeLbl.text = tr("PLAY_TIME") + ": - "
 	lvlReachLbl.text = tr("LEVEL_MAX") + ": - "
 
-	$Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2.visible = false
+	$SlotActionsPanel/Panel/MarginContainer/VBoxContainer/BtnContainer/HBoxContainer2.visible = false
 	buttons = buttons_empty
 	selectors = selectors_empty
 

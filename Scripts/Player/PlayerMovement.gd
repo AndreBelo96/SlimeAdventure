@@ -78,7 +78,6 @@ func can_move_by_tilemask(coords: Vector2i) -> bool:
 
 func can_enter_into_tile(coords: Vector2i) -> bool:
 	var child = find_child_at_coords(tile_map_layer, coords)
-	print("can_enter_into_tile ", coords, " -> ", child, " | indice: ", _tile_index._cache.keys())
 	return child == null or (child.has_method("can_enter") and child.can_enter())
 
 # -----------------------

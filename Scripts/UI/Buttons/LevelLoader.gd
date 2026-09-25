@@ -13,7 +13,7 @@ func get_all_levels() -> Array[String]:
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
-		if not dir.current_is_dir() and file_name.begins_with("Level") and file_name.ends_with(".tscn"):
+		if not dir.current_is_dir() and file_name.begins_with("Level") and file_name.ends_with(".tscn") and LocationManager.level_data.has(extract_level_number(file_name)):
 			level_files.append(file_name)
 		file_name = dir.get_next()
 	dir.list_dir_end()

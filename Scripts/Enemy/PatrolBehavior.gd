@@ -13,3 +13,8 @@ func get_next_tile(enemy: EnemyBase) -> Vector2i:
 	var dir := directions[_index % directions.size()]
 	_index += 1
 	return enemy.grid_movement.grid_position + dir
+
+func peek_next_tile(enemy: EnemyBase) -> Vector2i:
+	if directions.is_empty():
+		return enemy.grid_movement.grid_position
+	return enemy.grid_movement.grid_position + directions[_index % directions.size()]

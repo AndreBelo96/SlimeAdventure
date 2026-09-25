@@ -24,6 +24,7 @@ var is_cutscene := false
 var grid_position: Vector2i
 var _input_lock_count : int = 0
 var _terminal_state := false
+var previous_grid_position: Vector2i
 
 ## -- Armor -- ##
 var has_armor := false
@@ -71,6 +72,7 @@ func _ready():
 	
 	movement_handler.invalidate_indexes()
 	grid_position = movement_handler.grid_position
+	previous_grid_position = grid_position
 	interaction_handler.check_tile()
 	
 	light_timer.timeout.connect(Callable(self, "_on_light_timer_timeout"))
@@ -110,6 +112,7 @@ func _unhandled_input(event):
 		movement_handler.move_to( movement_handler.grid_position + direction )
 
 func on_movement_finished():
+	previous_grid_position = grid_position
 	grid_position = movement_handler.grid_position
 	
 	if not is_cutscene:
@@ -192,9 +195,11 @@ func _check_boss_collision():
 	if not is_inside_tree():
 		return
 	
-	var bosses = get_tree().get_nodes_in_group("enemy")
-	for boss in bosses:
-		if not boss.is_dead() and boss.grid_position == grid_position:
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		if enemy is Scarab:
+			continue  
+		if not enemy.is_dead() and enemy.grid_position == grid_position:
 			_on_player_touch_boss()
 			return
 

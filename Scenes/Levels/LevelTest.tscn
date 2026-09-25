@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_we0dy"]
 [ext_resource type="Script" uid="uid://b0846smmiommt" path="res://Scripts/Levels/LevelTest.gd" id="2_w26be"]
+[ext_resource type="PackedScene" uid="uid://civodfjdw8kmy" path="res://Scenes/Enemy/Critter/Scarab.tscn" id="3_w26be"]
 
 [node name="LevelTest" unique_id=2004832850 instance=ExtResource("1_we0dy")]
 script = ExtResource("2_w26be")
@@ -20,3 +21,6 @@ tile_map_data = PackedByteArray("AAD//wAAAwAAAAAAAAD+/wAAAwAAAAAAAAAAAAAAAwAAAAA
 
 [node name="PickupMapLayer" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="4" unique_id=98613881]
 tile_map_data = PackedByteArray("AAABAAIAAAAAAAAAAQA=")
+
+[node name="Scarab" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="10" unique_id=319300526 instance=ExtResource("3_w26be")]
+warning_color = Color(1, 0.6, 0, 0.4)

@@ -134,10 +134,11 @@ gravity = Vector3(0, 10, 0)
 [node name="Level" type="Node2D" unique_id=2004832850]
 script = ExtResource("1_l5mnm")
 
-[node name="LevelLogic" type="Node" parent="." unique_id=1134660148 node_paths=PackedStringArray("player", "tile_layer")]
+[node name="LevelLogic" type="Node" parent="." unique_id=1134660148 node_paths=PackedStringArray("player", "tile_layer", "movement_map")]
 script = ExtResource("2_1s4qq")
 player = NodePath("../YSort/Player")
 tile_layer = NodePath("../TileMapLayer")
+movement_map = NodePath("../MovementLogicMapLayer")
 
 [node name="BackgroundManager" parent="." unique_id=1364242012 instance=ExtResource("3_lq64p")]
 

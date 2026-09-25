@@ -4,6 +4,7 @@ extends Node
 @export var player: Node2D
 @export var tile_layer: Node2D
 @export var boss: EnemyBase
+@export var movement_map: TileMapLayer
 
 signal global_step(step_count: int)
 signal boss_damaged(hit_count: int)

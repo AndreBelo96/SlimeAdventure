@@ -124,7 +124,7 @@ func on_movement_finished():
 	interaction_handler.check_tile()
 	interaction_handler.check_pickup()
 	
-	_check_boss_collision()
+	_check_enemy_contact()
 	
 	can_move = true
 	emit_signal("move_finished")
@@ -191,16 +191,13 @@ func force_move(dir: Vector2i) -> void:
 	can_move = false
 	movement_handler.move_to(movement_handler.grid_position + dir)
 
-func _check_boss_collision():
+func _check_enemy_contact():
 	if not is_inside_tree():
 		return
-	
-	var enemies = get_tree().get_nodes_in_group("enemy")
-	for enemy in enemies:
-		if enemy is Scarab:
-			continue  
-		if not enemy.is_dead() and enemy.grid_position == grid_position:
-			_on_player_touch_boss()
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy.checks_contact_on_player_move() and not enemy.is_dead() \
+				and enemy.grid_position == grid_position:
+			on_player_died(DeathType.Type.ENEMY)
 			return
 
 func _on_player_touch_boss():

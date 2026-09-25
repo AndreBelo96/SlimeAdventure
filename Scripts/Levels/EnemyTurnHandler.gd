@@ -10,12 +10,17 @@ func setup(_tile_layer: Node2D) -> void:
 	tile_layer = _tile_layer
 	tile_index = TileSpatialIndex.new(_tile_layer)
 
-func process_enemies(step_count: int, scene_tree) -> void:
+func process_enemies(_step_count: int, scene_tree) -> void:
 	for enemy in scene_tree.get_nodes_in_group("enemy"):
-		if enemy.should_move(step_count):
-			enemy.take_turn()
-		else:
-			emit_signal("enemy_turn_done", enemy)
+		if enemy.is_in_group("boss") or enemy.is_dead():
+			continue
+		enemy.take_turn()
+
+func process_boss(boss: BossBase, step_count: int) -> void:
+	if boss.should_move(step_count):
+		boss.take_turn()
+	else:
+		emit_signal("enemy_turn_done", boss)
 
 func on_enemy_finished_turn(enemy) -> void:
 	emit_signal("enemy_turn_done", enemy)

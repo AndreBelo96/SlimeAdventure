@@ -1,5 +1,5 @@
 # Boss.gd
-extends EnemyBase
+extends BossBase
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 

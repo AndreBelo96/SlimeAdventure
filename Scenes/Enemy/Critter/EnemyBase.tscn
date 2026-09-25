@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dptdp5ovxymib"]
+
+[ext_resource type="Script" uid="uid://c2h27gpgiw0yb" path="res://Scripts/Enemy/Enemy/EnemyBase.gd" id="1_wxltu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjlts"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"DEATH",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"WALK",
+"speed": 5.0
+}]
+
+[node name="EnemyBase" type="Node2D" unique_id=662826890]
+script = ExtResource("1_wxltu")
+
+[node name="Center" type="Marker2D" parent="." unique_id=207158635]
+
+[node name="Animation" type="AnimatedSprite2D" parent="." unique_id=377218498]
+sprite_frames = SubResource("SpriteFrames_xjlts")
+animation = &"WALK"

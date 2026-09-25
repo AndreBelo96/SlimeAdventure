@@ -3,7 +3,7 @@ extends Node
 
 @export var player: Node2D
 @export var tile_layer: Node2D
-@export var boss: EnemyBase
+@export var boss: BossBase
 @export var movement_map: TileMapLayer
 
 signal global_step(step_count: int)
@@ -60,17 +60,20 @@ func _on_tile_triggered(sender, action: String, data: Dictionary) -> void:
 			GameLogger.info("Switch sender=%s key=%s action=%s" % [sender.name, key, switch_action])
 			switch_spike_handler.handle_switch(key, switch_action, sender)
 		"enemy_hit":
-			switch_spike_handler.notify_boss_hit()
+			if data.get("enemy") == boss:
+				switch_spike_handler.notify_boss_hit()
 		_:
 			GameLogger.info("Sender %s action=%s data=%s" % [sender.name, action, str(data)])
 
 func on_player_step(step_count: int):
 	_enemy_phase_done = false
 	_tiles_phase_done = false
-	
+
 	emit_signal("global_step", step_count)
 	switch_spike_handler.on_step_begin()
 	enemy_turn_handler.process_enemies(step_count, get_tree())
+	if boss:
+		enemy_turn_handler.process_boss(boss, step_count)
 
 func _on_switch_action_done() -> void:
 	_tiles_phase_done = true

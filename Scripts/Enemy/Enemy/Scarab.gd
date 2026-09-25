@@ -18,18 +18,17 @@ var _tile_index: TileSpatialIndex
 func _ready():
 	super._ready()
 	setup_health(1)
-
+	
 	var patrol := PatrolBehavior.new()
 	patrol.directions = pattern
 	turn_behavior = patrol
-
+	
 	_level_logic = get_tree().get_first_node_in_group("level_logic")
 	if _level_logic.movement_map == null:
 		push_error("Scarab: LevelLogic.movement_map non assegnato (collega MovementLogicMapLayer in BaseLevel.tscn)")
 	_visual_map = _level_logic.tile_layer as TileMapLayer
 	_tile_index = TileSpatialIndex.new(_visual_map)
-	tilemap = _visual_map
-
+	
 	var start := start_cell if use_start_cell else _visual_map.local_to_map(_visual_map.to_local($Center.global_position))
 	setup_grid(_visual_map, $Center.position, start)
 	animation.play("IDLE")
@@ -37,9 +36,6 @@ func _ready():
 	await get_tree().process_frame
 	_tile_index.invalidate()
 	_update_warning()
-
-func should_move(_step_count: int) -> bool:
-	return true
 
 func take_turn():
 	if is_dead():

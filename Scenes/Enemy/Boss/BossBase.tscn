@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qfo2dhin8psy"]
 
-[ext_resource type="Script" uid="uid://b74hmnfqtmkqu" path="res://Scripts/Enemy/Boss/BaseBoss.gd" id="1_qh0r3"]
+[ext_resource type="Script" uid="uid://b74hmnfqtmkqu" path="res://Scripts/Enemy/Boss/BossBase.gd" id="1_4m5vt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_evbvj"]
 animations = [{
@@ -15,9 +15,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BaseBoss" type="Node2D" unique_id=319300526]
+[node name="BossBase" type="Node2D" unique_id=319300526]
 y_sort_enabled = true
-script = ExtResource("1_qh0r3")
+script = ExtResource("1_4m5vt")
 
 [node name="Center" type="Marker2D" parent="." unique_id=962466829]
 

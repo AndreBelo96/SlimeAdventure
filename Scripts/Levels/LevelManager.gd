@@ -101,7 +101,7 @@ func setup_hud():
 	hud_manager.setup_base_level()
 	
 	if is_boss_level:
-		var boss = get_tree().get_first_node_in_group("enemy")
+		var boss = get_tree().get_first_node_in_group("boss")
 		if boss:
 			boss.defeated.connect(on_boss_defeated)
 			boss.defeated.connect(hud_manager.hide_boss_hp_bar)

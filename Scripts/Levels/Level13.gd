@@ -116,7 +116,7 @@ func drop_pickaxe_pickup():
 	if not pickaxe_pickup_scene:
 		return
 	
-	var bosses := get_tree().get_nodes_in_group("enemy")
+	var bosses := get_tree().get_nodes_in_group("boss")
 	if bosses.is_empty():
 		return
 	

@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://civodfjdw8kmy"]
+[gd_scene format=3 uid="uid://chpuf8j11hit2"]
 
-[ext_resource type="PackedScene" uid="uid://qfo2dhin8psy" path="res://Scenes/Enemy/Boss/BaseBoss.tscn" id="1_vm62o"]
-[ext_resource type="Script" uid="uid://2vignt3geh84" path="res://Scripts/Enemy/Critters/Scarab.gd" id="2_cr78i"]
+[ext_resource type="PackedScene" uid="uid://dptdp5ovxymib" path="res://Scenes/Enemy/Critter/EnemyBase.tscn" id="1_vm62o"]
+[ext_resource type="Script" uid="uid://2vignt3geh84" path="res://Scripts/Enemy/Enemy/Scarab.gd" id="2_cr78i"]
 [ext_resource type="Texture2D" uid="uid://drenwysjkipy" path="res://Assets/Sprites/Enemies/scarab_sheet.png" id="2_wiqut"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cr78i"]
@@ -16,19 +16,11 @@ region = Rect2(0, 0, 48, 48)
 atlas = ExtResource("2_wiqut")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wiqut"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_e6awj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cr78i")
-}],
-"loop": true,
-"name": &"BREATH",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ay7un")
 }],
 "loop": false,
 "name": &"DEATH",
@@ -36,21 +28,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ol1sf")
+"texture": SubResource("AtlasTexture_ay7un")
 }],
 "loop": true,
 "name": &"IDLE",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol1sf")
+}],
+"loop": true,
+"name": &"WALK",
+"speed": 5.0
 }]
 
-[node name="Scarab" unique_id=319300526 instance=ExtResource("1_vm62o")]
+[node name="Scarab" unique_id=662826890 instance=ExtResource("1_vm62o")]
 script = ExtResource("2_cr78i")
-pattern = Array[Vector2i]([Vector2i(1, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, 0)])
+pattern = Array[Vector2i]([])
 move_duration = 0.15
 use_start_cell = true
 start_cell = Vector2i(0, 0)
+warning_color = Color(1, 0.6, 0, 0.4)
 
-[node name="Animation" parent="." index="1" unique_id=603321364]
-sprite_frames = SubResource("SpriteFrames_wiqut")
-animation = &"DEATH"
-offset = Vector2(0, -3)
+[node name="Animation" parent="." index="1" unique_id=377218498]
+sprite_frames = SubResource("SpriteFrames_e6awj")

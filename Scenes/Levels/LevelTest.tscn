@@ -26,6 +26,7 @@ tile_map_data = PackedByteArray("AAABAAIAAAAAAAAAAQA=")
 [node name="Scarab" parent="YSort" parent_id_path=PackedInt32Array(946289436) index="10" unique_id=662826890 instance=ExtResource("3_w26be")]
 pattern = Array[Vector2i]([Vector2i(1, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, 0)])
 warning_color = Color(0.99119705, 0.481749, 1.92523e-07, 0.4)
+max_health = 1
 can_dash = false
 dash_sight = 2
 dash_step_duration = 0.07
@@ -35,4 +36,5 @@ dash_warning_color = Color(1, 0.1, 0.1, 0.4)
 pattern = Array[Vector2i]([Vector2i(0, 1), Vector2i(0, -1)])
 start_cell = Vector2i(-3, -1)
 warning_color = Color(0.9081728, 0.54298913, 0, 0.4)
+max_health = 2
 dash_warning_color = Color(0.8421877, 0, 0.037850022, 0.4)

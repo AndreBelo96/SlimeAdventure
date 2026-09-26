@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dptdp5ovxymib"]
 
 [ext_resource type="Script" uid="uid://c2h27gpgiw0yb" path="res://Scripts/Enemy/Enemy/EnemyBase.gd" id="1_wxltu"]
+[ext_resource type="PackedScene" uid="uid://delfm455i3tdo" path="res://Scenes/Enemy/EnemyHealthBar.tscn" id="2_hurpm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xjlts"]
 animations = [{
@@ -28,3 +29,5 @@ script = ExtResource("1_wxltu")
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=377218498]
 sprite_frames = SubResource("SpriteFrames_xjlts")
 animation = &"WALK"
+
+[node name="HealthBar" parent="." unique_id=689214539 instance=ExtResource("2_hurpm")]

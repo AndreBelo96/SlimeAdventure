@@ -13,12 +13,16 @@ var _dead := false
 @onready var health := HealthComponent.new()
 @onready var grid_movement := GridMovement.new()
 @onready var animation: AnimatedSprite2D = $Animation
+@onready var health_bar: EnemyHealthBar = $HealthBar
+
 
 func _ready():
 	add_to_group("enemy")
 
 func setup_health(starting_life: int) -> void:
 	health.setup(starting_life)
+	if health_bar:
+		health_bar.bind(health)
 
 func setup_grid(_tilemap: TileMapLayer, center_offset: Vector2, start_pos: Vector2i, movement_map: TileMapLayer = null, visual_map: TileMapLayer = null) -> void:
 	grid_movement.setup(self, _tilemap, center_offset, start_pos, movement_map, visual_map)

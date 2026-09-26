@@ -9,6 +9,7 @@ const WARNING_SCENE := preload("res://Scenes/Decorations/Warning/WarningTile.tsc
 @export var use_start_cell := true
 @export var start_cell := Vector2i.ZERO
 @export var warning_color := Color(1.0, 0.6, 0.0, 0.4)
+@export var max_health := 1
 
 @export_group("Dash")
 @export var can_dash := true
@@ -23,7 +24,7 @@ var _warnings: Array[Node2D] = []
 
 func _ready():
 	super._ready()
-	setup_health(1)
+	setup_health(max_health)
 
 	var patrol := PatrolBehavior.new()
 	patrol.directions = pattern
@@ -199,6 +200,9 @@ func _face_towards(cell: Vector2i) -> void:
 	var screen_dir := _visual_map.map_to_local(cell) - _visual_map.map_to_local(grid_position)
 	if screen_dir.x != 0:
 		animation.flip_h = screen_dir.x < 0   # assume sprite disegnato verso destra
+
+func damage_animation():
+	await VisualEffects.flash(animation)
 
 func die():
 	if is_dead():

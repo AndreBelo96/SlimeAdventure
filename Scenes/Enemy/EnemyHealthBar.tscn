@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://delfm455i3tdo"]
+
+[ext_resource type="Script" uid="uid://cp2fou4yl02yc" path="res://Scripts/Enemy/EnemyHealthBar.gd" id="1_qxipj"]
+
+[node name="EnemyHealthBar" type="Node2D" unique_id=689214539]
+script = ExtResource("1_qxipj")

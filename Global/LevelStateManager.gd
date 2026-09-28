@@ -12,6 +12,7 @@ var total_deaths: Dictionary = {}
 
 var current_save_slot: int = 1
 var has_pickaxe = false
+var has_liana := false
 
 var death_counts := {
 	DeathType.Type.SPIKES: 0,
@@ -33,6 +34,7 @@ func reload_save_data():
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
 	has_pickaxe = SaveManager.has_unlock("pickaxe")
+	has_liana = SaveManager.has_unlock("liana")
 	total_steps = totals.steps
 	total_time = totals.time
 	total_deaths = totals.deaths

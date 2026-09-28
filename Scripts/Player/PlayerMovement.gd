@@ -1,6 +1,9 @@
 class_name PlayerMovement
 extends Resource
 
+const LIANA_RANGE := 2
+const LIANA_ARC_HEIGHT := -16.0
+
 var player
 var tile_map_layer
 var npc_map_layer
@@ -113,6 +116,23 @@ func tween_jump(start_pos: Vector2, end_pos: Vector2, jump_height: float, durati
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	return tween.finished
 
+func swing_to(dir: Vector2i) -> void:
+	if is_moving:
+		return
+	var target := find_liana_target(dir)
+	if target == grid_position:
+		return   # nessun aggancio raggiungibile: nessun effetto
+
+	is_moving = true
+	player.animation_handler.play_move()
+	var start_pos = player.global_position
+	grid_position = target
+	var end_pos = get_tile_center_position(target)
+	await tween_jump(start_pos, end_pos, LIANA_ARC_HEIGHT, move_duration * 1.2)
+	player.animation_handler.play_idle()
+	is_moving = false
+	player.on_movement_finished()   # un solo passo
+
 # -----------------------
 # Support methods
 # -----------------------
@@ -145,3 +165,27 @@ func invalidate_indexes() -> void:
 	_doors_index.invalidate()
 	_npc_index.invalidate()
 	_tile_index.invalidate()
+
+func find_liana_target(dir: Vector2i) -> Vector2i:
+	var from := grid_position
+	for dist in range(1, LIANA_RANGE + 1):
+		var cell := grid_position + dir * dist
+		if not _mask_allows(from, cell) or is_obstacle_at(cell):
+			return grid_position
+		var tile = find_child_at_coords(tile_map_layer, cell)
+		if tile is TileVineAnchor:
+			return cell
+		# cella intermedia: vuoto, spine e nemici si sorvolano, muri/funghi/sassi no
+		if tile and (tile.weight >= 999 or not tile.can_enter()):
+			return grid_position
+		from = cell
+	return grid_position
+
+func _mask_allows(from: Vector2i, to: Vector2i) -> bool:
+	var data = movement_logic_map_layer.get_cell_tile_data(from)
+	if data == null:
+		return true
+	var mask = data.get_custom_data("MovementMask")
+	if mask == null:
+		return true
+	return (mask & GridUtils.DIRECTION_BITS.get(to - from, 0)) == 0

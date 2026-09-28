@@ -5,12 +5,14 @@ extends "res://Scripts/Levels/LevelManager.gd"
 
 @export var simulated_level := 14   # decide location, tileset, sfondo, effetti
 @export var unlock_pickaxe := true
+@export var unlock_liana := true
 @export var test_victory_mode: VictoryMode = VictoryMode.TILES
 
 func _enter_tree() -> void:
 	# _enter_tree del padre gira PRIMA dei _ready delle tile figlie
 	LevelStateManager.current_level = simulated_level
 	LevelStateManager.has_pickaxe = unlock_pickaxe
+	LevelStateManager.has_liana = unlock_liana
 
 func _ready():
 	super._ready()

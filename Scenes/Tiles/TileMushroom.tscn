@@ -26,4 +26,3 @@ include_diagonals = true
 
 [node name="AnimatedTile" parent="." index="2" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_d8e4f")
-offset = Vector2(0, -18)

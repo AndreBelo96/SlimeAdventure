@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dumpfp61vxa0u"]
+
+[ext_resource type="PackedScene" uid="uid://bcyrvic42ifeu" path="res://Scenes/Tiles/TileBase.tscn" id="1_rmmxn"]
+[ext_resource type="Script" uid="uid://b7q4p3nfk60h7" path="res://Scripts/Tiles/TileVineAnchor.gd" id="2_n1wes"]
+
+[node name="TileVineAnchor" unique_id=562900622 instance=ExtResource("1_rmmxn")]
+script = ExtResource("2_n1wes")

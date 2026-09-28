@@ -109,7 +109,11 @@ func _unhandled_input(event):
 	if direction != Vector2i.ZERO:
 		if confusion_steps_left > 0:
 			direction = -direction
-		movement_handler.move_to( movement_handler.grid_position + direction )
+		if Input.is_action_pressed("use_liana"):
+			if LevelStateManager.has_liana:
+				movement_handler.swing_to(direction)
+			return   # con il tasto liana premuto non si fa mai un passo normale
+		movement_handler.move_to(movement_handler.grid_position + direction)
 
 func on_movement_finished():
 	previous_grid_position = grid_position

@@ -6,7 +6,8 @@ const SPIKE_STEP_TILE_POSITION := 7
 const SPIKE_TILE_POSITION := 11
 const WALL_TILE_POSITION := 12
 const SWITCH_TILE_POSITION := 13
-const MUSHROOM_TILE_POSITION := 17
+const MUSHROOM_TILE_POSITION := 27
+const VINE_ANCHOR_TILE_POSITION := 28
 
 const PICKUP_SPRITESHEET := preload("res://Assets/Sprites/Pickups/pickups_set.png")
 

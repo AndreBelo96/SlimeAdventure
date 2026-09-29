@@ -33,21 +33,19 @@ tangential_accel_max = 80.0
 [node name="TileBase" unique_id=1942168026 instance=ExtResource("1_r8d1m")]
 script = ExtResource("2_87ril")
 
-[node name="Tile" parent="." index="1" unique_id=457203740]
+[node name="Tile" parent="Node2D" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
 texture = ExtResource("3_svkvp")
 region_enabled = true
 region_rect = Rect2(1, 1, 64, 48)
 
-[node name="AnimatedTile" parent="." index="2" unique_id=453386304]
+[node name="AnimatedTile" parent="Node2D" parent_id_path=PackedInt32Array(1044728971) index="1" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_afemw")
 animation = &"Activate"
 
-[node name="GlowParticles" type="GPUParticles2D" parent="." index="3" unique_id=1305716908]
+[node name="GlowParticles" type="GPUParticles2D" parent="." index="2" unique_id=1305716908]
 modulate = Color(1, 0.607843, 0.301961, 1)
 emitting = false
 amount = 5
 explosiveness = 0.04
 randomness = 0.26
 process_material = SubResource("ParticleProcessMaterial_sxtpd")
-
-[connection signal="animation_finished" from="AnimatedTile" to="." method="_on_animated_tile_animation_finished"]

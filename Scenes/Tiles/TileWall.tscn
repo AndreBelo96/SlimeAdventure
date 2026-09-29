@@ -104,11 +104,11 @@ animations = [{
 [node name="TileBase" unique_id=552513733 instance=ExtResource("1_uyrju")]
 script = ExtResource("2_5mqy3")
 
-[node name="Tile" parent="." index="1" unique_id=457203740]
+[node name="Tile" parent="Node2D" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
 visible = false
 centered = false
 region_enabled = true
 
-[node name="AnimatedTile" parent="." index="2" unique_id=453386304]
+[node name="AnimatedTile" parent="Node2D" parent_id_path=PackedInt32Array(1044728971) index="1" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_icjfe")
 offset = Vector2(0, -14)

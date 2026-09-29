@@ -87,7 +87,7 @@ func _populate_general_info() -> void:
 	_add_info_line(vbox, tr("PROFILE_TOTAL_TIME") % FormatUtils.format_time_long(slot_data.get("total_time", 0.0)))
 
 	_add_separator(vbox)
-	_add_section_title(vbox, tr("PROFILE_TOTAL_TIME"))
+	_add_section_title(vbox, tr("PROFILE_TOTAL"))
 	_add_info_line(vbox, tr("PROFILE_TOTAL_STEPS") % slot_data.get("total_steps", 0))
 	_add_info_line(vbox, tr("PROFILE_TOTAL_TIME") % FormatUtils.format_time_long(slot_data.get("total_time", 0.0)))
 	_add_info_line(vbox, tr("PROFILE_TOTAL_ATTEMPTS") % slot_data.get("total_attempts", 0))

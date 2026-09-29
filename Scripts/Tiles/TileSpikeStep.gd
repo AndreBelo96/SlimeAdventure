@@ -1,7 +1,5 @@
 extends "res://Scripts/Tiles/TileSpikeBase.gd"
 
-@onready var animation = $AnimatedTile
-
 var step_counter = 0
 const STEPS_TO_TRIGGER = 3
 
@@ -23,10 +21,10 @@ func _raise_spikes():
 	is_active = true
 	SoundManager.play_sfx(AudioPresets.ACTIVATE_SPINE, -20)
 	weight = 8
-	animation.play("UP")
+	animated_tile.play("UP")
 
 func _lower_spikes():
 	is_active = false
 	SoundManager.play_sfx(AudioPresets.DEACTIVATE_SPINE, -20)
 	weight = 1
-	animation.play("DOWN")
+	animated_tile.play("DOWN")

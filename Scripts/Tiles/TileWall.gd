@@ -13,7 +13,7 @@ func can_enter() -> bool:
 
 func on_player_enter():
 	if !is_broken:
-		$AnimatedTile.play("EXPLOSION")
+		animated_tile.play("EXPLOSION")
 		SoundManager.play_sfx(AudioPresets.SMASH_STONE, 0.0, 0.08)
 		weight = 1
 		is_broken = true

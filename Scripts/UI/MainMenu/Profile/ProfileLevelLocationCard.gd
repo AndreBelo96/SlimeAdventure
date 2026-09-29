@@ -84,27 +84,3 @@ func play_intro(delay: float) -> void:
 	t.tween_property(self, "modulate:a", 1.0, 0.15).set_delay(delay)
 	t.tween_property(self, "scale", Vector2.ONE, 0.3).set_delay(delay)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-func _apply_state(animate: bool) -> void:
-	var shown_panel: Control
-	var hidden_panel: Control
-	if showing_record:
-		shown_panel = record_info
-		hidden_panel = total_info
-	else:
-		shown_panel = total_info
-		hidden_panel = record_info
-
-	if not animate:
-		hidden_panel.visible = false
-		shown_panel.visible = true
-		scale.x = 1.0
-		return
-
-	var tween := create_tween()
-	tween.tween_property(self, "scale:x", 0.0, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.tween_callback(func():
-		hidden_panel.visible = false
-		shown_panel.visible = true
-	)
-	tween.tween_property(self, "scale:x", 1.0, 0.28).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)

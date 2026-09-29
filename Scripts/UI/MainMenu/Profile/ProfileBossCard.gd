@@ -79,18 +79,6 @@ func _pop_in(node: Control, delay: float) -> Tween:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	return t
 
-func _breathe(node: Control) -> void:
-	var t := create_tween().set_loops(100000)
-	t.tween_property(node, "scale", Vector2(1.0, 1.04), 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(node, "scale", Vector2.ONE, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-func _flick(node: Control) -> void:
-	var t := create_tween().set_loops(100000)
-	t.tween_interval(2.0)
-	t.tween_property(node, "rotation", -0.15, 0.08)
-	t.tween_property(node, "rotation", 0.15, 0.16)
-	t.tween_property(node, "rotation", 0.0, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	
 func _setup_shine(icon: TextureRect, active: bool) -> void:
 	if not active or not icon.material is ShaderMaterial:
 		icon.material = null

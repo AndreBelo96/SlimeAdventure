@@ -227,8 +227,8 @@ func _exit_tree():
 	PlayerRef.clear(self)
 
 ## Confusion ##
-func apply_confusion(steps: int) -> void:
-	confusion_steps_left = max(confusion_steps_left, steps)
+func apply_confusion(amount: int) -> void:
+	confusion_steps_left = max(confusion_steps_left, amount)
 	_update_confusion_visual()
 
 func _consume_confusion_step() -> void:

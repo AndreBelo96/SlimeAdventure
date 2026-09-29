@@ -3,8 +3,6 @@ extends "res://Scripts/Tiles/TileSpikeBase.gd"
 var key := "A"
 var action := "deactivate"
 
-@onready var animation = $AnimatedTile
-
 func _ready():
 	super._ready()
 	is_active = true
@@ -40,8 +38,8 @@ func activate():
 func _play_locked(anim_name: String) -> void:
 	if PlayerRef.player:
 		PlayerRef.player.lock_input()
-	animation.play(anim_name)
-	await animation.animation_finished
+	animated_tile.play(anim_name)
+	await animated_tile.animation_finished
 	if PlayerRef.player:
 		PlayerRef.player.unlock_input()
 

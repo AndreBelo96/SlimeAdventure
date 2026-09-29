@@ -2,7 +2,9 @@
 extends Node2D
 class_name TileBase
 
-@onready var sprite := $Tile
+@onready var sprite := $Visual/Tile
+@onready var animated_tile: AnimatedSprite2D = $Visual/AnimatedTile
+
 var tile_pos: Vector2i = Vector2i.ZERO
 var weight: int = 1
 

@@ -5,7 +5,6 @@ signal tile_state_changed
 var locked := false
 
 @onready var center_marker: Marker2D = $Center
-@onready var animation_player: AnimatedSprite2D = $AnimatedTile
 @onready var particles := $GlowParticles
 
 func _ready():
@@ -15,7 +14,8 @@ func _ready():
 	sprite.texture = atlas_texture
 	var animation_row = LocationManager.get_tileset_row_for_level()
 	var frames = _create_animations(animation_row)
-	animation_player.frames = frames
+	animated_tile.frames = frames
+	animated_tile.animation_finished.connect(_on_animated_tile_animation_finished)
 
 func _create_animations(row: int) -> SpriteFrames:
 	var frames = SpriteFrames.new()
@@ -40,10 +40,10 @@ func on_player_enter():
 	
 	is_active = !is_active
 	if is_active:
-		animation_player.play("Activate")
+		animated_tile.play("Activate")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/AccendeTile.wav")
 	else:
-		animation_player.play("Deactivate")
+		animated_tile.play("Deactivate")
 		SoundManager.play_sfx("res://Assets/Audio/Sound/SpegneTile.wav")
 	
 	emit_signal("tile_state_changed")
@@ -52,11 +52,11 @@ func is_activated() -> bool:
 	return is_active
 
 func _on_animated_tile_animation_finished() -> void:
-	var current_anim = animation_player.animation
+	var current_anim = animated_tile.animation
 
 	if current_anim == "Activate":
 		particles.emitting = true
-		await VisualEffects.flash(animation_player)
+		await VisualEffects.flash(animated_tile)
 		particles.emitting = false
 	elif current_anim == "Deactivate":
-		await VisualEffects.flash(animation_player, 0.3, Color(2, 0.6, 0.3))
+		await VisualEffects.flash(animated_tile, 0.3, Color(2, 0.6, 0.3))

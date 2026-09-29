@@ -1,6 +1,6 @@
 class_name EnemyHealthBar
 extends Node2D
-## Barra vita a segmenti sopra i nemici semplici. Si nasconde da sola con 1 HP.
+## Barra vita a segmenti sopra i nemici semplici.
 
 @export var segment_size := Vector2(3, 1)
 @export var segment_gap := 1

@@ -1,8 +1,8 @@
 class_name PlayerMovement
 extends Resource
 
-const LIANA_RANGE := 2
-const LIANA_ARC_HEIGHT := -16.0
+const VINE_RANGE := 2
+const VINE_ARC_HEIGHT := -16.0
 
 var player
 var tile_map_layer
@@ -119,7 +119,7 @@ func tween_jump(start_pos: Vector2, end_pos: Vector2, jump_height: float, durati
 func swing_to(dir: Vector2i) -> void:
 	if is_moving:
 		return
-	var target := find_liana_target(dir)
+	var target := find_vine_target(dir)
 	if target == grid_position:
 		return   # nessun aggancio raggiungibile: nessun effetto
 
@@ -128,7 +128,7 @@ func swing_to(dir: Vector2i) -> void:
 	var start_pos = player.global_position
 	grid_position = target
 	var end_pos = get_tile_center_position(target)
-	await tween_jump(start_pos, end_pos, LIANA_ARC_HEIGHT, move_duration * 1.2)
+	await tween_jump(start_pos, end_pos, VINE_ARC_HEIGHT, move_duration * 1.2)
 	player.animation_handler.play_idle()
 	is_moving = false
 	player.on_movement_finished()   # un solo passo
@@ -166,9 +166,9 @@ func invalidate_indexes() -> void:
 	_npc_index.invalidate()
 	_tile_index.invalidate()
 
-func find_liana_target(dir: Vector2i) -> Vector2i:
+func find_vine_target(dir: Vector2i) -> Vector2i:
 	var from := grid_position
-	for dist in range(1, LIANA_RANGE + 1):
+	for dist in range(1, VINE_RANGE + 1):
 		var cell := grid_position + dir * dist
 		if not _mask_allows(from, cell) or is_obstacle_at(cell):
 			return grid_position
@@ -189,3 +189,11 @@ func _mask_allows(from: Vector2i, to: Vector2i) -> bool:
 	if mask == null:
 		return true
 	return (mask & GridUtils.DIRECTION_BITS.get(to - from, 0)) == 0
+
+func get_reachable_anchors() -> Array:
+	var result := []
+	for dir in GridUtils.DIRECTION_BITS:
+		var cell := find_vine_target(dir)
+		if cell != grid_position:
+			result.append(find_child_at_coords(tile_map_layer, cell))
+	return result

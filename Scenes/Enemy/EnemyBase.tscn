@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dptdp5ovxymib"]
 
-[ext_resource type="Script" uid="uid://c2h27gpgiw0yb" path="res://Scripts/Enemy/Enemy/EnemyBase.gd" id="1_wxltu"]
+[ext_resource type="Script" uid="uid://c2h27gpgiw0yb" path="res://Scripts/Enemy/EnemyBase.gd" id="1_wxltu"]
 [ext_resource type="PackedScene" uid="uid://delfm455i3tdo" path="res://Scenes/Enemy/EnemyHealthBar.tscn" id="2_hurpm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xjlts"]

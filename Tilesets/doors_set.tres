@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" format=3 uid="uid://dwiuj3egvhemc"]
 
-[ext_resource type="PackedScene" uid="uid://0x63sxigcn8w" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaE.tscn" id="1_0iiht"]
-[ext_resource type="PackedScene" uid="uid://ckr2xduwmue4o" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaN.tscn" id="2_qmgbn"]
-[ext_resource type="PackedScene" uid="uid://dl1qnr5gef6ch" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaS.tscn" id="3_g73nd"]
-[ext_resource type="PackedScene" uid="uid://cbai1egjg2n1s" path="res://Scenes/Decorations/Interactive/Doors/FineLivello/PortaW.tscn" id="4_5rbfy"]
+[ext_resource type="PackedScene" uid="uid://0x63sxigcn8w" path="res://Scenes/Decorations/Interactive/Doors/DoorE.tscn" id="1_0iiht"]
+[ext_resource type="PackedScene" uid="uid://ckr2xduwmue4o" path="res://Scenes/Decorations/Interactive/Doors/DoorN.tscn" id="2_qmgbn"]
+[ext_resource type="PackedScene" uid="uid://dl1qnr5gef6ch" path="res://Scenes/Decorations/Interactive/Doors/DoorS.tscn" id="3_g73nd"]
+[ext_resource type="PackedScene" uid="uid://cbai1egjg2n1s" path="res://Scenes/Decorations/Interactive/Doors/DoorW.tscn" id="4_5rbfy"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2kcle"]
 scenes/8/scene = ExtResource("1_0iiht")

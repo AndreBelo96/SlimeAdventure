@@ -5,6 +5,7 @@
 
 [node name="PickupArmor" unique_id=1889952731 instance=ExtResource("1_mnteo")]
 script = ExtResource("2_x24xv")
+respawn = true
 
 [node name="Sprite" parent="." index="0" unique_id=969472673]
 region_enabled = true

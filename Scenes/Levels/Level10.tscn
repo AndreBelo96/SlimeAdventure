@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://epn6jxi3iejh" path="res://Scenes/Levels/BaseLevel.tscn" id="1_muqwr"]
 [ext_resource type="Script" uid="uid://dwsu81v66er4" path="res://Scripts/Levels/Level10.gd" id="2_11u3d"]
-[ext_resource type="PackedScene" uid="uid://dxlqe485gkg46" path="res://Scenes/Decorations/Wip.tscn" id="3_346oq"]
+[ext_resource type="PackedScene" uid="uid://dxlqe485gkg46" path="res://Scenes/NPCs/Wip.tscn" id="3_346oq"]
 
 [node name="Level" unique_id=1750106458 instance=ExtResource("1_muqwr")]
 script = ExtResource("2_11u3d")

@@ -7,6 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8iktd"]
 shader = ExtResource("5_0j3qj")
+shader_parameter/tag_size = Vector2(64, 14)
 shader_parameter/period = 3.0
 shader_parameter/width = 0.18
 shader_parameter/strength = 0.6

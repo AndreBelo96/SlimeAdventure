@@ -23,6 +23,7 @@ offsets = PackedFloat32Array(0, 0.3547718, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="ConfusionFog" type="CPUParticles2D" unique_id=1649153173]
+z_index = 10
 texture_filter = 2
 texture_repeat = 1
 texture = SubResource("GradientTexture2D_8autd")

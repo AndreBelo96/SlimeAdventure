@@ -18,9 +18,9 @@ func set_initial_state():
 			set_initial_frame("OFF")
 
 func set_initial_frame(anim_name: String):
-	$AnimatedTile.animation = anim_name
-	$AnimatedTile.stop()
-	$AnimatedTile.frame = 0
+	animated_tile.animation = anim_name
+	animated_tile.stop()
+	animated_tile.frame = 0
 
 func deactivate():
 	is_active = false

@@ -13,7 +13,7 @@ var _dead := false
 @onready var health := HealthComponent.new()
 @onready var grid_movement := GridMovement.new()
 @onready var animation: AnimatedSprite2D = $Animation
-@onready var health_bar: EnemyHealthBar = $HealthBar
+@onready var health_bar: EnemyHealthBar = get_node_or_null("HealthBar")
 
 
 func _ready():

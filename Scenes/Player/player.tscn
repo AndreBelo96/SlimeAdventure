@@ -291,6 +291,11 @@ animations = [{
 [node name="Player" type="Node2D" unique_id=1307353967]
 y_sort_enabled = true
 script = ExtResource("1_63ylr")
+tile_map_layer_path = null
+pickup_map_layer_path = null
+movement_logic_map_layer_path = null
+doors_map_layer_path = null
+npc_map_layer_path = null
 point_light_path = NodePath("PointLight2D")
 
 [node name="Center" type="Marker2D" parent="." unique_id=1163309868]

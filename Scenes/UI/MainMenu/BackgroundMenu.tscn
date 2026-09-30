@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://eo37755agpgs" path="res://Assets/Sprites/UI/MainMenu/bg_far.png" id="1_arbor"]
 [ext_resource type="Texture2D" uid="uid://cl6yoodmsostw" path="res://Assets/Sprites/UI/MainMenu/bg_mid.png" id="2_06v3u"]
-[ext_resource type="PackedScene" uid="uid://bqd131solu8ks" path="res://Scenes/UI/MainMenu/TorchMenù.tscn" id="3_ceffg"]
+[ext_resource type="PackedScene" uid="uid://bqd131solu8ks" path="res://Scenes/UI/MainMenu/TorchMenu.tscn" id="3_ceffg"]
 [ext_resource type="Texture2D" uid="uid://bq7at0hh5oqpi" path="res://Assets/Sprites/UI/MainMenu/fg.png" id="4_06v3u"]
 [ext_resource type="Shader" uid="uid://cyjxxyjsj62ro" path="res://Shader/fog.gdshader" id="4_ho8kw"]
 [ext_resource type="Texture2D" uid="uid://diyapcnyj1dnu" path="res://Assets/Sprites/UI/vignette.png" id="5_o8273"]
@@ -45,16 +45,16 @@ autoscroll = Vector2(-70, 0)
 position = Vector2(481, 180)
 texture = ExtResource("2_06v3u")
 
-[node name="TorchMenù" parent="Mid" unique_id=1000181767 instance=ExtResource("3_ceffg")]
+[node name="TorchMenu" parent="Mid" unique_id=1000181767 instance=ExtResource("3_ceffg")]
 position = Vector2(161, 152)
 
-[node name="TorchMenù2" parent="Mid" unique_id=1638387182 instance=ExtResource("3_ceffg")]
+[node name="TorchMenu2" parent="Mid" unique_id=1638387182 instance=ExtResource("3_ceffg")]
 position = Vector2(801, 152)
 
-[node name="TorchMenù3" parent="Mid" unique_id=1686131552 instance=ExtResource("3_ceffg")]
+[node name="TorchMenu3" parent="Mid" unique_id=1686131552 instance=ExtResource("3_ceffg")]
 position = Vector2(1121, 152)
 
-[node name="TorchMenù4" parent="Mid" unique_id=1676154878 instance=ExtResource("3_ceffg")]
+[node name="TorchMenu4" parent="Mid" unique_id=1676154878 instance=ExtResource("3_ceffg")]
 position = Vector2(1761, 152)
 
 [node name="Fore" type="Parallax2D" parent="." unique_id=549029956]

@@ -10,7 +10,6 @@ signal move_finished
 signal armor_changed(has_armor: bool)
 
 @export var tile_map_layer_path: NodePath
-@export var terrain_map_layer_path: NodePath
 @export var pickup_map_layer_path: NodePath
 @export var movement_logic_map_layer_path: NodePath
 @export var doors_map_layer_path: NodePath
@@ -25,6 +24,9 @@ var grid_position: Vector2i
 var _input_lock_count : int = 0
 var _terminal_state := false
 var previous_grid_position: Vector2i
+
+## -- vine -- ##
+var _highlighted_anchors: Array = []
 
 ## -- Armor -- ##
 var has_armor := false
@@ -88,6 +90,7 @@ func turn_on_lights(duration: float = 0.0) -> void:
 		hud.setup_progressbar(duration, duration)
 
 func _process(_delta):
+	_update_vine_preview()
 	if light_timer.is_stopped():
 		return
 	var hud = get_tree().get_first_node_in_group("hud")
@@ -109,10 +112,10 @@ func _unhandled_input(event):
 	if direction != Vector2i.ZERO:
 		if confusion_steps_left > 0:
 			direction = -direction
-		if Input.is_action_pressed("use_liana"):
-			if LevelStateManager.has_liana:
+		if Input.is_action_pressed("use_vine"):
+			if LevelStateManager.has_vine:
 				movement_handler.swing_to(direction)
-			return   # con il tasto liana premuto non si fa mai un passo normale
+			return
 		movement_handler.move_to(movement_handler.grid_position + direction)
 
 func on_movement_finished():
@@ -204,9 +207,6 @@ func _check_enemy_contact():
 			on_player_died(DeathType.Type.ENEMY)
 			return
 
-func _on_player_touch_boss():
-	on_player_died(DeathType.Type.ENEMY)
-
 func on_finish_level():
 	var tween = self.create_tween()
 	tween.tween_property(shader_material, "shader_parameter/white_value", 0.0, 1)
@@ -225,6 +225,19 @@ func reset_end_level_variables():
 
 func _exit_tree():
 	PlayerRef.clear(self)
+
+## Vine ##
+func _update_vine_preview() -> void:
+	var active := LevelStateManager.has_vine and Input.is_action_pressed("use_vine") and not should_ignore_input()
+	var anchors: Array = movement_handler.get_reachable_anchors() if active else []
+	if anchors == _highlighted_anchors:
+		return
+	for a in _highlighted_anchors:
+		if is_instance_valid(a):
+			a.set_reachable(false)
+	for a in anchors:
+		a.set_reachable(true)
+	_highlighted_anchors = anchors
 
 ## Confusion ##
 func apply_confusion(amount: int) -> void:

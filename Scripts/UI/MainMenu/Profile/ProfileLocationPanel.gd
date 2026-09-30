@@ -89,6 +89,7 @@ func _create_card(level: int, data: Dictionary, parent: Node) -> ProfileLevelLoc
 func _toggle_info() -> void:
 	showing_record = !showing_record
 	for i in level_cards.size():
+		@warning_ignore("integer_division") #TODO non un fan
 		var delay := ((i % recap_container.columns) + i / recap_container.columns) * 0.04
 		if showing_record:
 			level_cards[i].show_record(true, delay)

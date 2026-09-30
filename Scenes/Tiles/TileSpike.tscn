@@ -22,8 +22,8 @@ animations = [{
 [node name="TileBase" unique_id=167031670 instance=ExtResource("1_3noqd")]
 script = ExtResource("2_wcs8j")
 
-[node name="Tile" parent="." index="1" unique_id=457203740]
+[node name="Tile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
 region_enabled = true
 
-[node name="AnimatedTile" parent="." index="2" unique_id=453386304]
+[node name="AnimatedTile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="1" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_ingk0")

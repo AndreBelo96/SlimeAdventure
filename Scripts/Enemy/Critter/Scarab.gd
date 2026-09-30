@@ -2,25 +2,26 @@
 extends EnemyBase
 class_name Scarab
 
-const WARNING_SCENE := preload("res://Scenes/Decorations/Warning/WarningTile.tscn")
-
 @export var pattern: Array[Vector2i] = []
 @export var move_duration := 0.15
 @export var use_start_cell := true
 @export var start_cell := Vector2i.ZERO
-@export var warning_color := Color(1.0, 0.6, 0.0, 0.4)
+@export var warning_color := Color(0.801, 0.0, 0.039, 0.627)
 @export var max_health := 1
 
 @export_group("Dash")
-@export var can_dash := true
-@export var dash_sight := 2
+@export var can_dash := false
+@export var dash_sight := 3
 @export var dash_step_duration := 0.07
-@export var dash_warning_color := Color(1.0, 0.1, 0.1, 0.4)
+@export var dash_warning_color := Color(0.801, 0.0, 0.039, 0.627)
+@export var sight_warning_color := Color(0.734, 0.813, 0.007, 0.3)
 
+var _charging := false
+var _charge_cells: Array[Vector2i] = []
 var _level_logic
 var _visual_map: TileMapLayer
 var _tile_index: TileSpatialIndex
-var _warnings: Array[Node2D] = []
+var _warnings: WarningPainter
 
 func _ready():
 	super._ready()
@@ -35,6 +36,7 @@ func _ready():
 		push_error("Scarab: LevelLogic.movement_map non assegnato (collega MovementLogicMapLayer in BaseLevel.tscn)")
 	_visual_map = _level_logic.tile_layer as TileMapLayer
 	_tile_index = TileSpatialIndex.new(_visual_map)
+	_warnings = WarningPainter.new(self, _tile_index)
 
 	var start := start_cell if use_start_cell else _visual_map.local_to_map(_visual_map.to_local($Center.global_position))
 	setup_grid(_visual_map, $Center.position, start)
@@ -48,13 +50,59 @@ func _ready():
 func take_turn():
 	if is_dead():
 		return
-	var distance := _player_distance_in_sight()
-	if distance > 0:
-		await _dash(distance)
+	if _charging:
+		await _dash()
+	elif _player_in_sight():
+		_start_charge()
 	else:
 		await _move_step()
 	if not is_dead():
 		_update_warnings()
+
+func _player_in_sight() -> bool:
+	var player = PlayerRef.player
+	return player != null and _sight_cells().has(player.grid_position)
+
+# ---------- Carica ----------
+func _start_charge() -> void:
+	_hit_player_on_my_cell()
+	_charging = true
+	_charge_cells = _sight_cells()
+	_face_towards(_charge_cells[0])
+	VisualEffects.flash(animation, 0.25, Color(2.0, 0.6, 0.6))   # PLACEHOLDER
+
+func _dash() -> void:
+	_charging = false
+	_warnings.clear()
+	_hit_player_on_my_cell()
+	var player = PlayerRef.player
+	if player:
+		player.lock_input()
+
+	animation.play("WALK")
+	for cell in _charge_cells:
+		if not _can_step(grid_position, cell):
+			break
+		grid_position = cell
+		grid_movement.grid_position = cell
+		await grid_movement.move_to(cell, dash_step_duration)
+		if player and cell == player.grid_position:
+			player.on_player_died(DeathType.Type.ENEMY)   # l'armatura può assorbire, lui prosegue
+		_level_logic.enemy_turn_handler.apply_tile_effect(self)
+		if is_dead():
+			break
+	_charge_cells.clear()
+
+	if not is_dead():
+		animation.play("IDLE")
+	if player:
+		player.unlock_input()
+
+## Se il player è entrato nella sua cella mentre era fermo a caricare.
+func _hit_player_on_my_cell() -> void:
+	var player = PlayerRef.player
+	if player and player.grid_position == grid_position:
+		player.on_player_died(DeathType.Type.ENEMY)
 
 ## Direzione del prossimo passo del pattern; ZERO se è una pausa.
 func _get_facing() -> Vector2i:
@@ -74,42 +122,6 @@ func _sight_cells() -> Array[Vector2i]:
 		cells.append(cell)
 		prev = cell
 	return cells
-
-## 1..dash_sight se il player è nella linea di vista, 0 altrimenti.
-func _player_distance_in_sight() -> int:
-	var player = PlayerRef.player
-	if player == null:
-		return 0
-	return _sight_cells().find(player.grid_position) + 1
-
-# ---------- Scatto ----------
-func _dash(distance: int) -> void:
-	var dir := _get_facing()
-	var player = PlayerRef.player
-	_clear_warnings()
-	_face_towards(grid_position + dir)
-	if player:
-		player.lock_input()
-
-	animation.play("WALK")
-	# fino alla cella subito oltre il player, fermandosi prima se bloccato
-	for i in distance + 1:
-		var next := grid_position + dir
-		if not _can_step(grid_position, next):
-			break
-		grid_position = next
-		grid_movement.grid_position = next
-		await grid_movement.move_to(next, dash_step_duration)
-		if player and next == player.grid_position:
-			player.on_player_died(DeathType.Type.ENEMY)   # l'armatura può assorbire, lui prosegue
-		_level_logic.enemy_turn_handler.apply_tile_effect(self)
-		if is_dead():
-			break
-
-	if not is_dead():
-		animation.play("IDLE")
-	if player:
-		player.unlock_input()
 
 # ---------- Passo normale ----------
 func _move_step() -> void:
@@ -152,27 +164,19 @@ func _move_step() -> void:
 
 # ---------- Warning ----------
 func _update_warnings() -> void:
-	_clear_warnings()
-	if can_dash:
-		for cell in _sight_cells():
-			_add_warning(cell, dash_warning_color)
-		return
-	var next := (turn_behavior as PatrolBehavior).peek_next_tile(self)
-	if next != grid_position and _can_step(grid_position, next):
-		_add_warning(next, warning_color)
-
-func _add_warning(cell: Vector2i, color: Color) -> void:
-	var w: Node2D = WARNING_SCENE.instantiate()
-	get_parent().add_child(w)          # nello YSort, MAI nel TileMapLayer
-	w.get_node("Sprite2D").modulate = color
-	w.global_position = _visual_map.to_global(_visual_map.map_to_local(cell))
-	_warnings.append(w)
-
-func _clear_warnings() -> void:
-	for w in _warnings:
-		if is_instance_valid(w):
-			w.queue_free()
 	_warnings.clear()
+	if _charging:
+		for cell in _charge_cells:
+			_warnings.paint(cell, dash_warning_color, TileWarning.Priority.CHARGE)
+		return
+
+	var next := (turn_behavior as PatrolBehavior).peek_next_tile(self)
+	var walks := next != grid_position and _can_step(grid_position, next)
+	if walks:
+		_warnings.paint(next, warning_color, TileWarning.Priority.STEP)
+	for cell in _sight_cells():
+		if not (walks and cell == next):
+			_warnings.paint(cell, sight_warning_color, TileWarning.Priority.SIGHT)
 
 # ---------- Movimento ----------
 func _can_step(from: Vector2i, to: Vector2i) -> bool:
@@ -207,7 +211,7 @@ func damage_animation():
 func die():
 	if is_dead():
 		return
-	_clear_warnings()
+	_warnings.clear()
 	super.die()
 	await animation.animation_finished
 	var tween := create_tween()

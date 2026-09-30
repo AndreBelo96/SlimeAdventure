@@ -1,6 +1,5 @@
 extends "res://Scripts/Tiles/TileSpikeBase.gd"
 
-var step_counter = 0
 const STEPS_TO_TRIGGER = 3
 
 func _ready():

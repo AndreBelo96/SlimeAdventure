@@ -4,13 +4,12 @@ extends BossBase
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 
 @export var ceiling_debris_scene: PackedScene
-@export var warning_tile_scene: PackedScene
 @export var attack_impact_frame := 3
 @export var movement_map: TileMapLayer
 @export var visual_map: TileMapLayer
-@export var effects_layer: Node2D
 @export var starting_health := 3
 @export var starting_grid_position := Vector2i(-1, -8)
+@export var attack_warning_color := Color(1.0, 0.1, 0.1, 0.4)
 
 var steps_to_trigger = 3
 var _warning_pending := false
@@ -30,7 +29,7 @@ func _ready():
 	setup_health(starting_health)
 	setup_grid(tilemap, $Center.position, starting_grid_position, movement_map, visual_map)
 	
-	boss_attack.setup(self, warning_tile_scene, ceiling_debris_scene, camera, effects_layer)
+	boss_attack.setup(self, ceiling_debris_scene, camera, TileSpatialIndex.new(visual_map), attack_warning_color)
 	boss_breath.setup(animation)
 
 	if level_logic:
@@ -81,7 +80,7 @@ func _start_move():
 		grid_position = grid_movement.grid_position
 
 	if _warning_pending:
-		boss_attack.show_attack_warning(grid_movement.grid_position, tilemap)
+		boss_attack.show_attack_warning(grid_movement.grid_position)
 		_warning_pending = false
 
 	action_in_progress = false
@@ -148,13 +147,10 @@ func _on_global_step(step_count: int) -> void:
 		return
 
 	if (step_count + 1) % steps_to_trigger == 0 and steps_to_trigger > 1:
-		boss_attack.show_attack_warning(grid_movement.grid_position, tilemap)
+		boss_attack.show_attack_warning(grid_movement.grid_position)
 
 	if steps_to_trigger == 1:
 		_warning_pending = true
-
-func _get_attack_tiles() -> Array[Vector2i]:
-	return boss_attack.get_attack_tiles(grid_movement.grid_position)
 
 func _on_animation_frame_changed() -> void:
 	if sprite.animation != "ATTACK":

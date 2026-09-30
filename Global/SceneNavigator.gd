@@ -50,9 +50,3 @@ func return_to_location_menu():
 	SaveManager.load_progress()
 	LevelStateManager.reload_save_data()
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu/MenuRoot.tscn")
-
-func reset_game():
-	LevelStateManager.current_level = 1
-	LevelStateManager.total_time = 0.0
-	LevelStateManager.total_steps = 0
-	get_tree().change_scene_to_file("res://Scenes/Level1.tscn")

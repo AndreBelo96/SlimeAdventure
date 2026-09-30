@@ -14,7 +14,7 @@ func _ready():
 	sprite.texture = atlas_texture
 	var animation_row = LocationManager.get_tileset_row_for_level()
 	var frames = _create_animations(animation_row)
-	animated_tile.frames = frames
+	animated_tile.sprite_frames = frames
 	animated_tile.animation_finished.connect(_on_animated_tile_animation_finished)
 
 func _create_animations(row: int) -> SpriteFrames:

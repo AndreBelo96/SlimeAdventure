@@ -6,7 +6,7 @@ uniform float smoothness : hint_range(0.0, 0.1) = 0.02;
 uniform vec3 color : source_color = vec3(1.0);
 
 void fragment() {
-	vec4 pixelColor = texture(TEXTURE, UV);
+	vec4 pixelColor = COLOR;
 
 	pixelColor.rgb *= color;
 

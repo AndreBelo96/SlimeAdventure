@@ -107,9 +107,6 @@ func _on_level_button_pressed(btn: Button) -> void:
 		return
 	handle_selection(index)
 
-func is_level_disabled() -> bool:
-	return current_selection + 1 > LevelStateManager.max_level_reach
-
 func handle_navigation(_event: InputEvent) -> void:
 	var max_index = buttons.size() - 1
 
@@ -134,10 +131,9 @@ func handle_selection(index: int) -> void:
 		back_pressed.emit()
 		return
 
-	if is_level_disabled():
-		return
-
 	var info = loader.get_level_data_for_location(LocationManager.location_selected)[index]
+	if info.disabled:
+		return
 	_on_level_confirmed(info.path, info.sound)
 
 func _on_level_confirmed(path: String, _sound: String) -> void:

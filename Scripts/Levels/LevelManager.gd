@@ -11,8 +11,8 @@ extends Node2D
 @onready var background_manager: BackgroundManager = $BackgroundManager
 @onready var ambient_controller = $AmbientAudioController
 
-const DUNGEON_EFFECT = preload("res://Scenes/UI/Effetti/DungeonParticles.tscn")
-const FOG_EFFECT = preload("res://Scenes/UI/Effetti/FogEffect.tscn")
+const DUNGEON_EFFECT = preload("res://Scenes/Effects/DungeonParticles.tscn")
+const FOG_EFFECT = preload("res://Scenes/Effects/FogEffect.tscn")
 
 enum VictoryMode {
 	TILES,

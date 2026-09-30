@@ -27,7 +27,7 @@ func save_progress(level: int, steps: int, time: float) -> bool:
 	_write_file()
 	return is_record
 
-func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, _has_pickaxe: bool) -> bool:
+func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victory: bool, unlocks: Dictionary) -> bool:
 	var level_key = str(level)
 
 	if not save_data["levels"].has(level_key):
@@ -49,8 +49,9 @@ func update_stats(level: int, steps: int, time: float, deaths: Dictionary, victo
 	var is_record := false
 	if victory:
 		is_record = save_progress(level, steps, time)
-		if _has_pickaxe:
-			save_data["player"]["unlocks"]["pickaxe"] = true
+		for id in unlocks:
+			if unlocks[id]:
+				save_data["player"]["unlocks"][id] = true
 
 		level_data["victories"] = level_data.get("victories", 0) + 1
 		if not level_data.has("first_completed_at"):

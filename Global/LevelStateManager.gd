@@ -12,7 +12,7 @@ var total_deaths: Dictionary = {}
 
 var current_save_slot: int = 1
 var has_pickaxe = false
-var has_liana := false
+var has_vine := false
 
 var death_counts := {
 	DeathType.Type.SPIKES: 0,
@@ -34,7 +34,7 @@ func reload_save_data():
 	max_level_reach = SaveManager.get_max_level_reach()
 	var totals = SaveManager.get_totals()
 	has_pickaxe = SaveManager.has_unlock("pickaxe")
-	has_liana = SaveManager.has_unlock("liana")
+	has_vine = SaveManager.has_unlock("vine")
 	total_steps = totals.steps
 	total_time = totals.time
 	total_deaths = totals.deaths
@@ -52,7 +52,7 @@ func end_level(victory: bool):
 	last_attempt["deaths"] = death_counts.duplicate(true)
 	last_attempt["victory"] = victory
 
-	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory, has_pickaxe)
+	isRecord = SaveManager.update_stats(current_level, current_steps, current_time, death_counts, victory, get_unlocks())
 	last_attempt["is_record"] = isRecord
 
 	death_counts = {
@@ -68,3 +68,6 @@ func end_level(victory: bool):
 
 func get_death_count(death_type: int) -> int:
 	return death_counts.get(death_type, 0)
+
+func get_unlocks() -> Dictionary:
+	return {"pickaxe": has_pickaxe, "vine": has_vine}

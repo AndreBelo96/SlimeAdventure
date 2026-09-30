@@ -3,19 +3,18 @@ class_name BossAttack
 extends Resource
 
 var boss: Node2D
-var warning_tile_scene: PackedScene
 var ceiling_debris_scene: PackedScene
 var camera: Camera2D
-var effects_layer: Node2D
+var warning_color: Color
 
-var active_warnings: Array[Node2D] = []
+var _warnings: WarningPainter
 
-func setup(_boss: Node2D, _warning_tile_scene: PackedScene, _ceiling_debris_scene: PackedScene, _camera: Camera2D, _effects_layer: Node2D) -> void:
+func setup(_boss: Node2D, _ceiling_debris_scene: PackedScene, _camera: Camera2D, tile_index: TileSpatialIndex, _warning_color: Color) -> void:
 	boss = _boss
-	warning_tile_scene = _warning_tile_scene
 	ceiling_debris_scene = _ceiling_debris_scene
 	camera = _camera
-	effects_layer = _effects_layer
+	warning_color = _warning_color
+	_warnings = WarningPainter.new(_boss, tile_index)
 
 func get_attack_tiles(origin: Vector2i) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
@@ -26,27 +25,16 @@ func get_attack_tiles(origin: Vector2i) -> Array[Vector2i]:
 			result.append(origin + Vector2i(dx, dy))
 	return result
 
-func show_attack_warning(origin: Vector2i, tilemap: TileMapLayer) -> void:
-	if warning_tile_scene == null:
-		push_error("BossAttack: warning_tile_scene non impostato")
-		return
-
+func show_attack_warning(origin: Vector2i) -> void:
 	for cell in get_attack_tiles(origin):
-		var warning_tile := warning_tile_scene.instantiate()
-		warning_tile.global_position = tilemap.map_to_local(cell)
-		effects_layer.add_child(warning_tile)
-		active_warnings.append(warning_tile)
+		_warnings.paint(cell, warning_color, TileWarning.Priority.CHARGE)
 
 func clear_attack_warning() -> void:
-	for warning in active_warnings:
-		if is_instance_valid(warning):
-			warning.queue_free()
-	active_warnings.clear()
+	_warnings.clear()
 
 func spawn_ceiling_debris() -> void:
 	if ceiling_debris_scene == null or camera == null:
 		return
-
 	var debris = ceiling_debris_scene.instantiate()
 	camera.add_child(debris)
 	debris.position = Vector2(0, -90) # TODO fixme

@@ -4,9 +4,10 @@ class_name TileBase
 
 @onready var sprite := $Visual/Tile
 @onready var animated_tile: AnimatedSprite2D = $Visual/AnimatedTile
+@onready var visual: Node2D = $Visual
 
-var tile_pos: Vector2i = Vector2i.ZERO
 var weight: int = 1
+var _warning: TileWarning
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @warning_ignore("UNUSED_SIGNAL")
@@ -36,3 +37,15 @@ func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_hei
 		Vector2(tile_x * block_w + offset, tile_y * block_h + offset),
 		Vector2(tile_width, tile_height)
 	)
+
+func set_warning(source: Object, warning_color: Color, priority := 0) -> void:
+	if _warning == null:
+		_warning = TileWarning.new()
+		add_child(_warning)   # ultimo figlio: disegnato sopra Visual
+		_warning.position = $Center.position
+		_warning.setup(Vector2((get_parent() as TileMapLayer).tile_set.tile_size))
+	_warning.set_source(source, warning_color, priority)
+
+func clear_warning(source: Object) -> void:
+	if _warning:
+		_warning.clear_source(source)

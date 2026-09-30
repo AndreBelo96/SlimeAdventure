@@ -1,4 +1,4 @@
-# PickupSunglasses.gd
+# PickupLantern.gd
 extends PickupBase
 
 func on_ready_custom() -> void:

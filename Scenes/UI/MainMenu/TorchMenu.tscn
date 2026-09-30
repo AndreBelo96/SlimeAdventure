@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqd131solu8ks"]
 
-[ext_resource type="Script" uid="uid://clwatmendh7dh" path="res://Scripts/UI/MainMenu/TorchMenù.gd" id="1_jpf3g"]
+[ext_resource type="Script" uid="uid://clwatmendh7dh" path="res://Scripts/UI/MainMenu/TorchMenu.gd" id="1_jpf3g"]
 [ext_resource type="Texture2D" uid="uid://dpx0be1kgmcwq" path="res://Assets/Sprites/UI/MainMenu/Toarch.png" id="2_krr8w"]
 [ext_resource type="Texture2D" uid="uid://d2y15d41gdqn6" path="res://Assets/Sprites/UI/LightMask.png" id="3_mxa2m"]
 
@@ -24,7 +24,7 @@ colors = PackedColorArray(0.81422967, 0.99999934, 0.46956545, 1, 1, 1, 0.2274509
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_du3qh"]
 polygon = PackedVector2Array(-4, -4, 4, -4, 22, 1, 167, 39, -157, 39, -21, 1)
 
-[node name="TorchMenù" type="Node2D" unique_id=2094797982]
+[node name="TorchMenu" type="Node2D" unique_id=2094797982]
 script = ExtResource("1_jpf3g")
 
 [node name="Smoke" type="CPUParticles2D" parent="." unique_id=923707301]

@@ -90,10 +90,6 @@ animations = [{
 [node name="Tile" unique_id=639769677 instance=ExtResource("1_oxoqu")]
 script = ExtResource("2_eqr8q")
 
-[node name="Tile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
-region_enabled = true
-region_rect = Rect2(793, 51, 64, 48)
-
-[node name="AnimatedTile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="1" unique_id=453386304]
+[node name="AnimatedTile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_pf1ww")
 animation = &"OFF"

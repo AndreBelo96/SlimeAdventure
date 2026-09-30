@@ -2,45 +2,27 @@ extends RefCounted
 class_name Pathfinder
 
 var movement_map: TileMapLayer
-var visual_map: TileMapLayer
-var DIRECTION_BITS: Dictionary
-var _tile_index: TileSpatialIndex
+var _tile_index: GridSpatialIndex
 
-func _init(_movement_map: TileMapLayer, _visual_map: TileMapLayer, _direction_bits: Dictionary):
+func _init(_movement_map: TileMapLayer, visual_map: TileMapLayer) -> void:
 	movement_map = _movement_map
-	visual_map = _visual_map
-	DIRECTION_BITS = _direction_bits
-	_tile_index = TileSpatialIndex.new(visual_map)
+	_tile_index = GridSpatialIndex.new(visual_map)
 
-# --------------------------------------------------
-# Punto di ingresso → restituisce LA PROSSIMA TILE
-# --------------------------------------------------
 func get_next_step(start: Vector2i, goal: Vector2i) -> Vector2i:
 	if start == goal:
 		return start
-
 	var path := a_star(start, goal)
+	return path[1] if path.size() >= 2 else start
 
-	if path.size() >= 2:
-		return path[1]	# path[0] = start, path[1] = next step
-	else:
-		return start	# Nessun percorso → resta fermo
-
-
-# --------------------------------------------------
-# Implementazione A*
-# --------------------------------------------------
 func a_star(start: Vector2i, goal: Vector2i) -> Array:
 	var open := {}
 	var closed := {}
 	var came_from := {}
-
 	open[start] = {"g": 0, "f": heuristic(start, goal)}
 
 	while open.size() > 0:
 		var current: Vector2i = get_lowest_f(open)
 		var current_data = open[current]
-
 		if current == goal:
 			return reconstruct_path(came_from, current)
 
@@ -48,70 +30,26 @@ func a_star(start: Vector2i, goal: Vector2i) -> Array:
 		open.erase(current)
 
 		for dir in GridUtils.DIRECTION_BITS:
-			var neighbor = current + dir
-
-			if closed.has(neighbor):
+			var neighbor: Vector2i = current + dir
+			if closed.has(neighbor) or not can_move(current, neighbor):
 				continue
-
-			if not can_move(current, neighbor):
-				continue
-
-			var tile_cost = get_tile_cost(neighbor)
-			var tentative_g = current_data["g"] + tile_cost
-
+			var tentative_g = current_data["g"] + get_tile_cost(neighbor)
 			if not open.has(neighbor) or tentative_g < open[neighbor]["g"]:
 				came_from[neighbor] = current
-				open[neighbor] = {
-					"g": tentative_g,
-					"f": tentative_g + heuristic(neighbor, goal)
-				}
-	
+				open[neighbor] = {"g": tentative_g, "f": tentative_g + heuristic(neighbor, goal)}
+
 	push_warning("A*: nessun percorso da ", start, " a ", goal)
-	return []  # Nessun percorso trovato
+	return []
 
-# --------------------------------------------------
-# Movement mask check (identico al player)
-# --------------------------------------------------
 func can_move(from: Vector2i, to: Vector2i) -> bool:
-	
-	if movement_map == null:
-		push_error("movement_map is null in Pathfinder, check initialization!")
+	if not GridUtils.mask_allows(movement_map, from, to):
 		return false
-	
-	var tile_data := movement_map.get_cell_tile_data(from)
-	if tile_data == null:
-		return false
+	var tile := _tile_index.get_tile_at(to)
+	return tile != null and not tile.is_blocking()
 
-	var mask = tile_data.get_custom_data("MovementMask")
-	if mask == null:
-		return true	# nessuna restrizione → libero
-
-	var dir := to - from
-	var bit = DIRECTION_BITS.get(dir, 0)
-
-	# Se il bit è presente → quella direzione è BLOCCATA
-	return (mask & bit) == 0
-
-
-# --------------------------------------------------
-# Funzioni di supporto per A*
-# --------------------------------------------------
 func get_tile_cost(pos: Vector2i) -> int:
-	if visual_map == null:
-		return 999
-
-	var tile_instance = get_tile_instance_at(pos)
-
-	if tile_instance == null:
-		return 999
-
-	if "weight" in tile_instance:
-		return tile_instance.weight
-	else:
-		return 1
-
-func get_tile_instance_at(pos: Vector2i) -> TileBase:
-	return _tile_index.get_tile_at(pos)
+	var tile := _tile_index.get_tile_at(pos)
+	return tile.weight if tile else TileBase.BLOCKED_WEIGHT
 
 func invalidate_tile_cache() -> void:
 	_tile_index.invalidate()
@@ -122,12 +60,10 @@ func heuristic(a: Vector2i, b: Vector2i) -> int:
 func get_lowest_f(open: Dictionary) -> Vector2i:
 	var best = open.keys()[0]
 	var best_f = open[best]["f"]
-
 	for k in open.keys():
 		if open[k]["f"] < best_f:
 			best_f = open[k]["f"]
 			best = k
-
 	return best
 
 func reconstruct_path(came_from: Dictionary, current: Vector2i) -> Array:

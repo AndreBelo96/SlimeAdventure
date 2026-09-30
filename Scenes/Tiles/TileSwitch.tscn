@@ -82,11 +82,7 @@ animations = [{
 [node name="Tile" unique_id=1788976882 instance=ExtResource("1_tp50i")]
 script = ExtResource("2_465eo")
 
-[node name="Tile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
-region_enabled = true
-region_rect = Rect2(1255, 51, 64, 48)
-
-[node name="AnimatedTile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="1" unique_id=453386304]
+[node name="AnimatedTile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=453386304]
 material = SubResource("ShaderMaterial_pjyja")
 sprite_frames = SubResource("SpriteFrames_cbrgv")
 animation = &"PRESSED"

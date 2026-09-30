@@ -6,7 +6,6 @@ signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @export var ceiling_debris_scene: PackedScene
 @export var attack_impact_frame := 3
 @export var movement_map: TileMapLayer
-@export var visual_map: TileMapLayer
 @export var starting_health := 3
 @export var starting_grid_position := Vector2i(-1, -8)
 @export var attack_warning_color := Color(1.0, 0.1, 0.1, 0.4)
@@ -27,9 +26,8 @@ func _ready():
 
 	turn_behavior = ChaseBehavior.new()
 	setup_health(starting_health)
-	setup_grid(tilemap, $Center.position, starting_grid_position, movement_map, visual_map)
-	
-	boss_attack.setup(self, ceiling_debris_scene, camera, TileSpatialIndex.new(visual_map), attack_warning_color)
+	setup_grid(tilemap, $Center.position, starting_grid_position, movement_map, tilemap)
+	boss_attack.setup(self, ceiling_debris_scene, camera, GridSpatialIndex.new(tilemap), attack_warning_color)
 	boss_breath.setup(animation)
 
 	if level_logic:

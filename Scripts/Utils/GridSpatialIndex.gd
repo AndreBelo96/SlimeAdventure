@@ -32,3 +32,6 @@ func _build() -> void:
 		var grid_pos = _layer.local_to_map(local_pos)
 		_cache[grid_pos] = child
 	_built = true
+
+func get_tile_at(grid_pos: Vector2i) -> TileBase:
+	return get_at(grid_pos) as TileBase

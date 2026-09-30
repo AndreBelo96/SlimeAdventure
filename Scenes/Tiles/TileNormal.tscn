@@ -5,7 +5,3 @@
 
 [node name="TileBase" unique_id=1561096517 instance=ExtResource("1_n1yxv")]
 script = ExtResource("2_wulv7")
-
-[node name="Tile" parent="Visual" parent_id_path=PackedInt32Array(1044728971) index="0" unique_id=457203740]
-region_enabled = true
-region_rect = Rect2(463, 51, 64, 48)

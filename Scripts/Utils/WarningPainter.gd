@@ -4,10 +4,10 @@ extends RefCounted
 ## e le pulisce tutte insieme.
 
 var _source: Object
-var _tile_index: TileSpatialIndex
+var _tile_index: GridSpatialIndex
 var _tiles: Array[TileBase] = []
 
-func _init(source: Object, tile_index: TileSpatialIndex) -> void:
+func _init(source: Object, tile_index: GridSpatialIndex) -> void:
 	_source = source
 	_tile_index = tile_index
 

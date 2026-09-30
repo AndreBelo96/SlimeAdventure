@@ -14,7 +14,7 @@ func setup(_enemy: Node2D, _tilemap: TileMapLayer, _center_offset: Vector2, star
 	center_offset = _center_offset
 
 	if movement_map and visual_map:
-		pathfinder = Pathfinder.new(movement_map, visual_map, GridUtils.DIRECTION_BITS)
+		pathfinder = Pathfinder.new(movement_map, visual_map)
 
 	snap_to(start_pos)
 

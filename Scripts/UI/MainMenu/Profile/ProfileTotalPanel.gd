@@ -84,7 +84,6 @@ func _populate_general_info() -> void:
 
 	_add_section_title(vbox, tr("PROFILE_SECTION_PROGRESS"))
 	_add_info_line(vbox, tr("PROFILE_LEVELS_COMPLETED") % [completed, total_levels, completion_pct])
-	_add_info_line(vbox, tr("PROFILE_TOTAL_TIME") % FormatUtils.format_time_long(slot_data.get("total_time", 0.0)))
 
 	_add_separator(vbox)
 	_add_section_title(vbox, tr("PROFILE_TOTAL"))

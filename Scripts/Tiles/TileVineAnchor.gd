@@ -6,9 +6,10 @@ var _pulse: Tween
 
 func _ready():
 	super._ready()
-	set_region_from_coords(LocationManager.VINE_ANCHOR_TILE_POSITION, LocationManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
-	sprite.modulate = Color(0.45, 1.0, 0.45)
+	animated_tile.modulate = Color(0.45, 1.0, 0.45)   # PLACEHOLDER
+
+func _atlas_id() -> String:
+	return "vine_anchor"
 
 func set_reachable(on: bool) -> void:
 	if _pulse:

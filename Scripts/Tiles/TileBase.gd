@@ -2,24 +2,32 @@
 extends Node2D
 class_name TileBase
 
-@onready var sprite := $Visual/Tile
-@onready var animated_tile: AnimatedSprite2D = $Visual/AnimatedTile
-@onready var visual: Node2D = $Visual
-
-var weight: int = 1
-var _warning: TileWarning
+const BLOCKED_WEIGHT := 999
 
 signal tile_triggered(tile: TileBase, action: String, data: Dictionary)
 @warning_ignore("UNUSED_SIGNAL")
 signal state_changed(tile: TileBase, new_state: String)
 
+@onready var visual: Node2D = $Visual
+@onready var animated_tile: AnimatedSprite2D = $Visual/AnimatedTile
+
+var weight: int = 1
 var is_active := false
-const TILESET := preload("res://Assets/Sprites/Tiles/Logic_Tileset.png")
-var atlas_texture := AtlasTexture.new()
+var _warning: TileWarning
 
 func _ready():
-	sprite.region_enabled = false
-	atlas_texture.atlas = TILESET
+	var id := _atlas_id()
+	if id != "":
+		animated_tile.sprite_frames = TileAtlas.get_frames(id, LocationManager.get_tileset_row_for_level())
+		animated_tile.animation = _start_animation()
+		animated_tile.frame = 0
+
+## Chiave in TileAtlas.ANIMATIONS. Vuoto = tile logica invisibile (TileNormal).
+func _atlas_id() -> String:
+	return ""
+
+func _start_animation() -> StringName:
+	return &"default"
 
 func on_player_enter():
 	emit_signal("tile_triggered", self, "none", {})
@@ -27,16 +35,9 @@ func on_player_enter():
 func can_enter() -> bool:
 	return true
 
-func set_region_from_coords(tile_x: int, tile_y: int, tile_width := 64, tile_height := 48):
-	var offset = 1;
-	
-	var block_w = tile_width + 2 * offset
-	var block_h = tile_height + 2 * offset
-	
-	atlas_texture.region = Rect2(
-		Vector2(tile_x * block_w + offset, tile_y * block_h + offset),
-		Vector2(tile_width, tile_height)
-	)
+## Muri, funghi, sassi: non ci si entra e non si sorvolano.
+func is_blocking() -> bool:
+	return weight >= BLOCKED_WEIGHT or not can_enter()
 
 func set_warning(source: Object, warning_color: Color, priority := 0) -> void:
 	if _warning == null:

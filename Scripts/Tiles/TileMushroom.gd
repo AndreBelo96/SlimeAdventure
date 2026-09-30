@@ -11,13 +11,13 @@ const FOG_SPREAD := 0.5
 
 func _ready():
 	super._ready()
-	
-	set_region_from_coords(LocationManager.MUSHROOM_TILE_POSITION, LocationManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
-	sprite.modulate = Color(0.75, 0.35, 0.95)   # PLACEHOLDER
-	weight = 999
+	animated_tile.modulate = Color(0.75, 0.35, 0.95)   # PLACEHOLDER
+	weight = BLOCKED_WEIGHT
 	_cell = get_parent().local_to_map(position)
 	_spawn_fog()
+
+func _atlas_id() -> String:
+	return "mushroom"
 
 func can_enter() -> bool:
 	return false

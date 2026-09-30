@@ -9,7 +9,7 @@ var warning_color: Color
 
 var _warnings: WarningPainter
 
-func setup(_boss: Node2D, _ceiling_debris_scene: PackedScene, _camera: Camera2D, tile_index: TileSpatialIndex, _warning_color: Color) -> void:
+func setup(_boss: Node2D, _ceiling_debris_scene: PackedScene, _camera: Camera2D, tile_index: GridSpatialIndex, _warning_color: Color) -> void:
 	boss = _boss
 	ceiling_debris_scene = _ceiling_debris_scene
 	camera = _camera

@@ -29,3 +29,14 @@ func is_adjacent_8(a: Vector2i, b: Vector2i) -> bool:
 
 func coords_from_global(tilemap: TileMapLayer, global_pos: Vector2) -> Vector2i:
 	return tilemap.local_to_map(tilemap.to_local(global_pos))
+
+func mask_allows(movement_map: TileMapLayer, from: Vector2i, to: Vector2i) -> bool:
+	if movement_map == null:
+		return true
+	var data := movement_map.get_cell_tile_data(from)
+	if data == null:
+		return true
+	var mask = data.get_custom_data("MovementMask")
+	if mask == null:
+		return true
+	return (mask & DIRECTION_BITS.get(to - from, 0)) == 0

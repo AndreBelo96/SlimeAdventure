@@ -4,11 +4,11 @@ class_name EnemyTurnHandler
 signal enemy_turn_done(enemy)
 
 var tile_layer: Node2D
-var tile_index: TileSpatialIndex
+var tile_index: GridSpatialIndex
 
 func setup(_tile_layer: Node2D) -> void:
 	tile_layer = _tile_layer
-	tile_index = TileSpatialIndex.new(_tile_layer)
+	tile_index = GridSpatialIndex.new(_tile_layer)
 
 func process_enemies(_step_count: int, scene_tree) -> void:
 	for enemy in scene_tree.get_nodes_in_group("enemy"):

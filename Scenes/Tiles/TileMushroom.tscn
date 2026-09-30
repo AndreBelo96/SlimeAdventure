@@ -27,5 +27,5 @@ include_diagonals = true
 [node name="Visual" parent="." index="1" unique_id=1044728971]
 position = Vector2(0, -8)
 
-[node name="AnimatedTile" parent="Visual" index="1" unique_id=453386304]
+[node name="AnimatedTile" parent="Visual" index="0" unique_id=453386304]
 sprite_frames = SubResource("SpriteFrames_d8e4f")

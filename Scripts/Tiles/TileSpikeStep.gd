@@ -2,10 +2,11 @@ extends "res://Scripts/Tiles/TileSpikeBase.gd"
 
 const STEPS_TO_TRIGGER = 3
 
-func _ready():
-	super._ready()
-	set_region_from_coords(LocationManager.SPIKE_STEP_TILE_POSITION, LocationManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
+func _atlas_id() -> String:
+	return "spike_step"
+
+func _start_animation() -> StringName:
+	return &"UP"
 
 func setup_level_logic(_level_logic) -> void:
 	_level_logic.global_step.connect(_on_global_step)

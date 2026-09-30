@@ -8,6 +8,12 @@ func _ready():
 	is_active = true
 	add_to_group("spikes")
 
+func _atlas_id() -> String:
+	return "spike_switch"
+
+func _start_animation() -> StringName:
+	return &"OFF"
+
 func set_initial_state():
 	match action:
 		"activate":

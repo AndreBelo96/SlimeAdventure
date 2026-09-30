@@ -6,7 +6,7 @@ class_name Scarab
 @export var move_duration := 0.15
 @export var use_start_cell := true
 @export var start_cell := Vector2i.ZERO
-@export var warning_color := Color(0.801, 0.0, 0.039, 0.627)
+@export var warning_color := Color(1.0, 0.6, 0.0, 0.4)
 @export var max_health := 1
 
 @export_group("Dash")
@@ -20,7 +20,7 @@ var _charging := false
 var _charge_cells: Array[Vector2i] = []
 var _level_logic
 var _visual_map: TileMapLayer
-var _tile_index: TileSpatialIndex
+var _tile_index: GridSpatialIndex
 var _warnings: WarningPainter
 
 func _ready():
@@ -35,7 +35,7 @@ func _ready():
 	if _level_logic.movement_map == null:
 		push_error("Scarab: LevelLogic.movement_map non assegnato (collega MovementLogicMapLayer in BaseLevel.tscn)")
 	_visual_map = _level_logic.tile_layer as TileMapLayer
-	_tile_index = TileSpatialIndex.new(_visual_map)
+	_tile_index = GridSpatialIndex.new(_visual_map)
 	_warnings = WarningPainter.new(self, _tile_index)
 
 	var start := start_cell if use_start_cell else _visual_map.local_to_map(_visual_map.to_local($Center.global_position))
@@ -180,25 +180,15 @@ func _update_warnings() -> void:
 
 # ---------- Movimento ----------
 func _can_step(from: Vector2i, to: Vector2i) -> bool:
-	if not _mask_allows(from, to):
+	if not GridUtils.mask_allows(_level_logic.movement_map, from, to):
 		return false
 	var tile := _tile_index.get_tile_at(to)
-	if tile == null or tile.weight >= 999 or not tile.can_enter():
+	if tile == null or tile.is_blocking():
 		return false   # vuoto, muro, fungo, sasso
 	for other in get_tree().get_nodes_in_group("enemy"):
 		if other != self and not other.is_dead() and other.grid_position == to:
 			return false
 	return true
-
-# Stessa logica del player: nessun dato nella maschera = libero
-func _mask_allows(from: Vector2i, to: Vector2i) -> bool:
-	var data: TileData = _level_logic.movement_map.get_cell_tile_data(from)
-	if data == null:
-		return true
-	var mask = data.get_custom_data("MovementMask")
-	if mask == null:
-		return true
-	return (mask & GridUtils.DIRECTION_BITS.get(to - from, 0)) == 0
 
 func _face_towards(cell: Vector2i) -> void:
 	var screen_dir := _visual_map.map_to_local(cell) - _visual_map.map_to_local(grid_position)

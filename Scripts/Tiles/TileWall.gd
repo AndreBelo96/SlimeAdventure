@@ -4,9 +4,10 @@ var is_broken := false
 
 func _ready():
 	super._ready()
-	set_region_from_coords(LocationManager.WALL_TILE_POSITION, LocationManager.get_tileset_row_for_level())
-	sprite.texture = atlas_texture
-	weight = 999
+	weight = BLOCKED_WEIGHT
+
+func _atlas_id() -> String:
+	return "wall"
 
 func can_enter() -> bool:
 	return LevelStateManager.has_pickaxe

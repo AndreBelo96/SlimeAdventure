@@ -66,19 +66,6 @@ func is_obstacle_at(coords: Vector2i) -> bool:
 func can_move_to(coords: Vector2i) -> bool:
 	return can_move_by_tilemask(coords) and can_enter_into_tile(coords)
 
-func can_move_by_tilemask(coords: Vector2i) -> bool:
-	var tile_data = movement_logic_map_layer.get_cell_tile_data(grid_position)
-	if tile_data == null:
-		return true
-	
-	var mask = tile_data.get_custom_data("MovementMask")
-	if mask == null:
-		return true
-	
-	var dir = coords - grid_position
-	var dir_bit = GridUtils.DIRECTION_BITS.get(dir, 0)
-	return (mask & dir_bit) == 0
-
 func can_enter_into_tile(coords: Vector2i) -> bool:
 	var child = find_child_at_coords(tile_map_layer, coords)
 	return child == null or (child.has_method("can_enter") and child.can_enter())
@@ -166,29 +153,23 @@ func invalidate_indexes() -> void:
 	_npc_index.invalidate()
 	_tile_index.invalidate()
 
+func can_move_by_tilemask(coords: Vector2i) -> bool:
+	return GridUtils.mask_allows(movement_logic_map_layer, grid_position, coords)
+
 func find_vine_target(dir: Vector2i) -> Vector2i:
 	var from := grid_position
 	for dist in range(1, VINE_RANGE + 1):
 		var cell := grid_position + dir * dist
-		if not _mask_allows(from, cell) or is_obstacle_at(cell):
+		if not GridUtils.mask_allows(movement_logic_map_layer, from, cell) or is_obstacle_at(cell):
 			return grid_position
 		var tile = find_child_at_coords(tile_map_layer, cell)
 		if tile is TileVineAnchor:
 			return cell
 		# cella intermedia: vuoto, spine e nemici si sorvolano, muri/funghi/sassi no
-		if tile and (tile.weight >= 999 or not tile.can_enter()):
+		if tile and tile.is_blocking():
 			return grid_position
 		from = cell
 	return grid_position
-
-func _mask_allows(from: Vector2i, to: Vector2i) -> bool:
-	var data = movement_logic_map_layer.get_cell_tile_data(from)
-	if data == null:
-		return true
-	var mask = data.get_custom_data("MovementMask")
-	if mask == null:
-		return true
-	return (mask & GridUtils.DIRECTION_BITS.get(to - from, 0)) == 0
 
 func get_reachable_anchors() -> Array:
 	var result := []

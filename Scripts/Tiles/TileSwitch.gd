@@ -11,6 +11,12 @@ func _ready():
 	animated_tile.material = shader_material
 	add_to_group("switches")
 
+func _atlas_id() -> String:
+	return "switch"
+
+func _start_animation() -> StringName:
+	return &"PRESSED"
+
 func on_player_enter():
 	if not activated:
 		activated = true

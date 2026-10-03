@@ -22,6 +22,9 @@ enum VictoryMode {
 
 var victory_mode: VictoryMode = VictoryMode.TILES
 
+## -- DEBUG -- ##
+var _autoplaying := false
+
 var steps := 0
 var level_time := 0.0
 var tile_manager
@@ -33,6 +36,7 @@ var is_boss_level := false
 var ambient_preset: Array[Dictionary] = []
 var music_track: String = ""
 var music_autoplay := true
+
 
 func _ready():
 	time_running = false
@@ -86,6 +90,9 @@ func _process(delta):
 		hud_manager.update_time(level_time)
 
 func _unhandled_input(event):
+	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F9:
+		_autoplay()
+		return
 	if event.is_action_pressed("ui_cancel"):
 		if not player.input_enabled:
 			return
@@ -257,3 +264,31 @@ func play_intro(lines: Array, delay_before: float = 0.0) -> void:
 	time_running = true
 	if not music_autoplay and music_track != "":
 		SoundManager.play_music(music_track)
+
+
+## DEBUG: risolve il livello e lo gioca da solo. Funziona solo prima del primo passo.
+func _autoplay() -> void:
+	if _autoplaying or steps > 0 or not player.can_move:
+		return
+	var model := LevelModel.from_scene(self, LevelStateManager.has_pickaxe)
+	if not model.unsupported.is_empty():
+		print("[AUTOPLAY] non supportato: ", ", ".join(model.unsupported))
+		return
+	var res := StepSolver.new().solve(model)
+	if res.steps < 0:
+		print("[AUTOPLAY] ", res.reason)
+		return
+	print("[AUTOPLAY] %d passi: %s" % [res.steps, StepSolver.directions_text(res.path)])
+
+	_autoplaying = true
+	player.lock_input()   # il giocatore non può interferire
+	for dir in StepSolver.to_directions(res.path):
+		if player._terminal_state:   # morto o vinto
+			break
+		player.force_move(dir)
+		await player.move_finished
+		# aspetta switch e spine (bloccano l'input durante l'animazione); il nostro blocco è 1
+		while player._input_lock_count > 1:
+			await get_tree().process_frame
+	player.unlock_input()
+	_autoplaying = false

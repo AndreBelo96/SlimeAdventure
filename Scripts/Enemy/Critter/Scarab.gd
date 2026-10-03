@@ -89,7 +89,7 @@ func _dash() -> void:
 		if player and cell == player.grid_position:
 			player.on_player_died(DeathType.Type.ENEMY)   # l'armatura può assorbire, lui prosegue
 		_level_logic.enemy_turn_handler.apply_tile_effect(self)
-		if is_dead():
+		if health.is_dead():
 			break
 	_charge_cells.clear()
 
@@ -182,6 +182,9 @@ func _update_warnings() -> void:
 func _can_step(from: Vector2i, to: Vector2i) -> bool:
 	if not GridUtils.mask_allows(_level_logic.movement_map, from, to):
 		return false
+	var player = PlayerRef.player
+	if player and player.movement_handler.is_obstacle_at(to):
+		return false   # porta chiusa o NPC
 	var tile := _tile_index.get_tile_at(to)
 	if tile == null or tile.is_blocking():
 		return false   # vuoto, muro, fungo, sasso

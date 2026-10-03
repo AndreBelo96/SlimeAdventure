@@ -1,36 +1,70 @@
 @tool
 extends EditorScript
+## Calcola i passi minimi di ogni livello e li scrive in OUTPUT_PATH.
+## Script Editor -> File -> Run (Ctrl+Shift+X).
+## I livelli non risolvibili (boss, meccaniche non supportate, nessuna soluzione) vengono saltati.
 
-const LEVELS := [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+const LEVELS_DIR := "res://Scenes/Levels/"
+const OUTPUT_PATH := "res://Data/level_par.json"
 const PICKAXE_FROM_LEVEL := 14   # il piccone si ottiene battendo il boss del 13
 const VINE_FROM_LEVEL := 24      # PROVVISORIO: livello dopo il boss Foresta
-## Scene di test: [path, piccone, liana]
-const EXTRA := [
-	# ["res://Scenes/Levels/LevelTestSolver.tscn", true, true],
-]
 
 func _run() -> void:
-	for n in LEVELS:
-		_report("Livello %d" % n, "res://Scenes/Levels/Level%d.tscn" % n,
-			n >= PICKAXE_FROM_LEVEL, n >= VINE_FROM_LEVEL)
-	for e in EXTRA:
-		_report(e[0].get_file(), e[0], e[1], e[2])
+	var levels := {}
+	var t0 := Time.get_ticks_msec()
+	for n in _level_numbers():
+		var path := LEVELS_DIR + "Level%d.tscn" % n
+		var r := _solve(path, n >= PICKAXE_FROM_LEVEL, n >= VINE_FROM_LEVEL)
+		if r.has("par"):
+			levels[str(n)] = {"par": r.par, "keys": r.keys}
+			print("Livello %d: %d passi  (%d stati, %d ms)" % [n, r.par, r.states, r.ms])
+			print("    tasti: ", r.keys)
+		else:
+			print("Livello %d: SALTATO - %s" % [n, r.reason])
 
-func _report(label: String, path: String, pickaxe: bool, vine: bool) -> void:
+	_write(levels)
+	print("\nScritti %d livelli in %s (%d ms totali)" % [levels.size(), OUTPUT_PATH, Time.get_ticks_msec() - t0])
+
+func _solve(path: String, pickaxe: bool, vine: bool) -> Dictionary:
 	var root: Node = load(path).instantiate()
 	var model := LevelModel.from_scene(root, pickaxe, vine)
 	root.free()
-
 	if not model.unsupported.is_empty():
-		print("%s: non supportato (%s)" % [label, ", ".join(model.unsupported)])
-		return
+		return {"reason": "non supportato (%s)" % ", ".join(model.unsupported)}
 
 	var t := Time.get_ticks_msec()
 	var solver := StepSolver.new()
 	var res := solver.solve(model)
-	var ms := Time.get_ticks_msec() - t
 	if res.steps < 0:
-		print("%s: %s" % [label, res.reason])
-	else:
-		print("%s: %d passi  (%d activator, %d stati, %d ms)" % [label, res.steps, model.activators.size(), solver.states_explored, ms])
-		print("    tasti: ", StepSolver.directions_text(res.path))
+		return {"reason": res.reason}
+	return {
+		"par": res.steps,
+		"keys": StepSolver.directions_text(res.path),
+		"states": solver.states_explored,
+		"ms": Time.get_ticks_msec() - t,
+	}
+
+## Numeri dei file LevelN.tscn (LevelTest e simili esclusi), in ordine
+func _level_numbers() -> Array[int]:
+	var out: Array[int] = []
+	for file in DirAccess.get_files_at(LEVELS_DIR):
+		if not file.begins_with("Level") or not file.ends_with(".tscn"):
+			continue
+		var num := file.trim_prefix("Level").trim_suffix(".tscn")
+		if num.is_valid_int():
+			out.append(num.to_int())
+	out.sort()
+	return out
+
+func _write(levels: Dictionary) -> void:
+	DirAccess.make_dir_recursive_absolute(OUTPUT_PATH.get_base_dir())
+	var file := FileAccess.open(OUTPUT_PATH, FileAccess.WRITE)
+	if file == null:
+		push_error("PrintPar: impossibile scrivere %s" % OUTPUT_PATH)
+		return
+	file.store_string(JSON.stringify({
+		"generated_at": Time.get_datetime_string_from_system(),
+		"levels": levels,
+	}, "\t"))
+	file.close()
+	EditorInterface.get_resource_filesystem().scan()

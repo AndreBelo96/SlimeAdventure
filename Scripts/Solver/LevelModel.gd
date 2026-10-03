@@ -38,7 +38,7 @@ var start := Vector2i.ZERO
 var exit_cell = null        # Vector2i, oppure null se il livello non ha uscita
 var has_pickaxe := false
 var has_vine := false
-var period := 1             # ciclo temporale del livello (1 = statico)
+var period := 1             # ciclo delle spine a tempo (1 = nessuna)
 var unsupported: Array[String] = []
 
 ## Switch: ogni chiave premuta è un bit dello stato, sopra quelli degli activator
@@ -46,6 +46,16 @@ var keys: Array[String] = []
 var switch_key := {}         # cella dello switch -> indice chiave
 var spike_key := {}          # cella della spina a switch -> indice chiave
 var spike_starts_down := {}  # spine a switch che partono abbassate (azione "activate")
+
+## Nemici in ordine di albero (= ordine dei turni in gioco)
+## { "name": String, "start": Vector2i, "pattern": Array, "hp": int, "dash": int }
+## dash = celle di vista/scatto (0 = scarabeo semplice)
+var enemies: Array[Dictionary] = []
+
+## Bit dello stato: [activator | chiavi | armatura | sassi rotti]
+var armor_flag := 0          # 0 = livello senza armatura
+var wall_flag := {}          # cella del sasso -> bit "rotto" (solo se qualcuno ne dipende)
+var flag_count := 0
 
 static func from_scene(root: Node, pickaxe := false, vine := false) -> LevelModel:
 	var m := LevelModel.new()
@@ -112,25 +122,40 @@ static func from_scene(root: Node, pickaxe := false, vine := false) -> LevelMode
 			m.armor_pickups[cell] = true
 		else:
 			m._unsupported("PickupArmor senza respawn")
-	_find_enemies(root, m)
+
+	_read_enemies(root, root, tiles, m)
 
 	# Fuori dall'albero non esiste global_position: si sommano le posizioni locali
-	m.start = tiles.local_to_map(player.position + ysort.position - tiles.position)
+	m.start = tiles.local_to_map(_pos_in_root(player, root) - tiles.position)
+	m._assign_flags()
 	return m
 
-## Bit totali dello stato: activator + chiavi + armatura
+func _assign_flags() -> void:
+	var b := activators.size() + keys.size()
+	if not armor_pickups.is_empty():
+		armor_flag = 1 << b
+		b += 1
+	# Un sasso rotto conta solo per chi lo sorvola (liana) o ci cammina (nemici)
+	if has_pickaxe and (has_vine or not enemies.is_empty()):
+		for cell in cells:
+			if cells[cell] == Cell.WALL:
+				wall_flag[cell] = 1 << b
+				b += 1
+	flag_count = b
+
+## Bit totali dello stato
 func state_bits() -> int:
-	return activators.size() + keys.size() + (1 if not armor_pickups.is_empty() else 0)
+	return flag_count
 
 ## Bit di una chiave nello stato (sopra i bit degli activator)
 func key_bit(key_idx: int) -> int:
 	return 1 << (activators.size() + key_idx)
 
-## Bit dell'armatura (sopra le chiavi). Mai acceso se il livello non ha pickup armatura.
-func armor_bit() -> int:
-	return 1 << (activators.size() + keys.size())
+## Sasso ancora intatto? (se non è tracciato, lo si considera intatto)
+func wall_intact(cell: Vector2i, mask: int) -> bool:
+	return not wall_flag.has(cell) or (mask & wall_flag[cell]) == 0
 
-## Si può entrare nella cella? (altrimenti rimbalzo, nessun passo)
+## Il PLAYER può entrare nella cella? (altrimenti rimbalzo, nessun passo)
 func can_step(from: Vector2i, to: Vector2i, all_on: bool) -> bool:
 	if (masks.get(from, 0) & DIR_BITS.get(to - from, 0)) != 0:
 		return false
@@ -141,7 +166,26 @@ func can_step(from: Vector2i, to: Vector2i, all_on: bool) -> bool:
 		return false
 	return true
 
-## Entrarci al passo `step`, con le chiavi in `mask`, uccide?
+## Un NEMICO può entrare nella cella? Come Scarab._can_step (senza il controllo sugli altri nemici).
+func enemy_can_enter(from: Vector2i, to: Vector2i, mask: int) -> bool:
+	if (masks.get(from, 0) & DIR_BITS.get(to - from, 0)) != 0:
+		return false
+	if not cells.has(to) or npcs.has(to):
+		return false
+	if doors.has(to) and not all_activators_on(mask):
+		return false
+	var c = cells[to]
+	if c == Cell.BLOCK:
+		return false
+	if c == Cell.WALL and (not has_pickaxe or wall_intact(to, mask)):
+		return false
+	return true
+
+func all_activators_on(mask: int) -> bool:
+	var full := (1 << activators.size()) - 1
+	return (mask & full) == full
+
+## Entrarci al passo `step`, con le chiavi in `mask`, uccide? (vale anche per i nemici)
 func is_deadly(cell: Vector2i, step: int, mask: int) -> bool:
 	if not cells.has(cell):
 		return true
@@ -152,7 +196,7 @@ func is_deadly(cell: Vector2i, step: int, mask: int) -> bool:
 			return step > 0 and step % SPIKE_STEP_PERIOD == 0
 		Cell.SPIKE_SWITCH:
 			if spike_starts_down.has(cell):
-				return false   # alzata solo fino al passo dopo: mai mortale per il player
+				return false   # alzata solo fino al passo dopo: mai mortale
 			return (mask & key_bit(spike_key[cell])) == 0
 	return false
 
@@ -161,8 +205,7 @@ func can_absorb(cell: Vector2i) -> bool:
 	return cells.has(cell)
 
 ## Cella d'arrivo della liana in direzione `dir`, oppure null. Come PlayerMovement.find_vine_target.
-## Sassi sempre considerati intatti (bloccanti): approssimazione conservativa.
-func vine_target(from: Vector2i, dir: Vector2i, all_on: bool):
+func vine_target(from: Vector2i, dir: Vector2i, all_on: bool, mask: int):
 	var prev := from
 	for dist in range(1, VINE_RANGE + 1):
 		var cell := from + dir * dist
@@ -173,9 +216,9 @@ func vine_target(from: Vector2i, dir: Vector2i, all_on: bool):
 		var c = cells.get(cell, -1)
 		if c == Cell.ANCHOR:
 			return cell
-		if c == Cell.WALL or c == Cell.BLOCK:
+		if c == Cell.BLOCK or (c == Cell.WALL and wall_intact(cell, mask)):
 			return null
-		prev = cell   # vuoto e spine si sorvolano
+		prev = cell   # vuoto, spine e sassi rotti si sorvolano
 	return null
 
 func _key_index(key: String) -> int:
@@ -188,6 +231,49 @@ func _key_index(key: String) -> int:
 func _unsupported(what: String) -> void:
 	if not unsupported.has(what):
 		unsupported.append(what)
+
+# ---------- Lettura della scena ----------
+static func _read_enemies(node: Node, root: Node, tiles: TileMapLayer, m: LevelModel) -> void:
+	for child in node.get_children():
+		if not "/Enemy/" in child.scene_file_path:
+			_read_enemies(child, root, tiles, m)
+			continue
+		if "/Boss/" in child.scene_file_path:
+			m._unsupported("boss " + child.name)
+			continue
+		var pattern = child.get("pattern")
+		if pattern == null:
+			m._unsupported("dati di " + child.name + " non leggibili")
+			continue
+		var start_cell: Vector2i
+		if child.get("use_start_cell"):
+			start_cell = child.get("start_cell")
+		else:
+			start_cell = tiles.local_to_map(_pos_in_root(child.get_node("Center"), root) - tiles.position)
+		if not m.cells.has(start_cell):
+			m._unsupported("nemico " + child.name + " fuori dalle tile")
+			continue
+		var hp = child.get("max_health")
+		var sight = child.get("dash_sight")
+		var dash := 0
+		if child.get("can_dash"):
+			dash = 3 if sight == null else maxi(1, int(sight))
+		m.enemies.append({
+			"name": String(child.name),
+			"start": start_cell,
+			"pattern": Array(pattern),
+			"hp": 1 if hp == null else maxi(1, int(hp)),
+			"dash": dash,
+		})
+
+## Posizione di un nodo relativa alla radice, sommando le posizioni locali
+static func _pos_in_root(node: Node, root: Node) -> Vector2:
+	var p := Vector2.ZERO
+	var n := node
+	while n != root and n is Node2D:
+		p += (n as Node2D).position
+		n = n.get_parent()
+	return p
 
 static func _scene_at(layer: TileMapLayer, cell: Vector2i) -> PackedScene:
 	var src = layer.tile_set.get_source(layer.get_cell_source_id(cell))
@@ -206,9 +292,3 @@ static func _root_property(scene: PackedScene, prop: String, default_value):
 		if state.get_node_property_name(0, i) == prop:
 			return state.get_node_property_value(0, i)
 	return default_value
-
-static func _find_enemies(node: Node, m: LevelModel) -> void:
-	for child in node.get_children():
-		if "/Enemy/" in child.scene_file_path:
-			m._unsupported("nemico " + child.name)
-		_find_enemies(child, m)

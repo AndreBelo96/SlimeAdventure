@@ -85,7 +85,10 @@ func setup_results():
 		atlas.atlas = preload("res://Assets/Sprites/Player/SlimeSet.png")
 		atlas.region = Rect2(Vector2(0, 0), Vector2(32, 32))
 		sprite.texture = atlas
-
+	
+	if LevelPar.has_par(completed_level) and run_steps < LevelPar.get_par(completed_level):
+		GameLogger.warn("Livello %d chiuso in %d passi, sotto il par %d: verificare il solver" % [completed_level, run_steps, LevelPar.get_par(completed_level)])
+	
 	LevelStateManager.isRecord = false
 
 func setup_languages():

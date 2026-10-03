@@ -270,7 +270,7 @@ func play_intro(lines: Array, delay_before: float = 0.0) -> void:
 func _autoplay() -> void:
 	if _autoplaying or steps > 0 or not player.can_move:
 		return
-	var model := LevelModel.from_scene(self, LevelStateManager.has_pickaxe)
+	var model := LevelModel.from_scene(self, LevelStateManager.has_pickaxe, LevelStateManager.has_vine)
 	if not model.unsupported.is_empty():
 		print("[AUTOPLAY] non supportato: ", ", ".join(model.unsupported))
 		return
@@ -282,12 +282,14 @@ func _autoplay() -> void:
 
 	_autoplaying = true
 	player.lock_input()   # il giocatore non può interferire
-	for dir in StepSolver.to_directions(res.path):
+	for delta in StepSolver.to_directions(res.path):
 		if player._terminal_state:   # morto o vinto
 			break
-		player.force_move(dir)
+		if StepSolver.is_vine_move(delta):
+			player.force_swing(delta.sign())
+		else:
+			player.force_move(delta)
 		await player.move_finished
-		# aspetta switch e spine (bloccano l'input durante l'animazione); il nostro blocco è 1
 		while player._input_lock_count > 1:
 			await get_tree().process_frame
 	player.unlock_input()

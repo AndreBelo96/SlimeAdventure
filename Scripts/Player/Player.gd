@@ -198,6 +198,12 @@ func force_move(dir: Vector2i) -> void:
 	can_move = false
 	movement_handler.move_to(movement_handler.grid_position + dir)
 
+func force_swing(dir: Vector2i) -> void:
+	if movement_handler.is_moving:
+		return
+	can_move = false
+	movement_handler.swing_to(dir)
+
 func _check_enemy_contact():
 	if not is_inside_tree():
 		return

@@ -1,13 +1,14 @@
 @tool
 extends RefCounted
 class_name StepSolver
-## BFS sullo stato (cella, activator accesi, chiavi premute, fase temporale).
+## BFS sullo stato (cella, activator accesi, chiavi premute, armatura, fase temporale).
 ## Stato = ((indice_cella << BIT) | maschera) * periodo + fase
-## maschera = [chiavi premute | activator accesi], BIT = n_activator + n_chiavi
+## maschera = [armatura | chiavi premute | activator accesi]
 
 const MAX_STATES := 16_000_000
 const UNVISITED := -2
 const ROOT := -1
+const DEAD := -1
 
 const ARROWS := {Vector2i(0, -1): "↑", Vector2i(1, 0): "→", Vector2i(0, 1): "↓", Vector2i(-1, 0): "←"}
 
@@ -16,6 +17,7 @@ var states_explored := 0
 var _cells: Array[Vector2i] = []
 var _bits := 0
 var _period := 1
+var _armor := 0
 
 func solve(m: LevelModel) -> Dictionary:
 	var n_act := m.activators.size()
@@ -23,6 +25,7 @@ func solve(m: LevelModel) -> Dictionary:
 		return _fail("nessun activator")
 	_bits = m.state_bits()
 	_period = m.period
+	_armor = m.armor_bit()
 
 	_cells.clear()
 	var index := {}
@@ -35,7 +38,7 @@ func solve(m: LevelModel) -> Dictionary:
 	if total > MAX_STATES:
 		return _fail("troppi stati (%d)" % total)
 
-	# Allo spawn il player "entra" nella sua cella (check_tile in Player._ready)
+	# Allo spawn il player "entra" nella sua cella (check_tile in Player._ready, niente pickup)
 	var mask0 := 0
 	if m.activator_bit.has(m.start):
 		mask0 |= 1 << m.activator_bit[m.start]
@@ -64,18 +67,12 @@ func solve(m: LevelModel) -> Dictionary:
 			var cell := _cell_of(s)
 			var mask := _mask_of(s)
 			var all_on := (mask & act_full) == act_full   # activator bloccati, porte aperte
-			for dir in LevelModel.DIRS:
-				var to := cell + dir
-				# Le spine guardano le chiavi premute PRIMA di questo passo
-				if not m.can_step(cell, to, all_on) or m.is_deadly(to, steps, mask):
+			for to in _destinations(m, cell, all_on):
+				var new_mask := _enter(m, to, steps, mask, all_on)
+				if new_mask == DEAD:
 					continue
 				# Come in gioco: il controllo uscita avviene PRIMA che la tile cambi stato
 				var reached_exit: bool = all_on and m.exit_cell != null and to == m.exit_cell
-				var new_mask := mask
-				if not all_on and m.activator_bit.has(to):
-					new_mask ^= 1 << m.activator_bit[to]
-				if m.switch_key.has(to):
-					new_mask |= m.key_bit(m.switch_key[to])
 				var ns := _encode(index[to], new_mask, phase)
 				if reached_exit or ((new_mask & act_full) == act_full and m.exit_cell == null):
 					if prev[ns] == UNVISITED:
@@ -88,6 +85,35 @@ func solve(m: LevelModel) -> Dictionary:
 				states_explored += 1
 		frontier = next
 	return _fail("nessuna soluzione")
+
+## Celle raggiungibili con una mossa: passo normale o salto con la liana
+func _destinations(m: LevelModel, cell: Vector2i, all_on: bool) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	for dir in LevelModel.DIRS:
+		var to := cell + dir
+		if m.can_step(cell, to, all_on):
+			out.append(to)
+		if m.has_vine:
+			var v = m.vine_target(cell, dir, all_on)
+			if v != null and not out.has(v):
+				out.append(v)
+	return out
+
+## Maschera dopo essere entrati in `to` al passo `step`, DEAD se si muore.
+## Ordine del gioco: check_tile (spine guardano le chiavi di PRIMA) -> activator/switch -> check_pickup
+func _enter(m: LevelModel, to: Vector2i, step: int, mask: int, all_on: bool) -> int:
+	var new_mask := mask
+	if m.is_deadly(to, step, mask):
+		if (mask & _armor) == 0 or not m.can_absorb(to):
+			return DEAD
+		new_mask &= ~_armor
+	if not all_on and m.activator_bit.has(to):
+		new_mask ^= 1 << m.activator_bit[to]
+	if m.switch_key.has(to):
+		new_mask |= m.key_bit(m.switch_key[to])
+	if m.armor_pickups.has(to):
+		new_mask |= _armor
+	return new_mask
 
 # ---------- Codifica dello stato ----------
 func _encode(cell_idx: int, mask: int, phase: int) -> int:
@@ -110,14 +136,18 @@ func _path(prev: PackedInt32Array, s: int) -> Array[Vector2i]:
 
 func _fail(reason: String) -> Dictionary:
 	return {"steps": -1, "reason": reason}
-## Percorso di celle -> direzioni (= i tasti da premere)
+
+## Percorso di celle -> spostamenti. Lunghezza 1 = passo, 2 = salto con la liana.
 static func to_directions(path: Array[Vector2i]) -> Array[Vector2i]:
 	var dirs: Array[Vector2i] = []
 	for i in range(1, path.size()):
 		dirs.append(path[i] - path[i - 1])
 	return dirs
 
-## Es. "↑3 →2 ↓1"
+static func is_vine_move(delta: Vector2i) -> bool:
+	return absi(delta.x) + absi(delta.y) > 1
+
+## Es. "↑3 →2 ~↓1" (~ = liana)
 static func directions_text(path: Array[Vector2i]) -> String:
 	var parts: Array[String] = []
 	var dirs := to_directions(path)
@@ -126,6 +156,7 @@ static func directions_text(path: Array[Vector2i]) -> String:
 		var count := 1
 		while i + count < dirs.size() and dirs[i + count] == dirs[i]:
 			count += 1
-		parts.append("%s%d" % [ARROWS.get(dirs[i], "?"), count])
+		var prefix := "~" if is_vine_move(dirs[i]) else ""
+		parts.append("%s%s%d" % [prefix, ARROWS.get(dirs[i].sign(), "?"), count])
 		i += count
 	return " ".join(parts)

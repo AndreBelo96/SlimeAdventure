@@ -3,12 +3,13 @@ extends RefCounted
 class_name LevelModel
 ## Il livello come dati puri (niente nodi): usabile nell'editor e a runtime.
 
-enum Cell { FLOOR, ACTIVATOR, SPIKE, SPIKE_STEP, SPIKE_SWITCH, SWITCH, WALL, BLOCK }
+enum Cell { FLOOR, ACTIVATOR, SPIKE, SPIKE_STEP, SPIKE_SWITCH, SWITCH, WALL, BLOCK, ANCHOR }
 
 const DIRS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
 const DIR_BITS := {Vector2i(0, -1): 1, Vector2i(1, 0): 2, Vector2i(0, 1): 4, Vector2i(-1, 0): 8}
 
 const SPIKE_STEP_PERIOD := 3   # = TileSpikeStep.STEPS_TO_TRIGGER
+const VINE_RANGE := 2          # = PlayerMovement.VINE_RANGE
 ## Default di TileSwitch/TileSpikeSwitch quando la cella non ha dati nel LogicMapLayer
 const DEFAULT_KEY := "A"
 const DEFAULT_ACTION := "deactivate"
@@ -16,7 +17,7 @@ const DEFAULT_ACTION := "deactivate"
 ## Scena della tile -> tipo. Le scene non in elenco rendono il livello "non supportato".
 const TILE_TYPES := {
 	"TileNormal": Cell.FLOOR,
-	"TileVineAnchor": Cell.FLOOR,   # liana: fase 4, per ora è pavimento
+	"TileVineAnchor": Cell.ANCHOR,
 	"TileActivator": Cell.ACTIVATOR,
 	"TileSpike": Cell.SPIKE,
 	"TileSpikeStep": Cell.SPIKE_STEP,
@@ -32,9 +33,11 @@ var activators: Array[Vector2i] = []
 var activator_bit := {}     # Vector2i -> indice del bit
 var doors := {}             # Vector2i -> true
 var npcs := {}              # Vector2i -> true
+var armor_pickups := {}     # Vector2i -> true (solo pickup con respawn)
 var start := Vector2i.ZERO
 var exit_cell = null        # Vector2i, oppure null se il livello non ha uscita
 var has_pickaxe := false
+var has_vine := false
 var period := 1             # ciclo temporale del livello (1 = statico)
 var unsupported: Array[String] = []
 
@@ -44,9 +47,10 @@ var switch_key := {}         # cella dello switch -> indice chiave
 var spike_key := {}          # cella della spina a switch -> indice chiave
 var spike_starts_down := {}  # spine a switch che partono abbassate (azione "activate")
 
-static func from_scene(root: Node, pickaxe := false) -> LevelModel:
+static func from_scene(root: Node, pickaxe := false, vine := false) -> LevelModel:
 	var m := LevelModel.new()
 	m.has_pickaxe = pickaxe
+	m.has_vine = vine
 	var tiles: TileMapLayer = root.get_node("TileMapLayer")
 	var movement: TileMapLayer = root.get_node("MovementLogicMapLayer")
 	var logic: TileMapLayer = root.get_node("LogicMapLayer")
@@ -101,21 +105,30 @@ static func from_scene(root: Node, pickaxe := false) -> LevelModel:
 
 	var pickups: TileMapLayer = ysort.get_node("PickupMapLayer")
 	for cell in pickups.get_used_cells():
-		if "Armor" in _scene_name(pickups, cell):
-			m._unsupported("PickupArmor")
+		var scene := _scene_at(pickups, cell)
+		if scene == null or not "Armor" in scene.resource_path.get_file():
+			continue
+		if _root_property(scene, "respawn", true):
+			m.armor_pickups[cell] = true
+		else:
+			m._unsupported("PickupArmor senza respawn")
 	_find_enemies(root, m)
 
 	# Fuori dall'albero non esiste global_position: si sommano le posizioni locali
 	m.start = tiles.local_to_map(player.position + ysort.position - tiles.position)
 	return m
 
-## Bit totali dello stato: activator + chiavi
+## Bit totali dello stato: activator + chiavi + armatura
 func state_bits() -> int:
-	return activators.size() + keys.size()
+	return activators.size() + keys.size() + (1 if not armor_pickups.is_empty() else 0)
 
 ## Bit di una chiave nello stato (sopra i bit degli activator)
 func key_bit(key_idx: int) -> int:
 	return 1 << (activators.size() + key_idx)
+
+## Bit dell'armatura (sopra le chiavi). Mai acceso se il livello non ha pickup armatura.
+func armor_bit() -> int:
+	return 1 << (activators.size() + keys.size())
 
 ## Si può entrare nella cella? (altrimenti rimbalzo, nessun passo)
 func can_step(from: Vector2i, to: Vector2i, all_on: bool) -> bool:
@@ -143,6 +156,28 @@ func is_deadly(cell: Vector2i, step: int, mask: int) -> bool:
 			return (mask & key_bit(spike_key[cell])) == 0
 	return false
 
+## Una morte su questa cella è assorbibile dall'armatura? (spine sì, vuoto no)
+func can_absorb(cell: Vector2i) -> bool:
+	return cells.has(cell)
+
+## Cella d'arrivo della liana in direzione `dir`, oppure null. Come PlayerMovement.find_vine_target.
+## Sassi sempre considerati intatti (bloccanti): approssimazione conservativa.
+func vine_target(from: Vector2i, dir: Vector2i, all_on: bool):
+	var prev := from
+	for dist in range(1, VINE_RANGE + 1):
+		var cell := from + dir * dist
+		if (masks.get(prev, 0) & DIR_BITS[dir]) != 0:
+			return null
+		if npcs.has(cell) or (doors.has(cell) and not all_on):
+			return null
+		var c = cells.get(cell, -1)
+		if c == Cell.ANCHOR:
+			return cell
+		if c == Cell.WALL or c == Cell.BLOCK:
+			return null
+		prev = cell   # vuoto e spine si sorvolano
+	return null
+
 func _key_index(key: String) -> int:
 	var i := keys.find(key)
 	if i == -1:
@@ -154,13 +189,23 @@ func _unsupported(what: String) -> void:
 	if not unsupported.has(what):
 		unsupported.append(what)
 
-static func _scene_name(layer: TileMapLayer, cell: Vector2i) -> String:
+static func _scene_at(layer: TileMapLayer, cell: Vector2i) -> PackedScene:
 	var src = layer.tile_set.get_source(layer.get_cell_source_id(cell))
 	if src is TileSetScenesCollectionSource:
-		var scene = src.get_scene_tile_scene(layer.get_cell_alternative_tile(cell))
-		if scene:
-			return scene.resource_path.get_file().get_basename()
-	return "?"
+		return src.get_scene_tile_scene(layer.get_cell_alternative_tile(cell))
+	return null
+
+static func _scene_name(layer: TileMapLayer, cell: Vector2i) -> String:
+	var scene := _scene_at(layer, cell)
+	return scene.resource_path.get_file().get_basename() if scene else "?"
+
+## Legge una proprietà del nodo radice dalla scena senza istanziarla
+static func _root_property(scene: PackedScene, prop: String, default_value):
+	var state := scene.get_state()
+	for i in state.get_node_property_count(0):
+		if state.get_node_property_name(0, i) == prop:
+			return state.get_node_property_value(0, i)
+	return default_value
 
 static func _find_enemies(node: Node, m: LevelModel) -> void:
 	for child in node.get_children():
